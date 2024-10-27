@@ -1,0 +1,6 @@
+---
+eda_controller_tokens:
+  - name: my_user_token
+    description: my awesome token
+    token: ABCDEF
+...

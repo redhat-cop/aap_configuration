@@ -3,7 +3,7 @@ argument_specs:
   main:
     short_description: An Ansible Role to create users in EDA controller.
     options:
-      eda_users:
+      aap_user_accounts:
         default: []
         required: false
         description: Data structure describing your users to manage.

@@ -46,12 +46,12 @@
     state:                          "{{ controller_license.state | default(omit) }}"
 
     # Role Standard Options
-    aap_username:            "{{ aap_username | default(omit, true) }}"
-    aap_password:            "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:          "{{ aap_token | default(omit, true) }}"
-    request_timeout:                "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:                "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:                 "{{ aap_validate_certs | default(omit) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   no_log: "{{ controller_configuration_license_secure_logging }}"
   when: controller_license is defined
 ...

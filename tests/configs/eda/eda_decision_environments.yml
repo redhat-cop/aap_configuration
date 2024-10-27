@@ -1,0 +1,8 @@
+---
+eda_decision_environments:
+  - name: my_de
+    description: my awesome decision environment
+    organization: Default
+    image_url: registry.redhat.io/ansible-automation-platform-24/de-supported-rhel8
+    credential: my_github_user
+...

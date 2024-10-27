@@ -22,7 +22,7 @@
   loop: "{{ aap_user_accounts }}"
   loop_control:
     loop_var: __hub_user_item
-    label: "{{ __operation.verb }} the user {{ __hub_user_item.name }} to Hub"
+    label: "{{ __operation.verb }} the user {{ __hub_user_item.username }} to Hub"
     pause: "{{ ah_configuration_user_accounts_loop_delay }}"
   no_log: "{{ ah_configuration_user_secure_logging }}"
   async: "{{ ah_configuration_user_async_timeout }}"
@@ -43,7 +43,7 @@
   loop: "{{ __users_job_async.results }}"
   loop_control:
     loop_var: __users_job_async_result_item
-    label: "{{ __operation.verb }} User {{ __users_job_async_result_item.__hub_user_item.name }} | Wait for finish the User {{ __operation.action }}"
+    label: "{{ __operation.verb }} User {{ __users_job_async_result_item.__hub_user_item.username }} | Wait for finish the User {{ __operation.action }}"
   when: __users_job_async_result_item.ansible_job_id is defined
   no_log: "{{ ah_configuration_user_secure_logging }}"
   vars:

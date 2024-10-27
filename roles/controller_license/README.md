@@ -136,6 +136,7 @@ controller_license:
     redhat_subscription_username: changeme
     redhat_subscription_password: changeme
     controller_license:
+      use_lookup: true
       filters:
         product_name: "Red Hat Ansible Automation Platform"
         support_level: "Self-Support"

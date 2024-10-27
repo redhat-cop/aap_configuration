@@ -1,8 +1,8 @@
 # User may add platform auth creds to this file and encrypt it using `ansible-vault`
 ---
 # aap_hostname: ansible-controller-web-svc-test-project.example.com
-aap_username: admin
-aap_password:
+# aap_username: admin
+# aap_password:
 # aap_token: insertokenhere
 aap_validate_certs: false
 aap_configuration_enforce_defaults: true

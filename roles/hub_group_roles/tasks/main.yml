@@ -14,7 +14,7 @@
   loop: "{{ ah_group_roles }}"
   loop_control:
     loop_var: __hub_group_roles_item
-    label: "{{ __operation.verb }} the group role {{ __hub_group_roles_item.name }} in Hub"
+    label: "{{ __operation.verb }} the group role {{ __hub_group_roles_item.groups }} in Hub"
     pause: "{{ ah_configuration_group_roles_loop_delay }}"
   no_log: "{{ ah_configuration_group_roles_secure_logging }}"
   async: "{{ ah_configuration_group_roles_async_timeout }}"
@@ -35,7 +35,7 @@
   loop: "{{ __group_roles_job_async.results }}"
   loop_control:
     loop_var: __group_roles_job_async_result_item
-    label: "{{ __operation.verb }} Label {{ __group_roles_job_async_result_item.__hub_group_roles_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Label {{ __group_roles_job_async_result_item.__hub_group_roles_item.groups }} | Wait for finish the Label {{ __operation.action }}"
   when: __group_roles_job_async_result_item.ansible_job_id is defined
   no_log: "{{ ah_configuration_group_roles_secure_logging }}"
   vars:

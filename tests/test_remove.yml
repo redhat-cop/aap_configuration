@@ -1,0 +1,33 @@
+---
+- name: Playbook to configure ansible Controller post installation
+  hosts: localhost
+  connection: local
+  vars:
+    aap_validate_certs: false
+    aap_configuration_secure_logging: false
+    aap_hostname: https://aap.medina.vaultcrest.com/
+    aap_username: admin
+    aap_password: secret123!
+    fake_image: stuff.io/asdf
+    controller_license:
+      use_lookup: true
+      filters:
+        product_name: "Red Hat Ansible Automation Platform"
+        support_level: "Self-Support"
+  collections:
+    - ansible.controller
+    - infra.aap_configuration
+
+  pre_tasks:
+    - name: Include vars from configs directory
+      ansible.builtin.include_vars:
+        dir: ./configs
+        ignore_files: [controller_config.yml.template]
+        extensions: ["yml"]
+      tags:
+        - always
+
+  roles:
+    - infra.aap_configuration.hub_publish
+    # - dispatch  # The dispatch role calls all of the other roles.
+...

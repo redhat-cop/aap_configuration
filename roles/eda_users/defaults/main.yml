@@ -1,5 +1,5 @@
 ---
-eda_users: []
+aap_user_accounts: []
 
 eda_configuration_user_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
 eda_configuration_user_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
