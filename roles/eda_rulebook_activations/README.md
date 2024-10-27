@@ -60,7 +60,7 @@ This also speeds up the overall role.
 |`awx_token`|""|no|str|The token used to authenticate to controller.|
 |`enabled`|"true"|no|str|Whether the rulebook activation is automatically enabled to run.|
 |`state`|`present`|no|str|Desired state of the rulebook activation.|
-|`organization_name`|""|no|str|The name of the organization.|
+|`organization`|""|no|str|The name of the organization.|
 |`eda_credentials`|""|no|list|A list of IDs for EDA credentials used by the rulebook activation.|
 |`k8s_service_name`|""|no|str|The name of the Kubernetes service associated with this rulebook activation.|
 |`swap_single_source`|"true"|no|bool|Allow swapping of single sources in a rulebook without name match.|

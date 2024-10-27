@@ -1,0 +1,8 @@
+ah_ee_images:
+  - name: config_as_code_ee
+    state: present
+    append: false
+    tags:
+      - v2
+      - "2.0"
+      - prod1

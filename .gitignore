@@ -7,3 +7,4 @@ test
 tests/output
 .vscode
 ansible.cfg
+tests/localtest.yml

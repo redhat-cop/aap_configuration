@@ -25,7 +25,7 @@
   loop_control:
     loop_var: __gateway_routes_item
     label: "{{ __operation.verb }} the Gateway route {{ __gateway_routes_item.name }}"
-    pause: "{{ controller_configuration_labels_loop_delay }}"
+    pause: "{{ gateway_routes_loop_delay }}"
   no_log: "{{ gateway_routes_secure_logging }}"
   async: 1000
   poll: 0
@@ -40,8 +40,8 @@
     jid: "{{ __gateway_routes_job_async_results_item.ansible_job_id }}"
   register: __gateway_routes_job_async_result
   until: __gateway_routes_job_async_result.finished
-  retries: "{{ routes_async_retries }}"
-  delay: "{{ routes_async_delay }}"
+  retries: "{{ gateway_routes_async_retries }}"
+  delay: "{{ gateway_routes_async_delay }}"
   loop: "{{ __gateway_routes_job_async.results }}"
   loop_control:
     loop_var: __gateway_routes_job_async_results_item
