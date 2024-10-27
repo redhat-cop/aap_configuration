@@ -18,12 +18,15 @@
   loop: "{{ eda_projects }}"
   loop_control:
     loop_var: "__project_item"
-  no_log: "{{ eda_configuration_project_secure_logging }}"
+    label: "{{ __operation.verb }} the project {{ __project_item.name }} to EDA"
+    pause: "{{ eda_configuration_projects_async_delay }}"
+  no_log: "{{ eda_configuration_projects_secure_logging }}"
   async: 1000
   poll: 0
   register: __projects_job_async
   changed_when: not __projects_job_async.changed
   vars:
+    __operation: "{{ operation_translate[__project_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 
 - name: "Create project | Wait for finish the project creation"
@@ -31,13 +34,15 @@
     jid: "{{ __projects_job_async_result_item.ansible_job_id }}"
   register: __projects_job_async_result
   until: __projects_job_async_result.finished
-  retries: "{{ eda_configuration_project_async_retries }}"
-  delay: "{{ eda_configuration_project_async_delay }}"
+  retries: "{{ eda_configuration_projects_async_retries }}"
+  delay: "{{ eda_configuration_projects_async_delay }}"
   loop: "{{ __projects_job_async.results }}"
   loop_control:
     loop_var: __projects_job_async_result_item
-  when: __projects_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ eda_configuration_project_secure_logging }}"
+    label: "{{ __operation.verb }} project {{ __projects_job_async_result_item.__project_item.name }} | Wait for finish the project {{ __operation.action }}"
+  when:  __projects_job_async_result_item.ansible_job_id is defined
+  no_log: "{{ eda_configuration_projects_secure_logging }}"
   vars:
+    __operation: "{{ operation_translate[__projects_job_async_result.__projects_job_async.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 ...

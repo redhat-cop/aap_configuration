@@ -1,8 +1,8 @@
 ---
 eda_decision_environments: []
 
-eda_configuration_decision_environment_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
-eda_configuration_decision_environment_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
-eda_configuration_decision_environment_async_delay: "{{ aap_configuration_async_delay| default(1) }}"
+eda_configuration_decision_environments_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
+eda_configuration_decision_environments_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
+eda_configuration_decision_environments_async_delay: "{{ aap_configuration_async_delay| default(1) }}"
 aap_configuration_async_dir: null
 ...

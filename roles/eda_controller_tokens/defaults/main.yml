@@ -1,8 +1,8 @@
 ---
 eda_controller_tokens: []
 
-eda_configuration_user_token_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
-eda_configuration_user_token_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
-eda_configuration_user_token_async_delay: "{{ aap_configuration_async_delay| default(1) }}"
+eda_configuration_users_token_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
+eda_configuration_users_token_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
+eda_configuration_users_token_async_delay: "{{ aap_configuration_async_delay| default(1) }}"
 aap_configuration_async_dir: null
 ...

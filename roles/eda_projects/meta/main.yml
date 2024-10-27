@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: "project"
+  role_name: "eda_projects"
   author: "Chris Renwick"
   description: "An Ansible Role to create a project in EDA Controller."
   company: "Red Hat"

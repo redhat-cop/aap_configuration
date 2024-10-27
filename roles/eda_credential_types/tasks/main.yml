@@ -1,0 +1,47 @@
+---
+
+# Create EDA Controller Credential
+- name: Add EDA Controller credential
+  ansible.eda.credential_type:
+    name: "{{ __credential_type_item.name }}"
+    new_name: "{{ __credential_type_item.new_name | default(omit) }}"
+    description: "{{ __credential_type_item.description | default(omit) }}"
+    inputs: "{{ __credential_type_item.inputs | default(omit) }}"
+    injectors: "{{ __credential_type_item.injectors | default(omit) }}"
+    state: "{{ __credential_type_item.state | default(eda_state | default('present')) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+  loop: "{{ eda_credential_types }}"
+  loop_control:
+    loop_var: "__credential_type_item"
+    label: "{{ __operation.verb }} the credential {{ __credential_type_item.name }} to EDA"
+    pause: "{{ eda_configuration_credential_types_async_delay }}"
+  no_log: "{{ eda_configuration_credential_types_secure_logging }}"
+  async: 1000
+  poll: 0
+  register: __credential_types_job_async
+  changed_when: not __credential_types_job_async.changed
+  vars:
+    __operation: "{{ operation_translate[__credential_type_item.state | default(platform_state) | default('present')] }}"
+    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+
+- name: "Create credential | Wait for finish the credential creation"
+  ansible.builtin.async_status:
+    jid: "{{ __credential_types_job_async_result_item.ansible_job_id }}"
+  register: __credential_types_job_async_result
+  until: __credential_types_job_async_result.finished
+  retries: "{{ eda_configuration_credential_types_async_retries }}"
+  delay: "{{ eda_configuration_credential_types_async_delay }}"
+  loop: "{{ __credential_types_job_async.results }}"
+  loop_control:
+    loop_var: __credential_types_job_async_result_item
+    label: "{{ __operation.verb }} credential {{ __credential_types_job_async_result_item.__credential_type_item.name }} | Wait for finish the credential {{ __operation.action }}"
+  when: __credential_types_job_async_result_item.ansible_job_id is defined
+  no_log: "{{ eda_configuration_credential_types_secure_logging }}"
+  vars:
+    __operation: "{{ operation_translate[__credential_types_job_async_result_item.__credential_type_item.state | default(platform_state) | default('present')] }}"
+    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+...

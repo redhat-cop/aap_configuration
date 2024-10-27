@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: "credential"
+  role_name: "eda_credentials"
   author: "Derek Waters"
   description: "An Ansible Role to create a credential in EDA Controller."
   company: "Red Hat"

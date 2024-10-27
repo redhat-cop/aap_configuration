@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: "rulebook_activation"
+  role_name: "eda_rulebook_activations"
   author: "Tom Page"
   description: "An Ansible Role to create a rulebook activation in EDA Controller."
   company: "Red Hat"

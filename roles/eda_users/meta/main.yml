@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: "user"
+  role_name: "eda_users"
   author: "Tom Page"
   description: "An Ansible Role to create a user in EDA Controller."
   company: "Red Hat"
