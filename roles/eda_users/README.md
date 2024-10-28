@@ -1,4 +1,4 @@
-# infra.eda_configuration.user
+# infra.eda_configuration.aap_user_accounts
 
 ## Description
 
@@ -7,27 +7,27 @@ An Ansible Role to create users in EDA Controller.
 ## Variables
 
 |Variable Name|Default Value|Required|Description|Example|
-|:---:|:---:|:---:|:---:|:---:|
-|`eda_host`|""|yes|URL to the EDA Controller (alias: `eda_hostname`)|127.0.0.1|
-|`aap_username`|""|yes|Admin User on the Ansible Automation Platform Server. Either username / password or oauthtoken need to be specified.||
-|`aap_password`|""|yes|Platform Admin User's password on the EDA Controller Server.  This should be stored in an Ansible Vault at vars/platform-secrets.yml or elsewhere and called from a parent playbook.||
-|`aap_validate_certs`|`False`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
-|`aap_request_timeout`|`10`|no|Specify the timeout Ansible should use in requests to the Automation Platform host.||
-|`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.||
-|`aap_request_timeout`|`10`|no|Specify the timeout in seconds Ansible should use in requests to the Ansible Automation Platform host.||
-|`eda_users`|`see below`|yes|Data structure describing your users, described below.||
+|:---|:---:|:---:|:---|:---|
+|`platform_state`|"present"|no|The state all objects will take unless overridden by object default|'absent'|
+|`aap_hostname`|""|yes|URL to the Ansible Automation Platform Server.|127.0.0.1|
+|`aap_validate_certs`|`True`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
+|`aap_username`|""|no|Admin User on the Ansible Automation Platform Server. Either username / password or oauthtoken need to be specified.||
+|`aap_password`|""|no|Platform Admin User's password on the Server.  This should be stored in an Ansible Vault at vars/platform-secrets.yml or elsewhere and called from a parent playbook.||
+|`aap_token`|""|no|Controller Admin User's token on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.||
+|`aap_request_timeout`|`10`|no|Specify the timeout in seconds Ansible should use in requests to the controller host.||
+|`aap_user_accounts`|`see below`|yes|Data structure describing your users Described below.||
 
 ### Secure Logging Variables
 
 The following Variables compliment each other.
 If Both variables are not set, secure logging defaults to false.
-The role defaults to False as normally the add user task does not include sensitive information.
-eda_configuration_user_secure_logging defaults to the value of aap_configuration_secure_logging if it is not explicitly called. This allows for secure logging to be toggled for the entire suite of EDA Controller configuration roles with a single variable, or for the user to selectively use it.
+The role defaults to False as normally the add group_roles task does not include sensitive information.
+eda_configuration_users_secure_logging defaults to the value of aap_configuration_secure_logging if it is not explicitly called. This allows for secure logging to be toggled for the entire suite of automation hub configuration roles with a single variable, or for the user to selectively use it.
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`eda_configuration_user_secure_logging`|`False`|no|Whether or not to include the sensitive user role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
-|`aap_configuration_secure_logging`|`False`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
+|`eda_configuration_users_secure_logging`|`False`|no|Whether or not to include the sensitive Registry role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
+|`aap_configuration_secure_logging`|`False`|no|Whether or not to include the sensitive Registry role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
 
 ### Asynchronous Retry Variables
 
@@ -39,9 +39,12 @@ This also speeds up the overall role.
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
 |`aap_configuration_async_retries`|50|no|This variable sets the number of retries to attempt for the role globally.|
-|`eda_configuration_user_async_retries`|`aap_configuration_async_retries`|no|This variable sets the number of retries to attempt for the role.|
-|`eda_configuration_async_delay`|1|no|This sets the delay between retries for the role globally.|
-|`eda_configuration_user_async_delay`|`eda_configuration_async_delay`|no|This sets the delay between retries for the role.|
+|`eda_configuration_users_secure_logging`|`aap_configuration_async_retries`|no|This variable sets the number of retries to attempt for the role.|
+|`aap_configuration_async_delay`|1|no|This sets the delay between retries for the role globally.|
+|`eda_configuration_users_async_retries`|`aap_configuration_async_delay`|no|This sets the delay between retries for the role.|
+|`aap_configuration_loop_delay`|1000|no|This variable sets the loop_delay for the role globally.|
+|`eda_configuration_users_async_delay`|`aap_configuration_loop_delay`|no|This variable sets the loop_delay for the role.|
+|`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.|
 
 ## Data Structure
 

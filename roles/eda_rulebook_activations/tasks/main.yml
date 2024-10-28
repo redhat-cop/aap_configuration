@@ -27,12 +27,15 @@
   loop: "{{ eda_rulebook_activations }}"
   loop_control:
     loop_var: "__ra_item"
-  no_log: "{{ eda_configuration_rulebook_activation_secure_logging }}"
+    label: "{{ __operation.verb }} the rulebook activation {{ __ra_item.name }} to EDA"
+    pause: "{{ eda_configuration_rulebook_activations_async_delay }}"
+  no_log: "{{ eda_configuration_rulebook_activations_secure_logging }}"
   async: 1000
   poll: 0
   register: __rulebook_activations_job_async
   changed_when: not __rulebook_activations_job_async.changed
   vars:
+    __operation: "{{ operation_translate[__ra_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 
 - name: "Create rulebook_activation | Wait for finish the rulebook_activation creation"
@@ -40,13 +43,15 @@
     jid: "{{ __rulebook_activations_job_async_result_item.ansible_job_id }}"
   register: __rulebook_activations_job_async_result
   until: __rulebook_activations_job_async_result.finished
-  retries: "{{ eda_configuration_rulebook_activation_async_retries }}"
-  delay: "{{ eda_configuration_rulebook_activation_async_delay }}"
+  retries: "{{ eda_configuration_rulebook_activations_async_retries }}"
+  delay: "{{ eda_configuration_rulebook_activations_async_delay }}"
   loop: "{{ __rulebook_activations_job_async.results }}"
   loop_control:
     loop_var: __rulebook_activations_job_async_result_item
+    label: "{{ __operation.verb }} rulebook activation {{ __rulebook_activations_job_async_result_item.__ra_item.name }} | Wait for finish the rulebook activation {{ __operation.action }}"
   when: __rulebook_activations_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ eda_configuration_rulebook_activation_secure_logging }}"
+  no_log: "{{ eda_configuration_rulebook_activations_secure_logging }}"
   vars:
+    __operation: "{{ operation_translate[__rulebook_activations_job_async_result.__ra_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 ...

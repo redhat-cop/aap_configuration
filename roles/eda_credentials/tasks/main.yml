@@ -18,12 +18,15 @@
   loop: "{{ eda_credentials }}"
   loop_control:
     loop_var: "__credential_item"
-  no_log: "{{ eda_configuration_credential_secure_logging }}"
+    label: "{{ __operation.verb }} the credential {{ __credential_item.name }} to EDA"
+    pause: "{{ eda_configuration_credentials_async_delay }}"
+  no_log: "{{ eda_configuration_credentials_secure_logging }}"
   async: 1000
   poll: 0
   register: __credentials_job_async
   changed_when: not __credentials_job_async.changed
   vars:
+    __operation: "{{ operation_translate[__credentials_job_async.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 
 - name: "Create credential | Wait for finish the credential creation"
@@ -31,13 +34,15 @@
     jid: "{{ __credentials_job_async_result_item.ansible_job_id }}"
   register: __credentials_job_async_result
   until: __credentials_job_async_result.finished
-  retries: "{{ eda_configuration_credential_async_retries }}"
-  delay: "{{ eda_configuration_credential_async_delay }}"
+  retries: "{{ eda_configuration_credentials_async_retries }}"
+  delay: "{{ eda_configuration_credentials_async_delay }}"
   loop: "{{ __credentials_job_async.results }}"
   loop_control:
     loop_var: __credentials_job_async_result_item
+    label: "{{ __operation.verb }} credential {{ __credentials_job_async_result_item.__credential_item.name }} | Wait for finish the credential {{ __operation.action }}"
   when: __credentials_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ eda_configuration_credential_secure_logging }}"
+  no_log: "{{ eda_configuration_credentials_secure_logging }}"
   vars:
+    __operation: "{{ operation_translate[__credentials_job_async_result_item.__controller_user_accounts_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 ...

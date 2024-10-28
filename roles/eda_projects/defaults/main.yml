@@ -1,8 +1,8 @@
 ---
 eda_projects: []
 
-eda_configuration_project_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
-eda_configuration_project_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
-eda_configuration_project_async_delay: "{{ aap_configuration_async_delay| default(1) }}"
+eda_configuration_projects_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
+eda_configuration_projects_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
+eda_configuration_projects_async_delay: "{{ aap_configuration_async_delay| default(1) }}"
 aap_configuration_async_dir: null
 ...

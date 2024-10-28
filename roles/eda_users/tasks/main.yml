@@ -21,12 +21,15 @@
   loop: "{{ aap_user_accounts }}"
   loop_control:
     loop_var: "__user_item"
-  no_log: "{{ eda_configuration_user_secure_logging }}"
+    label: "{{ __operation.verb }} the user {{ __user_item.username }} to EDA"
+    pause: "{{ eda_configuration_users_async_delay }}"
+  no_log: "{{ eda_configuration_users_secure_logging }}"
   async: 1000
   poll: 0
   register: __users_job_async
   changed_when: not __users_job_async.changed
   vars:
+    __operation: "{{ operation_translate[__user_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 
 - name: "Create user | Wait for finish the user creation"
@@ -34,13 +37,15 @@
     jid: "{{ __users_job_async_result_item.ansible_job_id }}"
   register: __users_job_async_result
   until: __users_job_async_result.finished
-  retries: "{{ eda_configuration_user_async_retries }}"
-  delay: "{{ eda_configuration_user_async_delay }}"
+  retries: "{{ eda_configuration_users_async_retries }}"
+  delay: "{{ eda_configuration_users_async_delay }}"
   loop: "{{ __users_job_async.results }}"
   loop_control:
     loop_var: __users_job_async_result_item
+    label: "{{ __operation.verb }} user {{ __users_job_async_result_item.__user_item.username }} | Wait for finish the rulebook activation {{ __operation.action }}"
   when: __users_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ eda_configuration_user_secure_logging }}"
+  no_log: "{{ eda_configuration_users_secure_logging }}"
   vars:
+    __operation: "{{ operation_translate[__users_job_async_result.__user_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 ...
