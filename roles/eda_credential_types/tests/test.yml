@@ -1,0 +1,20 @@
+---
+- name: Add credential to EDA Controller
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    eda_validate_certs: false
+  # Define following vars here, or in eda_configs/eda_auth.yml
+  # controller_host: ansible-eda-web-svc-test-project.example.com
+  # eda_token: changeme
+  pre_tasks:
+    - name: Include vars from eda_configs directory
+      ansible.builtin.include_vars:
+        dir: ./vars
+        extensions: ["yml"]
+      tags:
+        - always
+  roles:
+    - ../../eda_credential_types
+...

@@ -1,12 +1,13 @@
 ---
 # Cannot add more than one, cannot add existing type.
-# gateway_service_clusters:
-#   - name: Automation Controller
-#     service_type: controller
-#   - name: Automation Hub
-#     service_type: hub
-#   - name: Event Driven Automation
-#     service_type: eda
+gateway_service_clusters:
+  - name: "gateway"
+    service_type: "gateway"
+  - name: "hub"
+    service_type: "hub"
+  - name: "controller"
+    service_type: "controller"
+
 gateway_service_keys:
   - name: Test-Key 1
     is_active: true

@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: "decision_environment"
+  role_name: "eda_decision_environments"
   author: "Derek Waters"
   description: "An Ansible Role to create a decision environment in EDA Controller."
   company: "Red Hat"

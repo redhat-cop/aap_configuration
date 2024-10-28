@@ -2,7 +2,7 @@
 ah_collections:
   - namespace: infra
     name: galaxy
-    path: "/home/runner/work/{{ git_repo_name }}/{{ git_repo_name }}/galaxy-galaxy-1.0.0.tar.gz"
+    path: "/home/runner/work/{{ git_repo_name }}/{{ git_repo_name }}/infra-aap_configuration-1.0.0.tar.gz"
     wait: true
     interaval: 5
     auto_approve: true
@@ -18,7 +18,7 @@ ah_collections:
 ah_collections_overwrite:
   - namespace: infra
     name: galaxy
-    path: "/home/runner/work/{{ git_repo_name }}/{{ git_repo_name }}/galaxy-galaxy-1.0.0.tar.gz"
+    path: "/home/runner/work/{{ git_repo_name }}/{{ git_repo_name }}/infra-aap_configuration-1.0.0.tar.gz"
     wait: true
     interaval: 5
     auto_approve: true

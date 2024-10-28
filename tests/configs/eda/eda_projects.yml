@@ -1,0 +1,17 @@
+---
+eda_projects:
+  - name: my_project
+    description: my awesome project
+    organization: Default
+    url: https://github.com/ansible/event-driven-ansible.git
+    sync: true
+    wait: true
+    timeout: 30
+    tls_validation: false
+  - name: my_project_clone
+    description: my awesome project clone
+    organization: Default
+    url: https://github.com/ansible/event-driven-ansible.git
+    sync: false
+    wait: false
+...

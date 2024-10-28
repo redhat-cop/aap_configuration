@@ -1,0 +1,9 @@
+---
+gateway_role_user_assignments:
+  - role_definition: Organization Member
+    user: controller_user
+    object_id: 1
+  - role_definition: Organization Admin
+    user: controller_user
+    object_id: 1
+...

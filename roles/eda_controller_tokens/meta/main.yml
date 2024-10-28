@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: controller_token
+  role_name: eda_controller_tokens
   author: "Derek Waters"
   description: "An Ansible Role to create a user token in EDA Controller."
   company: "Red Hat"

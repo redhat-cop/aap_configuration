@@ -7,24 +7,26 @@
     new_name:            "{{ __project_item.new_name | default(omit) }}"
     description:         "{{ __project_item.description | default(omit) }}"
     url:                 "{{ __project_item.url | default(__project_item.scm_url | default(omit)) }}"
-    # tls_validation:    "{{ __project_item.tls_validation | default(omit) }}"
     credential:          "{{ __project_item.credential | default(omit) }}"
     organization_name:   "{{ __project_item.organization | default(omit) }}"
     state:               "{{ __project_item.state | default(eda_state | default('present')) }}"
-    controller_host:     "{{ aap_hostname}}"
-    eda_username: "{{ aap_username| default(omit) }}"
-    aap_password: "{{ aap_password | default(omit) }}"
-    validate_certs:      "{{ aap_validate_certs| default(omit) }}"
-    request_timeout:     "{{ aap_request_timeout | default(omit) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ eda_projects }}"
   loop_control:
     loop_var: "__project_item"
-  no_log: "{{ eda_configuration_project_secure_logging }}"
+    label: "{{ __operation.verb }} the project {{ __project_item.name }} to EDA"
+    pause: "{{ eda_configuration_projects_async_delay }}"
+  no_log: "{{ eda_configuration_projects_secure_logging }}"
   async: 1000
   poll: 0
   register: __projects_job_async
   changed_when: not __projects_job_async.changed
   vars:
+    __operation: "{{ operation_translate[__project_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 
 - name: "Create project | Wait for finish the project creation"
@@ -32,13 +34,15 @@
     jid: "{{ __projects_job_async_result_item.ansible_job_id }}"
   register: __projects_job_async_result
   until: __projects_job_async_result.finished
-  retries: "{{ eda_configuration_project_async_retries }}"
-  delay: "{{ eda_configuration_project_async_delay }}"
+  retries: "{{ eda_configuration_projects_async_retries }}"
+  delay: "{{ eda_configuration_projects_async_delay }}"
   loop: "{{ __projects_job_async.results }}"
   loop_control:
     loop_var: __projects_job_async_result_item
-  when: __projects_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ eda_configuration_project_secure_logging }}"
+    label: "{{ __operation.verb }} project {{ __projects_job_async_result_item.__project_item.name }} | Wait for finish the project {{ __operation.action }}"
+  when:  __projects_job_async_result_item.ansible_job_id is defined
+  no_log: "{{ eda_configuration_projects_secure_logging }}"
   vars:
+    __operation: "{{ operation_translate[__projects_job_async_result.__projects_job_async.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 ...

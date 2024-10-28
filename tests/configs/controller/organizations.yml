@@ -2,10 +2,11 @@
 aap_organizations:
   - name: Satellite
     description: Satellite
-  - name: Default
+  # - name: Default
   - name: Test-dispatch-dependencies
     galaxy_credentials:
       - galaxy-server
     notification_templates_approvals:
       - Email notification
+    default_environment: My EE
 ...

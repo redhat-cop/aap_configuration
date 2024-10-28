@@ -1,0 +1,48 @@
+---
+
+# Create EDA Controller Event stream
+- name: Add EDA Controller Event Stream
+  ansible.eda.event_stream:
+    name: "{{ __event_stream_item.name }}"
+    new_name: "{{ __event_stream_item.new_name | default(omit) }}"
+    credential_name: "{{ __event_stream_item.credential_name | default(omit) }}"
+    organization: "{{ __event_stream_item.organization | default(omit) }}"
+    headers: "{{ __event_stream_item.headers | default(omit) }}"
+    forward_events: "{{ __event_stream_item.forward_events | default(omit) }}"
+    state: "{{ __event_stream_item.state | default(eda_state | default('present')) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+  loop: "{{ eda_event_streams }}"
+  loop_control:
+    loop_var: "__event_stream_item"
+    label: "{{ __operation.verb }} the Event stream {{ __event_stream_item.name }} to EDA"
+    pause: "{{ eda_configuration_event_streams_async_delay }}"
+  no_log: "{{ eda_configuration_event_streams_secure_logging }}"
+  async: 1000
+  poll: 0
+  register: __event_streams_job_async
+  changed_when: not __event_streams_job_async.changed
+  vars:
+    __operation: "{{ operation_translate[__event_stream_item.state | default(platform_state) | default('present')] }}"
+    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+
+- name: "Create Event stream | Wait for finish the Event stream creation"
+  ansible.builtin.async_status:
+    jid: "{{ __event_streams_job_async_result_item.ansible_job_id }}"
+  register: __event_streams_job_async_result
+  until: __event_streams_job_async_result.finished
+  retries: "{{ eda_configuration_event_streams_async_retries }}"
+  delay: "{{ eda_configuration_event_streams_async_delay }}"
+  loop: "{{ __event_streams_job_async.results }}"
+  loop_control:
+    loop_var: __event_streams_job_async_result_item
+    label: "{{ __operation.verb }} Event stream {{ __event_streams_job_async_result_item.__event_stream_item.name }} | Wait for finish the Event stream {{ __operation.action }}"
+  when: __event_streams_job_async_result_item.ansible_job_id is defined
+  no_log: "{{ eda_configuration_event_streams_secure_logging }}"
+  vars:
+    __operation: "{{ operation_translate[__event_streams_job_async_result_item.__event_stream_item.state | default(platform_state) | default('present')] }}"
+    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+...

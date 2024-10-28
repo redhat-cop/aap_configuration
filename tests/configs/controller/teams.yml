@@ -18,6 +18,6 @@ aap_teams:
     description: "Computer T1 Team"
     organization: Satellite
   - name: "Compute T2"
-    description: "Computer T2 Team"
+    description: "Computer T22 Team"
     organization: Satellite
 ...

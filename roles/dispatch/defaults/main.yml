@@ -125,22 +125,37 @@ controller_configuration_dispatcher_roles:
     assign_notification_templates_to_org: true
   - role: controller_projects
     var: controller_projects
-    tags: projects
+    tags:
+      - inventories
+      - projects
   - role: controller_inventories
     var: controller_inventories
     tags: inventories
   - role: controller_inventory_sources
     var: controller_inventory_sources
-    tags: inventory_sources
+    tags:
+      - inventories
+      - inventory_sources
   - role: controller_inventory_source_update
     var: controller_inventory_sources
-    tags: inventory_sources
+    tags:
+      - inventories
+      - inventory_sources
   - role: controller_hosts
     var: controller_hosts
-    tags: hosts
+    tags:
+      - inventories
+      - hosts
   - role: controller_bulk_host_create
     var: controller_bulk_hosts
-    tags: bulk_hosts
+    tags:
+      - inventories
+      - bulk_hosts
+  - role: controller_host_groups
+    var: controller_groups
+    tags:
+      - inventories
+      - host_groups
   - role: controller_job_templates
     var: controller_templates
     tags: job_templates

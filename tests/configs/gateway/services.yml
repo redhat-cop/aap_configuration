@@ -1,0 +1,34 @@
+---
+https_port_lookup: "{{ lookup('ansible.platform.gateway_api', 'http_ports', query_params={ 'is_api_port': true }, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false, expect_one=true) }}"
+gateway_services_lookup: "{{ lookup('ansible.platform.gateway_api', 'services', query_params={ 'name': 'gateway api' }, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false, expect_one=true) }}"
+service_node_name: "Node gateway - {{ aap_hostname | urlsplit('hostname') }}"
+gateway_service_node_lookup: "{{ lookup('ansible.platform.gateway_api', 'service_nodes', query_params={ 'name': service_node_name }, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false, expect_one=true) }}"
+gateway_routes_lookup: "{{ lookup('ansible.platform.gateway_api', 'routes', query_params={ 'name': 'hub container registry' }, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false, expect_one=true) }}"
+
+http_ports:
+  - name: "{{ https_port_lookup.name }}"
+    number: "{{ https_port_lookup.number | int }}"
+    use_https: true
+    is_api_port: true
+
+gateway_services:
+  - name: Controller API
+    state: exists
+  - name: gateway api
+    http_port: port-443
+    service_cluster: gateway
+    service_path: "/"
+    service_port: "{{ gateway_services_lookup.service_port | int }}"
+
+gateway_service_nodes:
+  - name: "{{ service_node_name }}"
+    address: "{{ aap_hostname | urlsplit('hostname') }}"
+    service_cluster: "{{ gateway_service_node_lookup.service_cluster }}"
+
+gateway_routes:
+  - name: "{{ gateway_routes_lookup.name }}"
+    description: "{{ gateway_routes_lookup.description }}"
+    http_port: "{{ gateway_routes_lookup.http_port }}"
+    enable_gateway_auth: "{{ gateway_routes_lookup.enable_gateway_auth }}"
+    service_cluster: "{{ gateway_routes_lookup.service_cluster }}"
+...

@@ -21,8 +21,8 @@
   loop: "{{ ah_ee_repositories }}"
   loop_control:
     loop_var: __hub_ee_repository_sync_item
-    label: "{{ __operation.verb }} the EE repository {{ __ee_repository_sync_item.name }} in Hub"
-    pause: "{{ ah_configuration_ee_registry_sync_loop_delay }}"
+    label: "{{ __operation.verb }} the EE repository {{ __hub_ee_repository_sync_item.name }} in Hub"
+    pause: "{{ ah_configuration_ee_repository_sync_loop_delay }}"
   no_log: "{{ ah_configuration_ee_repository_secure_logging }}"
   async: "{{ ah_configuration_ee_repository_async_timeout }}"
   poll: 0
@@ -42,7 +42,7 @@
   loop: "{{ __ee_repositories_job_async.results }}"
   loop_control:
     loop_var: __ee_repositories_job_async_result_item
-    label: "{{ __operation.verb }} Label {{ __ee_repositories_job_async_result_item.__ee_registry_sync_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Label {{ __ee_repositories_job_async_result_item.__hub_ee_repository_sync_item.name }} | Wait for finish the Label {{ __operation.action }}"
   when: __ee_repositories_job_async_result_item.ansible_job_id is defined
   no_log: "{{ ah_configuration_ee_repository_secure_logging }}"
   vars:

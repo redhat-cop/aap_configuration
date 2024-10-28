@@ -12,4 +12,5 @@ ah_namespaces:
   - name: infra
   - name: test_namespace
   - name: galaxy
+  - name: cisco
 ...

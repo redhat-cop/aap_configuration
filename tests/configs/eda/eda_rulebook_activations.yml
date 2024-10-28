@@ -1,0 +1,15 @@
+---
+eda_rulebook_activations:
+  - name: Github Hook
+    description: Hook to listen for changes in GitHub
+    organization: Default
+    project: my_project
+    rulebook: gitea_casc.yml
+    awx_token: my_user_token
+    decision_environment: my_de
+    extra_vars:
+      provider: github-local
+      repo_url: https://github.com/ansible/ansible-rulebook.git
+    enabled: true
+    state: present
+...
