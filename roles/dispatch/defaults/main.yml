@@ -80,6 +80,7 @@ ah_configuration_dispatcher_roles:
   - role: hub_collection_repository_sync
     var: ah_collection_repositories
     tags: collectionsrepsync
+
 controller_configuration_dispatcher_roles:
   - role: controller_settings
     var: controller_settings

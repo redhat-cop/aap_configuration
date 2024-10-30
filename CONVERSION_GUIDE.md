@@ -35,7 +35,7 @@ These are the variables that are used to connect the platform and are the same a
 
 ### Connection Variables
 
-These are the connection variables, These are used to connect to the platform.
+These are the connection variables, These are used to connect to the platform. These replace things like controller_hostname, ah_host, and other global connection variables.
 
 |Variable Name|Default Value|Required|Description|Example|
 |:---|:---:|:---:|:---|:---|
@@ -122,8 +122,103 @@ controller_configuration vars:
 
 eda_configuration vars:
 
-- eda_credentials
 - eda_controller_tokens
-- eda_projects
+- eda_credential_types
+- eda_credentials
 - eda_decision_environments
+- eda_event_streams
+- eda_projects
 - eda_rulebook_activations
+
+
+
+## Converted variables
+
+### Controller
+|Previous Name|New Name
+|:---|:---|
+|`controller_hostname`|`aap_hostname`|
+|`controller_hostname`|`aap_username`|
+|`controller_password`|`aap_password`|
+|`controller_oauthtoken`|`aap_token`|
+|`controller_validate_certs`|`aap_validate_certs`|
+|`controller_request_timeout`|`aap_request_timeout`|
+|`controller_user_accounts`|`aap_user_accounts`|
+|`controller_teams`|`aap_teams`|
+
+### Hub
+
+|Previous Name|New Name
+|`ah_host`|`aap_hostname`|
+|`ah_username`|`aap_username`|
+|`ah_password`|`aap_password`|
+|`ah_validate_certs`|`aap_validate_certs`|
+|`ah_token`|`aap_token`|
+|`ah_users`|`aap_user_accounts`|
+|`ah_groups`|`aap_teams`|
+
+### Eda
+
+|Previous Name|New Name
+|`eda_host`|`aap_hostname`|
+|`eda_username`|`aap_username`|
+|`eda_password`|`aap_password`|
+|`eda_token`|`aap_token`|
+|`eda_validate_certs`|`aap_validate_certs`|
+|`eda_request_timeout`|`aap_request_timeout`|
+|`eda_users`|`aap_user_accounts`|
+
+### Role Vars
+The following role vars have been updated as well. there are too many as its one for each role, so will go into how the name is crafted.
+
+For example the previous var of
+controller_configuration_projects_loop_delay
+is still
+controller_configuration_projects_loop_delay
+however
+ah_configuration_collection_repository_async_delay
+is now
+ah_configuration_collection_repository_loop_delay
+
+These are the following global variables.
+
+`aap_configuration_enforce_defaults`
+`aap_configuration_secure_logging`
+`aap_configuration_async_retries`
+`aap_configuration_async_delay`
+`aap_configuration_loop_delay`
+`aap_configuration_async_dir`
+
+This is the format that is used for each using the appropriate prefix
+
+Prefixes
+
+  - controller_configuration
+  - ah_configuration
+  - gateway
+  - eda_configuration_
+
+Format:
+`prefix`+`role_name`+_enforce_defaults`
+`prefix`+`role_name`+_secure_logging`
+`prefix`+`role_name`+_async_retries`
+`prefix`+`role_name`+_async_delay`
+`prefix`+`role_name`+_loop_delay`
+`prefix`+`role_name`+_async_dir`
+
+use these to tweak how the role runs, this is particulary useful for projects syncing, long lists of job templates, and other tasks that can take a while to loop around. These all have defaults, and each global var is described above as to what it does.
+
+## Dispatch changes
+
+The dispatch role has changed to use the following order:
+
+- gateway roles
+- hub roles
+- controller roles
+- eda roles
+
+These loop through all the applicable roles to create objects in the AAP. They will skip the role if the variable used in that role is not defined. you can tweak each services set of roles, or only run a single services roles by using the `aap_configuration_dispatcher_roles` variables. Refer to the [Dispatch role readme](roles/eda_controller_tokens/README.md) for more information.
+
+## Roles moved
+
+Any role that was not creating and managing objects on the AAP was moved to the [extended collection](https://github.com/redhat-cop/aap_configuration_extended). This includes lookup plugins, filtree and other roles.
