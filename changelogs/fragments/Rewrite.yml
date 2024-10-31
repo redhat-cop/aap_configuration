@@ -1,6 +1,9 @@
 ---
+release_summary: |
+   | Release Date: 2024-10-31
+   | `Conversion Guide <https://github.com/redhat-cop/infra.aap_configuration/blob/devel/CONVERSION_GUIDE.md>`__
 breaking_changes:
-  - Major overhaul to all code completed, variables have changed, role names have changed, please see the tranition guide for more details.
+  - Major overhaul to all code completed, variables have changed, role names have changed, please see the Conversion guide for more details.
 major_changes:
   - Roles from infra.ah_configuration and infra.eda_configuration have migrated into this collection
   - Rename of collection to infra.aap_configuration
