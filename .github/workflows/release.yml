@@ -9,18 +9,6 @@ on:
       - published
 
 jobs:
-  ci_standalone:
-    strategy:
-      fail-fast: false
-      matrix:
-        awx_version:
-          - devel
-          - 24.2.0
-          - 23.9.0
-          - 22.7.0
-    uses: "./.github/workflows/ci_standalone_versioned.yml"
-    with:
-      awx_version: ${{ matrix.awx_version }}
   release:
     needs:
       - ci_standalone
@@ -28,13 +16,13 @@ jobs:
     with:
       # Galaxy Publish
       collection_namespace_1: infra
-      collection_name_1: controller_configuration
+      collection_name_1: aap_configuration
       publish_url_collection_1: https://galaxy.ansible.com/api/
       galaxy_publish_1: true
       ah_publish_1: false
       # CRC Publish
       collection_namespace_2: infra
-      collection_name_2: controller_configuration
+      collection_name_2: aap_configuration
       publish_url_collection_2: https://cloud.redhat.com/api/automation-hub/
       galaxy_publish_2: false
       ah_publish_2: true
