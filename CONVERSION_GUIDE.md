@@ -147,7 +147,8 @@ eda_configuration vars:
 
 ### Hub
 
-|Previous Name|New Name
+|Previous Name|New Name|
+|:---|:---|
 |`ah_host`|`aap_hostname`|
 |`ah_username`|`aap_username`|
 |`ah_password`|`aap_password`|
@@ -158,7 +159,8 @@ eda_configuration vars:
 
 ### Eda
 
-|Previous Name|New Name
+|Previous Name|New Name|
+|:---|:---|
 |`eda_host`|`aap_hostname`|
 |`eda_username`|`aap_username`|
 |`eda_password`|`aap_password`|
@@ -180,14 +182,14 @@ ah_configuration_collection_repository_async_delay
 is now
 ah_configuration_collection_repository_loop_delay
 
-These are the following global variables.
+These are the following global variables:
 
-`aap_configuration_enforce_defaults`
-`aap_configuration_secure_logging`
-`aap_configuration_async_retries`
-`aap_configuration_async_delay`
-`aap_configuration_loop_delay`
-`aap_configuration_async_dir`
+- `aap_configuration_enforce_defaults`
+- `aap_configuration_secure_logging`
+- `aap_configuration_async_retries`
+- `aap_configuration_async_delay`
+- `aap_configuration_loop_delay`
+- `aap_configuration_async_dir`
 
 This is the format that is used for each using the appropriate prefix
 
@@ -199,12 +201,13 @@ Prefixes
 - eda_configuration_
 
 Format:
-`prefix`+`role_name`+_enforce_defaults`
-`prefix`+`role_name`+_secure_logging`
-`prefix`+`role_name`+_async_retries`
-`prefix`+`role_name`+_async_delay`
-`prefix`+`role_name`+_loop_delay`
-`prefix`+`role_name`+_async_dir`
+
+- `prefix`+`role_name`+`_enforce_defaults`
+- `prefix`+`role_name`+`_secure_logging`
+- `prefix`+`role_name`+`_async_retries`
+- `prefix`+`role_name`+`_async_delay`
+- `prefix`+`role_name`+`_loop_delay`
+- `prefix`+`role_name`+`_async_dir`
 
 use these to tweak how the role runs, this is particulary useful for projects syncing, long lists of job templates, and other tasks that can take a while to loop around. These all have defaults, and each global var is described above as to what it does.
 
