@@ -1,6 +1,6 @@
 ---
 breaking_changes:
-  - Major overhaul to all code completed, variables have changed, role names have changed, please see the tranition guide for more details.
+  - Major overhaul to all code completed, variables have changed, role names have changed, please see the [conversion guide](CONVERSION_GUIDE.md) for more details.
 major_changes:
   - Roles from infra.ah_configuration and infra.eda_configuration have migrated into this collection
   - Rename of collection to infra.aap_configuration
