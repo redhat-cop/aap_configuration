@@ -137,13 +137,11 @@ eda_configuration vars:
 |Previous Name|New Name|
 |:---|:---|
 |`controller_hostname`|`aap_hostname`|
-|`controller_hostname`|`aap_username`|
+|`controller_username`|`aap_username`|
 |`controller_password`|`aap_password`|
 |`controller_oauthtoken`|`aap_token`|
 |`controller_validate_certs`|`aap_validate_certs`|
 |`controller_request_timeout`|`aap_request_timeout`|
-|`controller_user_accounts`|`aap_user_accounts`|
-|`controller_teams`|`aap_teams`|
 
 ### Hub
 
@@ -154,8 +152,6 @@ eda_configuration vars:
 |`ah_password`|`aap_password`|
 |`ah_validate_certs`|`aap_validate_certs`|
 |`ah_token`|`aap_token`|
-|`ah_users`|`aap_user_accounts`|
-|`ah_groups`|`aap_teams`|
 
 ### Eda
 
@@ -167,7 +163,6 @@ eda_configuration vars:
 |`eda_token`|`aap_token`|
 |`eda_validate_certs`|`aap_validate_certs`|
 |`eda_request_timeout`|`aap_request_timeout`|
-|`eda_users`|`aap_user_accounts`|
 
 ### Role Vars
 
