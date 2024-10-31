@@ -1,6 +1,7 @@
 ---
 release_summary: |
    | Release Date: 2024-10-31
+   | The collection has been updated for AAP 2.5 use and has only been tested against AAP 2.5, it has been updated to include the previously separated hub, eda, and gateway collection roles.
    | `Conversion Guide <https://github.com/redhat-cop/infra.aap_configuration/blob/devel/CONVERSION_GUIDE.md>`__
 breaking_changes:
   - Major overhaul to all code completed, variables have changed, role names have changed, please see the Conversion guide for more details.
