@@ -83,22 +83,20 @@
     error_flag: true
   when: ansible_check_mode and __job_templates_job_async.failed is defined and __job_templates_job_async.failed
 
-- name: "Managing Controller Job Templates | include async file"
-  ansible.builtin.include_tasks: "{{ role_path }}/tasks/async.yml"
+- name: "Managing Job Templates | Wait for finish the Job Templates management"
+  ansible.builtin.async_status:
+    jid: "{{ __job_templates_job_async_result_item.ansible_job_id }}"
+  register: __job_templates_job_async_result
+  until: __job_templates_job_async_result.finished
+  retries: "{{ controller_configuration_job_templates_async_retries }}"
+  delay: "{{ controller_configuration_job_templates_async_delay }}"
   loop: "{{ __job_templates_job_async.results }}"
   loop_control:
     loop_var: __job_templates_job_async_result_item
-    label: "{{ __operation.verb }} Controller Job Template {{ __job_templates_job_async_result_item.__controller_template_item.name }} | Wait for finish the job templates {{ __operation.action }}"
+    label: "{{ __operation.verb }} Job Template {{ __job_templates_job_async_result_item }} | Wait for finish the Job Template {{ __operation.action }}"
   when: not ansible_check_mode and __job_templates_job_async_result_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_job_templates_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__job_templates_job_asycn_result_item.__controller_template_item.state | default(platform_state) | default('present')] }}"
+    __operation: "{{ operation_translate[__job_templates_job_async_result_item.__controller_template_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
-
-- name: Set Job Templates error artifact
-  when: __templates_error_list is defined
-  ansible.builtin.set_stats:
-    data:
-      job_templates_errors: "{{ __templates_error_list }}"
-  register: __job_templates_errors_set_stats
 ...
