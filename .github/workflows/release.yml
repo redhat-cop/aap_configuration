@@ -10,8 +10,6 @@ on:
 
 jobs:
   release:
-    needs:
-      - ci_standalone
     uses: "redhat-cop/ansible_collections_tooling/.github/workflows/release_pipeline_dual.yml@main"
     with:
       # Galaxy Publish
