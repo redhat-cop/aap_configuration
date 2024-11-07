@@ -5,7 +5,7 @@
   ansible.hub.ah_ee_registry_index:
     name:                   "{{ __hub_ee_registry_index_item.name }}"
     wait:                   "{{ __hub_ee_registry_index_item.wait | default(omit) }}"
-    interval:               "{{ __hub_ee_registry_index_item.interval | default(ah_configuration_ee_registry_index_async_delay) }}"
+    interval:               "{{ __hub_ee_registry_index_item.interval | default(hub_configuration_ee_registry_index_async_delay) }}"
     timeout:                "{{ __hub_ee_registry_index_item.timeout | default(omit) }}"
     ah_host:                "{{ aap_hostname | default(omit) }}"
     ah_username:           "{{ aap_username | default(omit) }}"
@@ -17,10 +17,10 @@
   loop_control:
     loop_var: __hub_ee_registry_index_item
     label: "{{ __operation.verb }} the EE registry index {{ __hub_ee_registry_index_item.name }} in Hub"
-    pause: "{{ ah_configuration_ee_registry_index_loop_delay }}"
+    pause: "{{ hub_configuration_ee_registry_index_loop_delay }}"
   when: __hub_ee_registry_index_item.index | default(false)
-  no_log: "{{ ah_configuration_ee_registry_secure_logging }}"
-  async: "{{ ah_configuration_ee_registry_index_async_timeout }}"
+  no_log: "{{ hub_configuration_ee_registry_secure_logging }}"
+  async: "{{ hub_configuration_ee_registry_index_async_timeout }}"
   poll: 0
   register: __ee_registry_indexes_job_async
   changed_when: not __ee_registry_indexes_job_async.changed
@@ -33,14 +33,14 @@
     jid: "{{ __ee_registry_indexes_job_async_result_item.ansible_job_id }}"
   register: __ee_registry_indexes_job_async_result
   until: __ee_registry_indexes_job_async_result.finished
-  retries: "{{ ah_configuration_ee_registry_index_async_retries }}"
-  delay: "{{ ah_configuration_ee_registry_index_async_delay }}"
+  retries: "{{ hub_configuration_ee_registry_index_async_retries }}"
+  delay: "{{ hub_configuration_ee_registry_index_async_delay }}"
   loop: "{{ __ee_registry_indexes_job_async.results }}"
   loop_control:
     loop_var: __ee_registry_indexes_job_async_result_item
     label: "{{ __operation.verb }} Label {{ __ee_registry_indexes_job_async_result_item.__hub_ee_registry_index_item.name }} | Wait for finish the Label {{ __operation.action }}"
   when: __ee_registry_indexes_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_ee_registry_secure_logging }}"
+  no_log: "{{ hub_configuration_ee_registry_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__ee_registry_indexes_job_async_result_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'

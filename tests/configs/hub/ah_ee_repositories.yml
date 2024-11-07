@@ -1,5 +1,5 @@
 ---
-ah_configuration_ee_registry_sync_async_delay: 20
+hub_configuration_ee_registry_sync_async_delay: 20
 hub_ee_registries:
   - name: quay
     url: https://quay.io/

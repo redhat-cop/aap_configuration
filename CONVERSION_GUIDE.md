@@ -177,7 +177,7 @@ controller_configuration_projects_loop_delay
 however
 ah_configuration_collection_repository_async_delay
 is now
-ah_configuration_collection_repository_loop_delay
+hub_configuration_collection_repository_loop_delay
 
 These are the following global variables:
 

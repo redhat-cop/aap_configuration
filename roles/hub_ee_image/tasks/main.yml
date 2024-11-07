@@ -18,9 +18,9 @@
   loop_control:
     loop_var: __ee_image_item
     label: "{{ __operation.verb }} the EE image {{ __ee_image_item.name }} in Hub"
-    pause: "{{ ah_configuration_ee_image_loop_delay }}"
-  no_log: "{{ ah_configuration_ee_image_secure_logging }}"
-  async: "{{ ah_configuration_ee_image_async_timeout }}"
+    pause: "{{ hub_configuration_ee_image_loop_delay }}"
+  no_log: "{{ hub_configuration_ee_image_secure_logging }}"
+  async: "{{ hub_configuration_ee_image_async_timeout }}"
   poll: 0
   register: __ee_images_job_async
   changed_when: not __ee_images_job_async.changed
@@ -33,14 +33,14 @@
     jid: "{{ __ee_images_job_async_result_item.ansible_job_id }}"
   register: __ee_images_job_async_result
   until: __ee_images_job_async_result.finished
-  retries: "{{ ah_configuration_ee_image_async_retries }}"
-  delay: "{{ ah_configuration_ee_image_async_delay }}"
+  retries: "{{ hub_configuration_ee_image_async_retries }}"
+  delay: "{{ hub_configuration_ee_image_async_delay }}"
   loop: "{{ __ee_images_job_async.results }}"
   loop_control:
     loop_var: __ee_images_job_async_result_item
     label: "{{ __operation.verb }} Label {{ __ee_images_job_async_result_item.__ee_image_item.name }} | Wait for finish the Label {{ __operation.action }}"
   when: __ee_images_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_ee_image_secure_logging }}"
+  no_log: "{{ hub_configuration_ee_image_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__ee_images_job_async_result_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'

@@ -11,7 +11,7 @@ argument_specs:
         elements: dict
 
       # Async variables
-      ah_configuration_ee_registry_index_async_retries:
+      hub_configuration_ee_registry_index_async_retries:
         default: "{{ aap_configuration_async_retries | default(50) }}"
         required: false
         description: This variable sets the number of retries to attempt for the role.
@@ -19,7 +19,7 @@ argument_specs:
         default: 50
         required: false
         description: This variable sets number of retries across all roles as a default.
-      ah_configuration_ee_registry_index_async_delay:
+      hub_configuration_ee_registry_index_async_delay:
         default: "{{ aap_configuration_async_delay | default(1) }}"
         required: false
         description: This variable sets delay between retries for the role.
@@ -33,7 +33,7 @@ argument_specs:
         description: Sets the directory to write the results file for async tasks. The default value is set to  `null` which uses the Ansible Default of `/root/.ansible_async/`.
 
       # No_log variables
-      ah_configuration_ee_registry_secure_logging:
+      hub_configuration_ee_registry_secure_logging:
         default: "{{ aap_configuration_secure_logging | default(false) }}"
         required: false
         type: bool

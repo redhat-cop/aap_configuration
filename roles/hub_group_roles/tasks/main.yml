@@ -15,9 +15,9 @@
   loop_control:
     loop_var: __hub_group_roles_item
     label: "{{ __operation.verb }} the group role {{ __hub_group_roles_item.groups }} in Hub"
-    pause: "{{ ah_configuration_group_roles_loop_delay }}"
-  no_log: "{{ ah_configuration_group_roles_secure_logging }}"
-  async: "{{ ah_configuration_group_roles_async_timeout }}"
+    pause: "{{ hub_configuration_group_roles_loop_delay }}"
+  no_log: "{{ hub_configuration_group_roles_secure_logging }}"
+  async: "{{ hub_configuration_group_roles_async_timeout }}"
   poll: 0
   register: __group_roles_job_async
   changed_when: not __group_roles_job_async.changed
@@ -30,14 +30,14 @@
     jid: "{{ __group_roles_job_async_result_item.ansible_job_id }}"
   register: __group_roles_job_async_result
   until: __group_roles_job_async_result.finished
-  retries: "{{ ah_configuration_group_roles_async_retries }}"
-  delay: "{{ ah_configuration_group_roles_async_delay }}"
+  retries: "{{ hub_configuration_group_roles_async_retries }}"
+  delay: "{{ hub_configuration_group_roles_async_delay }}"
   loop: "{{ __group_roles_job_async.results }}"
   loop_control:
     loop_var: __group_roles_job_async_result_item
     label: "{{ __operation.verb }} Label {{ __group_roles_job_async_result_item.__hub_group_roles_item.groups }} | Wait for finish the Label {{ __operation.action }}"
   when: __group_roles_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_group_roles_secure_logging }}"
+  no_log: "{{ hub_configuration_group_roles_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__group_roles_job_async_result_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'

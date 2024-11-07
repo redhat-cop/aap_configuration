@@ -9,5 +9,5 @@
 # aap_password: admin
 aap_validate_certs: false
 ah_path_prefix: 'galaxy'  # AH: galaxy Galaxy: automation-hub
-ah_configuration_namespace_secure_logging: false
+hub_configuration_namespace_secure_logging: false
 ...

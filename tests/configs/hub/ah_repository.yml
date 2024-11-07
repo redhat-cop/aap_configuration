@@ -1,6 +1,6 @@
 ---
-ah_configuration_repository_sync_async_delay: 5
-ah_configuration_repository_sync_async_retries: 150
+hub_configuration_repository_sync_async_delay: 5
+hub_configuration_repository_sync_async_retries: 150
 ah_repositories:
   - name: community
     url: https://beta-galaxy.ansible.com/
@@ -12,10 +12,10 @@ ah_repositories:
     timeout: 1000000
 
 # newer version
-ah_configuration_collection_repository_async_delay: 5
-ah_configuration_collection_repository_async_retries: 150
-ah_configuration_collection_repository_sync_async_delay: 5
-ah_configuration_collection_repository_sync_async_retries: 150
+hub_configuration_collection_repository_async_delay: 5
+hub_configuration_collection_repository_async_retries: 150
+hub_configuration_collection_repository_sync_async_delay: 5
+hub_configuration_collection_repository_sync_async_retries: 150
 hub_collection_remotes:
   - name: community-infra
     url: https://beta-galaxy.ansible.com/
