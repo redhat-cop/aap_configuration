@@ -2,7 +2,7 @@
 
 # Create AH EE repository
 - name: Sync Automation Hub EE Repository
-  ansible.hub.hub_ee_repository_sync:
+  ansible.hub.ah_ee_repository_sync:
     name:                   "{{ __hub_ee_repository_sync_item.name }}"
     wait:                   "{{ __hub_ee_repository_sync_item.wait | default(omit) }}"
     interval:               "{{ __hub_ee_repository_sync_item.interval | default(ah_configuration_ee_repository_sync_async_delay) }}"
