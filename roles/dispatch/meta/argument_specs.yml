@@ -112,7 +112,7 @@ argument_specs:
           - role: controller_workflow_launch
             var: controller_workflow_launch_jobs
             tags: workflow_launch
-      ah_configuration_dispatcher_roles:
+      hub_configuration_dispatcher_roles:
         default:
           - role: hub_group
             var: aap_teams

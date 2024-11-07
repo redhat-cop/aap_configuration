@@ -11,7 +11,7 @@ This is a meta role, its purpose is to run the other roles in the collection, it
 ```yaml
 aap_configuration_dispatcher_roles: >
   {{ gateway_configuration_dispatcher_roles
-   + ah_configuration_dispatcher_roles
+   + hub_configuration_dispatcher_roles
    + controller_configuration_dispatcher_roles
    + eda_configuration_dispatcher_roles
   }}
@@ -70,7 +70,7 @@ gateway_configuration_dispatcher_roles:
 #### Hub Roles
 
 ```yaml
-ah_configuration_dispatcher_roles:
+hub_configuration_dispatcher_roles:
   - role: hub_namespace
     var: hub_namespaces
     tags: namespaces
