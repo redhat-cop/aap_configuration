@@ -56,8 +56,7 @@
   loop: "{{ __namespaces_job_async.results }}"
   loop_control:
     loop_var: __namespaces_job_async_result_item
-    label: "{{ __operation.verb }} Namespace {{ __namespaces_job_async_result_item.__hub_namespace_item.name }} | Wait for finish the Namespace {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} Namespace {{ __namespaces_job_async_result_item.__hub_namespace_item.name }} | Wait for finish the Namespace {{ __operation.action }}"
   when: __namespaces_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_namespace_secure_logging }}"
   vars:

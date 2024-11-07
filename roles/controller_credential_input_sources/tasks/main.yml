@@ -44,12 +44,10 @@
   loop: "{{ __credential_input_sources_job_async.results }}"
   loop_control:
     loop_var: __credential_input_sources_job_async_results_item
-    label: "{{ __operation.verb }} Controller Credential Input Source for Credential {{ __credential_input_sources_job_async_results_item.__cred_input_src_item.target_credential
-      }}"
+    label: "{{ __operation.verb }} Controller Credential Input Source for Credential {{ __credential_input_sources_job_async_results_item.__cred_input_src_item.target_credential }}"
   when: not ansible_check_mode and __credential_input_sources_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_credential_input_sources_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__credential_input_sources_job_async_results_item.__cred_input_src_item.state | default(platform_state) | default('present')]
-      }}"
+    __operation: "{{ operation_translate[__credential_input_sources_job_async_results_item.__cred_input_src_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

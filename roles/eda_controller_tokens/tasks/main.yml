@@ -35,12 +35,10 @@
   loop: "{{ __controller_tokens_job_async.results }}"
   loop_control:
     loop_var: __controller_tokens_job_async_result_item
-    label: "{{ __operation.verb }} Controller token {{ __controller_tokens_job_async_result_item.__token_item.name }} | Wait for finish the Controller token {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} Controller token {{ __controller_tokens_job_async_result_item.__token_item.name }} | Wait for finish the Controller token {{ __operation.action }}"
   when: __controller_tokens_job_async_result_item.ansible_job_id is defined
   no_log: "{{ eda_configuration_users_token_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__controller_tokens_job_async_result_item.__controller_user_accounts_item.state | default(platform_state) | default('present')]
-      }}"
+    __operation: "{{ operation_translate[__controller_tokens_job_async_result_item.__controller_user_accounts_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

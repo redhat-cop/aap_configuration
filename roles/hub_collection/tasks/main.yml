@@ -62,8 +62,7 @@
   loop: "{{ __collections_job_async.results }}"
   loop_control:
     loop_var: __collections_job_async_result_item
-    label: "{{ __operation.verb }} Collection {{ __collections_job_async_result_item.__hub_collection_item.name }} | Wait for finish the Collection {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} Collection {{ __collections_job_async_result_item.__hub_collection_item.name }} | Wait for finish the Collection {{ __operation.action }}"
   when: __collections_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_collection_secure_logging }}"
   vars:

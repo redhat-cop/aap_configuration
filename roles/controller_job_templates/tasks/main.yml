@@ -5,10 +5,8 @@
     new_name: "{{ __controller_template_item.new_name | default(omit, true) }}"
     copy_from: "{{ __controller_template_item.copy_from | default(omit, true) }}"
     description: "{{ __controller_template_item.description | default(('' if controller_configuration_job_templates_enforce_defaults else omit), true) }}"
-    execution_environment: "{{ __controller_template_item.execution_environment.name | default(__controller_template_item.execution_environment | default(omit, true))
-      }}"
-    custom_virtualenv: "{{ __controller_template_item.custom_virtualenv | default(('' if controller_configuration_job_templates_enforce_defaults else omit), true)
-      }}"
+    execution_environment: "{{ __controller_template_item.execution_environment.name | default(__controller_template_item.execution_environment | default(omit, true)) }}"
+    custom_virtualenv: "{{ __controller_template_item.custom_virtualenv | default(('' if controller_configuration_job_templates_enforce_defaults else omit), true) }}"
     job_type: "{{ __controller_template_item.job_type | default('run') }}"
     inventory: "{{ __controller_template_item.inventory.name | default(__controller_template_item.inventory | default(omit, true)) }}"
     organization: "{{ __controller_template_item.organization.name | default(__controller_template_item.organization | default(('' if controller_configuration_job_templates_enforce_defaults
@@ -36,8 +34,7 @@
       omit)) }}"
     ask_variables_on_launch: "{{ __controller_template_item.ask_variables_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else
       omit)) }}"
-    ask_limit_on_launch: "{{ __controller_template_item.ask_limit_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else omit))
-      }}"
+    ask_limit_on_launch: "{{ __controller_template_item.ask_limit_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else omit)) }}"
     ask_tags_on_launch: "{{ __controller_template_item.ask_tags | default(__controller_template_item.ask_tags_on_launch | default((false if controller_configuration_job_templates_enforce_defaults
       else omit))) }}"
     ask_skip_tags_on_launch: "{{ __controller_template_item.ask_skip_tags | default(__controller_template_item.ask_skip_tags_on_launch | default((false if controller_configuration_job_templates_enforce_defaults
@@ -52,24 +49,20 @@
       else omit)) }}"
     ask_execution_environment_on_launch: "{{ __controller_template_item.ask_execution_environment_on_launch | default((false if controller_configuration_job_templates_enforce_defaults
       else omit)) }}"
-    ask_forks_on_launch: "{{ __controller_template_item.ask_forks_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else omit))
-      }}"
+    ask_forks_on_launch: "{{ __controller_template_item.ask_forks_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else omit)) }}"
     ask_instance_groups_on_launch: "{{ __controller_template_item.ask_instance_groups_on_launch | default((false if controller_configuration_job_templates_enforce_defaults
       else omit)) }}"
     ask_job_slice_count_on_launch: "{{ __controller_template_item.ask_job_slice_count_on_launch | default((false if controller_configuration_job_templates_enforce_defaults
       else omit)) }}"
-    ask_labels_on_launch: "{{ __controller_template_item.ask_labels_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else omit))
-      }}"
-    ask_timeout_on_launch: "{{ __controller_template_item.ask_timeout_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else omit))
-      }}"
+    ask_labels_on_launch: "{{ __controller_template_item.ask_labels_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else omit)) }}"
+    ask_timeout_on_launch: "{{ __controller_template_item.ask_timeout_on_launch | default((false if controller_configuration_job_templates_enforce_defaults else omit)) }}"
     prevent_instance_group_fallback: "{{ __controller_template_item.prevent_instance_group_fallback | default((false if controller_configuration_job_templates_enforce_defaults
       else omit)) }}"
     survey_enabled: "{{ __controller_template_item.survey_enabled | default((false if controller_configuration_job_templates_enforce_defaults else omit)) }}"
     survey_spec: "{{ __controller_template_item.related.survey_spec | default(__controller_template_item.survey_spec | default(__controller_template_item.survey |
       default(({} if controller_configuration_job_templates_enforce_defaults else omit), true))) }}"
     become_enabled: "{{ __controller_template_item.become_enabled | default((false if controller_configuration_job_templates_enforce_defaults else omit)) }}"
-    allow_simultaneous: "{{ __controller_template_item.allow_simultaneous | default((false if controller_configuration_job_templates_enforce_defaults else omit))
-      }}"
+    allow_simultaneous: "{{ __controller_template_item.allow_simultaneous | default((false if controller_configuration_job_templates_enforce_defaults else omit)) }}"
     timeout: "{{ __controller_template_item.timeout | default(0, true) if __controller_template_item.timeout is defined or controller_configuration_job_templates_enforce_defaults
       else omit }}"
     instance_groups: "{{ __controller_template_item.instance_groups | default(([] if controller_configuration_job_templates_enforce_defaults else omit), true) }}"

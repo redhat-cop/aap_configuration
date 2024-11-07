@@ -37,8 +37,7 @@
   loop: "{{ __credential_types_job_async.results }}"
   loop_control:
     loop_var: __credential_types_job_async_result_item
-    label: "{{ __operation.verb }} credential {{ __credential_types_job_async_result_item.__credential_type_item.name }} | Wait for finish the credential {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} credential {{ __credential_types_job_async_result_item.__credential_type_item.name }} | Wait for finish the credential {{ __operation.action }}"
   when: __credential_types_job_async_result_item.ansible_job_id is defined
   no_log: "{{ eda_configuration_credential_types_secure_logging }}"
   vars:

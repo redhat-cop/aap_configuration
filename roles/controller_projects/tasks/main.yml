@@ -77,8 +77,7 @@
   loop: "{{ __projects_job_async.results }}"
   loop_control:
     loop_var: __projects_job_async_results_item
-    label: "{{ __operation.verb }} Project {{ __projects_job_async_results_item.__controller_project_item.name }} | Wait for finish the project {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} Project {{ __projects_job_async_results_item.__controller_project_item.name }} | Wait for finish the project {{ __operation.action }}"
   when: not ansible_check_mode and __projects_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_projects_secure_logging }}"
   vars:

@@ -42,8 +42,7 @@
   loop: "{{ __controller_label_job_async.results }}"
   loop_control:
     loop_var: __controller_label_job_async_results_item
-    label: "{{ __operation.verb }} Label {{ __controller_label_job_async_results_item.__controller_label_item.name }} | Wait for finish the Label {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} Label {{ __controller_label_job_async_results_item.__controller_label_item.name }} | Wait for finish the Label {{ __operation.action }}"
   when: not ansible_check_mode and __controller_label_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_labels_secure_logging }}"
   vars:

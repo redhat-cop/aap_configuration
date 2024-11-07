@@ -38,8 +38,7 @@
   loop: "{{ __event_streams_job_async.results }}"
   loop_control:
     loop_var: __event_streams_job_async_result_item
-    label: "{{ __operation.verb }} Event stream {{ __event_streams_job_async_result_item.__event_stream_item.name }} | Wait for finish the Event stream {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} Event stream {{ __event_streams_job_async_result_item.__event_stream_item.name }} | Wait for finish the Event stream {{ __operation.action }}"
   when: __event_streams_job_async_result_item.ansible_job_id is defined
   no_log: "{{ eda_configuration_event_streams_secure_logging }}"
   vars:

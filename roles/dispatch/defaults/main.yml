@@ -193,7 +193,6 @@ aap_configuration_dispatcher_roles: >
   {{ gateway_configuration_dispatcher_roles
    + hub_configuration_dispatcher_roles
    + controller_configuration_dispatcher_roles
-   + eda_configuration_dispatcher_roles
-  }}
+   + eda_configuration_dispatcher_roles }}
 
 ...

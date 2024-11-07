@@ -19,8 +19,7 @@
   loop: "{{ inventory_sources if inventory_sources is defined else controller_inventory_sources }}"
   loop_control:
     loop_var: __inventory_source_update_item
-    label: "{{ (__inventory_source_update_item.organization | default('<no_org>')) }}/{{ __inventory_source_update_item.inventory }}/{{ __inventory_source_update_item.name
-      }}"
+    label: "{{ (__inventory_source_update_item.organization | default('<no_org>')) }}/{{ __inventory_source_update_item.inventory }}/{{ __inventory_source_update_item.name }}"
     pause: "{{ controller_configuration_inventory_source_update_loop_delay }}"
   no_log: "{{ controller_configuration_inventory_source_update_secure_logging }}"
   when:

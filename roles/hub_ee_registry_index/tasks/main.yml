@@ -37,8 +37,7 @@
   loop: "{{ __ee_registry_indexes_job_async.results }}"
   loop_control:
     loop_var: __ee_registry_indexes_job_async_result_item
-    label: "{{ __operation.verb }} Label {{ __ee_registry_indexes_job_async_result_item.__hub_ee_registry_index_item.name }} | Wait for finish the Label {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} Label {{ __ee_registry_indexes_job_async_result_item.__hub_ee_registry_index_item.name }} | Wait for finish the Label {{ __operation.action }}"
   when: __ee_registry_indexes_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_ee_registry_secure_logging }}"
   vars:

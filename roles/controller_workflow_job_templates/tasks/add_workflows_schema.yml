@@ -14,13 +14,10 @@
     verbosity: "{{ __workflow_loop_node_item.verbosity | default(omit, true) }}"
     credentials: "{{ __workflow_loop_node_item.credentials | default(__workflow_loop_node_item.related.credentials | default([]) | map(attribute='name') | list) |
       default(omit, true) }}"
-    workflow_job_template: "{{ __workflow_loop_node_item.workflow_job_template.name | default(__workflow_loop_node_item.workflow_job_template | default(omit, true))
-      }}"
-    unified_job_template: "{{ __workflow_loop_node_item.unified_job_template.name | default(__workflow_loop_node_item.unified_job_template | default(omit, true))
-      }}" # Run Job template
+    workflow_job_template: "{{ __workflow_loop_node_item.workflow_job_template.name | default(__workflow_loop_node_item.workflow_job_template | default(omit, true)) }}"
+    unified_job_template: "{{ __workflow_loop_node_item.unified_job_template.name | default(__workflow_loop_node_item.unified_job_template | default(omit, true)) }}" # Run Job template
     lookup_organization: "{{ __workflow_loop_node_item.lookup_organization | default(omit, true) }}"
-    execution_environment: "{{ __workflow_loop_node_item.execution_environment.name | default(__workflow_loop_node_item.execution_environment | default(omit, true))
-      }}"
+    execution_environment: "{{ __workflow_loop_node_item.execution_environment.name | default(__workflow_loop_node_item.execution_environment | default(omit, true)) }}"
     forks: "{{ __workflow_loop_node_item.forks | default(omit, true) }}"
     instance_groups: "{{ __workflow_loop_node_item.instance_groups | default(omit, true) }}"
     job_slice_count: "{{ __workflow_loop_node_item.job_slice_count | default(omit, true) }}"

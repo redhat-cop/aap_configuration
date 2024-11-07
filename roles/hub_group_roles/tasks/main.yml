@@ -35,8 +35,7 @@
   loop: "{{ __group_roles_job_async.results }}"
   loop_control:
     loop_var: __group_roles_job_async_result_item
-    label: "{{ __operation.verb }} Label {{ __group_roles_job_async_result_item.__hub_group_roles_item.groups }} | Wait for finish the Label {{ __operation.action
-      }}"
+    label: "{{ __operation.verb }} Label {{ __group_roles_job_async_result_item.__hub_group_roles_item.groups }} | Wait for finish the Label {{ __operation.action }}"
   when: __group_roles_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_group_roles_secure_logging }}"
   vars:

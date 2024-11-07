@@ -70,8 +70,7 @@
   loop: "{{ __controller_role_job_async.results }}"
   loop_control:
     loop_var: __controller_role_job_async_results_item
-    label: "{{ __operation.verb }} Role {{ __controller_role_job_async_results_item.__controller_role_item.1 | default(__controller_role_job_async_results_item.__controller_role_item.role)
-      }} | Wait for finish the Roles {{ __operation.action }}"
+    label: "{{ __operation.verb }} Role {{ __controller_role_job_async_results_item.__controller_role_item.1 | default(__controller_role_job_async_results_item.__controller_role_item.role) }} | Wait for finish the Roles {{ __operation.action }}"
   when: not ansible_check_mode and __controller_role_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_role_secure_logging }}"
   vars:

@@ -19,8 +19,7 @@
     execution_environment: "{{ __controller_source_item.execution_environment | default(omit, true) }}"
     overwrite: "{{ __controller_source_item.overwrite | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
     overwrite_vars: "{{ __controller_source_item.overwrite_vars | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
-    custom_virtualenv: "{{ __controller_source_item.custom_virtualenv | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true)
-      }}"
+    custom_virtualenv: "{{ __controller_source_item.custom_virtualenv | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
     timeout: "{{ __controller_source_item.timeout | default(0, true) if __controller_source_item.timeout is defined or controller_configuration_inventory_sources_enforce_defaults
       else omit }}"
     verbosity: "{{ __controller_source_item.verbosity | default((1 if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
@@ -82,7 +81,6 @@
   when: not ansible_check_mode and __inventory_source_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_inventory_sources_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__inventory_source_job_async_results_item.__controller_source_item.state | default(platform_state) | default('present')]
-      }}"
+    __operation: "{{ operation_translate[__inventory_source_job_async_results_item.__controller_source_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

@@ -18,8 +18,7 @@
       block:
         - name: Check if the collection ansible.controller is installed
           ansible.builtin.set_fact:
-            ansible_controller_collection_installed: "{{ lookup('ansible.builtin.pipe', 'ansible-galaxy collection list | grep -i ansible.controller || echo NOTINSTALLED')
-              }}"
+            ansible_controller_collection_installed: "{{ lookup('ansible.builtin.pipe', 'ansible-galaxy collection list | grep -i ansible.controller || echo NOTINSTALLED') }}"
           failed_when: ansible_controller_collection_installed is match('NOTINSTALLED')
       rescue:
         - name: Check if the collection awx.awx is installed

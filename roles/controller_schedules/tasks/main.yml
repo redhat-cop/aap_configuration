@@ -69,7 +69,6 @@
   when: not ansible_check_mode and __controller_schedule_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_schedules_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__controller_schedule_job_async_results_item.__controller_schedule_item.state | default(platform_state) | default('present')]
-      }}"
+    __operation: "{{ operation_translate[__controller_schedule_job_async_results_item.__controller_schedule_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...
