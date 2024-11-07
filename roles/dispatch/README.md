@@ -84,7 +84,7 @@ ah_configuration_dispatcher_roles:
     var: hub_ee_repositories
     tags: repos
   - role: hub_ee_repository_sync
-    var: ah_ee_repository_sync
+    var: hub_ee_repository_sync
     tags: reposync
   - role: hub_ee_image
     var: hub_ee_images
