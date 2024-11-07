@@ -38,7 +38,7 @@ argument_specs:
         #     default: false
         #     required: false
         #     type: bool
-        #     description: Set True to skip authorization step for completely trusted applications.
+        #     description: Set true to skip authorization step for completely trusted applications.
         #   state:
         #     default: "{{ controller_state | default('present') }}"
         #     required: false

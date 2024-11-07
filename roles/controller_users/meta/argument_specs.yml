@@ -42,7 +42,7 @@ argument_specs:
         #     default: true
         #     required: false
         #     type: bool
-        #     description: True will always change password if user specifies password, even if API gives $encrypted$ for password. False will only set the password if other values change too.
+        #     description: true will always change password if user specifies password, even if API gives $encrypted$ for password. false will only set the password if other values change too.
         #   organization:
         #     required: false
         #     type: str

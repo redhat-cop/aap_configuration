@@ -18,7 +18,7 @@ Currently:
 |:---|:---:|:---:|:---|:---|:---|
 |`controller_state`|"present"|no|str|The state all objects will take unless overridden by object default|'absent'|
 |`aap_hostname`|""|yes|str|URL to the Ansible Controller Server.|127.0.0.1|
-|`aap_validate_certs`|`True`|no|str|Whether or not to validate the Ansible Controller Server's SSL certificate.||
+|`aap_validate_certs`|`true`|no|str|Whether or not to validate the Ansible Controller Server's SSL certificate.||
 |`aap_username`|""|no|str|Admin User on the Ansible Controller Server. Either username / password or oauthtoken need to be specified.||
 |`aap_password`|""|no|str|Controller Admin User's password on the Ansible Controller Server. This should be stored in an Ansible Vault at vars/controller-secrets.yml or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.||
 |`controller_oauthtoken`|""|no|str|Controller Admin User's token on the Ansible Controller Server. This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.||
@@ -38,20 +38,20 @@ Enabling this will enforce configurtion without specifying every option in the c
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`controller_configuration_projects_enforce_defaults`|`False`|no|Whether or not to enforce default option values on only the applications role|
-|`aap_configuration_enforce_defaults`|`False`|no|This variable enables enforced default values as well, but is shared across multiple roles, see above.|
+|`controller_configuration_projects_enforce_defaults`|`false`|no|Whether or not to enforce default option values on only the applications role|
+|`aap_configuration_enforce_defaults`|`false`|no|This variable enables enforced default values as well, but is shared across multiple roles, see above.|
 
 ### Secure Logging Variables
 
 The following Variables compliment each other.
 If Both variables are not set, secure logging defaults to false.
-The role defaults to False as normally the add projects task does not include sensitive information.
+The role defaults to false as normally the add projects task does not include sensitive information.
 controller_configuration_projects_secure_logging defaults to the value of aap_configuration_secure_logging if it is not explicitly called. This allows for secure logging to be toggled for the entire suite of configuration roles with a single variable, or for the user to selectively use it.
 
 |Variable Name|Default Value|Required|Type|Description|
 |:---:|:---:|:---:|:---:|:---|
-|`controller_configuration_projects_secure_logging`|`False`|no|str|Whether or not to include the sensitive Project role tasks in the log. Set this value to `True` if you will be providing your sensitive values from elsewhere.|
-|`aap_configuration_secure_logging`|`False`|no|str|This variable enables secure logging as well, but is shared across multiple roles, see above.|
+|`controller_configuration_projects_secure_logging`|`false`|no|str|Whether or not to include the sensitive Project role tasks in the log. Set this value to `true` if you will be providing your sensitive values from elsewhere.|
+|`aap_configuration_secure_logging`|`false`|no|str|This variable enables secure logging as well, but is shared across multiple roles, see above.|
 
 ### Asynchronous Retry Variables
 
@@ -79,8 +79,8 @@ This also speeds up the overall role.
 |`name`|""|yes|str|Name of Project|
 |`new_name`|""|no|str|Setting this option will change the existing name (looked up via the name field).|
 |`copy_from`|""|no|str|Name or id to copy the project from. This will copy an existing project and change any parameters supplied.|
-|`description`|`False`|no|str|Description of the Project.|
-|`organization`|`False`|yes|str|Name of organization for project.|
+|`description`|`false`|no|str|Description of the Project.|
+|`organization`|`false`|yes|str|Name of organization for project.|
 |`scm_type`|""|no|str|Type of SCM resource.|
 |`scm_url`|""|no|str|URL of SCM resource.|
 |`default_environment`|""|no|str|Default Execution Environment to use for jobs relating to the project.|
@@ -93,7 +93,7 @@ This also speeds up the overall role.
 |`scm_delete_on_update`|""|no|bool|Remove the repository completely before updating.|
 |`scm_track_submodules`|""|no|bool|Track submodules latest commit on specified branch.|
 |`scm_update_on_launch`|""|no|bool|Before an update to the local repository before launching a job with this project.|
-|`scm_update_cache_timeout`|""|no|str|Cache Timeout to cache prior project syncs for a certain number of seconds. Only valid if scm_update_on_launch is to True, otherwise ignored.|
+|`scm_update_cache_timeout`|""|no|str|Cache Timeout to cache prior project syncs for a certain number of seconds. Only valid if scm_update_on_launch is to true, otherwise ignored.|
 |`allow_override`|""|no|str|Allow changing the SCM branch or revision in a job template that uses this project.|
 |`timeout`|""|no|int|The amount of time (in seconds) to run before the SCM Update is canceled. A value of 0 means no timeout.|
 |`custom_virtualenv`|""|no|str|Local absolute file path containing a custom Python virtualenv to use.|
@@ -102,7 +102,7 @@ This also speeds up the overall role.
 |`notification_templates_error`|""|no|list|The notifications on error to use for this organization in a list.|
 |`state`|`present`|no|str|Desired state of the resource.|
 |`wait`|""|no|bool|Provides option to wait for completed project sync before returning.|
-|`update_project`|`False`|no|bool|Force project to update after changes.Used in conjunction with wait, interval, and timeout.|
+|`update_project`|`false`|no|bool|Force project to update after changes.Used in conjunction with wait, interval, and timeout.|
 |`interval`|`controller_configuration_projects_async_delay`|no|float|The interval to request an update from controller. Requires wait.|
 
 ### Standard Project Data Structure

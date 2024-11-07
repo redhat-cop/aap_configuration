@@ -81,7 +81,7 @@ argument_specs:
         #   scm_update_cache_timeout:
         #     required: false
         #     type: int
-        #     description: Cache Timeout to cache prior project syncs for a certain number of seconds. Only valid if scm_update_on_launch is to True, otherwise ignored.
+        #     description: Cache Timeout to cache prior project syncs for a certain number of seconds. Only valid if scm_update_on_launch is to true, otherwise ignored.
         #   allow_override:
         #     required: false
         #     type: bool

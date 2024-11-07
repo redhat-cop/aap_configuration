@@ -48,7 +48,7 @@ argument_specs:
         #     default: true
         #     type: bool
         #     required: false
-        #     description: True will always change password if user specifies password, even if API gives $encrypted$ for password. False will only set the password if other values change too.
+        #     description: true will always change password if user specifies password, even if API gives $encrypted$ for password. false will only set the password if other values change too.
         #   state:
         #     default: "{{ controller_state | default('present') }}"
         #     type: str
