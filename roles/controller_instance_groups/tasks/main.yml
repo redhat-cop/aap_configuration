@@ -1,26 +1,33 @@
 ---
-- name: "Managing Controller Instance Groups"
+- name: Managing Controller Instance Groups
   instance_group:
-    name:                           "{{ __controller_instance_group_item.name | mandatory }}"
-    new_name:                       "{{ __controller_instance_group_item.new_name | default(omit, true) }}"
-    credential:                     "{{ __controller_instance_group_item.credential | default(('' if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
-    is_container_group:             "{{ __controller_instance_group_item.is_container_group | default((false if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
-    policy_instance_percentage:     "{{ __controller_instance_group_item.policy_instance_percentage | default(0, true) if __controller_instance_group_item.policy_instance_percentage is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
-    policy_instance_minimum:        "{{ __controller_instance_group_item.policy_instance_minimum | default(0, true) if __controller_instance_group_item.policy_instance_minimum is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
-    policy_instance_list:           "{{ __controller_instance_group_item.policy_instance_list | default(([] if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
-    max_concurrent_jobs:            "{{ __controller_instance_group_item.max_concurrent_jobs | default(0, true) if __controller_instance_group_item.max_concurrent_jobs is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
-    max_forks:                      "{{ __controller_instance_group_item.max_forks | default(0, true) if __controller_instance_group_item.max_forks is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
-    pod_spec_override:              "{{ __controller_instance_group_item.pod_spec_override | default(('' if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
-    instances:                      "{{ __controller_instance_group_item.instances | default(([] if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
-    state:                          "{{ __controller_instance_group_item.state | default(platform_state | default('present')) }}"
+    name: "{{ __controller_instance_group_item.name | mandatory }}"
+    new_name: "{{ __controller_instance_group_item.new_name | default(omit, true) }}"
+    credential: "{{ __controller_instance_group_item.credential | default(('' if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
+    is_container_group: "{{ __controller_instance_group_item.is_container_group | default((false if controller_configuration_instance_groups_enforce_defaults else
+      omit), true) }}"
+    policy_instance_percentage: "{{ __controller_instance_group_item.policy_instance_percentage | default(0, true) if __controller_instance_group_item.policy_instance_percentage
+      is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
+    policy_instance_minimum: "{{ __controller_instance_group_item.policy_instance_minimum | default(0, true) if __controller_instance_group_item.policy_instance_minimum
+      is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
+    policy_instance_list: "{{ __controller_instance_group_item.policy_instance_list | default(([] if controller_configuration_instance_groups_enforce_defaults else
+      omit), true) }}"
+    max_concurrent_jobs: "{{ __controller_instance_group_item.max_concurrent_jobs | default(0, true) if __controller_instance_group_item.max_concurrent_jobs is defined
+      or controller_configuration_instance_groups_enforce_defaults else omit }}"
+    max_forks: "{{ __controller_instance_group_item.max_forks | default(0, true) if __controller_instance_group_item.max_forks is defined or controller_configuration_instance_groups_enforce_defaults
+      else omit }}"
+    pod_spec_override: "{{ __controller_instance_group_item.pod_spec_override | default(('' if controller_configuration_instance_groups_enforce_defaults else omit),
+      true) }}"
+    instances: "{{ __controller_instance_group_item.instances | default(([] if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
+    state: "{{ __controller_instance_group_item.state | default(platform_state | default('present')) }}"
 
     # Role Standard Options
-    controller_username:            "{{ aap_username | default(omit, true) }}"
-    controller_password:            "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:          "{{ aap_token | default(omit, true) }}"
-    request_timeout:                "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:                "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:                 "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ controller_instance_groups }}"
   loop_control:
     loop_var: __controller_instance_group_item
@@ -31,17 +38,17 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __instance_groups_job_async
-  changed_when: "(__instance_groups_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__instance_groups_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__controller_instance_group_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __instance_groups_job_async.failed is defined and __instance_groups_job_async.failed
 
-- name: "Managing Controller instance groups | Wait for finish the instance groups management"
+- name: Managing Controller instance groups | Wait for finish the instance groups management
   ansible.builtin.async_status:
     jid: "{{ __instance_groups_job_async_results_item.ansible_job_id }}"
   register: __instance_groups_job_async_result
@@ -51,10 +58,12 @@
   loop: "{{ __instance_groups_job_async.results }}"
   loop_control:
     loop_var: __instance_groups_job_async_results_item
-    label: "{{ __operation.verb }} Controller instance group {{ __instance_groups_job_async_results_item.__controller_instance_group_item.name }} | Wait for finish the instance groups {{ __operation.action }}"
+    label: "{{ __operation.verb }} Controller instance group {{ __instance_groups_job_async_results_item.__controller_instance_group_item.name }} | Wait for finish
+      the instance groups {{ __operation.action }}"
   when: not ansible_check_mode and __instance_groups_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_instance_groups_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__instance_groups_job_async_results_item.__controller_instance_group_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    __operation: "{{ operation_translate[__instance_groups_job_async_results_item.__controller_instance_group_item.state | default(platform_state) | default('present')]
+      }}"
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

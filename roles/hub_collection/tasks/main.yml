@@ -16,24 +16,24 @@
 
 - name: Update or destroy Automation Hub Collection
   ansible.hub.ah_collection:
-    namespace:             "{{ __hub_collection_item.namespace }}"
-    name:                  "{{ __hub_collection_item.name }}"
-    version:               "{{ __hub_collection_item.version | default(omit) }}"
-    path:                  "{{ __hub_collection_item.path | default(omit) }}"
-    repository:            "{{ __hub_collection_item.repository | default(omit) }}"
-    wait:                  "{{ __hub_collection_item.wait | default(omit) }}"
-    auto_approve:          "{{ __hub_collection_item.auto_approve | default(omit) }}"
-    timeout:               "{{ __hub_collection_item.timeout | default(omit) }}"
-    interval:              "{{ __hub_collection_item.interval | default(omit) }}"
-    overwrite_existing:    "{{ __hub_collection_item.overwrite_existing | default(omit) }}"
-    state:                 "{{ __hub_collection_item.state | default('present') }}"
-    ah_host:               "{{ aap_hostname | default(omit) }}"
-    ah_username:          "{{ aap_username | default(omit) }}"
-    ah_password:           "{{ aap_password | default(omit) }}"
-    ah_token:              "{{ aap_token | default(omit) }}"
-    ah_path_prefix:        "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:        "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:       "{{ aap_request_timeout | default(omit) }}"
+    namespace: "{{ __hub_collection_item.namespace }}"
+    name: "{{ __hub_collection_item.name }}"
+    version: "{{ __hub_collection_item.version | default(omit) }}"
+    path: "{{ __hub_collection_item.path | default(omit) }}"
+    repository: "{{ __hub_collection_item.repository | default(omit) }}"
+    wait: "{{ __hub_collection_item.wait | default(omit) }}"
+    auto_approve: "{{ __hub_collection_item.auto_approve | default(omit) }}"
+    timeout: "{{ __hub_collection_item.timeout | default(omit) }}"
+    interval: "{{ __hub_collection_item.interval | default(omit) }}"
+    overwrite_existing: "{{ __hub_collection_item.overwrite_existing | default(omit) }}"
+    state: "{{ __hub_collection_item.state | default('present') }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_token: "{{ aap_token | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
   loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __hub_collection_item
@@ -46,13 +46,13 @@
   changed_when: not __collections_job_async.changed
   vars:
     __operation: "{{ operation_translate[__hub_collection_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
 - name: Sleep for 10 seconds and continue with play
   ansible.builtin.wait_for:
     timeout: 10
 
-- name: "Update/Destroy collection | Wait for finish the update/destruction of collection"
+- name: Update/Destroy collection | Wait for finish the update/destruction of collection
   ansible.builtin.async_status:
     jid: "{{ __collections_job_async_result_item.ansible_job_id }}"
   register: __collections_job_async_result
@@ -62,10 +62,11 @@
   loop: "{{ __collections_job_async.results }}"
   loop_control:
     loop_var: __collections_job_async_result_item
-    label: "{{ __operation.verb }} Collection {{ __collections_job_async_result_item.__hub_collection_item.name }} | Wait for finish the Collection {{ __operation.action }}"
+    label: "{{ __operation.verb }} Collection {{ __collections_job_async_result_item.__hub_collection_item.name }} | Wait for finish the Collection {{ __operation.action
+      }}"
   when: __collections_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_collection_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__collections_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

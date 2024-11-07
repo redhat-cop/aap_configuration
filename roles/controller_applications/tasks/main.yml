@@ -1,44 +1,44 @@
 ---
 # Create Controller applications
-- name: "Managing Controller Applications"
+- name: Managing Controller Applications
   application:
-    name:                           "{{ __application_item.name | mandatory }}"
-    new_name:                       "{{ __application_item.new_name | default(omit, true) }}"
-    organization:                   "{{ __application_item.organization | mandatory }}"
-    description:                    "{{ __application_item.description | default(('' if controller_configuration_applications_enforce_defaults else omit), true) }}"
-    authorization_grant_type:       "{{ __application_item.authorization_grant_type | default('password') }}"
-    client_type:                    "{{ __application_item.client_type | default('public') }}"
-    redirect_uris:                  "{{ __application_item.redirect_uris | default([]) }}"
-    skip_authorization:             "{{ __application_item.skip_authorization | default((false if controller_configuration_applications_enforce_defaults else omit), true) }}"
-    state:                          "{{ __application_item.state | default(platform_state | default('present')) }}"
+    name: "{{ __application_item.name | mandatory }}"
+    new_name: "{{ __application_item.new_name | default(omit, true) }}"
+    organization: "{{ __application_item.organization | mandatory }}"
+    description: "{{ __application_item.description | default(('' if controller_configuration_applications_enforce_defaults else omit), true) }}"
+    authorization_grant_type: "{{ __application_item.authorization_grant_type | default('password') }}"
+    client_type: "{{ __application_item.client_type | default('public') }}"
+    redirect_uris: "{{ __application_item.redirect_uris | default([]) }}"
+    skip_authorization: "{{ __application_item.skip_authorization | default((false if controller_configuration_applications_enforce_defaults else omit), true) }}"
+    state: "{{ __application_item.state | default(platform_state | default('present')) }}"
 
     # Role specific options
-    controller_username:            "{{ aap_username | default(omit, true) }}"
-    controller_password:            "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:          "{{ aap_token | default(omit, true) }}"
-    request_timeout:                "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:                "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:                 "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ aap_applications }}"
   loop_control:
-    loop_var: "__application_item"
+    loop_var: __application_item
     label: "{{ __operation.verb }} Controller Application {{ __application_item.name }}"
     pause: "{{ controller_configuration_applications_loop_delay }}"
   no_log: "{{ controller_configuration_applications_secure_logging }}"
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __applications_job_async
-  changed_when: "(__applications_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__applications_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__application_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __applications_job_async.failed is defined and __applications_job_async.failed
 
-- name: "Managing Controller Applications | Wait for finish the Application management"
+- name: Managing Controller Applications | Wait for finish the Application management
   ansible.builtin.async_status:
     jid: "{{ __applications_job_async_results_item.ansible_job_id }}"
   register: __applications_job_async_result
@@ -48,10 +48,11 @@
   loop: "{{ __applications_job_async.results }}"
   loop_control:
     loop_var: __applications_job_async_results_item
-    label: "{{ __operation.verb }} Controller Application {{ __applications_job_async_results_item.__application_item.name }} | Wait for finish the Application {{ __operation.action }}"
+    label: "{{ __operation.verb }} Controller Application {{ __applications_job_async_results_item.__application_item.name }} | Wait for finish the Application {{
+      __operation.action }}"
   when: not ansible_check_mode and __applications_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_applications_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__applications_job_async_results_item.__application_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

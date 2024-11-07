@@ -1,26 +1,29 @@
 ---
-- name: "Managing Inventories"
+- name: Managing Inventories
   inventory:
-    name:                               "{{ __controller_inventory_item.name | mandatory }}"
-    new_name:                           "{{ __controller_inventory_item.new_name | default(omit, true) }}"
-    copy_from:                          "{{ __controller_inventory_item.copy_from | default(omit, true) }}"
-    description:                        "{{ __controller_inventory_item.description | default(('' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
-    organization:                       "{{ __controller_inventory_item.organization.name | default(__controller_inventory_item.organization) | mandatory }}"
-    instance_groups:                    "{{ __controller_inventory_item.instance_groups | default(([] if controller_configuration_inventories_enforce_defaults else omit), true) }}"
-    input_inventories:                  "{{ __controller_inventory_item.input_inventories | default(([] if controller_configuration_inventories_enforce_defaults else omit), true) }}"
-    variables:                          "{{ __controller_inventory_item.variables | default(({} if controller_configuration_inventories_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
-    kind:                               "{{ __controller_inventory_item.kind | default(('' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
-    host_filter:                        "{{ __controller_inventory_item.host_filter | default(('' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
-    prevent_instance_group_fallback:    "{{ __controller_inventory_item.prevent_instance_group_fallback | default((false if controller_configuration_inventories_enforce_defaults else omit), true) }}"
-    state:                              "{{ __controller_inventory_item.state | default(platform_state | default('present')) }}"
+    name: "{{ __controller_inventory_item.name | mandatory }}"
+    new_name: "{{ __controller_inventory_item.new_name | default(omit, true) }}"
+    copy_from: "{{ __controller_inventory_item.copy_from | default(omit, true) }}"
+    description: "{{ __controller_inventory_item.description | default(('' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+    organization: "{{ __controller_inventory_item.organization.name | default(__controller_inventory_item.organization) | mandatory }}"
+    instance_groups: "{{ __controller_inventory_item.instance_groups | default(([] if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+    input_inventories: "{{ __controller_inventory_item.input_inventories | default(([] if controller_configuration_inventories_enforce_defaults else omit), true)
+      }}"
+    variables: "{{ __controller_inventory_item.variables | default(({} if controller_configuration_inventories_enforce_defaults else omit), true) | regex_replace('{\
+      \  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
+    kind: "{{ __controller_inventory_item.kind | default(('' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+    host_filter: "{{ __controller_inventory_item.host_filter | default(('' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
+    prevent_instance_group_fallback: "{{ __controller_inventory_item.prevent_instance_group_fallback | default((false if controller_configuration_inventories_enforce_defaults
+      else omit), true) }}"
+    state: "{{ __controller_inventory_item.state | default(platform_state | default('present')) }}"
 
     # Role Standard Options
-    controller_host:            "{{ aap_hostname | default(omit, true) }}"
-    controller_username:        "{{ aap_username | default(omit, true) }}"
-    controller_password:        "{{ aap_password | default(omit, true) }}"
-    request_timeout:            "{{ aap_request_timeout | default(omit, true) }}"
-    controller_oauthtoken:      "{{ aap_token | default(omit, true) }}"
-    validate_certs:             "{{ aap_validate_certs | default(omit) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ inventory if inventory is defined else controller_inventories }}"
   loop_control:
     loop_var: __controller_inventory_item
@@ -30,17 +33,17 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __inventories_job_async
-  changed_when: "(__inventories_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__inventories_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__controller_inventory_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __inventories_job_async.failed is defined and __inventories_job_async.failed
 
-- name: "Managing Controller Inventories | Wait for finish the inventories management"
+- name: Managing Controller Inventories | Wait for finish the inventories management
   ansible.builtin.async_status:
     jid: "{{ __inventories_job_async_result_item.ansible_job_id }}"
   register: __inventories_job_async_result
@@ -50,10 +53,11 @@
   loop: "{{ __inventories_job_async.results }}"
   loop_control:
     loop_var: __inventories_job_async_result_item
-    label: "{{ __operation.verb }} Controller inventory {{ __inventories_job_async_result_item.__controller_inventory_item.name }} | Wait for finish the inventories {{ __operation.action }}"
+    label: "{{ __operation.verb }} Controller inventory {{ __inventories_job_async_result_item.__controller_inventory_item.name }} | Wait for finish the inventories
+      {{ __operation.action }}"
   when: not ansible_check_mode and __inventories_job_async_result_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_inventories_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__inventories_job_async_result_item.__controller_inventory_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

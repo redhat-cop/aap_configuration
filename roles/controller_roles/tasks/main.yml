@@ -1,36 +1,46 @@
 ---
-- name: "Managing Role Based Access Entries on Controller"
+- name: Managing Role Based Access Entries on Controller
   role:
-    user:                           "{{ __controller_role_item.0.user | default(__controller_role_item.user) | default(omit, true) }}"
-    users:                          "{{ __controller_role_item.0.users | default(__controller_role_item.users) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    team:                           "{{ __controller_role_item.0.team | default(__controller_role_item.team) | default(omit, true) }}"
-    teams:                          "{{ __controller_role_item.0.teams | default(__controller_role_item.teams) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    role:                           "{{ __controller_role_item.1 | default(__controller_role_item.role) | mandatory }}"
-    target_team:                    "{{ __controller_role_item.0.target_team | default(__controller_role_item.target_team) | default(omit, true) }}"
-    target_teams:                   "{{ __controller_role_item.0.target_teams | default(__controller_role_item.target_teams) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    inventory:                      "{{ __controller_role_item.0.inventory | default(__controller_role_item.inventory) | default(omit, true) }}"
-    inventories:                    "{{ __controller_role_item.0.inventories | default(__controller_role_item.inventories) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    job_template:                   "{{ __controller_role_item.0.job_template | default(__controller_role_item.job_template) | default(omit, true) }}"
-    job_templates:                  "{{ __controller_role_item.0.job_templates | default(__controller_role_item.job_templates) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    workflow:                       "{{ __controller_role_item.0.workflow | default(__controller_role_item.workflow) | default(omit, true) }}"
-    workflows:                      "{{ __controller_role_item.0.workflows | default(__controller_role_item.workflows) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    credential:                     "{{ __controller_role_item.0.credential | default(__controller_role_item.credential) | default(omit, true) }}"
-    credentials:                    "{{ __controller_role_item.0.credentials | default(__controller_role_item.credentials) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    organization:                   "{{ __controller_role_item.0.organization | default(__controller_role_item.organization) | default(omit, true) }}"
-    organizations:                  "{{ __controller_role_item.0.organizations | default(__controller_role_item.organizations) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    lookup_organization:            "{{ __controller_role_item.0.lookup_organization | default(__controller_role_item.lookup_organization) | default(omit, true) }}"
-    project:                        "{{ __controller_role_item.0.project | default(__controller_role_item.project) | default(omit, true) }}"
-    projects:                       "{{ __controller_role_item.0.projects | default(__controller_role_item.projects) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    instance_groups:                "{{ __controller_role_item.0.instance_groups | default(__controller_role_item.instance_groups) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
-    state:                          "{{ __controller_role_item.0.state | default(__controller_role_item.state) | default(platform_state | default('present')) }}"
+    user: "{{ __controller_role_item.0.user | default(__controller_role_item.user) | default(omit, true) }}"
+    users: "{{ __controller_role_item.0.users | default(__controller_role_item.users) | default(([] if controller_configuration_role_enforce_defaults else omit),
+      true) }}"
+    team: "{{ __controller_role_item.0.team | default(__controller_role_item.team) | default(omit, true) }}"
+    teams: "{{ __controller_role_item.0.teams | default(__controller_role_item.teams) | default(([] if controller_configuration_role_enforce_defaults else omit),
+      true) }}"
+    role: "{{ __controller_role_item.1 | default(__controller_role_item.role) | mandatory }}"
+    target_team: "{{ __controller_role_item.0.target_team | default(__controller_role_item.target_team) | default(omit, true) }}"
+    target_teams: "{{ __controller_role_item.0.target_teams | default(__controller_role_item.target_teams) | default(([] if controller_configuration_role_enforce_defaults
+      else omit), true) }}"
+    inventory: "{{ __controller_role_item.0.inventory | default(__controller_role_item.inventory) | default(omit, true) }}"
+    inventories: "{{ __controller_role_item.0.inventories | default(__controller_role_item.inventories) | default(([] if controller_configuration_role_enforce_defaults
+      else omit), true) }}"
+    job_template: "{{ __controller_role_item.0.job_template | default(__controller_role_item.job_template) | default(omit, true) }}"
+    job_templates: "{{ __controller_role_item.0.job_templates | default(__controller_role_item.job_templates) | default(([] if controller_configuration_role_enforce_defaults
+      else omit), true) }}"
+    workflow: "{{ __controller_role_item.0.workflow | default(__controller_role_item.workflow) | default(omit, true) }}"
+    workflows: "{{ __controller_role_item.0.workflows | default(__controller_role_item.workflows) | default(([] if controller_configuration_role_enforce_defaults
+      else omit), true) }}"
+    credential: "{{ __controller_role_item.0.credential | default(__controller_role_item.credential) | default(omit, true) }}"
+    credentials: "{{ __controller_role_item.0.credentials | default(__controller_role_item.credentials) | default(([] if controller_configuration_role_enforce_defaults
+      else omit), true) }}"
+    organization: "{{ __controller_role_item.0.organization | default(__controller_role_item.organization) | default(omit, true) }}"
+    organizations: "{{ __controller_role_item.0.organizations | default(__controller_role_item.organizations) | default(([] if controller_configuration_role_enforce_defaults
+      else omit), true) }}"
+    lookup_organization: "{{ __controller_role_item.0.lookup_organization | default(__controller_role_item.lookup_organization) | default(omit, true) }}"
+    project: "{{ __controller_role_item.0.project | default(__controller_role_item.project) | default(omit, true) }}"
+    projects: "{{ __controller_role_item.0.projects | default(__controller_role_item.projects) | default(([] if controller_configuration_role_enforce_defaults else
+      omit), true) }}"
+    instance_groups: "{{ __controller_role_item.0.instance_groups | default(__controller_role_item.instance_groups) | default(([] if controller_configuration_role_enforce_defaults
+      else omit), true) }}"
+    state: "{{ __controller_role_item.0.state | default(__controller_role_item.state) | default(platform_state | default('present')) }}"
 
     # Role Standard Options
-    controller_username:            "{{ aap_username | default(omit, true) }}"
-    controller_password:            "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:          "{{ aap_token | default(omit, true) }}"
-    request_timeout:                "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:                "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:                 "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ (controller_roles | subelements(['roles'], skip_missing=true)) + controller_roles | selectattr('roles', 'undefined') }}"
   loop_control:
     loop_var: __controller_role_item
@@ -40,17 +50,17 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __controller_role_job_async
-  changed_when: "(__controller_role_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__controller_role_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__controller_role_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __controller_role_job_async.failed is defined and __controller_role_job_async.failed
 
-- name: "Managing Roles | Wait for finish the Roles management"
+- name: Managing Roles | Wait for finish the Roles management
   ansible.builtin.async_status:
     jid: "{{ __controller_role_job_async_results_item.ansible_job_id }}"
   register: __controller_role_job_async_result
@@ -60,10 +70,11 @@
   loop: "{{ __controller_role_job_async.results }}"
   loop_control:
     loop_var: __controller_role_job_async_results_item
-    label: "{{ __operation.verb }} Role {{ __controller_role_job_async_results_item.__controller_role_item.1 | default(__controller_role_job_async_results_item.__controller_role_item.role) }} | Wait for finish the Roles {{ __operation.action }}"
+    label: "{{ __operation.verb }} Role {{ __controller_role_job_async_results_item.__controller_role_item.1 | default(__controller_role_job_async_results_item.__controller_role_item.role)
+      }} | Wait for finish the Roles {{ __operation.action }}"
   when: not ansible_check_mode and __controller_role_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_role_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__controller_role_job_async_results_item.__controller_role_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

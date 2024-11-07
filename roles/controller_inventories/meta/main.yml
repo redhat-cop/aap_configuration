@@ -1,27 +1,27 @@
 ---
 galaxy_info:
-  role_name: "inventories"
-  author: "Andrew J. Huffman, Kedar Kulkarni"
-  description: "An Ansible role to create inventories and inventory sources in Ansible Controller."
-  company: "Red Hat"
+  role_name: inventories
+  author: Andrew J. Huffman, Kedar Kulkarni
+  description: An Ansible role to create inventories and inventory sources in Ansible Controller.
+  company: Red Hat
 
   license: GPL-3.0-or-later
 
   min_ansible_version: 2.16.0
 
   platforms:
-    - name: "EL"
+    - name: EL
       versions:
-        - "all"
+        - all
 
   galaxy_tags:
-    - "controller"
-    - "aap"
-    - "awx"
-    - "configuration"
-    - "inventory"
-    - "inventories"
-    - "source"
+    - controller
+    - aap
+    - awx
+    - configuration
+    - inventory
+    - inventories
+    - source
 
 collections:
   - ansible.controller

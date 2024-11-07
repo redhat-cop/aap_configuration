@@ -1,9 +1,9 @@
 ---
 galaxy_info:
-  role_name: "groups"
-  author: "Wei-Yen Tan"
-  description: "An Ansible Role to create hosts in Ansible Controller."
-  company: "Red Hat"
+  role_name: groups
+  author: Wei-Yen Tan
+  description: An Ansible Role to create hosts in Ansible Controller.
+  company: Red Hat
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -25,16 +25,16 @@ galaxy_info:
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
   platforms:
-    - name: "EL"
+    - name: EL
       versions:
-        - "all"
+        - all
 
   galaxy_tags:
-    - "controller"
-    - "aap"
-    - "awx"
-    - "group"
-    - "groups"
+    - controller
+    - aap
+    - awx
+    - group
+    - groups
 
 collections:
   - ansible.controller

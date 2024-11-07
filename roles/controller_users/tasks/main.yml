@@ -1,28 +1,30 @@
 ---
 # The user module is also an ansible.builtin module, but due to supporting both the awx.awx and automation.Controller collections
 # the FQCN cannot be used here.
-- name: "Managing Controller Users"  # noqa fqcn[action-core]
+- name: Managing Controller Users # noqa fqcn[action-core]
   user:
-    username:                 "{{ __controller_user_accounts_item.user | default(__controller_user_accounts_item.username) | mandatory }}"
-    new_username:             "{{ __controller_user_accounts_item.new_username | default(omit, true) }}"
+    username: "{{ __controller_user_accounts_item.user | default(__controller_user_accounts_item.username) | mandatory }}"
+    new_username: "{{ __controller_user_accounts_item.new_username | default(omit, true) }}"
     # the 'true' in the second default leads to no password being set if the default password is empty
-    password:                 "{{ __controller_user_accounts_item.password | default(controller_user_default_password | default(omit, true)) }}"
-    email:                    "{{ __controller_user_accounts_item.email | default(omit, true) }}"
-    first_name:               "{{ __controller_user_accounts_item.firstname | default(__controller_user_accounts_item.first_name | default(omit, true)) }}"
-    last_name:                "{{ __controller_user_accounts_item.lastname | default(__controller_user_accounts_item.last_name | default(omit, true)) }}"
-    is_superuser:             "{{ __controller_user_accounts_item.is_superuser | default(__controller_user_accounts_item.superuser | default((false if controller_configuration_users_enforce_defaults else omit))) }}"
-    is_system_auditor:        "{{ __controller_user_accounts_item.is_auditor | default(__controller_user_accounts_item.is_system_auditor | default((false if controller_configuration_users_enforce_defaults else omit))) }}"
-    update_secrets:           "{{ __controller_user_accounts_item.update_secrets | default((false if controller_configuration_users_enforce_defaults else omit)) }}"
-    organization:             "{{ __controller_user_accounts_item.organization | default(omit) }}"
-    state:                    "{{ __controller_user_accounts_item.state | default(platform_state | default(omit, true)) }}"
+    password: "{{ __controller_user_accounts_item.password | default(controller_user_default_password | default(omit, true)) }}"
+    email: "{{ __controller_user_accounts_item.email | default(omit, true) }}"
+    first_name: "{{ __controller_user_accounts_item.firstname | default(__controller_user_accounts_item.first_name | default(omit, true)) }}"
+    last_name: "{{ __controller_user_accounts_item.lastname | default(__controller_user_accounts_item.last_name | default(omit, true)) }}"
+    is_superuser: "{{ __controller_user_accounts_item.is_superuser | default(__controller_user_accounts_item.superuser | default((false if controller_configuration_users_enforce_defaults
+      else omit))) }}"
+    is_system_auditor: "{{ __controller_user_accounts_item.is_auditor | default(__controller_user_accounts_item.is_system_auditor | default((false if controller_configuration_users_enforce_defaults
+      else omit))) }}"
+    update_secrets: "{{ __controller_user_accounts_item.update_secrets | default((false if controller_configuration_users_enforce_defaults else omit)) }}"
+    organization: "{{ __controller_user_accounts_item.organization | default(omit) }}"
+    state: "{{ __controller_user_accounts_item.state | default(platform_state | default(omit, true)) }}"
 
     # Role Standard Options
-    controller_host:          "{{ aap_hostname | default(omit, true) }}"
-    controller_username:      "{{ aap_username | default(omit, true) }}"
-    controller_password:      "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:    "{{ aap_token | default(omit, true) }}"
-    request_timeout:          "{{ aap_request_timeout | default(omit, true) }}"
-    validate_certs:           "{{ aap_validate_certs | default(omit) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ aap_user_accounts }}"
   loop_control:
     loop_var: __controller_user_accounts_item
@@ -32,17 +34,17 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __controller_user_accounts_job_async
-  changed_when: "(__controller_user_accounts_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__controller_user_accounts_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__controller_user_accounts_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __controller_user_accounts_job_async.failed is defined and __controller_user_accounts_job_async.failed
 
-- name: "Managing Users | Wait for finish the Users management"
+- name: Managing Users | Wait for finish the Users management
   ansible.builtin.async_status:
     jid: "{{ __controller_user_accounts_job_async_results_item.ansible_job_id }}"
   register: __controller_user_accounts_job_async_result
@@ -52,10 +54,12 @@
   loop: "{{ __controller_user_accounts_job_async.results }}"
   loop_control:
     loop_var: __controller_user_accounts_job_async_results_item
-    label: "{{ __operation.verb }} User {{ __controller_user_accounts_job_async_results_item.__controller_user_accounts_item.user | default(__controller_user_accounts_job_async_results_item.__controller_user_accounts_item.username) }} | Wait for finish the Users {{ __operation.action }}"
+    label: "{{ __operation.verb }} User {{ __controller_user_accounts_job_async_results_item.__controller_user_accounts_item.user | default(__controller_user_accounts_job_async_results_item.__controller_user_accounts_item.username)
+      }} | Wait for finish the Users {{ __operation.action }}"
   when: not ansible_check_mode and __controller_user_accounts_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_users_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__controller_user_accounts_job_async_results_item.__controller_user_accounts_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    __operation: "{{ operation_translate[__controller_user_accounts_job_async_results_item.__controller_user_accounts_item.state | default(platform_state) | default('present')]
+      }}"
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

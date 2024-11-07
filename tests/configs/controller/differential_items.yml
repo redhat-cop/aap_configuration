@@ -74,12 +74,12 @@ differential_items:
   - name: credentials
     with_present: false
     differential_test_items:
-      - name: "cyberark"
+      - name: cyberark
         credential_type: CyberArk Central Credential Provider Lookup
         organization: Default
       - name: Demo Credential
         organization: Default
-        credential_type: "Machine"
+        credential_type: Machine
     expected_test_result:
       - name: galaxy-server
         credential_type: Ansible Galaxy/Automation Hub API Token
@@ -87,7 +87,7 @@ differential_items:
         state: absent
       - name: gitlab
         organization: Default
-        credential_type: "Source Control"
+        credential_type: Source Control
         state: absent
   #  - name: inventory_sources
   #    with_present: false
@@ -122,11 +122,11 @@ differential_items:
       - name: localhost
         inventory: Demo Inventory
     expected_test_result:
-      - name: "localhost"
-        inventory: "RHVM-01"
+      - name: localhost
+        inventory: RHVM-01
         state: absent
-      - name: "localhost"
-        inventory: "localhost"
+      - name: localhost
+        inventory: localhost
         state: absent
   - name: teams
     with_present: false

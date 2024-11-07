@@ -3,5 +3,4 @@
   hosts: localhost
   roles:
     - meta_dependency_check
-
 ...

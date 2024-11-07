@@ -1,21 +1,22 @@
 ---
-- name: "Managing Controller Hosts"
+- name: Managing Controller Hosts
   host:
-    name:                   "{{ __controller_host_item.name | mandatory }}"
-    new_name:               "{{ __controller_host_item.new_name | default(omit, true) }}"
-    description:            "{{ __controller_host_item.description | default(('' if controller_configuration_host_enforce_defaults else omit), true) }}"
-    inventory:              "{{ __controller_host_item.inventory | mandatory }}"
-    enabled:                "{{ __controller_host_item.enabled | default((false if controller_configuration_host_enforce_defaults else omit), true) }}"
-    state:                  "{{ __controller_host_item.state | default(platform_state | default('present')) }}"
-    variables:              "{{ __controller_host_item.variables | default(({} if controller_configuration_host_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
+    name: "{{ __controller_host_item.name | mandatory }}"
+    new_name: "{{ __controller_host_item.new_name | default(omit, true) }}"
+    description: "{{ __controller_host_item.description | default(('' if controller_configuration_host_enforce_defaults else omit), true) }}"
+    inventory: "{{ __controller_host_item.inventory | mandatory }}"
+    enabled: "{{ __controller_host_item.enabled | default((false if controller_configuration_host_enforce_defaults else omit), true) }}"
+    state: "{{ __controller_host_item.state | default(platform_state | default('present')) }}"
+    variables: "{{ __controller_host_item.variables | default(({} if controller_configuration_host_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{')
+      | regex_replace('_~~remove~~_', '') }}"
 
     # Role Standard Options
-    controller_host:        "{{ aap_hostname | default(omit, true) }}"
-    controller_username:    "{{ aap_username | default(omit, true) }}"
-    controller_password:    "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:  "{{ aap_token | default(omit, true) }}"
-    request_timeout:        "{{ aap_request_timeout | default(omit, true) }}"
-    validate_certs:         "{{ aap_validate_certs | default(omit) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ controller_hosts }}"
   loop_control:
     loop_var: __controller_host_item
@@ -25,17 +26,17 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __host_job_async
-  changed_when: "(__host_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__host_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__controller_host_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __host_job_async.failed is defined and __host_job_async.failed
 
-- name: "Managing Controller Hosts | Wait for finish the Hosts management"
+- name: Managing Controller Hosts | Wait for finish the Hosts management
   ansible.builtin.async_status:
     jid: "{{ __host_job_async_results_item.ansible_job_id }}"
   register: __host_job_async_result
@@ -45,10 +46,11 @@
   loop: "{{ __host_job_async.results }}"
   loop_control:
     loop_var: __host_job_async_results_item
-    label: "{{ __operation.verb }} Controller Host {{ __host_job_async_results_item.__controller_host_item.name }} | Wait for finish the Hosts {{ __operation.action }}"
+    label: "{{ __operation.verb }} Controller Host {{ __host_job_async_results_item.__controller_host_item.name }} | Wait for finish the Hosts {{ __operation.action
+      }}"
   when: not ansible_check_mode and __host_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_hosts_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__host_job_async_results_item.__controller_host_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

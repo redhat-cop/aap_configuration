@@ -2,22 +2,22 @@
 # Update Controller Projects
 - name: Run Controller project update
   project_update:
-    name:                     "{{ __project_update_update_item.name }}"
-    organization:             "{{ __project_update_update_item.organization.name | default(__project_update_update_item.organization | default(omit, true)) }}"
-    wait:                     "{{ __project_update_update_item.wait | default(omit) }}"
-    interval:                 "{{ __project_update_update_item.interval | default(controller_configuration_project_update_async_delay) }}"
-    timeout:                  "{{ __project_update_update_item.timeout | default(omit, true) }}"
+    name: "{{ __project_update_update_item.name }}"
+    organization: "{{ __project_update_update_item.organization.name | default(__project_update_update_item.organization | default(omit, true)) }}"
+    wait: "{{ __project_update_update_item.wait | default(omit) }}"
+    interval: "{{ __project_update_update_item.interval | default(controller_configuration_project_update_async_delay) }}"
+    timeout: "{{ __project_update_update_item.timeout | default(omit, true) }}"
 
     # Role Standard Options
-    controller_username:      "{{ aap_username | default(omit, true) }}"
-    controller_password:      "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:    "{{ aap_token | default(omit, true) }}"
-    request_timeout:          "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:          "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:           "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ projects if projects is defined else controller_projects }}"
   loop_control:
-    loop_var: "__project_update_update_item"
+    loop_var: __project_update_update_item
     label: "{{ (__project_update_update_item.organization | default('<no_org>')) }}/{{ __project_update_update_item.name }}"
     pause: "{{ controller_configuration_project_update_loop_delay }}"
   no_log: "{{ controller_configuration_project_update_secure_logging }}"
@@ -28,16 +28,16 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __project_update_job_async
-  changed_when: "(__project_update_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__project_update_job_async.changed if ansible_check_mode else false)
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __project_update_job_async.failed is defined and __project_update_job_async.failed
 
-- name: "Configure Controller Projects | Wait for finish the projects update"
+- name: Configure Controller Projects | Wait for finish the projects update
   ansible.builtin.async_status:
     jid: "{{ __project_update_job_async_results_item.ansible_job_id }}"
   register: __project_update_job_async_result
@@ -50,5 +50,5 @@
   when: not ansible_check_mode and __project_update_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_project_update_secure_logging }}"
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

@@ -1,19 +1,18 @@
 ---
-
 # Create AH EE Image
 - name: Add Automation Hub EE Image
   ansible.hub.ah_ee_image:
-    name:             "{{ __ee_image_item.name }}"
+    name: "{{ __ee_image_item.name }}"
     # new_name:         "{{ __ee_image_item.new_name | default(omit) }}"  <-- Needs adding once new_name option added to module
     append: "{{ __ee_image_item.append | default(omit) }}"
     tags: "{{ __ee_image_item.tags | default(omit) }}"
-    state:            "{{ __ee_image_item.state | default(ah_state | default('present')) }}"
-    ah_host:          "{{ aap_hostname | default(omit) }}"
-    ah_username:     "{{ aap_username | default(omit) }}"
-    ah_password:      "{{ aap_password | default(omit) }}"
-    ah_path_prefix:   "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:   "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:  "{{ aap_request_timeout | default(omit) }}"
+    state: "{{ __ee_image_item.state | default(ah_state | default('present')) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
   loop: "{{ hub_ee_images }}"
   loop_control:
     loop_var: __ee_image_item
@@ -26,9 +25,9 @@
   changed_when: not __ee_images_job_async.changed
   vars:
     __operation: "{{ operation_translate[__ee_image_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create EE Image | Wait for finish the ee_image creation"
+- name: Create EE Image | Wait for finish the ee_image creation
   ansible.builtin.async_status:
     jid: "{{ __ee_images_job_async_result_item.ansible_job_id }}"
   register: __ee_images_job_async_result
@@ -43,5 +42,5 @@
   no_log: "{{ hub_configuration_ee_image_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__ee_images_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

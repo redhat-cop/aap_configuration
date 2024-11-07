@@ -79,7 +79,7 @@ argument_specs:
         required: false
         description: This variable sets delay between retries across all roles as a default.
       aap_configuration_async_dir:
-        default: null
+        default:
         required: false
         description: >
           Sets the directory to write the results file for async tasks.

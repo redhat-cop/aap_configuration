@@ -13,27 +13,28 @@
   # aap_username: admin
   # aap_password: changeme
   pre_tasks:
-
-    - name: "Determine collection (block)"
+    - name: Determine collection (block)
       block:
-        - name: "Check if the collection ansible.controller is installed"
+        - name: Check if the collection ansible.controller is installed
           ansible.builtin.set_fact:
-            ansible_controller_collection_installed: "{{ lookup('ansible.builtin.pipe', 'ansible-galaxy collection list | grep -i ansible.controller || echo NOTINSTALLED') }}"
+            ansible_controller_collection_installed: "{{ lookup('ansible.builtin.pipe', 'ansible-galaxy collection list | grep -i ansible.controller || echo NOTINSTALLED')
+              }}"
           failed_when: ansible_controller_collection_installed is match('NOTINSTALLED')
       rescue:
-        - name: "Check if the collection awx.awx is installed"
+        - name: Check if the collection awx.awx is installed
           ansible.builtin.set_fact:
             awx_awx_collection_installed: "{{ lookup('ansible.builtin.pipe', 'ansible-galaxy collection list | grep -i awx.awx || echo NOTINSTALLED') }}"
           failed_when: awx_awx_collection_installed is match('NOTINSTALLED')
       always:
-        - name: "Set the collection providing the controller_api lookup plugin"
+        - name: Set the collection providing the controller_api lookup plugin
           ansible.builtin.set_fact:
-            controller_api_plugin: "{{ ('ansible.controller.controller_api' if ansible_controller_collection_installed is defined) | default('awx.awx.controller_api' if awx_awx_collection_installed is defined) | default('NONE') }}"
-        - name: "Fail if no collection is detected"
+            controller_api_plugin: "{{ ('ansible.controller.controller_api' if ansible_controller_collection_installed is defined) | default('awx.awx.controller_api'
+              if awx_awx_collection_installed is defined) | default('NONE') }}"
+        - name: Fail if no collection is detected
           ansible.builtin.fail:
             msg: "One of the following collections is required to be installed: 'ansible.controller' or 'awx.awx'."
           when: controller_api_plugin is match('NONE')
-        - name: "Show the plugin we are using"
+        - name: Show the plugin we are using
           ansible.builtin.debug:
             msg: "Using the 'controller_api' plugin from: {{ controller_api_plugin }}"
 
@@ -41,11 +42,11 @@
       ansible.builtin.include_vars:
         dir: ./configs_export_model
         ignore_files: [README.md]
-        extensions: ["yml"]
+        extensions: [yml]
 
     - name: Wait for the controller to be up
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/mesh_visualizer/"
+        url: https://{{ aap_hostname }}/api/v2/mesh_visualizer/
         user: "{{ aap_username }}"
         password: "{{ aap_password }}"
         method: GET
@@ -58,18 +59,17 @@
       retries: 120
       delay: 5
 
-
   roles:
-    - {role: gateway_organizations, when: organizations is defined, tags: organizations}
-    - {role: gateway_users, when: users is defined, tags: users}
-    - {role: gateway_teams, when: teams is defined, tags: teams}
-    - {role: controller_credential_types, when: credential_types is defined, tags: credential_types}
-    - {role: controller_credentials, when: credentials is defined, tags: credentials}
-    - {role: controller_inventories, when: inventory is defined, tags: inventories}
-    - {role: controller_inventory_sources, when: inventory_sources is defined, tags: inventory_sources}
-    - {role: controller_projects, when: projects is defined, tags: projects}
-    - {role: controller_project_update, when: projects is defined, tags: projects}
-    - {role: controller_job_templates, when: job_templates is defined, tags: job_templates}
-    - {role: controller_workflow_job_templates, when: workflow_job_templates is defined, tags: workflow_job_templates}
-    - {role: controller_notification_templates, when: notification_templates is defined, tags: notification_templates}
+    - { role: gateway_organizations, when: organizations is defined, tags: organizations }
+    - { role: gateway_users, when: users is defined, tags: users }
+    - { role: gateway_teams, when: teams is defined, tags: teams }
+    - { role: controller_credential_types, when: credential_types is defined, tags: credential_types }
+    - { role: controller_credentials, when: credentials is defined, tags: credentials }
+    - { role: controller_inventories, when: inventory is defined, tags: inventories }
+    - { role: controller_inventory_sources, when: inventory_sources is defined, tags: inventory_sources }
+    - { role: controller_projects, when: projects is defined, tags: projects }
+    - { role: controller_project_update, when: projects is defined, tags: projects }
+    - { role: controller_job_templates, when: job_templates is defined, tags: job_templates }
+    - { role: controller_workflow_job_templates, when: workflow_job_templates is defined, tags: workflow_job_templates }
+    - { role: controller_notification_templates, when: notification_templates is defined, tags: notification_templates }
 ...

@@ -1,23 +1,22 @@
 ---
-
 # Create AH EE repository
 - name: Add Automation Hub EE repository
   ansible.hub.ah_ee_repository:
-    name:                       "{{ __hub_ee_repository_sync_item.name }}"
-    description:                "{{ __hub_ee_repository_sync_item.description | default(omit) }}"
-    readme:                     "{{ __hub_ee_repository_sync_item.readme | default(omit) }}"
-    readme_file:                "{{ __hub_ee_repository_sync_item.readme_file | default(omit) }}"
-    registry:                   "{{ __hub_ee_repository_sync_item.registry | default(omit) }}"
-    upstream_name:              "{{ __hub_ee_repository_sync_item.upstream_name | default(omit) }}"
-    include_tags:               "{{ __hub_ee_repository_sync_item.include_tags | default(omit) }}"
-    exclude_tags:               "{{ __hub_ee_repository_sync_item.exclude_tags | default(omit) }}"
-    state:                      "{{ __hub_ee_repository_sync_item.state | default(ah_state | default('present')) }}"
-    ah_host:                    "{{ aap_hostname | default(omit) }}"
-    ah_username:               "{{ aap_username | default(omit) }}"
-    ah_password:                "{{ aap_password | default(omit) }}"
-    ah_path_prefix:             "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:             "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:            "{{ aap_request_timeout | default(omit) }}"
+    name: "{{ __hub_ee_repository_sync_item.name }}"
+    description: "{{ __hub_ee_repository_sync_item.description | default(omit) }}"
+    readme: "{{ __hub_ee_repository_sync_item.readme | default(omit) }}"
+    readme_file: "{{ __hub_ee_repository_sync_item.readme_file | default(omit) }}"
+    registry: "{{ __hub_ee_repository_sync_item.registry | default(omit) }}"
+    upstream_name: "{{ __hub_ee_repository_sync_item.upstream_name | default(omit) }}"
+    include_tags: "{{ __hub_ee_repository_sync_item.include_tags | default(omit) }}"
+    exclude_tags: "{{ __hub_ee_repository_sync_item.exclude_tags | default(omit) }}"
+    state: "{{ __hub_ee_repository_sync_item.state | default(ah_state | default('present')) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
   loop: "{{ hub_ee_repositories }}"
   loop_control:
     loop_var: __hub_ee_repository_sync_item
@@ -30,9 +29,9 @@
   changed_when: not __ee_repositories_job_async.changed
   vars:
     __operation: "{{ operation_translate[__hub_ee_repository_sync_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create EE Repository | Wait for finish the ee_repository creation"
+- name: Create EE Repository | Wait for finish the ee_repository creation
   ansible.builtin.async_status:
     jid: "{{ __ee_repositories_job_async_result_item.ansible_job_id }}"
   register: __ee_repositories_job_async_result
@@ -42,10 +41,11 @@
   loop: "{{ __ee_repositories_job_async.results }}"
   loop_control:
     loop_var: __ee_repositories_job_async_result_item
-    label: "{{ __operation.verb }} Label {{ __ee_repositories_job_async_result_item.__hub_ee_repository_sync_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Label {{ __ee_repositories_job_async_result_item.__hub_ee_repository_sync_item.name }} | Wait for finish the Label {{ __operation.action
+      }}"
   when: __ee_repositories_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_ee_repository_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__ee_repositories_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

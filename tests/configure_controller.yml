@@ -14,27 +14,28 @@
     - infra.aap_configuration
 
   pre_tasks:
-
-    - name: "Determine collection (block)"
+    - name: Determine collection (block)
       block:
-        - name: "Check if the collection ansible.controller is installed"
+        - name: Check if the collection ansible.controller is installed
           ansible.builtin.set_fact:
-            ansible_controller_collection_installed: "{{ lookup('ansible.builtin.pipe', 'ansible-galaxy collection list | grep -i ansible.controller || echo NOTINSTALLED') }}"
+            ansible_controller_collection_installed: "{{ lookup('ansible.builtin.pipe', 'ansible-galaxy collection list | grep -i ansible.controller || echo NOTINSTALLED')
+              }}"
           failed_when: ansible_controller_collection_installed is match('NOTINSTALLED')
       rescue:
-        - name: "Check if the collection awx.awx is installed"
+        - name: Check if the collection awx.awx is installed
           ansible.builtin.set_fact:
             awx_awx_collection_installed: "{{ lookup('ansible.builtin.pipe', 'ansible-galaxy collection list | grep -i awx.awx || echo NOTINSTALLED') }}"
           failed_when: awx_awx_collection_installed is match('NOTINSTALLED')
       always:
-        - name: "Set the collection providing the controller_api lookup plugin"
+        - name: Set the collection providing the controller_api lookup plugin
           ansible.builtin.set_fact:
-            controller_api_plugin: "{{ ('ansible.controller.controller_api' if ansible_controller_collection_installed is defined) | default('awx.awx.controller_api' if awx_awx_collection_installed is defined) | default('NONE') }}"
-        - name: "Fail if no collection is detected"
+            controller_api_plugin: "{{ ('ansible.controller.controller_api' if ansible_controller_collection_installed is defined) | default('awx.awx.controller_api'
+              if awx_awx_collection_installed is defined) | default('NONE') }}"
+        - name: Fail if no collection is detected
           ansible.builtin.fail:
             msg: "One of the following collections is required to be installed: 'ansible.controller' or 'awx.awx'."
           when: controller_api_plugin is match('NONE')
-        - name: "Show the plugin we are using"
+        - name: Show the plugin we are using
           ansible.builtin.debug:
             msg: "Using the 'controller_api' plugin from: {{ controller_api_plugin }}"
 
@@ -42,13 +43,13 @@
       ansible.builtin.include_vars:
         dir: ./configs
         ignore_files: [controller_config.yml.template]
-        extensions: ["yml"]
+        extensions: [yml]
       tags:
         - always
 
     - name: Wait for Controller to come up
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/ping/"
+        url: https://{{ aap_hostname }}/api/v2/ping/
         status_code: 200
         validate_certs: "{{ aap_validate_certs }}"
       register: result
@@ -59,7 +60,7 @@
 
     - name: Wait for the controller node to be up
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/mesh_visualizer/"
+        url: https://{{ aap_hostname }}/api/v2/mesh_visualizer/
         user: "{{ aap_username }}"
         password: "{{ aap_password }}"
         method: GET
@@ -72,7 +73,7 @@
       retries: 80
       delay: 5
 
-    - name: "Show result of mesh_visualizer"
+    - name: Show result of mesh_visualizer
       ansible.builtin.debug:
         var: mesh_data
 
@@ -82,10 +83,9 @@
       delegate_to: localhost
 
   roles:
-    - dispatch  # The dispatch role calls all of the other roles.
+    - dispatch # The dispatch role calls all of the other roles.
 
   tasks:
-
     - name: Validate error handling
       block:
         - name: Add Invalid Job Templates to Controller
@@ -99,8 +99,8 @@
             that:
               - job_templates_errors is defined
               - job_templates_errors | length > 0
-            fail_msg: "No errors found, validate test example"
-            success_msg: "Errors found, proceeding"
+            fail_msg: No errors found, validate test example
+            success_msg: Errors found, proceeding
           vars:
             job_templates_errors: "{{ __job_templates_errors_set_stats.ansible_stats.data.job_templates_errors }}"
 
@@ -116,7 +116,7 @@
       when: controller_ad_hoc_commands is defined
 
     - name: Cancel Ad hoc commands
-      ansible.builtin.include_tasks: "./tasks/ad_hoc_cancel.yml"
+      ansible.builtin.include_tasks: ./tasks/ad_hoc_cancel.yml
       when: controller_ad_hoc_commands is defined
 
     - name: Launch Controller Bulk Hosts
@@ -182,9 +182,9 @@
         job_id: "{{ launched_controller_workflows.results[0].id }}"
         job_type: workflow_jobs
         timeout: 180
-        aap_username:     "{{ aap_username }}"
-        aap_password:     "{{ aap_password }}"
-        controller_host:         "{{ aap_hostname }}"
-        validate_certs:          "{{ aap_validate_certs }}"
-      ignore_errors: true  # noqa ignore-errors
+        aap_username: "{{ aap_username }}"
+        aap_password: "{{ aap_password }}"
+        controller_host: "{{ aap_hostname }}"
+        validate_certs: "{{ aap_validate_certs }}"
+      ignore_errors: true # noqa ignore-errors
 ...

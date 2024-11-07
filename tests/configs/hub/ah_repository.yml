@@ -25,23 +25,23 @@ hub_collection_remotes:
 
 hub_collection_repositories:
   - name: community-infra-repo
-    description: "description of community-infra repository"
+    description: description of community-infra repository
     pulp_labels:
-      pipeline: "approved"
+      pipeline: approved
     distribution:
       state: present
     remote: community-infra
   - name: community-infra-repo-nodistro
-    description: "description of community-infra repository"
+    description: description of community-infra repository
     pulp_labels:
-      pipeline: "approved"
+      pipeline: approved
     remote: community-infra
   - name: community-infra-repo-noremote
-    description: "description of community-infra repository"
+    description: description of community-infra repository
     pulp_labels:
-      pipeline: "approved"
+      pipeline: approved
     distribution:
       state: present
   - name: community-infra-repo-nothing
-    description: "description of community-infra repository"
+    description: description of community-infra repository
 ...

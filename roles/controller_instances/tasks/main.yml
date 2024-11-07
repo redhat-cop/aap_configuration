@@ -2,23 +2,25 @@
 # Add Controller Instances
 - name: Add Controller Instance
   instance:
-    hostname:                       "{{ __controller_instance_item.hostname | mandatory }}"
-    capacity_adjustment:            "{{ __controller_instance_item.capacity_adjustment | default((1.0 if controller_configuration_instances_enforce_defaults else omit), true) }}"
-    enabled:                        "{{ __controller_instance_item.enabled | default((true if controller_configuration_instances_enforce_defaults else omit), true) }}"
-    managed_by_policy:              "{{ __controller_instance_item.managed_by_policy | default((true if controller_configuration_instances_enforce_defaults else omit), true) }}"
-    node_type:                      "{{ __controller_instance_item.node_type | default(omit, true) }}"
-    node_state:                     "{{ __controller_instance_item.node_state | default(omit, true) }}"
-    listener_port:                  "{{ __controller_instance_item.listener_port | default((27199 if controller_configuration_instances_enforce_defaults else omit), true) }}"
-    peers:                          "{{ __controller_instance_item.peers | default(([] if controller_configuration_instances_enforce_defaults else omit), true) }}"
-    peers_from_control_nodes:       "{{ __controller_instance_item.peers_from_control_nodes | default((false if controller_configuration_instances_enforce_defaults else omit), true) }}"
+    hostname: "{{ __controller_instance_item.hostname | mandatory }}"
+    capacity_adjustment: "{{ __controller_instance_item.capacity_adjustment | default((1.0 if controller_configuration_instances_enforce_defaults else omit), true)
+      }}"
+    enabled: "{{ __controller_instance_item.enabled | default((true if controller_configuration_instances_enforce_defaults else omit), true) }}"
+    managed_by_policy: "{{ __controller_instance_item.managed_by_policy | default((true if controller_configuration_instances_enforce_defaults else omit), true) }}"
+    node_type: "{{ __controller_instance_item.node_type | default(omit, true) }}"
+    node_state: "{{ __controller_instance_item.node_state | default(omit, true) }}"
+    listener_port: "{{ __controller_instance_item.listener_port | default((27199 if controller_configuration_instances_enforce_defaults else omit), true) }}"
+    peers: "{{ __controller_instance_item.peers | default(([] if controller_configuration_instances_enforce_defaults else omit), true) }}"
+    peers_from_control_nodes: "{{ __controller_instance_item.peers_from_control_nodes | default((false if controller_configuration_instances_enforce_defaults else
+      omit), true) }}"
 
     # Role Standard Options
-    controller_username:            "{{ aap_username | default(omit, true) }}"
-    controller_password:            "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:          "{{ aap_token | default(omit, true) }}"
-    request_timeout:                "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:                "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:                 "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ controller_instances }}"
   loop_control:
     loop_var: __controller_instance_item
@@ -29,16 +31,16 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __instance_job_async
-  changed_when: "(__instance_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__instance_job_async.changed if ansible_check_mode else false)
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __instance_job_async.failed is defined and __instance_job_async.failed
 
-- name: "Configure Controller instances | Wait for finish the instance creation"
+- name: Configure Controller instances | Wait for finish the instance creation
   ansible.builtin.async_status:
     jid: "{{ __instance_job_async_results_item.ansible_job_id }}"
   register: __instance_job_async_result
@@ -51,5 +53,5 @@
   when: not ansible_check_mode and __instance_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_instances_secure_logging }}"
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

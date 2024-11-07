@@ -1,41 +1,53 @@
 ---
-- name: "Managing Inventory Sources"
+- name: Managing Inventory Sources
   inventory_source:
-    name:                                 "{{ __controller_source_item.name | mandatory }}"
-    new_name:                             "{{ __controller_source_item.new_name | default(omit, true) }}"
-    description:                          "{{ __controller_source_item.description | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    inventory:                            "{{ __controller_source_item.inventory.name | default(__controller_source_item.inventory) | mandatory }}"
-    organization:                         "{{ __controller_source_item.inventory.organization.name | default(__controller_source_item.organization | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true)) }}"
-    source:                               "{{ __controller_source_item.source | default(('scm' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    source_path:                          "{{ __controller_source_item.source_path | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    source_vars:                          "{{ __controller_source_item.source_vars | default(({} if controller_configuration_inventory_sources_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
-    enabled_var:                          "{{ __controller_source_item.enabled_var | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    enabled_value:                        "{{ __controller_source_item.enabled_value | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    host_filter:                          "{{ __controller_source_item.host_filter | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    limit:                                "{{ __controller_source_item.limit | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    credential:                           "{{ __controller_source_item.credential | default(omit, true) }}"
-    execution_environment:                "{{ __controller_source_item.execution_environment | default(omit, true) }}"
-    overwrite:                            "{{ __controller_source_item.overwrite | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
-    overwrite_vars:                       "{{ __controller_source_item.overwrite_vars | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
-    custom_virtualenv:                    "{{ __controller_source_item.custom_virtualenv | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    timeout:                              "{{ __controller_source_item.timeout | default(0, true) if __controller_source_item.timeout is defined or controller_configuration_inventory_sources_enforce_defaults else omit }}"
-    verbosity:                            "{{ __controller_source_item.verbosity | default((1 if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    update_on_launch:                     "{{ __controller_source_item.update_on_launch | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
-    update_cache_timeout:                 "{{ __controller_source_item.update_cache_timeout | default(0, true) if __controller_source_item.update_cache_timeout is defined or controller_configuration_inventory_sources_enforce_defaults else omit }}"
-    source_project:                       "{{ __controller_source_item.source_project.name | default(__controller_source_item.source_project | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true)) }}"
-    scm_branch:                           "{{ __controller_source_item.scm_branch | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    state:                                "{{ __controller_source_item.state | default(platform_state | default('present')) }}"
-    notification_templates_started:       "{{ (__controller_source_item.related.notification_templates_started | map(attribute='name') | list if __controller_source_item.related.notification_templates_started is defined) | default(__controller_source_item.notification_templates_started) | default(([] if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    notification_templates_success:       "{{ (__controller_source_item.related.notification_templates_success | map(attribute='name') | list if __controller_source_item.related.notification_templates_success is defined) | default(__controller_source_item.notification_templates_success) | default(([] if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    notification_templates_error:         "{{ (__controller_source_item.related.notification_templates_error | map(attribute='name') | list if __controller_source_item.related.notification_templates_error is defined) | default(__controller_source_item.notification_templates_error) | default(([] if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    name: "{{ __controller_source_item.name | mandatory }}"
+    new_name: "{{ __controller_source_item.new_name | default(omit, true) }}"
+    description: "{{ __controller_source_item.description | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    inventory: "{{ __controller_source_item.inventory.name | default(__controller_source_item.inventory) | mandatory }}"
+    organization: "{{ __controller_source_item.inventory.organization.name | default(__controller_source_item.organization | default(('' if controller_configuration_inventory_sources_enforce_defaults
+      else omit), true)) }}"
+    source: "{{ __controller_source_item.source | default(('scm' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    source_path: "{{ __controller_source_item.source_path | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    source_vars: "{{ __controller_source_item.source_vars | default(({} if controller_configuration_inventory_sources_enforce_defaults else omit), true) | regex_replace('{\
+      \  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
+    enabled_var: "{{ __controller_source_item.enabled_var | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    enabled_value: "{{ __controller_source_item.enabled_value | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    host_filter: "{{ __controller_source_item.host_filter | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    limit: "{{ __controller_source_item.limit | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    credential: "{{ __controller_source_item.credential | default(omit, true) }}"
+    execution_environment: "{{ __controller_source_item.execution_environment | default(omit, true) }}"
+    overwrite: "{{ __controller_source_item.overwrite | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
+    overwrite_vars: "{{ __controller_source_item.overwrite_vars | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
+    custom_virtualenv: "{{ __controller_source_item.custom_virtualenv | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true)
+      }}"
+    timeout: "{{ __controller_source_item.timeout | default(0, true) if __controller_source_item.timeout is defined or controller_configuration_inventory_sources_enforce_defaults
+      else omit }}"
+    verbosity: "{{ __controller_source_item.verbosity | default((1 if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    update_on_launch: "{{ __controller_source_item.update_on_launch | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
+    update_cache_timeout: "{{ __controller_source_item.update_cache_timeout | default(0, true) if __controller_source_item.update_cache_timeout is defined or controller_configuration_inventory_sources_enforce_defaults
+      else omit }}"
+    source_project: "{{ __controller_source_item.source_project.name | default(__controller_source_item.source_project | default(('' if controller_configuration_inventory_sources_enforce_defaults
+      else omit), true)) }}"
+    scm_branch: "{{ __controller_source_item.scm_branch | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    state: "{{ __controller_source_item.state | default(platform_state | default('present')) }}"
+    notification_templates_started: "{{ (__controller_source_item.related.notification_templates_started | map(attribute='name') | list if __controller_source_item.related.notification_templates_started
+      is defined) | default(__controller_source_item.notification_templates_started) | default(([] if controller_configuration_inventory_sources_enforce_defaults
+      else omit), true) }}"
+    notification_templates_success: "{{ (__controller_source_item.related.notification_templates_success | map(attribute='name') | list if __controller_source_item.related.notification_templates_success
+      is defined) | default(__controller_source_item.notification_templates_success) | default(([] if controller_configuration_inventory_sources_enforce_defaults
+      else omit), true) }}"
+    notification_templates_error: "{{ (__controller_source_item.related.notification_templates_error | map(attribute='name') | list if __controller_source_item.related.notification_templates_error
+      is defined) | default(__controller_source_item.notification_templates_error) | default(([] if controller_configuration_inventory_sources_enforce_defaults else
+      omit), true) }}"
 
     # Role Standard Options
-    controller_host:                      "{{ aap_hostname | default(omit, true) }}"
-    controller_username:                  "{{ aap_username | default(omit, true) }}"
-    controller_password:                  "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:                "{{ aap_token | default(omit, true) }}"
-    request_timeout:                      "{{ aap_request_timeout | default(omit, true) }}"
-    validate_certs:                       "{{ aap_validate_certs | default(omit) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ inventory_sources if inventory_sources is defined else controller_inventory_sources }}"
   loop_control:
     loop_var: __controller_source_item
@@ -45,18 +57,18 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __inventory_source_job_async
-  changed_when: "(__inventory_source_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__inventory_source_job_async.changed if ansible_check_mode else false)
   when: (__controller_source_item.source | default(('scm' if controller_configuration_inventory_sources_enforce_defaults else omit), true)) != "constructed"
   vars:
     __operation: "{{ operation_translate[__controller_source_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __inventory_source_job_async.failed is defined and __inventory_source_job_async.failed
 
-- name: "Managing Inventory Sources | Wait for finish the Inventory Sources management"
+- name: Managing Inventory Sources | Wait for finish the Inventory Sources management
   ansible.builtin.async_status:
     jid: "{{ __inventory_source_job_async_results_item.ansible_job_id }}"
   register: __inventory_source_job_async_result
@@ -70,6 +82,7 @@
   when: not ansible_check_mode and __inventory_source_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_inventory_sources_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__inventory_source_job_async_results_item.__controller_source_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    __operation: "{{ operation_translate[__inventory_source_job_async_results_item.__controller_source_item.state | default(platform_state) | default('present')]
+      }}"
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

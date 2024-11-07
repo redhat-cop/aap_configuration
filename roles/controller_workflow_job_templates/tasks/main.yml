@@ -1,45 +1,64 @@
 ---
-- name: "Managing Workflows"
+- name: Managing Workflows
   workflow_job_template:
-    name:                               "{{ __workflow_loop_item.name | mandatory }}"
-    new_name:                           "{{ __workflow_loop_item.new_name | default(omit, true) }}"
-    copy_from:                          "{{ __workflow_loop_item.copy_from | default(omit, true) }}"
-    description:                        "{{ __workflow_loop_item.description | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    extra_vars:                         "{{ __workflow_loop_item.extra_vars | default(({} if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    allow_simultaneous:                 "{{ __workflow_loop_item.allow_simultaneous | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
-    organization:                       "{{ __workflow_loop_item.organization.name | default(__workflow_loop_item.organization | default(('' if controller_configuration_workflows_enforce_defaults else omit), true)) }}"
-    ask_variables_on_launch:            "{{ __workflow_loop_item.ask_variables_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
-    inventory:                          "{{ __workflow_loop_item.inventory.name | default(__workflow_loop_item.inventory | default(('' if controller_configuration_workflows_enforce_defaults else omit), true)) }}"
-    limit:                              "{{ __workflow_loop_item.limit | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    labels:                             "{{ (__workflow_loop_item.related.labels | map(attribute='name') | list if __workflow_loop_item.related.labels is defined) | default(__workflow_loop_item.labels) | default(([] if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    scm_branch:                         "{{ __workflow_loop_item.scm_branch | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    ask_inventory_on_launch:            "{{ __workflow_loop_item.ask_inventory_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
-    ask_scm_branch_on_launch:           "{{ __workflow_loop_item.ask_scm_branch_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
-    ask_limit_on_launch:                "{{ __workflow_loop_item.ask_limit_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
-    webhook_service:                    "{{ __workflow_loop_item.webhook_service | default(omit, true) }}"
-    webhook_credential:                 "{{ __workflow_loop_item.webhook_credential.name | default(__workflow_loop_item.webhook_credential | default(omit, true)) }}"
-    survey_enabled:                     "{{ __workflow_loop_item.survey_enabled | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
-    survey_spec:                        "{{ __workflow_loop_item.related.survey_spec | default(__workflow_loop_item.survey_spec | default(__workflow_loop_item.survey | default(({} if controller_configuration_workflows_enforce_defaults else omit), true))) }}"
-    job_tags:                           "{{ __workflow_loop_item.job_tags | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    skip_tags:                          "{{ __workflow_loop_item.skip_tags | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    ask_tags_on_launch:                 "{{ __workflow_loop_item.ask_tags | default(__workflow_loop_item.ask_tags_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit))) }}"
-    ask_labels_on_launch:               "{{ __workflow_loop_item.ask_labels_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
-    ask_skip_tags_on_launch:            "{{ __workflow_loop_item.ask_skip_tags | default(__workflow_loop_item.ask_skip_tags_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit))) }}"
-    workflow_nodes:                     "{{ __workflow_loop_item.related.workflow_nodes | default(__workflow_loop_item.workflow_nodes | default(([] if controller_configuration_workflows_enforce_defaults else omit), true)) }}"
-    destroy_current_nodes:              "{{ __workflow_loop_item.destroy_current_nodes | default(__workflow_loop_item.destroy_current_schema | default((false if controller_configuration_workflows_enforce_defaults else omit))) }}"
-    state:                              "{{ __workflow_loop_item.state | default(platform_state | default('present')) }}"
-    notification_templates_started:     "{{ (__workflow_loop_item.related.notification_templates_started | map(attribute='name') | list if __workflow_loop_item.related.notification_templates_started is defined) | default(__workflow_loop_item.notification_templates_started) | default(([] if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    notification_templates_success:     "{{ (__workflow_loop_item.related.notification_templates_success | map(attribute='name') | list if __workflow_loop_item.related.notification_templates_success is defined) | default(__workflow_loop_item.notification_templates_success) | default(([] if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    notification_templates_error:       "{{ (__workflow_loop_item.related.notification_templates_error | map(attribute='name') | list if __workflow_loop_item.related.notification_templates_error is defined) | default(__workflow_loop_item.notification_templates_error) | default(([] if controller_configuration_workflows_enforce_defaults else omit), true) }}"
-    notification_templates_approvals:   "{{ (__workflow_loop_item.related.notification_templates_approvals | map(attribute='name') | list if __workflow_loop_item.related.notification_templates_approvals is defined) | default(__workflow_loop_item.notification_templates_approvals) | default(([] if controller_configuration_workflows_enforce_defaults else omit), true) }}"
+    name: "{{ __workflow_loop_item.name | mandatory }}"
+    new_name: "{{ __workflow_loop_item.new_name | default(omit, true) }}"
+    copy_from: "{{ __workflow_loop_item.copy_from | default(omit, true) }}"
+    description: "{{ __workflow_loop_item.description | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
+    extra_vars: "{{ __workflow_loop_item.extra_vars | default(({} if controller_configuration_workflows_enforce_defaults else omit), true) }}"
+    allow_simultaneous: "{{ __workflow_loop_item.allow_simultaneous | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
+    organization: "{{ __workflow_loop_item.organization.name | default(__workflow_loop_item.organization | default(('' if controller_configuration_workflows_enforce_defaults
+      else omit), true)) }}"
+    ask_variables_on_launch: "{{ __workflow_loop_item.ask_variables_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit))
+      }}"
+    inventory: "{{ __workflow_loop_item.inventory.name | default(__workflow_loop_item.inventory | default(('' if controller_configuration_workflows_enforce_defaults
+      else omit), true)) }}"
+    limit: "{{ __workflow_loop_item.limit | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
+    labels: "{{ (__workflow_loop_item.related.labels | map(attribute='name') | list if __workflow_loop_item.related.labels is defined) | default(__workflow_loop_item.labels)
+      | default(([] if controller_configuration_workflows_enforce_defaults else omit), true) }}"
+    scm_branch: "{{ __workflow_loop_item.scm_branch | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
+    ask_inventory_on_launch: "{{ __workflow_loop_item.ask_inventory_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit))
+      }}"
+    ask_scm_branch_on_launch: "{{ __workflow_loop_item.ask_scm_branch_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit))
+      }}"
+    ask_limit_on_launch: "{{ __workflow_loop_item.ask_limit_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
+    webhook_service: "{{ __workflow_loop_item.webhook_service | default(omit, true) }}"
+    webhook_credential: "{{ __workflow_loop_item.webhook_credential.name | default(__workflow_loop_item.webhook_credential | default(omit, true)) }}"
+    survey_enabled: "{{ __workflow_loop_item.survey_enabled | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
+    survey_spec: "{{ __workflow_loop_item.related.survey_spec | default(__workflow_loop_item.survey_spec | default(__workflow_loop_item.survey | default(({} if controller_configuration_workflows_enforce_defaults
+      else omit), true))) }}"
+    job_tags: "{{ __workflow_loop_item.job_tags | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
+    skip_tags: "{{ __workflow_loop_item.skip_tags | default(('' if controller_configuration_workflows_enforce_defaults else omit), true) }}"
+    ask_tags_on_launch: "{{ __workflow_loop_item.ask_tags | default(__workflow_loop_item.ask_tags_on_launch | default((false if controller_configuration_workflows_enforce_defaults
+      else omit))) }}"
+    ask_labels_on_launch: "{{ __workflow_loop_item.ask_labels_on_launch | default((false if controller_configuration_workflows_enforce_defaults else omit)) }}"
+    ask_skip_tags_on_launch: "{{ __workflow_loop_item.ask_skip_tags | default(__workflow_loop_item.ask_skip_tags_on_launch | default((false if controller_configuration_workflows_enforce_defaults
+      else omit))) }}"
+    workflow_nodes: "{{ __workflow_loop_item.related.workflow_nodes | default(__workflow_loop_item.workflow_nodes | default(([] if controller_configuration_workflows_enforce_defaults
+      else omit), true)) }}"
+    destroy_current_nodes: "{{ __workflow_loop_item.destroy_current_nodes | default(__workflow_loop_item.destroy_current_schema | default((false if controller_configuration_workflows_enforce_defaults
+      else omit))) }}"
+    state: "{{ __workflow_loop_item.state | default(platform_state | default('present')) }}"
+    notification_templates_started: "{{ (__workflow_loop_item.related.notification_templates_started | map(attribute='name') | list if __workflow_loop_item.related.notification_templates_started
+      is defined) | default(__workflow_loop_item.notification_templates_started) | default(([] if controller_configuration_workflows_enforce_defaults else omit),
+      true) }}"
+    notification_templates_success: "{{ (__workflow_loop_item.related.notification_templates_success | map(attribute='name') | list if __workflow_loop_item.related.notification_templates_success
+      is defined) | default(__workflow_loop_item.notification_templates_success) | default(([] if controller_configuration_workflows_enforce_defaults else omit),
+      true) }}"
+    notification_templates_error: "{{ (__workflow_loop_item.related.notification_templates_error | map(attribute='name') | list if __workflow_loop_item.related.notification_templates_error
+      is defined) | default(__workflow_loop_item.notification_templates_error) | default(([] if controller_configuration_workflows_enforce_defaults else omit), true)
+      }}"
+    notification_templates_approvals: "{{ (__workflow_loop_item.related.notification_templates_approvals | map(attribute='name') | list if __workflow_loop_item.related.notification_templates_approvals
+      is defined) | default(__workflow_loop_item.notification_templates_approvals) | default(([] if controller_configuration_workflows_enforce_defaults else omit),
+      true) }}"
 
     # Role Standard Options
-    controller_username:                "{{ aap_username | default(omit, true) }}"
-    controller_password:                "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:              "{{ aap_token | default(omit, true) }}"
-    request_timeout:                    "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:                    "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:                     "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ workflow_job_templates if workflow_job_templates is defined else controller_workflows }}"
   loop_control:
     loop_var: __workflow_loop_item
@@ -48,17 +67,17 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __workflows_job_async
-  changed_when: "(__workflows_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__workflows_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__workflow_loop_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __workflows_job_async.failed is defined and __workflows_job_async.failed
 
-- name: "Managing Workflows | Wait for finish the workflow management"
+- name: Managing Workflows | Wait for finish the workflow management
   ansible.builtin.async_status:
     jid: "{{ __workflows_job_async_results_item.ansible_job_id }}"
   register: __workflows_job_async_result
@@ -68,16 +87,17 @@
   loop: "{{ __workflows_job_async.results }}"
   loop_control:
     loop_var: __workflows_job_async_results_item
-    label: "{{ __operation.verb }} Workflow {{ __workflows_job_async_results_item.__workflow_loop_item.name }} | Wait for finish the workflow {{ __operation.action }}"
+    label: "{{ __operation.verb }} Workflow {{ __workflows_job_async_results_item.__workflow_loop_item.name }} | Wait for finish the workflow {{ __operation.action
+      }}"
   when: not ansible_check_mode and __workflows_job_async_results_item.ansible_job_id is defined
   no_log: "{{ workflow_job_templates_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__workflows_job_async_results_item.__workflow_loop_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
 # Create links between workflow node
 - name: Loop over nodes in schema to add to workflow templates
-  ansible.builtin.include_tasks: "add_workflows_schema.yml"
+  ansible.builtin.include_tasks: add_workflows_schema.yml
   loop: "{{ controller_workflows | default(workflow_job_templates) }}"
   loop_control:
     loop_var: __workflow_loop_item

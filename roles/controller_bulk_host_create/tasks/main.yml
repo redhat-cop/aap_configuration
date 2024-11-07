@@ -2,16 +2,16 @@
 # Create Job Template
 - name: Add Controller hosts in bulk
   bulk_host_create:
-    hosts:                              "{{ __controller_bulk_hosts_item.hosts }}"
-    inventory:                          "{{ __controller_bulk_hosts_item.inventory }}"
+    hosts: "{{ __controller_bulk_hosts_item.hosts }}"
+    inventory: "{{ __controller_bulk_hosts_item.inventory }}"
 
     # Role Standard options
-    controller_username:                "{{ aap_username | default(omit, true) }}"
-    controller_password:                "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:              "{{ aap_token | default(omit, true) }}"
-    request_timeout:                    "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:                    "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:                 "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ controller_bulk_hosts }}"
   loop_control:
     loop_var: __controller_bulk_hosts_item
@@ -20,16 +20,16 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __controller_bulk_hosts_job_async
-  changed_when: "(__controller_bulk_hosts_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__controller_bulk_hosts_job_async.changed if ansible_check_mode else false)
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __controller_bulk_hosts_job_async.failed is defined and __controller_bulk_hosts_job_async.failed
 
-- name: "Configure bulk_hosts | Wait for finish the bulk_hosts creation"
+- name: Configure bulk_hosts | Wait for finish the bulk_hosts creation
   ansible.builtin.async_status:
     jid: "{{ __controller_bulk_hosts_job_async_results_item.ansible_job_id }}"
   register: __controller_bulk_hosts_job_async_result
@@ -42,5 +42,5 @@
   when: not ansible_check_mode and __controller_bulk_hosts_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_bulk_hosts_secure_logging }}"
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

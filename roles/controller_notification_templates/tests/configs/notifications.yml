@@ -10,8 +10,8 @@ controller_notifications:
         - admin@example.com
       sender: tower0@example.com
       port: 25
-      username: ''
-      password: ''
+      username: ""
+      password: ""
       use_tls: false
       use_ssl: false
 ...

@@ -18,7 +18,8 @@
   loop: "{{ gateway_role_user_assignments }}"
   loop_control:
     loop_var: __gateway_role_user_assignments_item
-    label: "{{ __operation.verb }} Role Based Access Entry on Controller {{ __gateway_role_user_assignments_item.1 | default(__gateway_role_user_assignments_item.role_definition) }}"
+    label: "{{ __operation.verb }} Role Based Access Entry on Controller {{ __gateway_role_user_assignments_item.1 | default(__gateway_role_user_assignments_item.role_definition)
+      }}"
     pause: "{{ gateway_role_user_assignments_loop_delay }}"
   no_log: "{{ gateway_role_user_assignments_secure_logging }}"
   async: 1000
@@ -39,10 +40,12 @@
   loop: "{{ __gateway_role_user_assignments_job_async.results }}"
   loop_control:
     loop_var: __gateway_role_user_assignments_job_async_results_item
-    label: "{{ __operation.verb }} Role {{ __gateway_role_user_assignments_job_async_results_item.__gateway_role_user_assignments_item.1 | default(__gateway_role_user_assignments_job_async_results_item.__gateway_role_user_assignments_item.role_definition) }} | Wait for finish the Roles {{ __operation.action }}"
+    label: "{{ __operation.verb }} Role {{ __gateway_role_user_assignments_job_async_results_item.__gateway_role_user_assignments_item.1 | default(__gateway_role_user_assignments_job_async_results_item.__gateway_role_user_assignments_item.role_definition)
+      }} | Wait for finish the Roles {{ __operation.action }}"
   when: __gateway_role_user_assignments_job_async_results_item.ansible_job_id is defined
   no_log: "{{ gateway_role_user_assignments_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__gateway_role_user_assignments_job_async_results_item.__controller_role_item.state | default(platform_state) | default('present')] }}"
+    __operation: "{{ operation_translate[__gateway_role_user_assignments_job_async_results_item.__controller_role_item.state | default(platform_state) | default('present')]
+      }}"
     ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

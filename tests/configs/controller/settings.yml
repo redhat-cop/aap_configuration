@@ -1,7 +1,7 @@
 ---
 controller_settings:
   settings:
-    AWX_TASK_ENV: {'GIT_SSL_NO_VERIFY': 'True'}
+    AWX_TASK_ENV: { GIT_SSL_NO_VERIFY: "True" }
 gateway_settings:
   gateway_token_name: X-DAB-JW-TOKEN
   gateway_access_token_expiration: 600

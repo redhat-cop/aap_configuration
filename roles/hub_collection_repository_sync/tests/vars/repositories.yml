@@ -1,11 +1,11 @@
 ---
 hub_collection_repositories:
-  - name: "foobar"
-    description: "description of foobar repository"
+  - name: foobar
+    description: description of foobar repository
     pulp_labels:
-      pipeline: "approved"
+      pipeline: approved
     distribution:
-      name: "foobar"
+      name: foobar
       state: present
     remote: community
 ...

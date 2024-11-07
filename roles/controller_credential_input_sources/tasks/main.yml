@@ -1,40 +1,40 @@
 ---
-- name: "Managing Controller Credential Input Sources"
+- name: Managing Controller Credential Input Sources
   credential_input_source:
-    target_credential:              "{{ __cred_input_src_item.target_credential | mandatory }}"
-    input_field_name:               "{{ __cred_input_src_item.input_field_name | mandatory }}"
-    source_credential:              "{{ __cred_input_src_item.source_credential | default(omit, true) }}"
-    description:                    "{{ __cred_input_src_item.description | default(('' if controller_configuration_credential_input_sources_enforce_defaults else omit), true) }}"
-    metadata:                       "{{ __cred_input_src_item.metadata | default(({} if controller_configuration_credential_input_sources_enforce_defaults else omit), true) }}"
-    state:                          "{{ __cred_input_src_item.state | default(platform_state | default('present')) }}"
+    target_credential: "{{ __cred_input_src_item.target_credential | mandatory }}"
+    input_field_name: "{{ __cred_input_src_item.input_field_name | mandatory }}"
+    source_credential: "{{ __cred_input_src_item.source_credential | default(omit, true) }}"
+    description: "{{ __cred_input_src_item.description | default(('' if controller_configuration_credential_input_sources_enforce_defaults else omit), true) }}"
+    metadata: "{{ __cred_input_src_item.metadata | default(({} if controller_configuration_credential_input_sources_enforce_defaults else omit), true) }}"
+    state: "{{ __cred_input_src_item.state | default(platform_state | default('present')) }}"
 
     # Role specific options
-    controller_username:            "{{ aap_username | default(omit, true) }}"
-    controller_password:            "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:          "{{ aap_token | default(omit, true) }}"
-    request_timeout:                "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:                "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:                 "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ controller_credential_input_sources }}"
   loop_control:
-    loop_var: "__cred_input_src_item"
+    loop_var: __cred_input_src_item
     label: "{{ __operation.verb }} Controller Credential Input Source for Credential {{ __cred_input_src_item.target_credential }}"
     pause: "{{ controller_configuration_credential_input_sources_loop_delay }}"
   no_log: "{{ controller_configuration_credential_input_sources_secure_logging }}"
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __credential_input_sources_job_async
-  changed_when: "(__credential_input_sources_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__credential_input_sources_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__cred_input_src_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __credential_input_sources_job_async.failed is defined and __credential_input_sources_job_async.failed
 
-- name: "Managing Controller Credential Input Sources | Wait for finish the Controller Credential Input Sources management"
+- name: Managing Controller Credential Input Sources | Wait for finish the Controller Credential Input Sources management
   ansible.builtin.async_status:
     jid: "{{ __credential_input_sources_job_async_results_item.ansible_job_id }}"
   register: __credential_input_sources_job_async_result
@@ -44,10 +44,12 @@
   loop: "{{ __credential_input_sources_job_async.results }}"
   loop_control:
     loop_var: __credential_input_sources_job_async_results_item
-    label: "{{ __operation.verb }} Controller Credential Input Source for Credential {{ __credential_input_sources_job_async_results_item.__cred_input_src_item.target_credential }}"
+    label: "{{ __operation.verb }} Controller Credential Input Source for Credential {{ __credential_input_sources_job_async_results_item.__cred_input_src_item.target_credential
+      }}"
   when: not ansible_check_mode and __credential_input_sources_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_credential_input_sources_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__credential_input_sources_job_async_results_item.__cred_input_src_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    __operation: "{{ operation_translate[__credential_input_sources_job_async_results_item.__cred_input_src_item.state | default(platform_state) | default('present')]
+      }}"
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

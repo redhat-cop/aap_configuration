@@ -40,7 +40,7 @@ argument_specs:
         required: false
         description: This variable sets delay between retries across all roles as a default.
       aap_configuration_async_dir:
-        default: null
+        default:
         required: false
         description: Sets the directory to write the results file for async tasks. The default value is set to  `null` which uses the Ansible Default of `/root/.ansible_async/`.
 
@@ -83,6 +83,7 @@ argument_specs:
       aap_password:
         default: None
         required: false
-        description: Controller Admin User's password on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at vars/controller-secrets.yml or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.
+        description: Controller Admin User's password on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at vars/controller-secrets.yml
+          or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.
         type: str
 ...

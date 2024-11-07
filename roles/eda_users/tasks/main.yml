@@ -1,18 +1,17 @@
 ---
-
 # Create EDA Controller user
 - name: Add EDA Controller user
   ansible.eda.user:
-    username:            "{{ __user_item.username }}"
-    new_username:        "{{ __user_item.new_username | default(omit) }}"
-    first_name:          "{{ __user_item.first_name | default(omit) }}"
-    last_name:           "{{ __user_item.last_name | default(omit) }}"
-    email:               "{{ __user_item.email | default(omit) }}"
-    password:            "{{ __user_item.password | default(omit) }}"
-    update_secrets:      "{{ __user_item.update_secrets | default(omit) }}"
-    is_superuser:        "{{ __user_item.is_superuser | default(omit) }}"
-    roles:               "{{ __user_item.roles | default(omit) }}"
-    state:               "{{ __user_item.state | default(eda_state | default('present')) }}"
+    username: "{{ __user_item.username }}"
+    new_username: "{{ __user_item.new_username | default(omit) }}"
+    first_name: "{{ __user_item.first_name | default(omit) }}"
+    last_name: "{{ __user_item.last_name | default(omit) }}"
+    email: "{{ __user_item.email | default(omit) }}"
+    password: "{{ __user_item.password | default(omit) }}"
+    update_secrets: "{{ __user_item.update_secrets | default(omit) }}"
+    is_superuser: "{{ __user_item.is_superuser | default(omit) }}"
+    roles: "{{ __user_item.roles | default(omit) }}"
+    state: "{{ __user_item.state | default(eda_state | default('present')) }}"
     controller_host: "{{ aap_hostname | default(omit, true) }}"
     controller_username: "{{ aap_username | default(omit, true) }}"
     controller_password: "{{ aap_password | default(omit, true) }}"
@@ -20,7 +19,7 @@
     validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ aap_user_accounts }}"
   loop_control:
-    loop_var: "__user_item"
+    loop_var: __user_item
     label: "{{ __operation.verb }} the user {{ __user_item.username }} to EDA"
     pause: "{{ eda_configuration_users_async_delay }}"
   no_log: "{{ eda_configuration_users_secure_logging }}"
@@ -30,9 +29,9 @@
   changed_when: not __users_job_async.changed
   vars:
     __operation: "{{ operation_translate[__user_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create user | Wait for finish the user creation"
+- name: Create user | Wait for finish the user creation
   ansible.builtin.async_status:
     jid: "{{ __users_job_async_result_item.ansible_job_id }}"
   register: __users_job_async_result
@@ -47,5 +46,5 @@
   no_log: "{{ eda_configuration_users_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__users_job_async_result.__user_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

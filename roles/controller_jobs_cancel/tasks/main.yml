@@ -2,19 +2,19 @@
 # Cancel a Controller Job
 - name: Cancel a Controller Job
   job_cancel:
-    job_id:                   "{{ __controller_jobs_cancel_item.id | mandatory }}"
-    fail_if_not_running:      "{{ __controller_jobs_cancel_item.fail_if_not_running | default(omit) }}"
+    job_id: "{{ __controller_jobs_cancel_item.id | mandatory }}"
+    fail_if_not_running: "{{ __controller_jobs_cancel_item.fail_if_not_running | default(omit) }}"
 
     # Role Standard Options
-    controller_username:     "{{ aap_username | default(omit, true) }}"
-    controller_password:     "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:   "{{ aap_token | default(omit, true) }}"
-    request_timeout:         "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:         "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:     "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ controller_cancel_jobs }}"
   loop_control:
-    loop_var: "__controller_jobs_cancel_item"
+    loop_var: __controller_jobs_cancel_item
   no_log: "{{ controller_configuration_jobs_cancel_secure_logging }}"
   when: controller_cancel_jobs is defined
 ...

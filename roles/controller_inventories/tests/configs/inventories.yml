@@ -6,6 +6,6 @@ controller_inventories:
   - name: test2
     organization: Default
     kind: smart
-    host_filter: "name__icontains=test"
+    host_filter: name__icontains=test
     variables: '{"key1":"val1", "key2":"val2"}'
 ...

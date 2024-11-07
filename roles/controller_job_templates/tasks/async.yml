@@ -1,7 +1,7 @@
 ---
-- name: Async block
+- name: async | Async block
   block:
-    - name: "Managing Controller Job Templates | Wait for finish the Job Templates management"
+    - name: async | Managing Controller Job Templates | Wait for finish the Job Templates management
       ansible.builtin.async_status:
         jid: "{{ __job_templates_job_async_result_item.ansible_job_id }}"
       register: __job_templates_job_async_result
@@ -10,27 +10,20 @@
       delay: "{{ controller_configuration_job_templates_async_delay }}"
 
   rescue:
-    - name:  Removing variables existance from result_file
+    - name: async | Removing variables existance from result_file
       ansible.builtin.replace:
         path: "{{ __job_templates_job_async_result.results_file }}"
-        regexp: '\{\{.*?\}\}'
-        replace: ''
+        regexp: \{\{.*?\}\}
+        replace: ""
 
-    - name: "Load error details"
+    - name: async | Load error details
       ansible.builtin.include_vars:
         file: "{{ __job_templates_job_async_result.results_file }}"
         name: __error_data
 
-    - name: "Building list of not processed templates"
+    - name: async | Building list of not processed templates
       ansible.builtin.set_fact:
-        __templates_error_list: "{{ __templates_error_list | default([]) + [ {
-                                                                          'name': __error_data['invocation']['module_args']['name'],
-                                                                          'project_name': __error_data['invocation']['module_args']['project'],
-                                                                          'playbook': __error_data['invocation']['module_args']['playbook'],
-                                                                          'inventory': __error_data['invocation']['module_args']['inventory'],
-                                                                          'credentials': __error_data['invocation']['module_args']['credentials'],
-                                                                          'error': __error_data['msg']
-                                                                          }
-                                                                        ]
-                               }}"
+        __templates_error_list: "{{ __templates_error_list | default([]) + [ { 'name': __error_data['invocation']['module_args']['name'], 'project_name': __error_data['invocation']['module_args']['project'],
+          'playbook': __error_data['invocation']['module_args']['playbook'], 'inventory': __error_data['invocation']['module_args']['inventory'], 'credentials': __error_data['invocation']['module_args']['credentials'],
+          'error': __error_data['msg'] } ] }}"
 ...

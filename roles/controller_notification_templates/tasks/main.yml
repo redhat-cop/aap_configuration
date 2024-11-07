@@ -1,23 +1,25 @@
 ---
-- name: "Managing Controller Notifications"
+- name: Managing Controller Notifications
   notification_template:
-    name:                           "{{ __controller_notification_item.name | mandatory }}"
-    new_name:                       "{{ __controller_notification_item.new_name | default(omit, true) }}"
-    copy_from:                      "{{ __controller_notification_item.copy_from | default(omit, true) }}"
-    description:                    "{{ __controller_notification_item.description | default(('' if controller_configuration_notifications_enforce_defaults else omit), true) }}"
-    organization:                   "{{ __controller_notification_item.organization.name | default(__controller_notification_item.organization) | mandatory }}"
-    notification_type:              "{{ __controller_notification_item.notification_type | default(omit, true) | mandatory }}"
-    notification_configuration:     "{{ __controller_notification_item.notification_configuration | default(({} if controller_configuration_notifications_enforce_defaults else omit), true) }}"
-    messages:                       "{{ __controller_notification_item.messages | default(({} if controller_configuration_notifications_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
-    state:                          "{{ __controller_notification_item.state | default(platform_state | default('present')) }}"
+    name: "{{ __controller_notification_item.name | mandatory }}"
+    new_name: "{{ __controller_notification_item.new_name | default(omit, true) }}"
+    copy_from: "{{ __controller_notification_item.copy_from | default(omit, true) }}"
+    description: "{{ __controller_notification_item.description | default(('' if controller_configuration_notifications_enforce_defaults else omit), true) }}"
+    organization: "{{ __controller_notification_item.organization.name | default(__controller_notification_item.organization) | mandatory }}"
+    notification_type: "{{ __controller_notification_item.notification_type | default(omit, true) | mandatory }}"
+    notification_configuration: "{{ __controller_notification_item.notification_configuration | default(({} if controller_configuration_notifications_enforce_defaults
+      else omit), true) }}"
+    messages: "{{ __controller_notification_item.messages | default(({} if controller_configuration_notifications_enforce_defaults else omit), true) | regex_replace('{\
+      \  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
+    state: "{{ __controller_notification_item.state | default(platform_state | default('present')) }}"
 
     # Role Standard Options
-    controller_host:                "{{ aap_hostname | default(omit, true) }}"
-    controller_username:            "{{ aap_username | default(omit, true) }}"
-    controller_password:            "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:          "{{ aap_token | default(omit, true) }}"
-    request_timeout:                "{{ aap_request_timeout | default(omit, true) }}"
-    validate_certs:                 "{{ aap_validate_certs | default(omit) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ notification_templates if notification_templates is defined else controller_notifications }}"
   loop_control:
     loop_var: __controller_notification_item
@@ -27,17 +29,17 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __controller_notification_job_async
-  changed_when: "(__controller_notification_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__controller_notification_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__controller_notification_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __controller_notification_job_async.failed is defined and __controller_notification_job_async.failed
 
-- name: "Managing Notifications | Wait for finish the Notifications management"
+- name: Managing Notifications | Wait for finish the Notifications management
   ansible.builtin.async_status:
     jid: "{{ __controller_notification_job_async_results_item.ansible_job_id }}"
   register: __controller_notification_job_async_result
@@ -47,10 +49,12 @@
   loop: "{{ __controller_notification_job_async.results }}"
   loop_control:
     loop_var: __controller_notification_job_async_results_item
-    label: "{{ __operation.verb }} notification {{ __controller_notification_job_async_results_item.__controller_notification_item.name }} | Wait for finish the notifications {{ __operation.action }}"
+    label: "{{ __operation.verb }} notification {{ __controller_notification_job_async_results_item.__controller_notification_item.name }} | Wait for finish the notifications
+      {{ __operation.action }}"
   when: not ansible_check_mode and __controller_notification_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_notifications_secure_logging }}"
   vars:
-    __operation: "{{ operation_translate[__controller_notification_job_async_results_item.__controller_notification_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    __operation: "{{ operation_translate[__controller_notification_job_async_results_item.__controller_notification_item.state | default(platform_state) | default('present')]
+      }}"
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

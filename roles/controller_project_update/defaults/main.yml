@@ -3,5 +3,5 @@ controller_configuration_project_update_secure_logging: "{{ aap_configuration_se
 controller_configuration_project_update_async_retries: "{{ aap_configuration_async_retries | default(60) }}"
 controller_configuration_project_update_async_delay: "{{ aap_configuration_async_delay | default(10) }}"
 controller_configuration_project_update_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
-aap_configuration_async_dir: null
+aap_configuration_async_dir:
 ...

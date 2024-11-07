@@ -1,25 +1,24 @@
 ---
-
 # Create AH EE registry
 - name: Add Automation Hub EE Registry
   ansible.hub.ah_ee_registry:
-    name:                   "{{ __hub_ee_registry_item.name }}"
-    url:                    "{{ __hub_ee_registry_item.url }}"
-    username:               "{{ __hub_ee_registry_item.username | default(omit) }}"
-    password:               "{{ __hub_ee_registry_item.password | default(omit) }}"
-    tls_validation:         "{{ __hub_ee_registry_item.tls_validation | default(omit) }}"
-    download_concurrency:   "{{ __hub_ee_registry_item.download_concurrency | default(omit) }}"
-    rate_limit:             "{{ __hub_ee_registry_item.rate_limit | default(omit) }}"
-    state:                  "{{ __hub_ee_registry_item.state | default(ah_state | default('present')) }}"
-    ah_host:                "{{ aap_hostname | default(omit) }}"
-    ah_username:           "{{ aap_username | default(omit) }}"
-    ah_password:            "{{ aap_password | default(omit) }}"
-    ah_path_prefix:         "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:         "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:        "{{ aap_request_timeout | default(omit) }}"
-    proxy_url:              "{{ __hub_ee_registry_item.proxy_url | default(proxy_url | default(omit)) }}"
-    proxy_username:         "{{ __hub_ee_registry_item.proxy_username | default(proxy_username | default(omit)) }}"
-    proxy_password:         "{{ __hub_ee_registry_item.proxy_password | default(proxy_password | default(omit)) }}"
+    name: "{{ __hub_ee_registry_item.name }}"
+    url: "{{ __hub_ee_registry_item.url }}"
+    username: "{{ __hub_ee_registry_item.username | default(omit) }}"
+    password: "{{ __hub_ee_registry_item.password | default(omit) }}"
+    tls_validation: "{{ __hub_ee_registry_item.tls_validation | default(omit) }}"
+    download_concurrency: "{{ __hub_ee_registry_item.download_concurrency | default(omit) }}"
+    rate_limit: "{{ __hub_ee_registry_item.rate_limit | default(omit) }}"
+    state: "{{ __hub_ee_registry_item.state | default(ah_state | default('present')) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
+    proxy_url: "{{ __hub_ee_registry_item.proxy_url | default(proxy_url | default(omit)) }}"
+    proxy_username: "{{ __hub_ee_registry_item.proxy_username | default(proxy_username | default(omit)) }}"
+    proxy_password: "{{ __hub_ee_registry_item.proxy_password | default(proxy_password | default(omit)) }}"
   loop: "{{ hub_ee_registries }}"
   loop_control:
     loop_var: __hub_ee_registry_item
@@ -32,9 +31,9 @@
   changed_when: not __ee_registries_job_async.changed
   vars:
     __operation: "{{ operation_translate[__hub_ee_registry_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create EE Registry | Wait for finish the ee_registry creation"
+- name: Create EE Registry | Wait for finish the ee_registry creation
   ansible.builtin.async_status:
     jid: "{{ __ee_registries_job_async_result_item.ansible_job_id }}"
   register: __ee_registries_job_async_result
@@ -44,10 +43,11 @@
   loop: "{{ __ee_registries_job_async.results }}"
   loop_control:
     loop_var: __ee_registries_job_async_result_item
-    label: "{{ __operation.verb }} Label {{ __ee_registries_job_async_result_item.__hub_ee_registry_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Label {{ __ee_registries_job_async_result_item.__hub_ee_registry_item.name }} | Wait for finish the Label {{ __operation.action
+      }}"
   when: __ee_registries_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_ee_registry_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__ee_registries_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

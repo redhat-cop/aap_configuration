@@ -15,7 +15,7 @@
   tasks:
     - name: Get number of JT
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/metrics/?format=json"
+        url: https://{{ aap_hostname }}/api/v2/metrics/?format=json
         method: GET
         force_basic_auth: true
         user: "{{ aap_username }}"
@@ -39,7 +39,7 @@
 
     - name: Get users info
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/users/?format=json"
+        url: https://{{ aap_hostname }}/api/v2/users/?format=json
         method: GET
         force_basic_auth: true
         user: "{{ aap_username }}"
@@ -58,7 +58,8 @@
           - "{{ ansible_facts['date_time']['date'] | to_datetime('%Y-%m-%d') }}"
           - "{{ r_users['json']['results'][0]['last_login'] | regex_search('[0-9]{4}-[0-9]{2}-[0-9]{2}', '\\0') | first }}"
           - "{{ (r_users['json']['results'][0]['last_login'] | regex_search('[0-9]{4}-[0-9]{2}-[0-9]{2}', '\\0') | first) | to_datetime('%Y-%m-%d') }}"
-          - "{{ (((r_users['json']['results'][0]['last_login'] | regex_search('[0-9]{4}-[0-9]{2}-[0-9]{2}', '\\0') | first) | to_datetime('%Y-%m-%d')) - (ansible_facts['date_time']['date'] | to_datetime('%Y-%m-%d'))).days }}"
+          - "{{ (((r_users['json']['results'][0]['last_login'] | regex_search('[0-9]{4}-[0-9]{2}-[0-9]{2}', '\\0') | first) | to_datetime('%Y-%m-%d')) - (ansible_facts['date_time']['date']
+            | to_datetime('%Y-%m-%d'))).days }}"
 
     - name: Remove users who have never logged in (null)
       ansible.builtin.set_fact:
@@ -77,12 +78,13 @@
       ansible.builtin.set_fact:
         active_users: "{{ active_users + [item] }}"
       # when: (((item | regex_search('[0-9]{4}-[0-9]{2}-[0-9]{2}', '\\0') | first) | to_datetime('%Y-%m-%d')) - ('2023-03-30' | to_datetime('%Y-%m-%d'))).days <= 30
-      when: ((((item | regex_search('[0-9]{4}-[0-9]{2}-[0-9]{2}', '\\0') | first) | to_datetime('%Y-%m-%d')) - (ansible_facts['date_time']['date'] | to_datetime('%Y-%m-%d'))).days) <= 30
+      when: ((((item | regex_search('[0-9]{4}-[0-9]{2}-[0-9]{2}', '\\0') | first) | to_datetime('%Y-%m-%d')) - (ansible_facts['date_time']['date'] | to_datetime('%Y-%m-%d'))).days)
+        <= 30
       loop: "{{ temp_user_list }}"
 
     - name: Get subscription info
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/settings/all/?format=json"
+        url: https://{{ aap_hostname }}/api/v2/settings/all/?format=json
         method: GET
         force_basic_auth: true
         user: "{{ aap_username }}"

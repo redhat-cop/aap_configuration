@@ -2,24 +2,25 @@
 # Update Inventory sources
 - name: Run Controller inventory source update
   inventory_source_update:
-    name:                     "{{ __inventory_source_update_item.name | mandatory }}"
-    inventory:                "{{ __inventory_source_update_item.inventory | mandatory }}"
-    organization:             "{{ __inventory_source_update_item.organization | default(omit, true) }}"
-    wait:                     "{{ __inventory_source_update_item.wait | default(omit) }}"
-    interval:                 "{{ __inventory_source_update_item.interval | default(controller_configuration_inventory_source_update_async_delay) }}"
-    timeout:                  "{{ __inventory_source_update_item.timeout | default(omit, true) }}"
+    name: "{{ __inventory_source_update_item.name | mandatory }}"
+    inventory: "{{ __inventory_source_update_item.inventory | mandatory }}"
+    organization: "{{ __inventory_source_update_item.organization | default(omit, true) }}"
+    wait: "{{ __inventory_source_update_item.wait | default(omit) }}"
+    interval: "{{ __inventory_source_update_item.interval | default(controller_configuration_inventory_source_update_async_delay) }}"
+    timeout: "{{ __inventory_source_update_item.timeout | default(omit, true) }}"
 
     # Role Standard Options
-    controller_username:      "{{ aap_username | default(omit, true) }}"
-    controller_password:      "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:    "{{ aap_token | default(omit, true) }}"
-    request_timeout:          "{{ aap_request_timeout | default(omit, true) }}"
-    controller_host:          "{{ aap_hostname | default(omit, true) }}"
-    validate_certs:           "{{ aap_validate_certs | default(omit) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ inventory_sources if inventory_sources is defined else controller_inventory_sources }}"
   loop_control:
-    loop_var: "__inventory_source_update_item"
-    label: "{{ (__inventory_source_update_item.organization | default('<no_org>')) }}/{{ __inventory_source_update_item.inventory }}/{{ __inventory_source_update_item.name }}"
+    loop_var: __inventory_source_update_item
+    label: "{{ (__inventory_source_update_item.organization | default('<no_org>')) }}/{{ __inventory_source_update_item.inventory }}/{{ __inventory_source_update_item.name
+      }}"
     pause: "{{ controller_configuration_inventory_source_update_loop_delay }}"
   no_log: "{{ controller_configuration_inventory_source_update_secure_logging }}"
   when:
@@ -30,14 +31,14 @@
   register: __inventory_source_update_async
   changed_when: not __inventory_source_update_async.changed
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __inventory_source_update_async.failed is defined and __inventory_source_update_async.failed
 
-- name: "Controller inventory source update | Wait for finish of the inventory source update"
+- name: Controller inventory source update | Wait for finish of the inventory source update
   ansible.builtin.async_status:
     jid: "{{ __inventory_source_update_async_results_item.ansible_job_id }}"
   register: __inventory_source_update_async_result
@@ -50,5 +51,5 @@
   when: not ansible_check_mode and __inventory_source_update_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_inventory_source_update_secure_logging }}"
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

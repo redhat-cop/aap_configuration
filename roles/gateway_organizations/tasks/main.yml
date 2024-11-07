@@ -37,7 +37,8 @@
   loop: "{{ __gateway_organizations_job_async.results }}"
   loop_control:
     loop_var: __gateway_organizations_job_async_results_item
-    label: "{{ __operation.verb }} AAP Platform Organizations {{ __gateway_organizations_job_async_result.__gateway_organizations_job_async_results_item.__gateway_organization_item.name }} | Wait for finish the Organizations {{ __operation.action }}"
+    label: "{{ __operation.verb }} AAP Platform Organizations {{ __gateway_organizations_job_async_result.__gateway_organizations_job_async_results_item.__gateway_organization_item.name
+      }} | Wait for finish the Organizations {{ __operation.action }}"
   when: __gateway_organizations_job_async_results_item.ansible_job_id is defined
   no_log: "{{ gateway_organizations_secure_logging }}"
   vars:

@@ -1,5 +1,4 @@
 ---
-
 # Create EDA Controller Event stream
 - name: Add EDA Controller Event Stream
   ansible.eda.event_stream:
@@ -17,7 +16,7 @@
     validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ eda_event_streams }}"
   loop_control:
-    loop_var: "__event_stream_item"
+    loop_var: __event_stream_item
     label: "{{ __operation.verb }} the Event stream {{ __event_stream_item.name }} to EDA"
     pause: "{{ eda_configuration_event_streams_async_delay }}"
   no_log: "{{ eda_configuration_event_streams_secure_logging }}"
@@ -27,9 +26,9 @@
   changed_when: not __event_streams_job_async.changed
   vars:
     __operation: "{{ operation_translate[__event_stream_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create Event stream | Wait for finish the Event stream creation"
+- name: Create Event stream | Wait for finish the Event stream creation
   ansible.builtin.async_status:
     jid: "{{ __event_streams_job_async_result_item.ansible_job_id }}"
   register: __event_streams_job_async_result
@@ -39,10 +38,11 @@
   loop: "{{ __event_streams_job_async.results }}"
   loop_control:
     loop_var: __event_streams_job_async_result_item
-    label: "{{ __operation.verb }} Event stream {{ __event_streams_job_async_result_item.__event_stream_item.name }} | Wait for finish the Event stream {{ __operation.action }}"
+    label: "{{ __operation.verb }} Event stream {{ __event_streams_job_async_result_item.__event_stream_item.name }} | Wait for finish the Event stream {{ __operation.action
+      }}"
   when: __event_streams_job_async_result_item.ansible_job_id is defined
   no_log: "{{ eda_configuration_event_streams_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__event_streams_job_async_result_item.__event_stream_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

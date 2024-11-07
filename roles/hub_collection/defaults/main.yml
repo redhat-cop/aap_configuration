@@ -23,5 +23,5 @@ hub_configuration_collection_async_timeout: "{{ aap_configuration_async_timeout 
 hub_configuration_collection_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
 hub_configuration_collection_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
 hub_configuration_collection_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
-aap_configuration_async_dir: null
+aap_configuration_async_dir:
 ...

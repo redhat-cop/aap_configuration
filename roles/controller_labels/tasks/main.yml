@@ -1,18 +1,18 @@
 ---
-- name: "Managing Labels"
+- name: Managing Labels
   label:
-    name:                                 "{{ __controller_label_item.name | mandatory }}"
-    new_name:                             "{{ __controller_label_item.new_name | default(omit, true) }}"
-    organization:                         "{{ __controller_label_item.organization | mandatory }}"
-    state:                                "{{ __controller_label_item.state | default(platform_state | default('present')) }}"
+    name: "{{ __controller_label_item.name | mandatory }}"
+    new_name: "{{ __controller_label_item.new_name | default(omit, true) }}"
+    organization: "{{ __controller_label_item.organization | mandatory }}"
+    state: "{{ __controller_label_item.state | default(platform_state | default('present')) }}"
 
     # Role Standard Options
-    controller_host:                      "{{ aap_hostname | default(omit, true) }}"
-    controller_username:                  "{{ aap_username | default(omit, true) }}"
-    controller_password:                  "{{ aap_password | default(omit, true) }}"
-    controller_oauthtoken:                "{{ aap_token | default(omit, true) }}"
-    request_timeout:                      "{{ aap_request_timeout | default(omit, true) }}"
-    validate_certs:                       "{{ aap_validate_certs | default(omit) }}"
+    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_username: "{{ aap_username | default(omit, true) }}"
+    controller_password: "{{ aap_password | default(omit, true) }}"
+    controller_oauthtoken: "{{ aap_token | default(omit, true) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ controller_labels }}"
   loop_control:
     loop_var: __controller_label_item
@@ -22,17 +22,17 @@
   async: "{{ ansible_check_mode | ternary(0, 1000) }}"
   poll: 0
   register: __controller_label_job_async
-  changed_when: "(__controller_label_job_async.changed if ansible_check_mode else false)"
+  changed_when: (__controller_label_job_async.changed if ansible_check_mode else false)
   vars:
     __operation: "{{ operation_translate[__controller_label_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Flag for errors (check mode only)"
+- name: Flag for errors (check mode only)
   ansible.builtin.set_fact:
     error_flag: true
   when: ansible_check_mode and __controller_label_job_async.failed is defined and __controller_label_job_async.failed
 
-- name: "Managing Labels | Wait for finish the Labels management"
+- name: Managing Labels | Wait for finish the Labels management
   ansible.builtin.async_status:
     jid: "{{ __controller_label_job_async_results_item.ansible_job_id }}"
   register: __controller_label_job_async_result
@@ -42,10 +42,11 @@
   loop: "{{ __controller_label_job_async.results }}"
   loop_control:
     loop_var: __controller_label_job_async_results_item
-    label: "{{ __operation.verb }} Label {{ __controller_label_job_async_results_item.__controller_label_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Label {{ __controller_label_job_async_results_item.__controller_label_item.name }} | Wait for finish the Label {{ __operation.action
+      }}"
   when: not ansible_check_mode and __controller_label_job_async_results_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_labels_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__controller_label_job_async_results_item.__controller_label_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...
