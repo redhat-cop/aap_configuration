@@ -19,19 +19,19 @@ An Ansible Role to publish collections to Automation Hub or Galaxies.
 |`aap_configuration_working_dir`|`/var/tmp`|no|The working directory where the built artifacts live, or where the artifacts will be built.||
 |`ah_auto_approve`|`False`|no|Whether the collection will be automatically approved in Automation Hub. This will only work if the account being used has correct privileges.||
 |`ah_overwrite_existing`|`False`|no|Whether the collection will be automatically overwrite an existing collection in Automation Hub. This will only work if the account being used has correct privileges.||
-|`ah_collections`|`see below`|no|Data structure describing your collections, mutually exclusive to ah_collection_list, described below.||
-|`ah_collection_list`|`list`|no|Data structure file paths to pre built collections, mutually exclusive with ah_collections.||
+|`hub_collections`|`see below`|no|Data structure describing your collections, mutually exclusive to ah_collection_list, described below.||
+|`ah_collection_list`|`list`|no|Data structure file paths to pre built collections, mutually exclusive with hub_collections.||
 
 ### Secure Logging Variables
 
 The following Variables compliment each other.
 If Both variables are not set, secure logging defaults to false.
 The role defaults to False as normally the add publish collections task does not include sensitive information.
-ah_configuration_publish_secure_logging defaults to the value of aap_configuration_secure_logging if it is not explicitly called. This allows for secure logging to be toggled for the entire suite of automation hub configuration roles with a single variable, or for the user to selectively use it.
+hub_configuration_publish_secure_logging defaults to the value of aap_configuration_secure_logging if it is not explicitly called. This allows for secure logging to be toggled for the entire suite of automation hub configuration roles with a single variable, or for the user to selectively use it.
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`ah_configuration_publish_secure_logging`|`False`|no|Whether or not to include the sensitive publish collections role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
+|`hub_configuration_publish_secure_logging`|`False`|no|Whether or not to include the sensitive publish collections role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
 |`aap_configuration_secure_logging`|`False`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
 
 ### Asynchronous Retry Variables
@@ -44,17 +44,17 @@ This also speeds up the overall role.
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
 |`aap_configuration_async_timeout`|1000|no|This variable sets the async timeout for the role globally.|
-|`ah_configuration_publish_async_timeout`|`aap_configuration_async_timeout`|no|This variable sets the async timeout for the role.|
+|`hub_configuration_publish_async_timeout`|`aap_configuration_async_timeout`|no|This variable sets the async timeout for the role.|
 |`aap_configuration_async_retries`|50|no|This variable sets the number of retries to attempt for the role globally.|
-|`ah_configuration_publish_async_retries`|`aap_configuration_async_retries`|no|This variable sets the number of retries to attempt for the role.|
+|`hub_configuration_publish_async_retries`|`aap_configuration_async_retries`|no|This variable sets the number of retries to attempt for the role.|
 |`aap_configuration_loop_delay`|1000|no|This variable sets the loop_delay for the role globally.|
-|`ah_configuration_publish_loop_delay`|`aap_configuration_loop_delay`|no|This variable sets the loop_delay for the role.|
+|`hub_configuration_publish_loop_delay`|`aap_configuration_loop_delay`|no|This variable sets the loop_delay for the role.|
 |`aap_configuration_async_delay`|1|no|This sets the delay between retries for the role globally.|
-|`ah_configuration_publish_async_delay`|`aap_configuration_async_delay`|no|This sets the delay between retries for the role.|
+|`hub_configuration_publish_async_delay`|`aap_configuration_async_delay`|no|This sets the delay between retries for the role.|
 
 ## Data Structure
 
-### ah_collections Variables
+### hub_collections Variables
 
 |Variable Name|Default Value|Required|Type|Description|
 |:---:|:---:|:---:|:---:|:---:|
@@ -71,7 +71,7 @@ This also speeds up the overall role.
 
 ```yaml
 ---
-ah_collections:
+hub_collections:
   - collection_name: cisco.iosxr
     git_url: https://github.com/ansible-collections/cisco.iosxr
 

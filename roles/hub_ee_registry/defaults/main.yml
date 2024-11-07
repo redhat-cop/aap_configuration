@@ -9,7 +9,7 @@
 # These are the default variables specific to the license role
 
 # a list of dictionaries describing the Automation Hub ee repository
-ah_ee_registries: []
+hub_ee_registries: []
 # possible fields:
 #  - name: "registry" # mandatory
 #    url: registry.redhat.io # mandatory
@@ -23,10 +23,10 @@ ah_ee_registries: []
 #    rate_limit: 5
 #    state: present
 
-ah_configuration_ee_registry_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
-ah_configuration_ee_registry_async_timeout: "{{ aap_configuration_async_timeout | default(1000) }}"
-ah_configuration_ee_registry_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
-ah_configuration_ee_registry_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
-ah_configuration_ee_registry_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
+hub_configuration_ee_registry_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
+hub_configuration_ee_registry_async_timeout: "{{ aap_configuration_async_timeout | default(1000) }}"
+hub_configuration_ee_registry_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
+hub_configuration_ee_registry_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
+hub_configuration_ee_registry_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
 aap_configuration_async_dir: null
 ...

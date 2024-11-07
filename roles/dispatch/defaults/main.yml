@@ -43,42 +43,42 @@ gateway_configuration_dispatcher_roles:
     var: aap_user_accounts
     tags: teams
 
-ah_configuration_dispatcher_roles:
+hub_configuration_dispatcher_roles:
   - role: hub_namespace
-    var: ah_namespaces
+    var: hub_namespaces
     tags: namespaces
   - role: hub_collection
-    var: ah_collections
+    var: hub_collections
     tags: collections
   - role: hub_ee_registry
-    var: ah_ee_registries
+    var: hub_ee_registries
     tags: registries
   - role: hub_ee_repository
-    var: ah_ee_repositories
+    var: hub_ee_repositories
     tags: repos
   - role: hub_ee_repository_sync
-    var: ah_ee_repository_sync
+    var: hub_ee_repository_sync
     tags: reposync
   - role: hub_ee_image
-    var: ah_ee_images
+    var: hub_ee_images
     tags: images
   - role: hub_ee_registry
-    var: ah_ee_registries
+    var: hub_ee_registries
     tags: registry
   - role: hub_ee_registry_index
-    var: ah_ee_registries
+    var: hub_ee_registries
     tags: ee_indices
   - role: hub_ee_registry_sync
-    var: ah_ee_registries
+    var: hub_ee_registries
     tags: regsync
   - role: hub_collection_remote
-    var: ah_collection_remotes
+    var: hub_collection_remotes
     tags: collectionremote
   - role: hub_collection_repository
-    var: ah_collection_repositories
+    var: hub_collection_repositories
     tags: collectionsrep
   - role: hub_collection_repository_sync
-    var: ah_collection_repositories
+    var: hub_collection_repositories
     tags: collectionsrepsync
 
 controller_configuration_dispatcher_roles:
@@ -191,7 +191,7 @@ eda_configuration_dispatcher_roles:
 
 aap_configuration_dispatcher_roles: >
   {{ gateway_configuration_dispatcher_roles
-   + ah_configuration_dispatcher_roles
+   + hub_configuration_dispatcher_roles
    + controller_configuration_dispatcher_roles
    + eda_configuration_dispatcher_roles
   }}

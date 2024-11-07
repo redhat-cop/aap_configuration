@@ -23,9 +23,9 @@
   loop_control:
     loop_var: __hub_user_item
     label: "{{ __operation.verb }} the user {{ __hub_user_item.username }} to Hub"
-    pause: "{{ ah_configuration_user_accounts_loop_delay }}"
-  no_log: "{{ ah_configuration_user_secure_logging }}"
-  async: "{{ ah_configuration_user_async_timeout }}"
+    pause: "{{ hub_configuration_user_accounts_loop_delay }}"
+  no_log: "{{ hub_configuration_user_secure_logging }}"
+  async: "{{ hub_configuration_user_async_timeout }}"
   poll: 0
   register: __users_job_async
   changed_when: not __users_job_async.changed
@@ -38,14 +38,14 @@
     jid: "{{ __users_job_async_result_item.ansible_job_id }}"
   register: __users_job_async_result
   until: __users_job_async_result.finished
-  retries: "{{ ah_configuration_user_async_retries }}"
-  delay: "{{ ah_configuration_user_async_delay }}"
+  retries: "{{ hub_configuration_user_async_retries }}"
+  delay: "{{ hub_configuration_user_async_delay }}"
   loop: "{{ __users_job_async.results }}"
   loop_control:
     loop_var: __users_job_async_result_item
     label: "{{ __operation.verb }} User {{ __users_job_async_result_item.__hub_user_item.username }} | Wait for finish the User {{ __operation.action }}"
   when: __users_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_user_secure_logging }}"
+  no_log: "{{ hub_configuration_user_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__users_job_async_result_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'

@@ -12,7 +12,7 @@
 #   when:
 #     - ah_token is not defined
 #     - lookup("ansible.builtin.env", "AH_API_TOKEN") == ""
-#     - ah_collections | length > 1
+#     - hub_collections | length > 1
 
 - name: Update or destroy Automation Hub Collection
   ansible.hub.ah_collection:
@@ -34,13 +34,13 @@
     ah_path_prefix:        "{{ ah_path_prefix | default(omit) }}"
     validate_certs:        "{{ aap_validate_certs | default(omit) }}"
     request_timeout:       "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_collections }}"
+  loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __hub_collection_item
     label: "{{ __operation.verb }} the collection {{ __hub_collection_item.name }} in Hub"
-    pause: "{{ ah_configuration_collection_loop_delay }}"
-  no_log: "{{ ah_configuration_collection_secure_logging }}"
-  async: "{{ ah_configuration_collection_async_timeout }}"
+    pause: "{{ hub_configuration_collection_loop_delay }}"
+  no_log: "{{ hub_configuration_collection_secure_logging }}"
+  async: "{{ hub_configuration_collection_async_timeout }}"
   poll: 0
   register: __collections_job_async
   changed_when: not __collections_job_async.changed
@@ -57,14 +57,14 @@
     jid: "{{ __collections_job_async_result_item.ansible_job_id }}"
   register: __collections_job_async_result
   until: __collections_job_async_result.finished
-  retries: "{{ ah_configuration_collection_async_retries }}"
-  delay: "{{ ah_configuration_collection_async_delay }}"
+  retries: "{{ hub_configuration_collection_async_retries }}"
+  delay: "{{ hub_configuration_collection_async_delay }}"
   loop: "{{ __collections_job_async.results }}"
   loop_control:
     loop_var: __collections_job_async_result_item
     label: "{{ __operation.verb }} Collection {{ __collections_job_async_result_item.__hub_collection_item.name }} | Wait for finish the Collection {{ __operation.action }}"
   when: __collections_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_collection_secure_logging }}"
+  no_log: "{{ hub_configuration_collection_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__collections_job_async_result_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: '{{ aap_configuration_async_dir }}'

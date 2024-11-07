@@ -1,5 +1,5 @@
 ---
-ah_collections:
+hub_collections:
   - collection_name: cisco.iosxr
     git_url: https://github.com/ansible-collections/cisco.iosxr
   - collection_local_path: /var/tmp/tower_configuration

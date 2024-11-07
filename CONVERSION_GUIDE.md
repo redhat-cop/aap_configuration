@@ -86,13 +86,15 @@ ah_configuration vars:
 
 - aap_teams <- ah_groups
 - aap_user_accounts <- ah_users
-- ah_namespaces
-- ah_collections
-- ah_ee_registries
-- ah_ee_repositories
-- ah_ee_images
-- ah_collection_remotes
-- ah_collection_repositories
+- hub_namespaces <- ah_namespaces
+- hub_collections <- ah_collections
+- hub_ee_registries <- ah_ee_registries
+- hub_ee_repositories <- ah_ee_repositories
+- hub_ee_images <- ah_ee_images
+- hub_collection_remotes <- ah_collection_remotes
+- hub_collection_repositories <- ah_collection_repositories
+- hub_group_roles <- ah_group_roles
+- hub_roles <- ah_roles
 
 controller_configuration vars:
 
@@ -175,7 +177,7 @@ controller_configuration_projects_loop_delay
 however
 ah_configuration_collection_repository_async_delay
 is now
-ah_configuration_collection_repository_loop_delay
+hub_configuration_collection_repository_loop_delay
 
 These are the following global variables:
 
@@ -204,7 +206,7 @@ Format:
 - `prefix`+`role_name`+`_loop_delay`
 - `prefix`+`role_name`+`_async_dir`
 
-use these to tweak how the role runs, this is particulary useful for projects syncing, long lists of job templates, and other tasks that can take a while to loop around. These all have defaults, and each global var is described above as to what it does.
+use these to tweak how the role runs, this is particularly useful for projects syncing, long lists of job templates, and other tasks that can take a while to loop around. These all have defaults, and each global var is described above as to what it does.
 
 ## Dispatch changes
 

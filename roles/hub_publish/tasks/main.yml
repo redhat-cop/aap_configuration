@@ -6,11 +6,11 @@
     version:  "{{ __ah_collection_item.version | default(omit) }}"
     key_file: "{{ __ah_collection_item.key_path | default(omit) }}"
     ssh_opts: "{{ __ah_collection_item.ssh_opts | default(omit) }}"
-  loop: "{{ ah_collections }}"
+  loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __ah_collection_item
-    pause: "{{ ah_configuration_publish_loop_delay }}"
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
+    pause: "{{ hub_configuration_publish_loop_delay }}"
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
   when:
     - ah_collection_list is not defined
     - __ah_collection_item.collection_local_path is not defined
@@ -21,10 +21,10 @@
     dest: "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}"
     remote_src: true
     mode: "0755"
-  loop: "{{ ah_collections }}"
+  loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __ah_collection_item
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
   when:
     - ah_collection_list is not defined
     - __ah_collection_item.collection_local_path is defined
@@ -35,17 +35,17 @@
     output_path: "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}"
     force: true
   register: ah_build_results
-  loop: "{{ ah_collections }}"
+  loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __ah_collection_item
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
   when: ah_collection_list is not defined
 
 - name: Find if variable contains file or dir
   ansible.builtin.stat:
     path: "{{ __ah_build_result_item.path }}"
   register: ah_build_stat_results
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
   loop: "{{ ah_build_results.results }}"
   loop_control:
     loop_var: __ah_build_result_item
@@ -56,8 +56,8 @@
   ansible.builtin.find:
     paths:    "{{ (__ah_build_result_item.stat.isdir) | ternary(__ah_build_result_item.stat.path, (__ah_build_result_item.stat.path | dirname)) }}"
     patterns: "{{ (__ah_build_result_item.stat.isdir) | ternary('*.tar.gz', (__ah_build_result_item.stat.path | basename)) }}"
-  register: __ah_collections_find_results
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
+  register: __hub_collections_find_results
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
   loop: "{{ ah_build_stat_results.results }}"
   loop_control:
     loop_var: "__ah_build_result_item"
@@ -65,8 +65,8 @@
 
 - name: Set path for all collections found
   ansible.builtin.set_fact:
-    ah_collection_list: "{{ __ah_collections_find_results.results | map(attribute='files') | flatten | map(attribute='path') | flatten }}"
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
+    ah_collection_list: "{{ __hub_collections_find_results.results | map(attribute='files') | flatten | map(attribute='path') | flatten }}"
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
   when: ah_collection_list is not defined
 
 - name: Get token
@@ -100,8 +100,8 @@
   loop: "{{ ah_collection_list }}"
   loop_control:
     loop_var: "__ah_collection_file"
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
-  async: "{{ ah_configuration_publish_async_timeout }}"
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
+  async: "{{ hub_configuration_publish_async_timeout }}"
   poll: 0
   register: __publish_job_async
   changed_when: not __publish_job_async.changed
@@ -113,13 +113,13 @@
     jid: "{{ __publish_job_async_result_item.ansible_job_id }}"
   register: __publish_job_async_result
   until: __publish_job_async_result.finished
-  retries: "{{ ah_configuration_publish_async_retries }}"
-  delay: "{{ ah_configuration_publish_async_delay }}"
+  retries: "{{ hub_configuration_publish_async_retries }}"
+  delay: "{{ hub_configuration_publish_async_delay }}"
   loop: "{{ __publish_job_async.results }}"
   loop_control:
     loop_var: __publish_job_async_result_item
   when: __publish_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
   vars:
     ansible_async_dir: '{{ aap_configuration_async_dir }}'
 
@@ -138,7 +138,7 @@
   loop: "{{ ah_collection_list }}"
   loop_control:
     loop_var: "__ah_collection_file"
-  no_log: "{{ ah_configuration_publish_secure_logging }}"
+  no_log: "{{ hub_configuration_publish_secure_logging }}"
   when: not ah_auto_approve
   register: approval
   retries: 3

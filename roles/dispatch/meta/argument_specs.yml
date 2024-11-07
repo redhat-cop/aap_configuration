@@ -112,49 +112,49 @@ argument_specs:
           - role: controller_workflow_launch
             var: controller_workflow_launch_jobs
             tags: workflow_launch
-      ah_configuration_dispatcher_roles:
+      hub_configuration_dispatcher_roles:
         default:
-          - role: pah_group
-            var: ah_groups
+          - role: hub_group
+            var: aap_teams
             tags: groups
-          - role: pah_user
+          - role: hub_user
             var: aap_user_accounts
             tags: users
-          - role: pah_namespace
-            var: ah_namespaces
+          - role: hub_namespace
+            var: hub_namespaces
             tags: namespaces
-          - role: pah_collection
-            var: ah_collections
+          - role: hub_collection
+            var: hub_collections
             tags: collections
-          - role: pah_ee_registry
-            var: ah_ee_registries
+          - role: hub_ee_registry
+            var: hub_ee_registries
             tags: registries
-          - role: pah_ee_repository
-            var: ah_ee_repositories
+          - role: hub_ee_repository
+            var: hub_ee_repositories
             tags: repos
-          - role: pah_ee_repository_sync
-            var: ah_ee_repository_sync
+          - role: phub_ee_repository_sync
+            var: hub_ee_repository_sync
             tags: reposync
-          - role: pah_ee_image
-            var: ah_ee_images
+          - role: hub_ee_image
+            var: hub_ee_images
             tags: images
-          - role: pah_ee_registry_index
-            var: ah_ee_registries
+          - role: hub_ee_registry_index
+            var: hub_ee_registries
             tags: indices
-          - role: pah_ee_registry_sync
-            var: ah_ee_registries
+          - role: hub_ee_registry_sync
+            var: hub_ee_registries
             tags: regsync
-          - role: pah_collection_remote
-            var: ah_collection_remotes
+          - role: hub_collection_remote
+            var: hub_collection_remotes
             tags: collectionremote
-          - role: pah_collection_repository
-            var: ah_collection_repositories
+          - role: hub_collection_repository
+            var: hub_collection_repositories
             tags: collectionsrep
-          - role: pah_collection_repository_sync
-            var: ah_collection_repositories
+          - role: hub_collection_repository_sync
+            var: hub_collection_repositories
             tags: collectionsrepsync
-          - role: pah_group_roles
-            var: ah_group_roles
+          - role: hub_group_roles
+            var: hub_group_roles
             tags: group_roles
       eda_configuration_dispatcher_roles:
         default:

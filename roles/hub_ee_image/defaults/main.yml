@@ -9,7 +9,7 @@
 # These are the default variables specific to the license role
 
 # a list of dictionaries describing the Automation Hub execution environment image
-ah_ee_images: []
+hub_ee_images: []
 # possible fields:
 #  - name: name: ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0-15
 #    state: present
@@ -19,10 +19,10 @@ ah_ee_images: []
 #      - "2.0"
 #      - prod1
 
-ah_configuration_ee_image_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
-ah_configuration_ee_image_async_timeout: "{{ aap_configuration_async_timeout | default(1000) }}"
-ah_configuration_ee_image_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
-ah_configuration_ee_image_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
-ah_configuration_ee_image_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
+hub_configuration_ee_image_secure_logging: "{{ aap_configuration_secure_logging | default(false) }}"
+hub_configuration_ee_image_async_timeout: "{{ aap_configuration_async_timeout | default(1000) }}"
+hub_configuration_ee_image_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
+hub_configuration_ee_image_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
+hub_configuration_ee_image_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
 aap_configuration_async_dir: null
 ...

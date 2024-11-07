@@ -3,7 +3,7 @@ argument_specs:
   main:
     short_description: An Ansible Role to create collection remotes in Automation Hub.
     options:
-      ah_collection_remotes:
+      hub_collection_remotes:
         default: []
         required: false
         description: Data structure describing the certified collection remotes to manage.
@@ -29,7 +29,7 @@ argument_specs:
         description: Sets the directory to write the results file for async tasks. The default value is set to  `null` which uses the Ansible Default of `/root/.ansible_async/`.
 
       # No_log variables
-      ah_configuration_collection_remote_secure_logging:
+      hub_configuration_collection_remote_secure_logging:
         default: "{{ aap_configuration_secure_logging | default(false) }}"
         required: false
         type: bool

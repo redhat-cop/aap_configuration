@@ -1,5 +1,5 @@
 ---
-ah_roles:
+hub_roles:
   - name: galaxy.stuff.mcstuffins
     description: test
     perms:
