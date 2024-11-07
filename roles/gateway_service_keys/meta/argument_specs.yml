@@ -23,22 +23,17 @@ argument_specs:
             description: Type of service ("hub", "controller", "eda", "gateway")
             type: str
           algorithm:
-            description: |
-              algorithm to use for this Service Key
+            description: algorithm to use for this Service Key
             choices: [HS256, HS384, HS512]
           secret:
             type: str
-            description: |
-              secret to use for this Service Key
-              required when creating new Service Key, non-editable
+            description: secret to use for this Service Key required when creating new Service Key, non-editable
           secret_length:
             type: int
-            description: |
-              Number of random bytes in the secret
+            description: Number of random bytes in the secret
           mark_previous_inactive:
             type: str
-            description: |
-              If true any other secret keys for this service will become inactive
+            description: If true any other secret keys for this service will become inactive
           state:
             default: "{{ platform_state | default('present') }}"
             required: false
@@ -65,10 +60,7 @@ argument_specs:
       aap_configuration_async_dir:
         default:
         required: false
-        description: >
-          Sets the directory to write the results file for async tasks.
-          The default value is set to `null` which uses the Ansible Default of `~/.ansible_async`.
-
+        description: Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `~/.ansible_async`.
 
       # No_log variables
       gateway_service_keys_secure_logging:
@@ -108,13 +100,11 @@ argument_specs:
       aap_password:
         default: None
         required: false
-        description: Controller Admin User's password on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at vars/controller-secrets.yml
-          or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.
+        description: Controller Admin User's password on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at vars/controller-secrets.yml or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.
         type: str
       aap_token:
         default: None
         required: false
-        description: Controller Admin User's token on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at or elsewhere and called
-          from a parent playbook. Either username / password or oauthtoken need to be specified.
+        description: Controller Admin User's token on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.
         type: str
 ...
