@@ -6,24 +6,13 @@
     description: "{{ __controller_organizations_item.description | default(('' if controller_configuration_organizations_enforce_defaults else omit), true) }}"
     custom_virtualenv: "{{ __controller_organizations_item.custom_virtualenv | default(omit, true) }}"
     max_hosts: "{{ __controller_organizations_item.max_hosts | default((0 if controller_configuration_organizations_enforce_defaults else omit), true) }}"
-    instance_groups: "{{ (__controller_organizations_item.instance_groups | default(([] if controller_configuration_organizations_enforce_defaults else omit), true))
-      if (assign_instance_groups_to_org is defined and assign_instance_groups_to_org) else omit }}"
-    default_environment: "{{ (__controller_organizations_item.default_environment.name | default(__controller_organizations_item.default_environment | default(__controller_organizations_item.execution_environment
-      | default(omit)))) if (assign_default_ee_to_org is defined and assign_default_ee_to_org) else omit }}"
-    galaxy_credentials: "{{ (__controller_organizations_item.galaxy_credentials | default(([] if controller_configuration_organizations_enforce_defaults else omit),
-      true)) if (assign_galaxy_credentials_to_org is defined and assign_galaxy_credentials_to_org) else omit }}"
-    notification_templates_approvals: "{{ (__controller_organizations_item.related.notification_templates_approvals | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_approvals
-      is defined) | default(__controller_organizations_item.notification_templates_approvals) | default(([] if controller_configuration_organizations_enforce_defaults
-      else omit), true) if (assign_notification_templates_to_org is defined and assign_notification_templates_to_org) else omit }}"
-    notification_templates_started: "{{ (__controller_organizations_item.related.notification_templates_started | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_started
-      is defined) | default(__controller_organizations_item.notification_templates_started) | default(([] if controller_configuration_organizations_enforce_defaults
-      else omit), true) if (assign_notification_templates_to_org is defined and assign_notification_templates_to_org) else omit }}"
-    notification_templates_success: "{{ (__controller_organizations_item.related.notification_templates_success | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_success
-      is defined) | default(__controller_organizations_item.notification_templates_success) | default(([] if controller_configuration_organizations_enforce_defaults
-      else omit), true) if (assign_notification_templates_to_org is defined and assign_notification_templates_to_org) else omit }}"
-    notification_templates_error: "{{ (__controller_organizations_item.related.notification_templates_error | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_error
-      is defined) | default(__controller_organizations_item.notification_templates_error) | default(([] if controller_configuration_organizations_enforce_defaults
-      else omit), true) if (assign_notification_templates_to_org is defined and assign_notification_templates_to_org) else omit }}"
+    instance_groups: "{{ (__controller_organizations_item.instance_groups | default(([] if controller_configuration_organizations_enforce_defaults else omit), true))if (assign_instance_groups_to_org is defined and assign_instance_groups_to_org) else omit }}"
+    default_environment: "{{ (__controller_organizations_item.default_environment.name | default(__controller_organizations_item.default_environment | default(__controller_organizations_item.execution_environment | default(omit)))) if (assign_default_ee_to_org is defined and assign_default_ee_to_org) else omit }}"
+    galaxy_credentials: "{{ (__controller_organizations_item.galaxy_credentials | default(([] if controller_configuration_organizations_enforce_defaults else omit), true)) if (assign_galaxy_credentials_to_org is defined and assign_galaxy_credentials_to_org) else omit }}"
+    notification_templates_approvals: "{{ (__controller_organizations_item.related.notification_templates_approvals | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_approvals is defined) | default(__controller_organizations_item.notification_templates_approvals) | default(([] if controller_configuration_organizations_enforce_defaults else omit), true) if (assign_notification_templates_to_org is defined and assign_notification_templates_to_org) else omit }}"
+    notification_templates_started: "{{ (__controller_organizations_item.related.notification_templates_started | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_started is defined) | default(__controller_organizations_item.notification_templates_started) | default(([] if controller_configuration_organizations_enforce_defaults else omit), true) if (assign_notification_templates_to_org is defined and assign_notification_templates_to_org) else omit }}"
+    notification_templates_success: "{{ (__controller_organizations_item.related.notification_templates_success | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_success is defined) | default(__controller_organizations_item.notification_templates_success) | default(([] if controller_configuration_organizations_enforce_defaults else omit), true) if (assign_notification_templates_to_org is defined and assign_notification_templates_to_org) else omit }}"
+    notification_templates_error: "{{ (__controller_organizations_item.related.notification_templates_error | map(attribute='name') | list if __controller_organizations_item.related.notification_templates_error is defined) | default(__controller_organizations_item.notification_templates_error) | default(([] if controller_configuration_organizations_enforce_defaults else omit), true) if (assign_notification_templates_to_org is defined and assign_notification_templates_to_org) else omit }}"
     state: "{{ __controller_organizations_item.state | default(platform_state | default('present')) }}"
 
     # Role Standard Options

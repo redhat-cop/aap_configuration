@@ -2,36 +2,26 @@
 - name: Managing Role Based Access Entries on Controller
   role:
     user: "{{ __controller_role_item.0.user | default(__controller_role_item.user) | default(omit, true) }}"
-    users: "{{ __controller_role_item.0.users | default(__controller_role_item.users) | default(([] if controller_configuration_role_enforce_defaults else omit),
-      true) }}"
+    users: "{{ __controller_role_item.0.users | default(__controller_role_item.users) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     team: "{{ __controller_role_item.0.team | default(__controller_role_item.team) | default(omit, true) }}"
-    teams: "{{ __controller_role_item.0.teams | default(__controller_role_item.teams) | default(([] if controller_configuration_role_enforce_defaults else omit),
-      true) }}"
+    teams: "{{ __controller_role_item.0.teams | default(__controller_role_item.teams) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     role: "{{ __controller_role_item.1 | default(__controller_role_item.role) | mandatory }}"
     target_team: "{{ __controller_role_item.0.target_team | default(__controller_role_item.target_team) | default(omit, true) }}"
-    target_teams: "{{ __controller_role_item.0.target_teams | default(__controller_role_item.target_teams) | default(([] if controller_configuration_role_enforce_defaults
-      else omit), true) }}"
+    target_teams: "{{ __controller_role_item.0.target_teams | default(__controller_role_item.target_teams) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     inventory: "{{ __controller_role_item.0.inventory | default(__controller_role_item.inventory) | default(omit, true) }}"
-    inventories: "{{ __controller_role_item.0.inventories | default(__controller_role_item.inventories) | default(([] if controller_configuration_role_enforce_defaults
-      else omit), true) }}"
+    inventories: "{{ __controller_role_item.0.inventories | default(__controller_role_item.inventories) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     job_template: "{{ __controller_role_item.0.job_template | default(__controller_role_item.job_template) | default(omit, true) }}"
-    job_templates: "{{ __controller_role_item.0.job_templates | default(__controller_role_item.job_templates) | default(([] if controller_configuration_role_enforce_defaults
-      else omit), true) }}"
+    job_templates: "{{ __controller_role_item.0.job_templates | default(__controller_role_item.job_templates) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     workflow: "{{ __controller_role_item.0.workflow | default(__controller_role_item.workflow) | default(omit, true) }}"
-    workflows: "{{ __controller_role_item.0.workflows | default(__controller_role_item.workflows) | default(([] if controller_configuration_role_enforce_defaults
-      else omit), true) }}"
+    workflows: "{{ __controller_role_item.0.workflows | default(__controller_role_item.workflows) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     credential: "{{ __controller_role_item.0.credential | default(__controller_role_item.credential) | default(omit, true) }}"
-    credentials: "{{ __controller_role_item.0.credentials | default(__controller_role_item.credentials) | default(([] if controller_configuration_role_enforce_defaults
-      else omit), true) }}"
+    credentials: "{{ __controller_role_item.0.credentials | default(__controller_role_item.credentials) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     organization: "{{ __controller_role_item.0.organization | default(__controller_role_item.organization) | default(omit, true) }}"
-    organizations: "{{ __controller_role_item.0.organizations | default(__controller_role_item.organizations) | default(([] if controller_configuration_role_enforce_defaults
-      else omit), true) }}"
+    organizations: "{{ __controller_role_item.0.organizations | default(__controller_role_item.organizations) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     lookup_organization: "{{ __controller_role_item.0.lookup_organization | default(__controller_role_item.lookup_organization) | default(omit, true) }}"
     project: "{{ __controller_role_item.0.project | default(__controller_role_item.project) | default(omit, true) }}"
-    projects: "{{ __controller_role_item.0.projects | default(__controller_role_item.projects) | default(([] if controller_configuration_role_enforce_defaults else
-      omit), true) }}"
-    instance_groups: "{{ __controller_role_item.0.instance_groups | default(__controller_role_item.instance_groups) | default(([] if controller_configuration_role_enforce_defaults
-      else omit), true) }}"
+    projects: "{{ __controller_role_item.0.projects | default(__controller_role_item.projects) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
+    instance_groups: "{{ __controller_role_item.0.instance_groups | default(__controller_role_item.instance_groups) | default(([] if controller_configuration_role_enforce_defaults else omit), true) }}"
     state: "{{ __controller_role_item.0.state | default(__controller_role_item.state) | default(platform_state | default('present')) }}"
 
     # Role Standard Options

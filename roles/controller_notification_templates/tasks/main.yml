@@ -7,10 +7,8 @@
     description: "{{ __controller_notification_item.description | default(('' if controller_configuration_notifications_enforce_defaults else omit), true) }}"
     organization: "{{ __controller_notification_item.organization.name | default(__controller_notification_item.organization) | mandatory }}"
     notification_type: "{{ __controller_notification_item.notification_type | default(omit, true) | mandatory }}"
-    notification_configuration: "{{ __controller_notification_item.notification_configuration | default(({} if controller_configuration_notifications_enforce_defaults
-      else omit), true) }}"
-    messages: "{{ __controller_notification_item.messages | default(({} if controller_configuration_notifications_enforce_defaults else omit), true) | regex_replace('{\
-      \  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
+    notification_configuration: "{{ __controller_notification_item.notification_configuration | default(({} if controller_configuration_notifications_enforce_defaults else omit), true) }}"
+    messages: "{{ __controller_notification_item.messages | default(({} if controller_configuration_notifications_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
     state: "{{ __controller_notification_item.state | default(platform_state | default('present')) }}"
 
     # Role Standard Options

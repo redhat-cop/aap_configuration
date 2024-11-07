@@ -4,8 +4,7 @@
 - name: Use manifest file
   ansible.builtin.include_tasks: manifest.yml
   when:
-    - controller_license.manifest_file is defined or controller_license.manifest is defined or controller_license.manifest_content is defined or controller_license.manifest_url
-      is defined
+    - controller_license.manifest_file is defined or controller_license.manifest is defined or controller_license.manifest_content is defined or controller_license.manifest_url is defined
 
 - name: Use subscription pool id or subscription lookup
   ansible.builtin.include_tasks: subscription.yml

@@ -9,13 +9,11 @@
     inventory: "{{ __controller_schedule_item.inventory | default(('' if controller_configuration_schedules_enforce_defaults else omit), true) }}"
     credentials: "{{ __controller_schedule_item.credentials | default(omit, true) }}"
     scm_branch: "{{ __controller_schedule_item.scm_branch | default(('' if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-    execution_environment: "{{ __controller_schedule_item.execution_environment.name | default(__controller_schedule_item.execution_environment | default(('' if controller_configuration_schedules_enforce_defaults
-      else omit), true)) }}"
+    execution_environment: "{{ __controller_schedule_item.execution_environment.name | default(__controller_schedule_item.execution_environment | default(('' if controller_configuration_schedules_enforce_defaults else omit), true)) }}"
     forks: "{{ __controller_schedule_item.forks | default(omit, true) }}"
     instance_groups: "{{ __controller_schedule_item.instance_groups | default(omit, true) }}"
     job_slice_count: "{{ __controller_schedule_item.job_slice_count | default((1 if controller_configuration_schedules_enforce_defaults else omit), true) }}"
-    labels: "{{ (__controller_schedule_item.related.labels | map(attribute='name') | list if __controller_schedule_item.related.labels is defined) | default(__controller_schedule_item.labels)
-      | default(([] if controller_configuration_schedules_enforce_defaults else omit), true) }}"
+    labels: "{{ (__controller_schedule_item.related.labels | map(attribute='name') | list if __controller_schedule_item.related.labels is defined) | default(__controller_schedule_item.labels) | default(([] if controller_configuration_schedules_enforce_defaults else omit), true) }}"
     timeout: "{{ __controller_schedule_item.timeout | default(omit, true) }}"
     job_type: "{{ __controller_schedule_item.job_type | default(omit, true) }}"
     job_tags: "{{ __controller_schedule_item.job_tags | default(('' if controller_configuration_schedules_enforce_defaults else omit), true) }}"

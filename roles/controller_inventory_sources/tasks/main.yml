@@ -5,12 +5,10 @@
     new_name: "{{ __controller_source_item.new_name | default(omit, true) }}"
     description: "{{ __controller_source_item.description | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
     inventory: "{{ __controller_source_item.inventory.name | default(__controller_source_item.inventory) | mandatory }}"
-    organization: "{{ __controller_source_item.inventory.organization.name | default(__controller_source_item.organization | default(('' if controller_configuration_inventory_sources_enforce_defaults
-      else omit), true)) }}"
+    organization: "{{ __controller_source_item.inventory.organization.name | default(__controller_source_item.organization | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true)) }}"
     source: "{{ __controller_source_item.source | default(('scm' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
     source_path: "{{ __controller_source_item.source_path | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    source_vars: "{{ __controller_source_item.source_vars | default(({} if controller_configuration_inventory_sources_enforce_defaults else omit), true) | regex_replace('{\
-      \  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
+    source_vars: "{{ __controller_source_item.source_vars | default(({} if controller_configuration_inventory_sources_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
     enabled_var: "{{ __controller_source_item.enabled_var | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
     enabled_value: "{{ __controller_source_item.enabled_value | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
     host_filter: "{{ __controller_source_item.host_filter | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
@@ -20,25 +18,16 @@
     overwrite: "{{ __controller_source_item.overwrite | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
     overwrite_vars: "{{ __controller_source_item.overwrite_vars | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
     custom_virtualenv: "{{ __controller_source_item.custom_virtualenv | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
-    timeout: "{{ __controller_source_item.timeout | default(0, true) if __controller_source_item.timeout is defined or controller_configuration_inventory_sources_enforce_defaults
-      else omit }}"
+    timeout: "{{ __controller_source_item.timeout | default(0, true) if __controller_source_item.timeout is defined or controller_configuration_inventory_sources_enforce_defaults else omit }}"
     verbosity: "{{ __controller_source_item.verbosity | default((1 if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
     update_on_launch: "{{ __controller_source_item.update_on_launch | default((false if controller_configuration_inventory_sources_enforce_defaults else omit)) }}"
-    update_cache_timeout: "{{ __controller_source_item.update_cache_timeout | default(0, true) if __controller_source_item.update_cache_timeout is defined or controller_configuration_inventory_sources_enforce_defaults
-      else omit }}"
-    source_project: "{{ __controller_source_item.source_project.name | default(__controller_source_item.source_project | default(('' if controller_configuration_inventory_sources_enforce_defaults
-      else omit), true)) }}"
+    update_cache_timeout: "{{ __controller_source_item.update_cache_timeout | default(0, true) if __controller_source_item.update_cache_timeout is defined or controller_configuration_inventory_sources_enforce_defaults else omit }}"
+    source_project: "{{ __controller_source_item.source_project.name | default(__controller_source_item.source_project | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true)) }}"
     scm_branch: "{{ __controller_source_item.scm_branch | default(('' if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
     state: "{{ __controller_source_item.state | default(platform_state | default('present')) }}"
-    notification_templates_started: "{{ (__controller_source_item.related.notification_templates_started | map(attribute='name') | list if __controller_source_item.related.notification_templates_started
-      is defined) | default(__controller_source_item.notification_templates_started) | default(([] if controller_configuration_inventory_sources_enforce_defaults
-      else omit), true) }}"
-    notification_templates_success: "{{ (__controller_source_item.related.notification_templates_success | map(attribute='name') | list if __controller_source_item.related.notification_templates_success
-      is defined) | default(__controller_source_item.notification_templates_success) | default(([] if controller_configuration_inventory_sources_enforce_defaults
-      else omit), true) }}"
-    notification_templates_error: "{{ (__controller_source_item.related.notification_templates_error | map(attribute='name') | list if __controller_source_item.related.notification_templates_error
-      is defined) | default(__controller_source_item.notification_templates_error) | default(([] if controller_configuration_inventory_sources_enforce_defaults else
-      omit), true) }}"
+    notification_templates_started: "{{ (__controller_source_item.related.notification_templates_started | map(attribute='name') | list if __controller_source_item.related.notification_templates_started is defined) | default(__controller_source_item.notification_templates_started) | default(([] if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    notification_templates_success: "{{ (__controller_source_item.related.notification_templates_success | map(attribute='name') | list if __controller_source_item.related.notification_templates_success is defined) | default(__controller_source_item.notification_templates_success) | default(([] if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
+    notification_templates_error: "{{ (__controller_source_item.related.notification_templates_error | map(attribute='name') | list if __controller_source_item.related.notification_templates_error is defined) | default(__controller_source_item.notification_templates_error) | default(([] if controller_configuration_inventory_sources_enforce_defaults else omit), true) }}"
 
     # Role Standard Options
     controller_host: "{{ aap_hostname | default(omit, true) }}"

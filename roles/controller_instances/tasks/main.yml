@@ -10,8 +10,7 @@
     node_state: "{{ __controller_instance_item.node_state | default(omit, true) }}"
     listener_port: "{{ __controller_instance_item.listener_port | default((27199 if controller_configuration_instances_enforce_defaults else omit), true) }}"
     peers: "{{ __controller_instance_item.peers | default(([] if controller_configuration_instances_enforce_defaults else omit), true) }}"
-    peers_from_control_nodes: "{{ __controller_instance_item.peers_from_control_nodes | default((false if controller_configuration_instances_enforce_defaults else
-      omit), true) }}"
+    peers_from_control_nodes: "{{ __controller_instance_item.peers_from_control_nodes | default((false if controller_configuration_instances_enforce_defaults else omit), true) }}"
 
     # Role Standard Options
     controller_username: "{{ aap_username | default(omit, true) }}"

@@ -8,12 +8,10 @@
     organization: "{{ __controller_inventory_item.organization.name | default(__controller_inventory_item.organization) | mandatory }}"
     instance_groups: "{{ __controller_inventory_item.instance_groups | default(([] if controller_configuration_inventories_enforce_defaults else omit), true) }}"
     input_inventories: "{{ __controller_inventory_item.input_inventories | default(([] if controller_configuration_inventories_enforce_defaults else omit), true) }}"
-    variables: "{{ __controller_inventory_item.variables | default(({} if controller_configuration_inventories_enforce_defaults else omit), true) | regex_replace('{\
-      \  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
+    variables: "{{ __controller_inventory_item.variables | default(({} if controller_configuration_inventories_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
     kind: "{{ __controller_inventory_item.kind | default(('' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
     host_filter: "{{ __controller_inventory_item.host_filter | default(('' if controller_configuration_inventories_enforce_defaults else omit), true) }}"
-    prevent_instance_group_fallback: "{{ __controller_inventory_item.prevent_instance_group_fallback | default((false if controller_configuration_inventories_enforce_defaults
-      else omit), true) }}"
+    prevent_instance_group_fallback: "{{ __controller_inventory_item.prevent_instance_group_fallback | default((false if controller_configuration_inventories_enforce_defaults else omit), true) }}"
     state: "{{ __controller_inventory_item.state | default(platform_state | default('present')) }}"
 
     # Role Standard Options

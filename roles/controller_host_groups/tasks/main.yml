@@ -7,13 +7,11 @@
     new_name: "{{ __controller_groups_item.new_name | default(omit, true) }}"
     description: "{{ __controller_groups_item.description | default(('' if controller_configuration_groups_enforce_defaults else omit), true) }}"
     inventory: "{{ __controller_groups_item.inventory | mandatory }}"
-    variables: "{{ __controller_groups_item.variables | default(({} if controller_configuration_groups_enforce_defaults else omit), true) | regex_replace('{  {',
-      '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
+    variables: "{{ __controller_groups_item.variables | default(({} if controller_configuration_groups_enforce_defaults else omit), true) | regex_replace('{  {', '{_~~remove~~_{') | regex_replace('_~~remove~~_', '') }}"
     hosts: "{{ __controller_groups_item.hosts | default(([] if controller_configuration_groups_enforce_defaults else omit), true) }}"
     children: "{{ __controller_groups_item.children | default(([] if controller_configuration_groups_enforce_defaults else omit), true) }}"
     preserve_existing_hosts: "{{ __controller_groups_item.preserve_existing_hosts | default((false if controller_configuration_groups_enforce_defaults else omit)) }}"
-    preserve_existing_children: "{{ __controller_groups_item.preserve_existing_children | default((false if controller_configuration_groups_enforce_defaults else
-      omit)) }}"
+    preserve_existing_children: "{{ __controller_groups_item.preserve_existing_children | default((false if controller_configuration_groups_enforce_defaults else omit)) }}"
     state: "{{ __controller_groups_item.state | default(platform_state | default('present')) }}"
 
     # Role Standard Options

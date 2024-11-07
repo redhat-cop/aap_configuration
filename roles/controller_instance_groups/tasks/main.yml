@@ -4,20 +4,13 @@
     name: "{{ __controller_instance_group_item.name | mandatory }}"
     new_name: "{{ __controller_instance_group_item.new_name | default(omit, true) }}"
     credential: "{{ __controller_instance_group_item.credential | default(('' if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
-    is_container_group: "{{ __controller_instance_group_item.is_container_group | default((false if controller_configuration_instance_groups_enforce_defaults else
-      omit), true) }}"
-    policy_instance_percentage: "{{ __controller_instance_group_item.policy_instance_percentage | default(0, true) if __controller_instance_group_item.policy_instance_percentage
-      is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
-    policy_instance_minimum: "{{ __controller_instance_group_item.policy_instance_minimum | default(0, true) if __controller_instance_group_item.policy_instance_minimum
-      is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
-    policy_instance_list: "{{ __controller_instance_group_item.policy_instance_list | default(([] if controller_configuration_instance_groups_enforce_defaults else
-      omit), true) }}"
-    max_concurrent_jobs: "{{ __controller_instance_group_item.max_concurrent_jobs | default(0, true) if __controller_instance_group_item.max_concurrent_jobs is defined
-      or controller_configuration_instance_groups_enforce_defaults else omit }}"
-    max_forks: "{{ __controller_instance_group_item.max_forks | default(0, true) if __controller_instance_group_item.max_forks is defined or controller_configuration_instance_groups_enforce_defaults
-      else omit }}"
-    pod_spec_override: "{{ __controller_instance_group_item.pod_spec_override | default(('' if controller_configuration_instance_groups_enforce_defaults else omit),
-      true) }}"
+    is_container_group: "{{ __controller_instance_group_item.is_container_group | default((false if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
+    policy_instance_percentage: "{{ __controller_instance_group_item.policy_instance_percentage | default(0, true) if __controller_instance_group_item.policy_instance_percentage is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
+    policy_instance_minimum: "{{ __controller_instance_group_item.policy_instance_minimum | default(0, true) if __controller_instance_group_item.policy_instance_minimum is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
+    policy_instance_list: "{{ __controller_instance_group_item.policy_instance_list | default(([] if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
+    max_concurrent_jobs: "{{ __controller_instance_group_item.max_concurrent_jobs | default(0, true) if __controller_instance_group_item.max_concurrent_jobs is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
+    max_forks: "{{ __controller_instance_group_item.max_forks | default(0, true) if __controller_instance_group_item.max_forks is defined or controller_configuration_instance_groups_enforce_defaults else omit }}"
+    pod_spec_override: "{{ __controller_instance_group_item.pod_spec_override | default(('' if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
     instances: "{{ __controller_instance_group_item.instances | default(([] if controller_configuration_instance_groups_enforce_defaults else omit), true) }}"
     state: "{{ __controller_instance_group_item.state | default(platform_state | default('present')) }}"
 

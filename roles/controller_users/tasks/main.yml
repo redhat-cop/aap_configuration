@@ -10,10 +10,8 @@
     email: "{{ __controller_user_accounts_item.email | default(omit, true) }}"
     first_name: "{{ __controller_user_accounts_item.firstname | default(__controller_user_accounts_item.first_name | default(omit, true)) }}"
     last_name: "{{ __controller_user_accounts_item.lastname | default(__controller_user_accounts_item.last_name | default(omit, true)) }}"
-    is_superuser: "{{ __controller_user_accounts_item.is_superuser | default(__controller_user_accounts_item.superuser | default((false if controller_configuration_users_enforce_defaults
-      else omit))) }}"
-    is_system_auditor: "{{ __controller_user_accounts_item.is_auditor | default(__controller_user_accounts_item.is_system_auditor | default((false if controller_configuration_users_enforce_defaults
-      else omit))) }}"
+    is_superuser: "{{ __controller_user_accounts_item.is_superuser | default(__controller_user_accounts_item.superuser | default((false if controller_configuration_users_enforce_defaults else omit))) }}"
+    is_system_auditor: "{{ __controller_user_accounts_item.is_auditor | default(__controller_user_accounts_item.is_system_auditor | default((false if controller_configuration_users_enforce_defaults else omit))) }}"
     update_secrets: "{{ __controller_user_accounts_item.update_secrets | default((false if controller_configuration_users_enforce_defaults else omit)) }}"
     organization: "{{ __controller_user_accounts_item.organization | default(omit) }}"
     state: "{{ __controller_user_accounts_item.state | default(platform_state | default(omit, true)) }}"

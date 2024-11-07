@@ -12,8 +12,7 @@
     limit: "{{ __workflow_loop_node_item.limit | default(omit, true) }}"
     diff_mode: "{{ __workflow_loop_node_item.diff_mode | default(omit) }}"
     verbosity: "{{ __workflow_loop_node_item.verbosity | default(omit, true) }}"
-    credentials: "{{ __workflow_loop_node_item.credentials | default(__workflow_loop_node_item.related.credentials | default([]) | map(attribute='name') | list) |
-      default(omit, true) }}"
+    credentials: "{{ __workflow_loop_node_item.credentials | default(__workflow_loop_node_item.related.credentials | default([]) | map(attribute='name') | list) | default(omit, true) }}"
     workflow_job_template: "{{ __workflow_loop_node_item.workflow_job_template.name | default(__workflow_loop_node_item.workflow_job_template | default(omit, true)) }}"
     unified_job_template: "{{ __workflow_loop_node_item.unified_job_template.name | default(__workflow_loop_node_item.unified_job_template | default(omit, true)) }}" # Run Job template
     lookup_organization: "{{ __workflow_loop_node_item.lookup_organization | default(omit, true) }}"
@@ -21,8 +20,7 @@
     forks: "{{ __workflow_loop_node_item.forks | default(omit, true) }}"
     instance_groups: "{{ __workflow_loop_node_item.instance_groups | default(omit, true) }}"
     job_slice_count: "{{ __workflow_loop_node_item.job_slice_count | default(omit, true) }}"
-    labels: "{{ __workflow_loop_node_item.labels | default(__workflow_loop_node_item.related.labels | default([]) | map(attribute='name') | list if __workflow_loop_node_item.related.labels
-      is defined else omit) }}"
+    labels: "{{ __workflow_loop_node_item.labels | default(__workflow_loop_node_item.related.labels | default([]) | map(attribute='name') | list if __workflow_loop_node_item.related.labels is defined else omit) }}"
     timeout: "{{ __workflow_loop_node_item.timeout | default(omit, true) }}"
     approval_node: "{{ __workflow_loop_node_item.approval_node | default(omit, true) }}"
     workflow: "{{ __workflow_loop_item.name | mandatory }}" # Workflow job template name to associate with

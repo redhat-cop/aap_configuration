@@ -6,8 +6,7 @@
     new_name: "{{ __execution_environments_item.new_name | default(omit, true) }}"
     description: "{{ __execution_environments_item.description | default(('' if controller_configuration_execution_environments_enforce_defaults else omit), true) }}"
     image: "{{ __execution_environments_item.image | mandatory }}"
-    organization: "{{ __execution_environments_item.organization.name | default(__execution_environments_item.organization | default(('' if controller_configuration_execution_environments_enforce_defaults
-      else omit), true)) }}"
+    organization: "{{ __execution_environments_item.organization.name | default(__execution_environments_item.organization | default(('' if controller_configuration_execution_environments_enforce_defaults else omit), true)) }}"
     credential: "{{ __execution_environments_item.credential | default(('' if controller_configuration_execution_environments_enforce_defaults else omit), true) }}"
     pull: "{{ __execution_environments_item.pull | default(('missing' if controller_configuration_execution_environments_enforce_defaults else omit), true) }}"
     state: "{{ __execution_environments_item.state | default(platform_state | default('present')) }}"
