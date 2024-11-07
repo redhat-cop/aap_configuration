@@ -9,7 +9,7 @@
 # These are the default variables specific to the license role
 
 # a list of dictionaries describing the Automation Hub execution environment image
-ah_ee_images: []
+hub_ee_images: []
 # possible fields:
 #  - name: name: ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0-15
 #    state: present

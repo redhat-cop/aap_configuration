@@ -12,7 +12,7 @@
 #   when:
 #     - ah_token is not defined
 #     - lookup("ansible.builtin.env", "AH_API_TOKEN") == ""
-#     - ah_collections | length > 1
+#     - hub_collections | length > 1
 
 - name: Update or destroy Automation Hub Collection
   ansible.hub.ah_collection:
@@ -34,7 +34,7 @@
     ah_path_prefix:        "{{ ah_path_prefix | default(omit) }}"
     validate_certs:        "{{ aap_validate_certs | default(omit) }}"
     request_timeout:       "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_collections }}"
+  loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __hub_collection_item
     label: "{{ __operation.verb }} the collection {{ __hub_collection_item.name }} in Hub"

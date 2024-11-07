@@ -33,7 +33,7 @@
     ah_path_prefix:           "{{ ah_path_prefix | default(omit) }}"
     validate_certs:           "{{ aap_validate_certs | default(omit) }}"
     request_timeout:          "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_collection_remotes }}"
+  loop: "{{ hub_collection_remotes }}"
   loop_control:
     loop_var: "__hub_collection_remote_item"
     label: "{{ __operation.verb }} the collection remote {{ __hub_collection_remote_item.name }} in Hub"

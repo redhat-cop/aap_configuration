@@ -1,5 +1,5 @@
 ---
-ah_collection_repositories:
+hub_collection_repositories:
   - name: "foobar"
     description: "description of foobar repository"
     pulp_labels:

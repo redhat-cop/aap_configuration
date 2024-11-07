@@ -14,7 +14,7 @@
     ah_path_prefix:   "{{ ah_path_prefix | default(omit) }}"
     validate_certs:   "{{ aap_validate_certs | default(omit) }}"
     request_timeout:  "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_ee_images }}"
+  loop: "{{ hub_ee_images }}"
   loop_control:
     loop_var: __ee_image_item
     label: "{{ __operation.verb }} the EE image {{ __ee_image_item.name }} in Hub"

@@ -15,7 +15,7 @@ An Ansible Role to create execution environment images in Automation Hub.
 |`aap_request_timeout`|`10`|no|Specify the timeout Ansible should use in requests to the Galaxy or Automation Hub host.||
 |`ah_path_prefix`|""|no|API path used to access the api. Either galaxy, automation-hub, or custom||
 |`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.||
-|`ah_ee_images`|`see below`|yes|Data structure describing your execution environment images, described below.||
+|`hub_ee_images`|`see below`|yes|Data structure describing your execution environment images, described below.||
 
 ### Secure Logging Variables
 
@@ -64,7 +64,7 @@ This also speeds up the overall role.
 
 ```yaml
 ---
-ah_ee_images:
+hub_ee_images:
   - name: ansible-automation-platform-20-early-access/ee-supported-rhel8:2.0.0-15
     state: present
     append: false

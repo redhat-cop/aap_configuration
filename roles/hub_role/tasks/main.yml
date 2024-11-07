@@ -13,7 +13,7 @@
     ah_path_prefix:   "{{ ah_path_prefix | default(omit) }}"
     validate_certs:   "{{ aap_validate_certs | default(omit) }}"
     request_timeout:  "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_roles }}"
+  loop: "{{ hub_roles }}"
   loop_control:
     loop_var: __hub_role_item
     label: "{{ __operation.verb }} the Role {{ __hub_role_item.name }} to Hub"

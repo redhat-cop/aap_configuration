@@ -6,7 +6,7 @@
     version:  "{{ __ah_collection_item.version | default(omit) }}"
     key_file: "{{ __ah_collection_item.key_path | default(omit) }}"
     ssh_opts: "{{ __ah_collection_item.ssh_opts | default(omit) }}"
-  loop: "{{ ah_collections }}"
+  loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __ah_collection_item
     pause: "{{ ah_configuration_publish_loop_delay }}"
@@ -21,7 +21,7 @@
     dest: "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}"
     remote_src: true
     mode: "0755"
-  loop: "{{ ah_collections }}"
+  loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __ah_collection_item
   no_log: "{{ ah_configuration_publish_secure_logging }}"
@@ -35,7 +35,7 @@
     output_path: "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}"
     force: true
   register: ah_build_results
-  loop: "{{ ah_collections }}"
+  loop: "{{ hub_collections }}"
   loop_control:
     loop_var: __ah_collection_item
   no_log: "{{ ah_configuration_publish_secure_logging }}"
@@ -56,7 +56,7 @@
   ansible.builtin.find:
     paths:    "{{ (__ah_build_result_item.stat.isdir) | ternary(__ah_build_result_item.stat.path, (__ah_build_result_item.stat.path | dirname)) }}"
     patterns: "{{ (__ah_build_result_item.stat.isdir) | ternary('*.tar.gz', (__ah_build_result_item.stat.path | basename)) }}"
-  register: __ah_collections_find_results
+  register: __hub_collections_find_results
   no_log: "{{ ah_configuration_publish_secure_logging }}"
   loop: "{{ ah_build_stat_results.results }}"
   loop_control:
@@ -65,7 +65,7 @@
 
 - name: Set path for all collections found
   ansible.builtin.set_fact:
-    ah_collection_list: "{{ __ah_collections_find_results.results | map(attribute='files') | flatten | map(attribute='path') | flatten }}"
+    ah_collection_list: "{{ __hub_collections_find_results.results | map(attribute='files') | flatten | map(attribute='path') | flatten }}"
   no_log: "{{ ah_configuration_publish_secure_logging }}"
   when: ah_collection_list is not defined
 

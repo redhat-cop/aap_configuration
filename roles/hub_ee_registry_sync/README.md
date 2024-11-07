@@ -15,7 +15,7 @@ An Ansible Role to sync EE Registries in Automation Hub.
 |`aap_request_timeout`|`10`|no|Specify the timeout Ansible should use in requests to the Galaxy or Automation Hub host.||
 |`ah_path_prefix`|""|no|API path used to access the api. Either galaxy, automation-hub, or custom||
 |`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.||
-|`ah_ee_registries`|`see below`|yes|Data structure describing your ee_registries, described below. (Note this is the same as for the `ee_registries` role and the variable can be combined. Note that this role will only do anything if the `sync` suboption of this variable is set to true.||
+|`hub_ee_registries`|`see below`|yes|Data structure describing your ee_registries, described below. (Note this is the same as for the `ee_registries` role and the variable can be combined. Note that this role will only do anything if the `sync` suboption of this variable is set to true.||
 
 ### Secure Logging Variables
 
@@ -65,7 +65,7 @@ This also speeds up the overall role.
 
 ```yaml
 ---
-ah_ee_registries:
+hub_ee_registries:
   - name: myreg
     url: https://quay.io/my/registry
     interval: 10

@@ -18,7 +18,7 @@ An Ansible Role to create EE Registries in Automation Hub.
 |`proxy_url`|""|no|str|The URL for the proxy. Defaults to global `proxy_url` variable.|
 |`proxy_username`|""|no|str|The username for the proxy authentication. Defaults to global `proxy_username` variable.|
 |`proxy_password`|""|no|str|The password for the proxy authentication. Defaults to global `proxy_password` variable.|
-|`ah_ee_registries`|`see below`|yes|Data structure describing your ee_registries, described below.||
+|`hub_ee_registries`|`see below`|yes|Data structure describing your ee_registries, described below.||
 
 ### Secure Logging Variables
 
@@ -72,7 +72,7 @@ This also speeds up the overall role.
 
 ```yaml
 ---
-ah_ee_registries:
+hub_ee_registries:
   - name: myreg
     url: https://quay.io/my/registry
 ```

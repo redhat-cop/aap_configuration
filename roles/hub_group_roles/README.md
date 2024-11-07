@@ -15,7 +15,7 @@ An Ansible Role to add roles to groups in Automation Hub.
 |`aap_request_timeout`|`10`|no|Specify the timeout Ansible should use in requests to the Galaxy or Automation Hub host.||
 |`ah_path_prefix`|""|no|API path used to access the api. Either galaxy, automation-hub, or custom||
 |`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.||
-|`ah_group_roles`|`see below`|yes|Data structure describing the roles which are applied to groups, described below.||
+|`hub_group_roles`|`see below`|yes|Data structure describing the roles which are applied to groups, described below.||
 
 ### Secure Logging Variables
 
@@ -87,7 +87,7 @@ Targets consist of the following.
 
 ```yaml
 ---
-ah_group_roles:
+hub_group_roles:
   - state: present
     groups:
       - santa

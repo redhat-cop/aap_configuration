@@ -3,7 +3,7 @@ argument_specs:
   main:
     short_description: An Ansible Role to create groups roles in Automation Hub.
     options:
-      ah_group_roles:
+      hub_group_roles:
         default: []
         required: false
         description: Data structure describing your groups roles to manage.

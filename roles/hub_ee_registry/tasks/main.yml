@@ -20,7 +20,7 @@
     proxy_url:              "{{ __hub_ee_registry_item.proxy_url | default(proxy_url | default(omit)) }}"
     proxy_username:         "{{ __hub_ee_registry_item.proxy_username | default(proxy_username | default(omit)) }}"
     proxy_password:         "{{ __hub_ee_registry_item.proxy_password | default(proxy_password | default(omit)) }}"
-  loop: "{{ ah_ee_registries }}"
+  loop: "{{ hub_ee_registries }}"
   loop_control:
     loop_var: __hub_ee_registry_item
     label: "{{ __operation.verb }} the EE registry {{ __hub_ee_registry_item.name }} in Hub"

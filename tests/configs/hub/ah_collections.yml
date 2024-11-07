@@ -1,5 +1,5 @@
 ---
-ah_collections:
+hub_collections:
   - namespace: infra
     name: galaxy
     path: "/home/runner/work/{{ git_repo_name }}/{{ git_repo_name }}/infra-aap_configuration-1.0.0.tar.gz"
@@ -15,7 +15,7 @@ ah_collections:
     auto_approve: true
     timeout: 180
 
-ah_collections_overwrite:
+hub_collections_overwrite:
   - namespace: infra
     name: galaxy
     path: "/home/runner/work/{{ git_repo_name }}/{{ git_repo_name }}/infra-aap_configuration-1.0.0.tar.gz"
@@ -25,7 +25,7 @@ ah_collections_overwrite:
     timeout: 180
     overwrite_existing: true
 
-ah_collections_delete:
+hub_collections_delete:
   - namespace: galaxy
     name: galaxy
     state: absent

@@ -15,7 +15,7 @@ An Ansible Role to create a Collection Remote Repository.
 |`aap_request_timeout`|`10`|no|Specify the timeout Ansible should use in requests to the Galaxy or Automation Hub host.||
 |`ah_path_prefix`|""|no|API path used to access the api. Either galaxy, automation-hub, or custom||
 |`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.||
-|`ah_collection_remotes`|`see below`|yes|Data structure describing your collection remote repository, described below.||
+|`hub_collection_remotes`|`see below`|yes|Data structure describing your collection remote repository, described below.||
 
 The `aap_configuration_async_dir` variable sets the directory to write the results file for async tasks.
 The default value is set to  `null` which uses the Ansible Default of `/root/.ansible_async/`.
@@ -89,7 +89,7 @@ This also speeds up the overall role.
 
 ```yaml
 ---
-ah_collection_remotes:
+hub_collection_remotes:
   - name: community-infra
     url: https://beta-galaxy.ansible.com/
     requirements:

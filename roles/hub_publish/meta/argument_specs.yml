@@ -18,7 +18,7 @@ argument_specs:
         type: bool
         required: false
         description: Whether the collection will be automatically overwrite an existing collection in Automation Hub. This will only work if the account being used has correct privileges.
-      ah_collections:
+      hub_collections:
         default: []
         required: false
         description: Data structure describing your collections, mutually exclusive to ah_collection_list
@@ -27,7 +27,7 @@ argument_specs:
       ah_collection_list:
         default: []
         required: false
-        description: Data structure file paths to pre built collections, mutually exclusive with ah_collections.
+        description: Data structure file paths to pre built collections, mutually exclusive with hub_collections.
         type: list
         elements: str
 

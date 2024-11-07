@@ -9,7 +9,7 @@
 # These are the default variables specific to the license role
 
 # a list of dictionaries describing the Automation Hub namespace
-ah_namespaces: []
+hub_namespaces: []
 # possible fields:
 #  - name: "namespace_name" # mandatory
 #    company: Redhat

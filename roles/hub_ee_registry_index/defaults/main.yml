@@ -9,7 +9,7 @@
 # These are the default variables specific to the license role
 
 # a list of dictionaries describing the Automation Hub ee repository
-ah_ee_registries: []
+hub_ee_registries: []
 # possible fields:
 #  - name: "registry_name" # mandatory
 #    interval: 1

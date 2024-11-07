@@ -1,5 +1,5 @@
 ---
-ah_ee_images:
+hub_ee_images:
   - name: config_as_code_ee
     state: present
     append: false

@@ -1,5 +1,5 @@
 ---
-ah_namespaces:
+hub_namespaces:
   - name: community_test
     company: Community Test
     email: user@example.com

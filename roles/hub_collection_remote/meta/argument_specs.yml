@@ -3,7 +3,7 @@ argument_specs:
   main:
     short_description: An Ansible Role to create collection remotes in Automation Hub.
     options:
-      ah_collection_remotes:
+      hub_collection_remotes:
         default: []
         required: false
         description: Data structure describing the certified collection remotes to manage.

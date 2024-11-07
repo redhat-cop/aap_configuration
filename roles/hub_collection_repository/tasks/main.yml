@@ -20,7 +20,7 @@
     ah_path_prefix:           "{{ ah_path_prefix | default(omit) }}"
     validate_certs:           "{{ aap_validate_certs | default(omit) }}"
     request_timeout:          "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_collection_repositories }}"
+  loop: "{{ hub_collection_repositories }}"
   loop_control:
     loop_var: __hub_collection_repository_item
     label: "{{ __operation.verb }} the remote repository {{ __hub_collection_repository_item.name }} in Hub"

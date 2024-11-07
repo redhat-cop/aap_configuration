@@ -13,7 +13,7 @@
     ah_path_prefix:         "{{ ah_path_prefix | default(omit) }}"
     validate_certs:         "{{ aap_validate_certs | default(omit) }}"
     request_timeout:        "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_ee_repositories }}"
+  loop: "{{ hub_ee_repositories }}"
   loop_control:
     loop_var: __hub_ee_repository_sync_item
     label: "{{ __operation.verb }} the EE repository sync {{ __hub_ee_repository_sync_item.name }} in Hub"

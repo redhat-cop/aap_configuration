@@ -3,7 +3,7 @@ argument_specs:
   main:
     short_description: An Ansible Role to sync execution environment registries in Automation Hub.
     options:
-      ah_ee_registries:
+      hub_ee_registries:
         default: []
         required: false
         description: Data structure describing your ee registries to manage. If the sync option is set then the registry will be synced.

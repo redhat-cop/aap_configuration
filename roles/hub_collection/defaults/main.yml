@@ -7,7 +7,7 @@
 # aap_validate_certs: false
 
 # These are the default variables specific to the collection role
-ah_collections: []
+hub_collections: []
 # possible fields:
 # - namespace
 # - name

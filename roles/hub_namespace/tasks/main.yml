@@ -11,7 +11,7 @@
 #   when:
 #     - ah_token is not defined
 #     - lookup("ansible.builtin.env", "AH_API_TOKEN") == ""
-#     - ah_namespaces | length > 1
+#     - hub_namespaces | length > 1
 
 - name: Add Automation Hub Namespace
   ansible.hub.ah_namespace:
@@ -32,7 +32,7 @@
     ah_path_prefix:   "{{ ah_path_prefix | default(omit) }}"
     validate_certs:   "{{ aap_validate_certs | default(omit) }}"
     request_timeout:  "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_namespaces }}"
+  loop: "{{ hub_namespaces }}"
   loop_control:
     loop_var: __hub_namespace_item
     label: "{{ __operation.verb }} the namespace {{ __hub_namespace_item.name }} in Hub"

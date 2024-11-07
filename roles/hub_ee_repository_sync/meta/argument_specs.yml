@@ -3,7 +3,7 @@ argument_specs:
   main:
     short_description: An Ansible Role to sync execution environment repositories in Automation Hub.
     options:
-      ah_ee_repositories:
+      hub_ee_repositories:
         default: []
         required: false
         description: Data structure describing your ee repositories to manage. If the sync option is set then the repository will be synced.

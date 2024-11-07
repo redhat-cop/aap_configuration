@@ -9,7 +9,7 @@
 # These are the default variables specific to the license role
 
 # a list of dictionaries describing the Automation Hub groups roles
-ah_group_roles: []
+hub_group_roles: []
 #  - groups
 #  - role_list
 
