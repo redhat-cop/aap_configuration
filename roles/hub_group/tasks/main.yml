@@ -35,7 +35,7 @@
   loop: "{{ __groups_job_async.results }}"
   loop_control:
     loop_var: __groups_job_async_result_item
-    label: "{{ __operation.verb }} Label {{ __groups_job_async_result_item.__hub_group_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Group {{ __groups_job_async_result_item.__hub_group_item.name }} | Wait for finish the Group {{ __operation.action }}"
   when: __groups_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_group_secure_logging }}"
   vars:

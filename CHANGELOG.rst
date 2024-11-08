@@ -1,9 +1,41 @@
-============================================
+======================================
 infra.aap_configuration Release Notes
-============================================
+======================================
 
 .. contents:: Topics
 
+v3.0.0
+======
+
+Release Summary
+---------------
+
+| Release Date: 2024-10-31
+| The collection has been updated for AAP 2.5 use and has only been tested against AAP 2.5, it has been updated to include the previously separated hub, eda, and gateway collection roles.
+| `Conversion Guide <https://github.com/redhat-cop/infra.aap_configuration/blob/devel/CONVERSION_GUIDE.md>`__
+
+Major Changes
+-------------
+
+- Introduction of roles for gateway
+- Rename of collection to infra.aap_configuration
+- Roles from infra.ah_configuration and infra.eda_configuration have migrated into this collection
+
+Breaking Changes / Porting Guide
+--------------------------------
+
+- Major overhaul to all code completed, variables have changed, role names have changed, please see the Conversion guide for more details.
+
+Removed Features (previously deprecated)
+----------------------------------------
+
+- ee_namespace role has been removed, this was removed in AAP 2.4, and was depreciated then.
+
+Bugfixes
+--------
+
+- Controller credentials role now includes request timeout option.
+- meta_dependency_check set to default to false. This is due to feature not working on controller, or in offline environments without a hub. Set controller_dependency_check to 'true' to re-enable feature.
 
 v2.11.0
 =======
