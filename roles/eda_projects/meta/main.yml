@@ -1,14 +1,14 @@
 ---
 galaxy_info:
-  role_name: "eda_projects"
-  author: "Chris Renwick"
-  description: "An Ansible Role to create a project in EDA Controller."
-  company: "Red Hat"
+  role_name: eda_projects
+  author: Chris Renwick
+  description: An Ansible Role to create a project in EDA Controller.
+  company: Red Hat
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
   # issue_tracker_url: http://example.com/issue/tracker
-  license: "GPLv3+"
+  license: GPLv3+
 
   min_ansible_version: 2.16.0
 
@@ -25,16 +25,16 @@ galaxy_info:
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
   platforms:
-    - name: "EL"
+    - name: EL
       versions:
-        - "all"
+        - all
 
   galaxy_tags:
-    - "edacontroller"
-    - "eda"
-    - "configuration"
-    - "project"
-    - "projects"
+    - edacontroller
+    - eda
+    - configuration
+    - project
+    - projects
 
 dependencies:
   - role: global_vars

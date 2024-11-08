@@ -8,6 +8,6 @@
 # ah_password: "{% if galaxy_ng_version == 'stable-4.4' or galaxy_ng_version == 'stable-4.5' or galaxy_ng_version == 'stable-4.6' %}admin{% else %}redhat{% endif %}"
 # aap_password: admin
 aap_validate_certs: false
-ah_path_prefix: 'galaxy'  # AH: galaxy Galaxy: automation-hub
+ah_path_prefix: galaxy # AH: galaxy Galaxy: automation-hub
 hub_configuration_namespace_secure_logging: false
 ...

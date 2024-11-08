@@ -18,8 +18,8 @@
     - name: Include vars from platform_configs directory
       ansible.builtin.include_vars:
         dir: ./config
-        extensions: ["yml"]
+        extensions: [yml]
 
   roles:
-    - {role: ../.., when: controller_license is defined}
+    - { role: ../.., when: controller_license is defined }
 ...

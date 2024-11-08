@@ -2,7 +2,7 @@
 controller_workflows:
   - name: Complicated workflow schema
     description: a complicated workflow
-    extra_vars: ''
+    extra_vars: ""
     survey_enabled: true
     allow_simultaneous: false
     ask_variables_on_launch: false
@@ -12,7 +12,7 @@ controller_workflows:
     ask_inventory_on_launch: false
     ask_scm_branch_on_launch: false
     ask_limit_on_launch: false
-    webhook_service: ''
+    webhook_service: ""
     webhook_credential:
     organization:
       name: Default
@@ -129,7 +129,7 @@ controller_workflows:
             type: workflow_job_template_node
         - extra_data:
             basic_name: test
-            option_true_false: 'yes'
+            option_true_false: true
             target_groups:
               - group1
           scm_branch:
@@ -252,8 +252,8 @@ controller_workflows:
       notification_templates_error: []
       notification_templates_approvals: []
       survey_spec:
-        name: ''
-        description: ''
+        name: ""
+        description: ""
         spec:
           - question_name: Basic Name
             question_description: Name
@@ -262,8 +262,8 @@ controller_workflows:
             variable: basic_name
             min: 0
             max: 1024
-            default: ''
-            choices: ''
+            default: ""
+            choices: ""
             new_question: true
           - question_name: Choose yes or no?
             question_description: Choosing yes or no.
@@ -272,19 +272,19 @@ controller_workflows:
             variable: option_true_false
             min:
             max:
-            default: 'yes'
+            default: true
             choices: |-
-              yes
-              no
+              true
+              false
             new_question: true
-          - question_name: 'Select Group:'
-            question_description: ''
+          - question_name: "Select Group:"
+            question_description: ""
             required: true
             type: multiplechoice
             variable: target_groups
             min:
             max:
-            default: ''
+            default: ""
             choices: |-
               group1
               group2
@@ -298,7 +298,7 @@ controller_workflows:
       type: workflow_job_template
   - name: Simple workflow schema
     description: a basic workflow
-    extra_vars: ''
+    extra_vars: ""
     survey_enabled: false
     allow_simultaneous: false
     ask_variables_on_launch: false
@@ -308,7 +308,7 @@ controller_workflows:
     ask_inventory_on_launch: false
     ask_scm_branch_on_launch: false
     ask_limit_on_launch: false
-    webhook_service: ''
+    webhook_service: ""
     webhook_credential:
     organization:
       name: Default

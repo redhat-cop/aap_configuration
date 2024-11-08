@@ -1,14 +1,14 @@
 ---
 galaxy_info:
-  role_name: "eda_rulebook_activations"
-  author: "Tom Page"
-  description: "An Ansible Role to create a rulebook activation in EDA Controller."
-  company: "Red Hat"
+  role_name: eda_rulebook_activations
+  author: Tom Page
+  description: An Ansible Role to create a rulebook activation in EDA Controller.
+  company: Red Hat
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
   # issue_tracker_url: http://example.com/issue/tracker
-  license: "GPLv3+"
+  license: GPLv3+
 
   min_ansible_version: 2.16.0
 
@@ -25,18 +25,18 @@ galaxy_info:
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
   platforms:
-    - name: "EL"
+    - name: EL
       versions:
-        - "all"
+        - all
 
   galaxy_tags:
-    - "edacontroller"
-    - "eda"
-    - "configuration"
-    - "rulebookactivation"
-    - "rulebookactivations"
-    - "activation"
-    - "activations"
+    - edacontroller
+    - eda
+    - configuration
+    - rulebookactivation
+    - rulebookactivations
+    - activation
+    - activations
 
 dependencies:
   - role: global_vars

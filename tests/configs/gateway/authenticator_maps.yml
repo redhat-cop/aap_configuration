@@ -1,16 +1,16 @@
 ---
 gateway_authenticators:
-  - name: 'Test-Authenticator-1'
-    slug: 'Test-Authenticator-1'
+  - name: Test-Authenticator-1
+    slug: Test-Authenticator-1
     type: ansible_base.authentication.authenticator_plugins.local
     configuration: {}
-  - name: 'Test-Authenticator-2'
-    slug: 'Test-Authenticator-2'
+  - name: Test-Authenticator-2
+    slug: Test-Authenticator-2
     type: ansible_base.authentication.authenticator_plugins.local
     configuration: {}
 gateway_authenticator_maps:
-  - name: 'Test-AMap-1'
-    authenticator: 'Test-Authenticator-1'
+  - name: Test-AMap-1
+    authenticator: Test-Authenticator-1
     revoke: false
     map_type: organization
     role: Organization Member
@@ -19,8 +19,8 @@ gateway_authenticator_maps:
       always: {}
       never: {}
     order: 10
-  - name: 'Test-AMap-2'
-    authenticator: 'Test-Authenticator-1'
+  - name: Test-AMap-2
+    authenticator: Test-Authenticator-1
     revoke: true
     map_type: team
     role: Team Admin
@@ -35,8 +35,8 @@ gateway_authenticator_maps:
           - group3
           - group4
     order: 2
-  - name: 'Test-AMap-3'
-    authenticator: 'Test-Authenticator-2'
+  - name: Test-AMap-3
+    authenticator: Test-Authenticator-2
     map_type: allow
     triggers:
       attributes:

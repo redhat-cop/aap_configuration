@@ -12,7 +12,7 @@
     - name: Include vars from ah_configs directory
       ansible.builtin.include_vars:
         dir: ./vars
-        extensions: ["yml"]
+        extensions: [yml]
       tags:
         - always
   roles:

@@ -14,8 +14,8 @@
     assign_default_ee_to_org: "{{ __role.assign_default_ee_to_org | default(false) }}"
     assign_notification_templates_to_org: "{{ __role.assign_notification_templates_to_org | default(false) }}"
 
-- name: "Fail the playbook if there were errors (check mode only)"
+- name: Fail the playbook if there were errors (check mode only)
   ansible.builtin.fail:
-    msg: "The execution has failed because of errors (probably due to missing dependencies caused by check mode)."
+    msg: The execution has failed because of errors (probably due to missing dependencies caused by check mode).
   when: ansible_check_mode and error_flag is defined and error_flag
 ...

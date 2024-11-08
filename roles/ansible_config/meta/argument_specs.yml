@@ -96,5 +96,4 @@ argument_specs:
         required: false
         type: bool
         description: This variable enables secure logging across all roles as a default.
-
 ...

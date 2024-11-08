@@ -5,5 +5,5 @@ controller_configuration_settings_secure_logging: "{{ aap_configuration_secure_l
 controller_configuration_settings_async_retries: "{{ aap_configuration_async_retries | default(30) }}"
 controller_configuration_settings_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
 controller_configuration_settings_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
-aap_configuration_async_dir: null
+aap_configuration_async_dir:
 ...

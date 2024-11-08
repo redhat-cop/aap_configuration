@@ -14,7 +14,7 @@ rules:
     min-spaces-from-content: 1 # prettier compatibility
   comments-indentation: false
   document-start: disable
-  document-end: {present: true}
+  document-end: { present: true }
   indentation:
     level: error
     # Require indentation https://redhat-cop.github.io/automation-good-practices/#_yaml_and_jinja2_syntax
@@ -31,6 +31,6 @@ rules:
     level: error
     # Allow only YAML 1.2 booleans https://redhat-cop.github.io/automation-good-practices/#_yaml_and_jinja2_syntax
     allowed-values:
-      - 'true'
-      - 'false'
+      - "true"
+      - "false"
 ...

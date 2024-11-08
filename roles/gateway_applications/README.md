@@ -10,7 +10,7 @@ An Ansible Role to create/update/remove Applications on Ansible gateway.
 |:---|:---:|:---:|:---|:---|
 |`platform_state`|"present"|no|The state all objects will take unless overridden by object default|'absent'|
 |`aap_hostname`|""|yes|URL to the Ansible Automation Platform Server.|127.0.0.1|
-|`aap_validate_certs`|`True`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
+|`aap_validate_certs`|`true`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
 |`aap_username`|""|no|Admin User on the Ansible Automation Platform Server. Either username / password or oauthtoken need to be specified.||
 |`aap_password`|""|no|Platform Admin User's password on the Server.  This should be stored in an Ansible Vault at vars/platform-secrets.yml or elsewhere and called from a parent playbook.||
 |`aap_token`|""|no|Controller Admin User's token on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.||
@@ -30,20 +30,20 @@ Enabling this will enforce configurtion without specifying every option in the c
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`aap_applications_enforce_defaults`|`False`|no|Whether or not to enforce default option values on only the applications role|
-|`aap_configuration_enforce_defaults`|`False`|no|This variable enables enforced default values as well, but is shared globally.|
+|`aap_applications_enforce_defaults`|`false`|no|Whether or not to enforce default option values on only the applications role|
+|`aap_configuration_enforce_defaults`|`false`|no|This variable enables enforced default values as well, but is shared globally.|
 
 ### Secure Logging Variables
 
 The following Variables compliment each other.
 If Both variables are not set, secure logging defaults to false.
-The role defaults to False as normally the add ee_registry task does not include sensitive information.
+The role defaults to false as normally the add ee_registry task does not include sensitive information.
 aap_applications_secure_logging defaults to the value of aap_configuration_secure_logging if it is not explicitly called. This allows for secure logging to be toggled for the entire suite of automation hub configuration roles with a single variable, or for the user to selectively use it.
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`aap_applications_secure_logging`|`False`|no|Whether or not to include the sensitive Registry role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
-|`aap_configuration_secure_logging`|`False`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
+|`aap_applications_secure_logging`|`false`|no|Whether or not to include the sensitive Registry role tasks in the log.  Set this value to `true` if you will be providing your sensitive values from elsewhere.|
+|`aap_configuration_secure_logging`|`false`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
 
 ### Asynchronous Retry Variables
 
@@ -79,7 +79,7 @@ Options for the `aap_applications` variable:
 | `authorization_grant_type`  |         N/A         |   yes    | str  | Grant type for tokens in this application, Choices: ["password", "authorization-code"] |
 | `client_type`               |         N/A         |   yes    | str  | Application client type. Choices: ["confidential", "public"]                           |
 | `redirect_uris`             |         ""          |    no    | str  | Allowed urls list, space separated. Required with "authorization-code" grant type      |
-| `skip_authorization`        | N/A(`false` by API) |   yes    | bool | Set True to skip authorization step for completely trusted applications.               |
+| `skip_authorization`        | N/A(`false` by API) |   yes    | bool | Set true to skip authorization step for completely trusted applications.               |
 | `post_logout_redirect_uris` |         ""          |    no    | str  | Allowed Post Logout URIs list, space separated.                                        |
 | `user`                      |         ""          |    no    | str  | The user who owns this application.                                                    |
 | `state`                     |      `present`      |    no    | str  | Desired state of the application.                                                      |

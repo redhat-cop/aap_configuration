@@ -26,5 +26,5 @@ hub_configuration_user_async_timeout: "{{ aap_configuration_async_timeout | defa
 hub_configuration_user_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
 hub_configuration_user_accounts_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
 hub_configuration_user_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
-aap_configuration_async_dir: null
+aap_configuration_async_dir:
 ...

@@ -81,7 +81,7 @@ argument_specs:
         #   scm_update_cache_timeout:
         #     required: false
         #     type: int
-        #     description: Cache Timeout to cache prior project syncs for a certain number of seconds. Only valid if scm_update_on_launch is to True, otherwise ignored.
+        #     description: Cache Timeout to cache prior project syncs for a certain number of seconds. Only valid if scm_update_on_launch is to true, otherwise ignored.
         #   allow_override:
         #     required: false
         #     type: bool
@@ -148,10 +148,9 @@ argument_specs:
         required: false
         description: This variable sets delay between retries across all roles as a default.
       aap_configuration_async_dir:
-        default: null
+        default:
         required: false
         description: Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.
-
 
       # No_log variables
       controller_configuration_projects_secure_logging:

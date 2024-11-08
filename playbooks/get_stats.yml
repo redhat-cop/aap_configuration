@@ -15,7 +15,7 @@
   tasks:
     - name: Get number of JT
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/metrics/?format=json"
+        url: https://{{ aap_hostname }}/api/v2/metrics/?format=json
         method: GET
         force_basic_auth: true
         user: "{{ aap_username }}"
@@ -39,7 +39,7 @@
 
     - name: Get users info
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/users/?format=json"
+        url: https://{{ aap_hostname }}/api/v2/users/?format=json
         method: GET
         force_basic_auth: true
         user: "{{ aap_username }}"
@@ -82,7 +82,7 @@
 
     - name: Get subscription info
       ansible.builtin.uri:
-        url: "https://{{ aap_hostname }}/api/v2/settings/all/?format=json"
+        url: https://{{ aap_hostname }}/api/v2/settings/all/?format=json
         method: GET
         force_basic_auth: true
         user: "{{ aap_username }}"

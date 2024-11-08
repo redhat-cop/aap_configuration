@@ -21,18 +21,12 @@ argument_specs:
             description: Description of the service
           api_slug:
             type: str
-            description: |
-              URL slug for the gateway API path for the Controller, Hub and EDA services
-              Gateway API route requires value "gateway", but the slug is not used
+            description: URL slug for the gateway API path for the Controller, Hub and EDA services Gateway API route requires value "gateway", but the slug is not used
           http_port:
-            description: |
-              Name or ID referencing the Http Port
-              Required when creating a new Service
+            description: Name or ID referencing the Http Port Required when creating a new Service
             type: str
           service_cluster:
-            description: |
-              Name or ID referencing the Service Cluster
-              Required when creating a new Service
+            description: Name or ID referencing the Service Cluster Required when creating a new Service
             type: str
           is_service_https:
             type: bool
@@ -43,19 +37,13 @@ argument_specs:
             description: If false, the AAP gateway will not insert a gateway token into the proxied request
           service_path:
             type: str
-            description: |
-              URL path on the AAP Service cluster to route traffic to
-              Required when creating a new Service
+            description: URL path on the AAP Service cluster to route traffic to Required when creating a new Service
           service_port:
             type: int
-            description: |
-              Port on the service to route traffic to
-              Required when creating a new Service
+            description: Port on the service to route traffic to Required when creating a new Service
           node_tags:
             type: str
-            description: |
-              Comma separated string
-              Selects which (tagged) nodes receive traffic from this route
+            description: Comma separated string Selects which (tagged) nodes receive traffic from this route
           order:
             type: int
             description: The order to apply the routes in lower numbers are first. Items with the same value have no guaranteed order
@@ -83,21 +71,16 @@ argument_specs:
         required: false
         description: This variable sets delay between retries across all roles as a default.
       aap_configuration_async_dir:
-        default: null
+        default:
         required: false
-        description: >
-          Sets the directory to write the results file for async tasks.
-          The default value is set to `null` which uses the Ansible Default of `~/.ansible_async`.
-
+        description: Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `~/.ansible_async`.
 
       # No_log variables
       gateway_services_secure_logging:
         default: "{{ aap_configuration_secure_logging | default(false) }}"
         required: false
         type: bool
-        description: >
-          Whether or not to include the sensitive tasks from this role in the log.
-          Set this value to `true` if you will be providing your sensitive values from elsewhere.
+        description: Whether or not to include the sensitive tasks from this role in the log. Set this value to `true` if you will be providing your sensitive values from elsewhere.
       aap_configuration_secure_logging:
         default: true
         required: false

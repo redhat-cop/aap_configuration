@@ -1,9 +1,9 @@
 ---
 - name: Git checkout
   ansible.builtin.git:
-    repo:     "{{ __ah_collection_item.git_url }}"
-    dest:     "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}/"
-    version:  "{{ __ah_collection_item.version | default(omit) }}"
+    repo: "{{ __ah_collection_item.git_url }}"
+    dest: "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}/"
+    version: "{{ __ah_collection_item.version | default(omit) }}"
     key_file: "{{ __ah_collection_item.key_path | default(omit) }}"
     ssh_opts: "{{ __ah_collection_item.ssh_opts | default(omit) }}"
   loop: "{{ hub_collections }}"
@@ -17,7 +17,7 @@
 
 - name: Copy local collection to working dir
   ansible.builtin.copy:
-    src:  "{{ __ah_collection_item.collection_local_path }}/"
+    src: "{{ __ah_collection_item.collection_local_path }}/"
     dest: "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}"
     remote_src: true
     mode: "0755"
@@ -31,7 +31,7 @@
 
 - name: Build Collections
   ansible.hub.ah_build:
-    path:        "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}"
+    path: "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}"
     output_path: "{{ aap_configuration_working_dir }}/{{ __ah_collection_item.collection_name }}"
     force: true
   register: ah_build_results
@@ -54,13 +54,13 @@
 # __ah_build_result_item.results.path will be the output_path in ansible<2.10 but the actual built path in ansible>=2.10
 - name: Find all relevant built collection files
   ansible.builtin.find:
-    paths:    "{{ (__ah_build_result_item.stat.isdir) | ternary(__ah_build_result_item.stat.path, (__ah_build_result_item.stat.path | dirname)) }}"
+    paths: "{{ (__ah_build_result_item.stat.isdir) | ternary(__ah_build_result_item.stat.path, (__ah_build_result_item.stat.path | dirname)) }}"
     patterns: "{{ (__ah_build_result_item.stat.isdir) | ternary('*.tar.gz', (__ah_build_result_item.stat.path | basename)) }}"
   register: __hub_collections_find_results
   no_log: "{{ hub_configuration_publish_secure_logging }}"
   loop: "{{ ah_build_stat_results.results }}"
   loop_control:
-    loop_var: "__ah_build_result_item"
+    loop_var: __ah_build_result_item
   when: ah_collection_list is not defined
 
 - name: Set path for all collections found
@@ -71,12 +71,12 @@
 
 - name: Get token
   ansible.hub.ah_token:
-    ah_host:               "{{ aap_hostname | default(omit) }}"
-    ah_username:          "{{ aap_username | default(omit) }}"
-    ah_password:           "{{ aap_password | default(omit) }}"
-    ah_path_prefix:        "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:        "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:       "{{ aap_request_timeout | default(omit) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
   when:
     - ah_token is not defined
     - lookup("ansible.builtin.env", "AH_API_TOKEN") == ""
@@ -84,31 +84,31 @@
 
 - name: Publish Collections
   ansible.hub.ah_collection:
-    namespace:          "{{ (__ah_collection_file | basename).split('-')[0] }}"
-    name:               "{{ (__ah_collection_file | basename).split('-')[1] }}"
-    version:            "{{ (__ah_collection_file | basename).split('-')[2:] | join('-') | splitext | first | splitext | first }}"
-    path:               "{{ __ah_collection_file }}"
-    auto_approve:       "{{ ah_auto_approve }}"
+    namespace: "{{ (__ah_collection_file | basename).split('-')[0] }}"
+    name: "{{ (__ah_collection_file | basename).split('-')[1] }}"
+    version: "{{ (__ah_collection_file | basename).split('-')[2:] | join('-') | splitext | first | splitext | first }}"
+    path: "{{ __ah_collection_file }}"
+    auto_approve: "{{ ah_auto_approve }}"
     overwrite_existing: "{{ ah_overwrite_existing }}"
-    ah_host:            "{{ aap_hostname | default(omit) }}"
-    ah_username:       "{{ aap_username | default(omit) }}"
-    ah_password:        "{{ aap_password | default(omit) }}"
-    ah_token:           "{{ aap_token | default(omit) }}"
-    ah_path_prefix:     "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:     "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:    "{{ aap_request_timeout | default(omit) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_token: "{{ aap_token | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
   loop: "{{ ah_collection_list }}"
   loop_control:
-    loop_var: "__ah_collection_file"
+    loop_var: __ah_collection_file
   no_log: "{{ hub_configuration_publish_secure_logging }}"
   async: "{{ hub_configuration_publish_async_timeout }}"
   poll: 0
   register: __publish_job_async
   changed_when: not __publish_job_async.changed
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Publish Collection | Wait for finish the publish creation"
+- name: Publish Collection | Wait for finish the publish creation
   ansible.builtin.async_status:
     jid: "{{ __publish_job_async_result_item.ansible_job_id }}"
   register: __publish_job_async_result
@@ -121,23 +121,23 @@
   when: __publish_job_async_result_item.ansible_job_id is defined
   no_log: "{{ hub_configuration_publish_secure_logging }}"
   vars:
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
 - name: Approve Collections
   ansible.hub.ah_approval:
-    namespace:        "{{ (__ah_collection_file | basename).split('-')[0] }}"
-    name:             "{{ (__ah_collection_file | basename).split('-')[1] }}"
-    version:          "{{ (__ah_collection_file | basename).split('-')[2:] | join('-') | splitext | first | splitext | first }}"
-    ah_host:          "{{ aap_hostname | default(omit) }}"
-    ah_username:     "{{ aap_username | default(omit) }}"
-    ah_password:      "{{ aap_password | default(omit) }}"
-    ah_token:         "{{ aap_token | default(omit) }}"
-    ah_path_prefix:   "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:   "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:  "{{ aap_request_timeout | default(omit) }}"
+    namespace: "{{ (__ah_collection_file | basename).split('-')[0] }}"
+    name: "{{ (__ah_collection_file | basename).split('-')[1] }}"
+    version: "{{ (__ah_collection_file | basename).split('-')[2:] | join('-') | splitext | first | splitext | first }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_token: "{{ aap_token | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
   loop: "{{ ah_collection_list }}"
   loop_control:
-    loop_var: "__ah_collection_file"
+    loop_var: __ah_collection_file
   no_log: "{{ hub_configuration_publish_secure_logging }}"
   when: not ah_auto_approve
   register: approval

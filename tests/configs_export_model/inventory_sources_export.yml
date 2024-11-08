@@ -1,15 +1,15 @@
 ---
 inventory_sources:
   - name: test
-    description: ''
+    description: ""
     source: scm
     source_path: /test.yml
-    source_regions: ''
-    instance_filters: ''
-    group_by: ''
+    source_regions: ""
+    instance_filters: ""
+    group_by: ""
     overwrite: false
     overwrite_vars: false
-    custom_virtualenv: null
+    custom_virtualenv:
     timeout: 0
     verbosity: 1
     update_on_launch: false

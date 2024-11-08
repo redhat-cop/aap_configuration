@@ -48,7 +48,7 @@ argument_specs:
         #     default: true
         #     type: bool
         #     required: false
-        #     description: True will always change password if user specifies password, even if API gives $encrypted$ for password. False will only set the password if other values change too.
+        #     description: true will always change password if user specifies password, even if API gives $encrypted$ for password. false will only set the password if other values change too.
         #   state:
         #     default: "{{ controller_state | default('present') }}"
         #     type: str
@@ -73,10 +73,9 @@ argument_specs:
         required: false
         description: This variable sets delay between retries across all roles as a default.
       aap_configuration_async_dir:
-        default: null
+        default:
         required: false
         description: Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.
-
 
       # No_log variables
       controller_configuration_credentials_secure_logging:

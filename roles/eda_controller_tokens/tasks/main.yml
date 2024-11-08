@@ -1,11 +1,10 @@
 ---
-
 # Create EDA Controller Tokens
 - name: Add EDA Controller token
   ansible.eda.controller_token:
-    name:                "{{ __token_item.name }}"
-    description:         "{{ __token_item.description | default(omit) }}"
-    token:               "{{ __token_item.token | default(omit) }}"
+    name: "{{ __token_item.name }}"
+    description: "{{ __token_item.description | default(omit) }}"
+    token: "{{ __token_item.token | default(omit) }}"
     controller_host: "{{ aap_hostname | default(omit, true) }}"
     controller_username: "{{ aap_username | default(omit, true) }}"
     controller_password: "{{ aap_password | default(omit, true) }}"
@@ -13,7 +12,7 @@
     validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ eda_controller_tokens }}"
   loop_control:
-    loop_var: "__token_item"
+    loop_var: __token_item
     label: "{{ __operation.verb }} the Controller token {{ __token_item.name }} to EDA"
     pause: "{{ eda_configuration_users_token_async_delay }}"
   no_log: "{{ eda_configuration_users_token_secure_logging }}"
@@ -24,9 +23,9 @@
   vars:
     __operation: "{{ operation_translate[__controller_tokens_job_async.state | default(platform_state) | default('present')] }}"
 
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create controller_token | Wait for finish the controller_token creation"
+- name: Create controller_token | Wait for finish the controller_token creation
   ansible.builtin.async_status:
     jid: "{{ __controller_tokens_job_async_result_item.ansible_job_id }}"
   register: __controller_tokens_job_async_result
@@ -41,5 +40,5 @@
   no_log: "{{ eda_configuration_users_token_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__controller_tokens_job_async_result_item.__controller_user_accounts_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

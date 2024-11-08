@@ -3,9 +3,9 @@
 - name: Template config template
   ansible.builtin.template:
     src: ansible.cfg.j2
-    dest:   "{{ aap_configuration_working_dir }}/ansible.cfg"
-    owner:  "{{ ansible_config_owner | default(omit) }}"
-    group:  "{{ ansible_config_group | default(omit) }}"
-    mode:   "{{ ansible_config_mode }}"
+    dest: "{{ aap_configuration_working_dir }}/ansible.cfg"
+    owner: "{{ ansible_config_owner | default(omit) }}"
+    group: "{{ ansible_config_group | default(omit) }}"
+    mode: "{{ ansible_config_mode }}"
   no_log: "{{ aap_configuration_ansible_config_secure_logging }}"
 ...

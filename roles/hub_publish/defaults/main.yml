@@ -17,7 +17,7 @@
 # - collection_name:  "name of collection, normally the last part before the / in a git url"  # mandatory
 #   git_url: "url to git repo."  # mandatory when type=git
 
-aap_configuration_working_dir: "/var/tmp"
+aap_configuration_working_dir: /var/tmp
 
 ah_auto_approve: false
 ah_overwrite_existing: false
@@ -27,5 +27,5 @@ hub_configuration_publish_async_timeout: "{{ aap_configuration_async_timeout | d
 hub_configuration_publish_async_retries: "{{ aap_configuration_async_retries | default(50) }}"
 hub_configuration_publish_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
 hub_configuration_publish_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
-aap_configuration_async_dir: null
+aap_configuration_async_dir:
 ...

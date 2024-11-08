@@ -5,6 +5,6 @@ workflow_job_templates_secure_logging: "{{ aap_configuration_secure_logging | de
 controller_configuration_workflow_async_retries: "{{ aap_configuration_async_retries | default(30) }}"
 controller_configuration_workflow_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
 controller_configuration_workflow_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
-aap_configuration_async_dir: null
+aap_configuration_async_dir:
 controller_configuration_workflows_enforce_defaults: "{{ aap_configuration_enforce_defaults | default(false) }}"
 ...

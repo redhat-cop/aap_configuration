@@ -1,24 +1,23 @@
 ---
-
 # Create AH Users
 - name: Add Automation Hub User
   ansible.hub.ah_user:
-    username:         "{{ __hub_user_item.username | default(omit) }}"
+    username: "{{ __hub_user_item.username | default(omit) }}"
     # new_name:         "{{ __user.new_name | default(omit) }}"  <-- Needs adding once new_name option added to module
-    groups:           "{{ __hub_user_item.groups | default(omit) }}"
-    append:           "{{ __hub_user_item.append | default(omit) }}"
-    first_name:       "{{ __hub_user_item.first_name | default(omit) }}"
-    last_name:        "{{ __hub_user_item.last_name | default(omit) }}"
-    email:            "{{ __hub_user_item.email | default(omit) }}"
-    is_superuser:     "{{ __hub_user_item.is_superuser | default(omit) }}"
-    password:         "{{ __hub_user_item.password | default(omit) }}"
-    state:            "{{ __hub_user_item.state | default(ah_state | default('present')) }}"
-    ah_host:          "{{ aap_hostname | default(omit) }}"
-    ah_username:     "{{ aap_username | default(omit) }}"
-    ah_password:      "{{ aap_password | default(omit) }}"
-    ah_path_prefix:   "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:   "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:  "{{ aap_request_timeout | default(omit) }}"
+    groups: "{{ __hub_user_item.groups | default(omit) }}"
+    append: "{{ __hub_user_item.append | default(omit) }}"
+    first_name: "{{ __hub_user_item.first_name | default(omit) }}"
+    last_name: "{{ __hub_user_item.last_name | default(omit) }}"
+    email: "{{ __hub_user_item.email | default(omit) }}"
+    is_superuser: "{{ __hub_user_item.is_superuser | default(omit) }}"
+    password: "{{ __hub_user_item.password | default(omit) }}"
+    state: "{{ __hub_user_item.state | default(ah_state | default('present')) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
   loop: "{{ aap_user_accounts }}"
   loop_control:
     loop_var: __hub_user_item
@@ -31,9 +30,9 @@
   changed_when: not __users_job_async.changed
   vars:
     __operation: "{{ operation_translate[__hub_user_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create User | Wait for finish the user creation"
+- name: Create User | Wait for finish the user creation
   ansible.builtin.async_status:
     jid: "{{ __users_job_async_result_item.ansible_job_id }}"
   register: __users_job_async_result
@@ -48,5 +47,5 @@
   no_log: "{{ hub_configuration_user_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__users_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

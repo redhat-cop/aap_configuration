@@ -7,8 +7,8 @@ hub_namespaces:
     description: string
     resources: "# Community\nA Namespace test with changes"
     links:
-      - name: "Nothing"
-        url: "https://github.com/ansible/awx"
+      - name: Nothing
+        url: https://github.com/ansible/awx
   - name: infra
   - name: test_namespace
   - name: galaxy

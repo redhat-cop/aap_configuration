@@ -1,7 +1,7 @@
 ---
 teams:
   - name: team1
-    description: ''
+    description: ""
     organization:
       name: Satellite
       type: organization

@@ -1,10 +1,10 @@
 ---
-- name: "Play to rename an object to every other object that is using it"
+- name: Play to rename an object to every other object that is using it
   hosts: localhost
   connection: local
   gather_facts: false
   tasks:
-    - name: "Get all the files using this object from the specified path"
+    - name: Get all the files using this object from the specified path
       ansible.builtin.find:
         paths: "{{ path }}"
         file_type: file
@@ -13,11 +13,11 @@
         contains: "{{ current_name | regex_escape() }}"
       register: __list_files
 
-    - name: "Update the name into the found files"
+    - name: Update the name into the found files
       ansible.builtin.replace:
         path: "{{ __file.path }}"
-        regexp: '^(.*){{ current_name | regex_escape() }}(.*)$'
-        replace: '\1{{ new_name }}\2'
+        regexp: ^(.*){{ current_name | regex_escape() }}(.*)$
+        replace: \1{{ new_name }}\2
       loop: "{{ __list_files.files }}"
       loop_control:
         loop_var: __file

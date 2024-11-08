@@ -31,7 +31,7 @@ argument_specs:
         #   extra_vars:
         #     required: false
         #     type: dict
-        #     description: Any extra vars required to launch the job. ask_extra_vars needs to be set to True via controller_job_template module.
+        #     description: Any extra vars required to launch the job. ask_extra_vars needs to be set to true via controller_job_template module.
         #   wait:
         #     required: false
         #     type: bool

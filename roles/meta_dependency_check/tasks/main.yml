@@ -5,8 +5,8 @@
   ansible.builtin.debug:
     msg: "{{ controller_dependency_check | bool | ternary(__depdency_check_active_msg, __depdency_check_inactive_msg) }}"
   vars:
-    __depdency_check_active_msg: 'Dependency check is active. Required collections presence will be verified.'
-    __depdency_check_inactive_msg: 'Dependency check is deactivated. Required collections presence will not be verified. This might cause failure in the next tasks.'
+    __depdency_check_active_msg: Dependency check is active. Required collections presence will be verified.
+    __depdency_check_inactive_msg: Dependency check is deactivated. Required collections presence will not be verified. This might cause failure in the next tasks.
 
 - name: Dependency check block
   when: controller_dependency_check | bool
