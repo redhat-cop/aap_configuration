@@ -1,6 +1,6 @@
 ---
 major_changes:
   - renamed some more vars that got missed in the new naming convention.
-bug_fixes:
+bugfixes:
   - updated gateway services async and no log vars to correct naming convention.
 ...
