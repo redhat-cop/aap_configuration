@@ -1,4 +1,5 @@
 ---
+services_secure_logging: false
 https_port_lookup: "{{ lookup('ansible.platform.gateway_api', 'http_ports', query_params={ 'is_api_port': true }, host=aap_hostname, username=aap_username, password=aap_password,
   verify_ssl=false, expect_one=true) }}"
 gateway_services_lookup: "{{ lookup('ansible.platform.gateway_api', 'services', query_params={ 'name': 'gateway api' }, host=aap_hostname, username=aap_username,
@@ -16,13 +17,14 @@ http_ports:
     is_api_port: true
 
 gateway_services:
-  - name: Controller API
+  - name: controller api
     state: exists
   - name: gateway api
     http_port: port-443
     service_cluster: gateway
     service_path: /
     service_port: "{{ gateway_services_lookup.service_port | int }}"
+    state: exists
 
 gateway_service_nodes:
   - name: "{{ service_node_name }}"
