@@ -1,47 +1,46 @@
 ---
-
 # Create AH EE registry
 - name: Sync Automation Hub EE Registry
   ansible.hub.ah_ee_registry_sync:
-    name:                   "{{ __hub_ee_registry_sync_item.name }}"
-    wait:                   "{{ __hub_ee_registry_sync_item.wait | default(omit) }}"
-    interval:               "{{ __hub_ee_registry_sync_item.interval | default(ah_configuration_ee_registry_sync_async_delay) }}"
-    timeout:                "{{ __hub_ee_registry_sync_item.timeout | default(omit) }}"
-    ah_host:                "{{ aap_hostname | default(omit) }}"
-    ah_username:           "{{ aap_username | default(omit) }}"
-    ah_password:            "{{ aap_password | default(omit) }}"
-    ah_path_prefix:         "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:         "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:        "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_ee_registries }}"
+    name: "{{ __hub_ee_registry_sync_item.name }}"
+    wait: "{{ __hub_ee_registry_sync_item.wait | default(omit) }}"
+    interval: "{{ __hub_ee_registry_sync_item.interval | default(hub_configuration_ee_registry_sync_async_delay) }}"
+    timeout: "{{ __hub_ee_registry_sync_item.timeout | default(omit) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
+  loop: "{{ hub_ee_registries }}"
   loop_control:
     loop_var: __hub_ee_registry_sync_item
     label: "{{ __operation.verb }} the EE registry sync {{ __hub_ee_registry_sync_item.name }} in Hub"
-    pause: "{{ ah_configuration_ee_registry_sync_loop_delay }}"
+    pause: "{{ hub_configuration_ee_registry_sync_loop_delay }}"
   when: __hub_ee_registry_sync_item.sync | default(false)
-  no_log: "{{ ah_configuration_ee_registry_secure_logging }}"
-  async: "{{ ah_configuration_ee_registry_sync_async_timeout }}"
+  no_log: "{{ hub_configuration_ee_registry_secure_logging }}"
+  async: "{{ hub_configuration_ee_registry_sync_async_timeout }}"
   poll: 0
   register: __ee_registry_syncs_job_async
   changed_when: not __ee_registry_syncs_job_async.changed
   vars:
     __operation: "{{ operation_translate[__ee_registry_syncs_job_async.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "EE Registry Sync | Wait for finish the ee_registry_sync to complete"
+- name: EE Registry Sync | Wait for finish the ee_registry_sync to complete
   ansible.builtin.async_status:
     jid: "{{ __ee_registry_syncs_job_async_result_item.ansible_job_id }}"
   register: __ee_registry_syncs_job_async_result
   until: __ee_registry_syncs_job_async_result.finished
-  retries: "{{ ah_configuration_ee_registry_sync_async_retries }}"
-  delay: "{{ ah_configuration_ee_registry_sync_async_delay }}"
+  retries: "{{ hub_configuration_ee_registry_sync_async_retries }}"
+  delay: "{{ hub_configuration_ee_registry_sync_async_delay }}"
   loop: "{{ __ee_registry_syncs_job_async.results }}"
   loop_control:
     loop_var: __ee_registry_syncs_job_async_result_item
     label: "{{ __operation.verb }} Label {{ __ee_registry_syncs_job_async_result_item.__hub_ee_registry_sync_item.name }} | Wait for finish the Label {{ __operation.action }}"
   when: __ee_registry_syncs_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_ee_registry_secure_logging }}"
+  no_log: "{{ hub_configuration_ee_registry_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__ee_registry_syncs_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

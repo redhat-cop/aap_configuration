@@ -32,7 +32,7 @@ controller_templates:
     credentials: Demo Credential
     verbosity: 0
     inventory: localhost
-    execution_environment: "My EE"
+    execution_environment: My EE
     ask_inventory_on_launch: true
     ask_execution_environment_on_launch: true
     ask_forks_on_launch: true
@@ -43,19 +43,18 @@ controller_templates:
     ask_limit_on_launch: true
     prevent_instance_group_fallback: true
     survey_spec:
-      name: ''
-      description: ''
+      name: ""
+      description: ""
       spec:
         - question_name: Target Host
-          question_description: target host is required for playbook to work, this host
-            needs to exist in the inventory
+          question_description: target host is required for playbook to work, this host needs to exist in the inventory
           required: true
           type: text
           variable: target_hosts
           min: 0
           max: 1024
           default: infra-ansible-tower-testing.infra.sat.rdu2.redhat.com
-          choices: ''
+          choices: ""
           new_question: true
 
 controller_templates_invalid:

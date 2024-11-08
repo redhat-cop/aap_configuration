@@ -1,7 +1,7 @@
 ---
 # tasks file for license role - Subscription
 
-- name: Get subscriptions with a filter
+- name: subscription | Get subscriptions with a filter
   subscriptions:
     username: "{{ redhat_subscription_username }}"
     password: "{{ redhat_subscription_password }}"
@@ -18,11 +18,11 @@
     - "'use_lookup' in controller_license"
     - controller_license.use_lookup
 
-- name: Install the Controller license
+- name: subscription | Install the Controller license
   license:
-    pool_id:                        "{{ controller_license.pool_id | default(subscription.subscriptions[(controller_license.list_num | default(0))].pool_id) }}"
-    force:                          "{{ controller_license.force | default(omit) }}"
-    state:                          "{{ controller_license.state | default(omit) }}"
+    pool_id: "{{ controller_license.pool_id | default(subscription.subscriptions[(controller_license.list_num | default(0))].pool_id) }}"
+    force: "{{ controller_license.force | default(omit) }}"
+    state: "{{ controller_license.state | default(omit) }}"
 
     # Role Standard Options
     controller_host: "{{ aap_hostname | default(omit, true) }}"

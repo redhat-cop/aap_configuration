@@ -1,5 +1,5 @@
 ---
-ah_namespaces:
+hub_namespaces:
   - name: community_test
     company: Community Test
     email: user@example.com
@@ -7,8 +7,8 @@ ah_namespaces:
     description: string
     resources: "# Community\nA Namespace test with changes"
     links:
-      - name: "Nothing"
-        url: "https://github.com/ansible/awx"
+      - name: Nothing
+        url: https://github.com/ansible/awx
   - name: infra
   - name: test_namespace
   - name: galaxy

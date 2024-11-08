@@ -47,7 +47,8 @@
   loop: "{{ __gateway_applications_job_async.results }}"
   loop_control:
     loop_var: __gateway_applications_job_async_results_item
-    label: "{{ __operation.verb }} AAP Platform Applications {{ __gateway_applications_job_async_results_item.__gateway_application_item.name }} | Wait for finish the Applications {{ __operation.action }}"
+    label: "{{ __operation.verb }} AAP Platform Applications {{ __gateway_applications_job_async_results_item.__gateway_application_item.name }} | Wait for finish
+      the Applications {{ __operation.action }}"
   when: __gateway_applications_job_async_results_item.ansible_job_id is defined
   no_log: "{{ gateway_applications_secure_logging }}"
   vars:

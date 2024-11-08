@@ -1,0 +1,4 @@
+---
+major_changes:
+  - renamed some more vars that got missed in the new naming convention.
+...

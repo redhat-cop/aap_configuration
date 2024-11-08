@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: "settings"
+  role_name: settings
   author: Red Hat CoP
   description: A role to set some Ansible Controller settings
   company: Red Hat
@@ -30,9 +30,9 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-    - name: "EL"
+    - name: EL
       versions:
-        - "all"
+        - all
 
   # List tags for your role here, one per line. A tag is a keyword that describes
   # and categorizes the role. Users find roles by searching for tags. Be sure to
@@ -41,12 +41,12 @@ galaxy_info:
   # NOTE: A tag is limited to a single word comprised of alphanumeric characters.
   #       Maximum 20 tags per role.
   galaxy_tags:
-    - "controller"
-    - "aap"
-    - "awx"
-    - "configuration"
-    - "setting"
-    - "settings"
+    - controller
+    - aap
+    - awx
+    - configuration
+    - setting
+    - settings
 
 collections:
   - ansible.controller

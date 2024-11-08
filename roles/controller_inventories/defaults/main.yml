@@ -5,6 +5,6 @@ controller_configuration_inventories_secure_logging: "{{ aap_configuration_secur
 controller_configuration_inventories_async_retries: "{{ aap_configuration_async_retries | default(30) }}"
 controller_configuration_inventories_async_delay: "{{ aap_configuration_async_delay | default(1) }}"
 controller_configuration_inventories_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
-aap_configuration_async_dir: null
+aap_configuration_async_dir:
 controller_configuration_inventories_enforce_defaults: "{{ aap_configuration_enforce_defaults | default(false) }}"
 ...

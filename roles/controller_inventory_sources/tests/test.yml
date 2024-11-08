@@ -16,8 +16,8 @@
     - name: Include vars from platform_configs directory
       ansible.builtin.include_vars:
         dir: ./configs
-        extensions: ["yml"]
+        extensions: [yml]
 
   roles:
-    - {role: ../.., when: controller_inventory_sources is defined}
+    - { role: ../.., when: controller_inventory_sources is defined }
 ...

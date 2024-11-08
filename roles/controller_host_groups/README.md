@@ -18,7 +18,7 @@ Currently:
 |:---|:---:|:---:|:---|:---|
 |`platform_state`|"present"|no|The state all objects will take unless overridden by object default|'absent'|
 |`aap_hostname`|""|yes|URL to the Ansible Automation Platform Server.|127.0.0.1|
-|`aap_validate_certs`|`True`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
+|`aap_validate_certs`|`true`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
 |`aap_username`|""|no|Admin User on the Ansible Automation Platform Server. Either username / password or oauthtoken need to be specified.||
 |`aap_password`|""|no|Platform Admin User's password on the Server.  This should be stored in an Ansible Vault at vars/platform-secrets.yml or elsewhere and called from a parent playbook.||
 |`aap_token`|""|no|Controller Admin User's token on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.||
@@ -38,20 +38,20 @@ Enabling this will enforce configurtion without specifying every option in the c
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`controller_configuration_groups_enforce_defaults`|`False`|no|Whether or not to enforce default option values on only the applications role|
-|`aap_configuration_enforce_defaults`|`False`|no|This variable enables enforced default values as well, but is shared across multiple roles, see above.|
+|`controller_configuration_groups_enforce_defaults`|`false`|no|Whether or not to enforce default option values on only the applications role|
+|`aap_configuration_enforce_defaults`|`false`|no|This variable enables enforced default values as well, but is shared across multiple roles, see above.|
 
 ### Secure Logging Variables
 
 The following Variables compliment each other.
 If Both variables are not set, secure logging defaults to false.
-The role defaults to False as normally the add groups task does not include sensitive information.
+The role defaults to false as normally the add groups task does not include sensitive information.
 controller_configuration_groups_secure_logging defaults to the value of aap_configuration_secure_logging if it is not explicitly called. This allows for secure logging to be toggled for the entire suite of configuration roles with a single variable, or for the user to selectively use it.
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`controller_configuration_groups_secure_logging`|`False`|no|Whether or not to include the sensitive Group role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
-|`aap_configuration_secure_logging`|`False`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
+|`controller_configuration_groups_secure_logging`|`false`|no|Whether or not to include the sensitive Group role tasks in the log.  Set this value to `true` if you will be providing your sensitive values from elsewhere.|
+|`aap_configuration_secure_logging`|`false`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
 
 ### Asynchronous Retry Variables
 
@@ -98,13 +98,13 @@ The role will strip the double space between the curly bracket in order to provi
 |:---:|:---:|:---:|:---:|:---:|
 |`name`|""|yes|str|Name of Group|
 |`new_name`|""|yes|str|Name of Group, used in updating a Group.|
-|`description`|`False`|no|str|Description of the Group.|
+|`description`|`false`|no|str|Description of the Group.|
 |`inventory`|""|yes|str|Name of inventory the group should be made a member of.|
 |`variables`|{}|no|dict|variables applicable to group.|
 |`hosts`|""|no|list|hosts (list) in group|
 |`children`|""|no|list|List of groups that should be nested inside in this group|
-|`preserve_existing_hosts`|`False`|no|bool|Whether to preserve existing hosts in an existing group|
-|`preserve_existing_children`|`False`|no|bool|Whether to preserve existing children in an existing group|
+|`preserve_existing_hosts`|`false`|no|bool|Whether to preserve existing hosts in an existing group|
+|`preserve_existing_children`|`false`|no|bool|Whether to preserve existing children in an existing group|
 |`state`|`present`|no|str|Desired state of the resource.|
 
 ### Standard Group Data Structure

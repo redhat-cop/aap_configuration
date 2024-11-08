@@ -1,5 +1,5 @@
 ---
-ah_ee_registries:
+hub_ee_registries:
   - name: registry.redhat
     url: registry.redhat.io
     username: myuser

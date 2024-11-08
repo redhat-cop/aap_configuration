@@ -2,53 +2,54 @@
 # Create AH repository
 - name: Add Automation Hub Collection Remote repository
   ansible.hub.collection_repository:
-    name:                     "{{ __hub_collection_repository_item.name }}"
-    description:              "{{ __hub_collection_repository_item.description | default(omit) }}"
-    retain_repo_versions:     "{{ __hub_collection_repository_item.retain_repo_versions | default(omit) }}"
-    pulp_labels:              "{{ __hub_collection_repository_item.pulp_labels | default(omit) }}"
-    distribution:             "{{ __hub_collection_repository_item.distribution | default(omit) }}"
-    private:                  "{{ __hub_collection_repository_item.private | default(omit) }}"
-    remote:                   "{{ __hub_collection_repository_item.remote | default(omit) }}"
-    update_repo:              "{{ __hub_collection_repository_item.update_repo | default(omit) }}"
-    wait:                     "{{ __hub_collection_repository_item.wait | default(omit) }}"
-    interval:                 "{{ __hub_collection_repository_item.interval | default(1) }}"
-    timeout:                  "{{ __hub_collection_repository_item.timeout | default(omit) }}"
-    state:                    "{{ __hub_collection_repository_item.state | default(ah_state | default('present')) }}"
-    ah_host:                  "{{ aap_hostname | default(omit) }}"
-    ah_username:             "{{ aap_username | default(omit) }}"
-    ah_password:              "{{ aap_password | default(omit) }}"
-    ah_path_prefix:           "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:           "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:          "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_collection_repositories }}"
+    name: "{{ __hub_collection_repository_item.name }}"
+    description: "{{ __hub_collection_repository_item.description | default(omit) }}"
+    retain_repo_versions: "{{ __hub_collection_repository_item.retain_repo_versions | default(omit) }}"
+    pulp_labels: "{{ __hub_collection_repository_item.pulp_labels | default(omit) }}"
+    distribution: "{{ __hub_collection_repository_item.distribution | default(omit) }}"
+    private: "{{ __hub_collection_repository_item.private | default(omit) }}"
+    remote: "{{ __hub_collection_repository_item.remote | default(omit) }}"
+    update_repo: "{{ __hub_collection_repository_item.update_repo | default(omit) }}"
+    wait: "{{ __hub_collection_repository_item.wait | default(omit) }}"
+    interval: "{{ __hub_collection_repository_item.interval | default(1) }}"
+    timeout: "{{ __hub_collection_repository_item.timeout | default(omit) }}"
+    state: "{{ __hub_collection_repository_item.state | default(ah_state | default('present')) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
+  loop: "{{ hub_collection_repositories }}"
   loop_control:
     loop_var: __hub_collection_repository_item
     label: "{{ __operation.verb }} the remote repository {{ __hub_collection_repository_item.name }} in Hub"
-    pause: "{{ ah_configuration_collection_repository_loop_delay }}"
-  no_log: "{{ ah_configuration_collection_repository_secure_logging }}"
-  async: "{{ ah_configuration_collection_repository_async_timeout }}"
+    pause: "{{ hub_configuration_collection_repository_loop_delay }}"
+  no_log: "{{ hub_configuration_collection_repository_secure_logging }}"
+  async: "{{ hub_configuration_collection_repository_async_timeout }}"
   poll: 0
   register: __collection_repository_job_async
   changed_when: not __collection_repository_job_async.changed
   vars:
     __operation: "{{ operation_translate[__hub_collection_repository_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create Repository | Wait for finish the repository creation"
+- name: Create Repository | Wait for finish the repository creation
   ansible.builtin.async_status:
     jid: "{{ __collection_repository_job_async_result_item.ansible_job_id }}"
   register: __collection_repository_job_async_result
   until: __collection_repository_job_async_result.finished
-  retries: "{{ ah_configuration_collection_repository_async_retries }}"
-  delay: "{{ ah_configuration_collection_repository_async_delay }}"
+  retries: "{{ hub_configuration_collection_repository_async_retries }}"
+  delay: "{{ hub_configuration_collection_repository_async_delay }}"
   loop: "{{ __collection_repository_job_async.results }}"
   loop_control:
     loop_var: __collection_repository_job_async_result_item
-    label: "{{ __operation.verb }} Collection repository {{ __collection_repository_job_async_result_item.__hub_collection_repository_item.name }} | Wait for finish the Collection repository {{ __operation.action }}"
+    label: "{{ __operation.verb }} Collection repository {{ __collection_repository_job_async_result_item.__hub_collection_repository_item.name }} | Wait for finish
+      the Collection repository {{ __operation.action }}"
   when: __collection_repository_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_collection_repository_secure_logging }}"
+  no_log: "{{ hub_configuration_collection_repository_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__collection_repository_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
 ...

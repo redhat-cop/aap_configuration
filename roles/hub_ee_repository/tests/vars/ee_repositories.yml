@@ -1,5 +1,5 @@
 ---
-ah_ee_repositories:
+hub_ee_repositories:
   - name: abc15
     description: string
     readme: "# My EE repository"

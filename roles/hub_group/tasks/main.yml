@@ -1,45 +1,44 @@
 ---
-
 # Create AH Group
 - name: Add Automation Hub group
   ansible.hub.ah_group:
-    name:             "{{ __hub_group_item.name | default(omit) }}"
+    name: "{{ __hub_group_item.name | default(omit) }}"
     # new_name:         "{{ __group.new_name | default(omit) }}"  <-- Needs adding once new_name option added to module
-    state:            "{{ __hub_group_item.state | default(ah_state | default('present')) }}"
-    ah_host:          "{{ aap_hostname | default(omit) }}"
-    ah_username:     "{{ aap_username | default(omit) }}"
-    ah_password:      "{{ aap_password | default(omit) }}"
-    ah_path_prefix:   "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:   "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:  "{{ aap_request_timeout | default(omit) }}"
+    state: "{{ __hub_group_item.state | default(ah_state | default('present')) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
   loop: "{{ aap_teams }}"
   loop_control:
     loop_var: __hub_group_item
     label: "{{ __operation.verb }} the group {{ __hub_group_item.name }} in Hub"
-    pause: "{{ ah_configuration_group_loop_delay }}"
-  no_log: "{{ ah_configuration_group_secure_logging }}"
-  async: "{{ ah_configuration_group_async_timeout }}"
+    pause: "{{ hub_configuration_group_loop_delay }}"
+  no_log: "{{ hub_configuration_group_secure_logging }}"
+  async: "{{ hub_configuration_group_async_timeout }}"
   poll: 0
   register: __groups_job_async
   changed_when: not __groups_job_async.changed
   vars:
     __operation: "{{ operation_translate[__hub_group_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create Group | Wait for finish the group creation"
+- name: Create Group | Wait for finish the group creation
   ansible.builtin.async_status:
     jid: "{{ __groups_job_async_result_item.ansible_job_id }}"
   register: __groups_job_async_result
   until: __groups_job_async_result.finished
-  retries: "{{ ah_configuration_group_async_retries }}"
-  delay: "{{ ah_configuration_group_async_delay }}"
+  retries: "{{ hub_configuration_group_async_retries }}"
+  delay: "{{ hub_configuration_group_async_delay }}"
   loop: "{{ __groups_job_async.results }}"
   loop_control:
     loop_var: __groups_job_async_result_item
     label: "{{ __operation.verb }} Label {{ __groups_job_async_result_item.__hub_group_item.name }} | Wait for finish the Label {{ __operation.action }}"
   when: __groups_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_group_secure_logging }}"
+  no_log: "{{ hub_configuration_group_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__groups_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

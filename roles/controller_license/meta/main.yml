@@ -1,6 +1,6 @@
 ---
 galaxy_info:
-  role_name: "license"
+  role_name: license
   author: Red Hat CoP
   description: A role to set the Ansible Controller License
   company: Red Hat
@@ -30,16 +30,16 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-    - name: "EL"
+    - name: EL
       versions:
-        - "all"
+        - all
 
   galaxy_tags:
-    - "controller"
-    - "aap"
-    - "awx"
-    - "configuration"
-    - "license"
+    - controller
+    - aap
+    - awx
+    - configuration
+    - license
 
 collections:
   - ansible.controller

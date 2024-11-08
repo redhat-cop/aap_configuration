@@ -20,7 +20,7 @@ Currently:
 |:---|:---:|:---:|:---|:---|
 |`platform_state`|"present"|no|The state all objects will take unless overridden by object default|'absent'|
 |`aap_hostname`|""|yes|URL to the Ansible Automation Platform Server.|127.0.0.1|
-|`aap_validate_certs`|`True`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
+|`aap_validate_certs`|`true`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
 |`aap_username`|""|no|Admin User on the Ansible Automation Platform Server. Either username / password or oauthtoken need to be specified.||
 |`aap_password`|""|no|Platform Admin User's password on the Server.  This should be stored in an Ansible Vault at vars/platform-secrets.yml or elsewhere and called from a parent playbook.||
 |`aap_token`|""|no|Controller Admin User's token on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.||
@@ -33,13 +33,13 @@ Currently:
 
 The following Variables compliment each other.
 If Both variables are not set, secure logging defaults to false.
-The role defaults to False as normally the add license task does not include sensitive information.
+The role defaults to false as normally the add license task does not include sensitive information.
 controller_configuration_license_secure_logging defaults to the value of aap_configuration_secure_logging if it is not explicitly called. This allows for secure logging to be toggled for the entire suite of controller configuration roles with a single variable, or for the user to selectively use it.
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`controller_configuration_license_secure_logging`|`False`|no|Whether or not to include the sensitive license role tasks in the log. Set this value to `True` if you will be providing your sensitive values from elsewhere.|
-|`aap_configuration_secure_logging`|`False`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
+|`controller_configuration_license_secure_logging`|`false`|no|Whether or not to include the sensitive license role tasks in the log. Set this value to `true` if you will be providing your sensitive values from elsewhere.|
+|`aap_configuration_secure_logging`|`false`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
 
 ## Data Structure
 
@@ -59,7 +59,7 @@ The module and this role can use either a manifest file, or lookup the subscript
 |`manifest_password`|""|no|obj|Optional password for access to `manifest_url`|
 |`pool_id`|""|no|str|Red Hat or Red Hat Satellite pool_id to attach to|
 |`eula_accepted`|""|yes|bool|DEPRECATED since Tower 3.8 - Whether to accept the End User License Agreement for Ansible controller|
-|`force`|`False`|no|bool|By default, the license manifest will only be applied if controller is currently unlicensed or trial licensed. When force=true, the license is always applied.|
+|`force`|`false`|no|bool|By default, the license manifest will only be applied if controller is currently unlicensed or trial licensed. When force=true, the license is always applied.|
 |`state`|`present`|no|str|Desired state of the resource.|
 
 ### License Variables for using Red Hat Subscription
@@ -70,8 +70,8 @@ The module and this role can use either a manifest file, or lookup the subscript
 |`support_level`|"Self-Support"|no|str|DEPRECATED - changed to `manifest_file` (still works as an alias)|
 |`list_num`|0|no|int|List index of the subscription to use, if you want to overide the default, it is recomended to use the filters to limit the pools found.|
 |`pool_id`|""|no|str|Red Hat or Red Hat Satellite pool_id to attach to.|
-|`force`|`False`|no|bool|By default, the license will only be applied if controller is currently unlicensed or trial licensed. When force=true, the license is always applied.|
-|`use_lookup`|`False`|no|bool|Whether or not to lookup subscriptions.|
+|`force`|`false`|no|bool|By default, the license will only be applied if controller is currently unlicensed or trial licensed. When force=true, the license is always applied.|
+|`use_lookup`|`false`|no|bool|Whether or not to lookup subscriptions.|
 |`state`|`present`|no|str|Desired state of the resource.|
 
 ### Standard License Data Structure

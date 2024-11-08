@@ -1,5 +1,5 @@
 ---
-ah_namespaces:
+hub_namespaces:
   - name: abc15
     company: Redhat
     email: user@example.com
@@ -7,8 +7,8 @@ ah_namespaces:
     description: string
     resources: "# Redhat\nA Namespace test with changes"
     links:
-      - name: "New_Google"
-        url: "http://www.google.com"
+      - name: New_Google
+        url: http://www.google.com
     groups:
       - system:partner-engineers
 ...

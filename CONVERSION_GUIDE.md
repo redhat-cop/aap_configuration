@@ -40,7 +40,7 @@ These are the connection variables, These are used to connect to the platform. T
 |Variable Name|Default Value|Required|Description|Example|
 |:---|:---:|:---:|:---|:---|
 |`aap_hostname`|""|yes|URL to the Ansible Automation Platform Server.|127.0.0.1|
-|`aap_validate_certs`|`True`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
+|`aap_validate_certs`|`true`|no|Whether or not to validate the Ansible Automation Platform Server's SSL certificate.||
 |`aap_username`|""|no|Admin User on the Ansible Automation Platform Server. Either username / password or oauthtoken need to be specified.||
 |`aap_password`|""|no|Platform Admin User's password on the Server.  This should be stored in an Ansible Vault at vars/platform-secrets.yml or elsewhere and called from a parent playbook.||
 |`aap_token`|""|no|Controller Admin User's token on the Ansible Automation Platform Server. This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.||
@@ -52,8 +52,8 @@ Other Variables that will apply to all roles when used globally. Each of these h
 
 |Variable Name|Default Value|Required|Description|
 |:---|:---:|:---:|:---|
-|`aap_configuration_enforce_defaults`|`False`|no|Whether or not to enforce default option values. This is not universal and it is a best effort to enforce the default values of fields.|
-|`aap_configuration_secure_logging`|`False`|no|Whether or not to include the sensitive Registry role tasks in the log.  Set this value to `True` if you will be providing your sensitive values from elsewhere.|
+|`aap_configuration_enforce_defaults`|`false`|no|Whether or not to enforce default option values. This is not universal and it is a best effort to enforce the default values of fields.|
+|`aap_configuration_secure_logging`|`false`|no|Whether or not to include the sensitive Registry role tasks in the log.  Set this value to `true` if you will be providing your sensitive values from elsewhere.|
 |`aap_configuration_async_retries`|50|no|This variable sets the number of retries to attempt for each role globally.|
 |`aap_configuration_async_delay`|1|no|This sets the delay between retries for each role globally.|
 |`aap_configuration_loop_delay`|1000|no|This variable sets the loop_delay for each role globally.|
@@ -86,13 +86,15 @@ ah_configuration vars:
 
 - aap_teams <- ah_groups
 - aap_user_accounts <- ah_users
-- ah_namespaces
-- ah_collections
-- ah_ee_registries
-- ah_ee_repositories
-- ah_ee_images
-- ah_collection_remotes
-- ah_collection_repositories
+- hub_namespaces <- ah_namespaces
+- hub_collections <- ah_collections
+- hub_ee_registries <- ah_ee_registries
+- hub_ee_repositories <- ah_ee_repositories
+- hub_ee_images <- ah_ee_images
+- hub_collection_remotes <- ah_collection_remotes
+- hub_collection_repositories <- ah_collection_repositories
+- hub_group_roles <- ah_group_roles
+- hub_roles <- ah_roles
 
 controller_configuration vars:
 
@@ -175,7 +177,7 @@ controller_configuration_projects_loop_delay
 however
 ah_configuration_collection_repository_async_delay
 is now
-ah_configuration_collection_repository_loop_delay
+hub_configuration_collection_repository_loop_delay
 
 These are the following global variables:
 
@@ -204,7 +206,7 @@ Format:
 - `prefix`+`role_name`+`_loop_delay`
 - `prefix`+`role_name`+`_async_dir`
 
-use these to tweak how the role runs, this is particulary useful for projects syncing, long lists of job templates, and other tasks that can take a while to loop around. These all have defaults, and each global var is described above as to what it does.
+use these to tweak how the role runs, this is particularly useful for projects syncing, long lists of job templates, and other tasks that can take a while to loop around. These all have defaults, and each global var is described above as to what it does.
 
 ## Dispatch changes
 

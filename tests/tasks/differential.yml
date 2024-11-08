@@ -1,92 +1,94 @@
 ---
-- name: "Get the API list in the Default Organization of all {{ differential_item.name }}"
+- name: differential | Get the API list in the Default Organization of all {{ differential_item.name }}
   ansible.builtin.set_fact:
-    controller_api_results: "{{ query(controller_api_plugin, differential_item.name, query_params=({'organization': controller_organization_id.id}) if differential_item.name is not match('hosts') else {}, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false) }}"
+    controller_api_results: "{{ query(controller_api_plugin, differential_item.name, query_params=({'organization': controller_organization_id.id}) if differential_item.name
+      is not match('hosts') else {}, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false) }}"
 
-- name: "Find the difference between what is on the Controller versus curated list of {{ differential_item.name }}"
+- name: differential | Find the difference between what is on the Controller versus curated list of {{ differential_item.name }}
   ansible.builtin.set_fact:
-    set_absent_diff: "{{ query('controller_object_diff', api_list=controller_api_results, compare_list=differential_item.differential_test_items, with_present=differential_item.with_present) | flatten }}"
+    set_absent_diff: "{{ query('controller_object_diff', api_list=controller_api_results, compare_list=differential_item.differential_test_items, with_present=differential_item.with_present)
+      | flatten }}"
 
-- name: Display set_absent_diff
+- name: differential | Display set_absent_diff
   ansible.builtin.debug:
     var: set_absent_diff
 
-- name: Display differential_item.expected_test_result
+- name: differential | Display differential_item.expected_test_result
   ansible.builtin.debug:
     var: differential_item.expected_test_result
 
-- name: "Assert that the expected results match for {{ differential_item.name }}"
+- name: differential | Assert that the expected results match for {{ differential_item.name }}
   ansible.builtin.assert:
     that:
       - set_absent_diff == differential_item.expected_test_result
 
-- name: Run differential applications
+- name: differential | Run differential applications
   ansible.builtin.include_role:
     name: applications
   vars:
     controller_applications: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'applications'
+  when: differential_item.name == 'applications'
 
-- name: Run differential credentials
+- name: differential | Run differential credentials
   ansible.builtin.include_role:
     name: credentials
   vars:
     controller_credentials: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'credentials'
+  when: differential_item.name == 'credentials'
 
-- name: Run differential projects
+- name: differential | Run differential projects
   ansible.builtin.include_role:
     name: projects
   vars:
     controller_projects: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'projects'
+  when: differential_item.name == 'projects'
 
-- name: Run differential inventories
+- name: differential | Run differential inventories
   ansible.builtin.include_role:
     name: inventories
   vars:
     controller_inventories: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'inventories'
+  when: differential_item.name == 'inventories'
 
-- name: Run differential inventory_sources
+- name: differential | Run differential inventory_sources
   ansible.builtin.include_role:
     name: inventory_sources
   vars:
     controller_inventory_sources: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'inventory_sources'
+  when: differential_item.name == 'inventory_sources'
 
-- name: Run differential labels
+- name: differential | Run differential labels
   ansible.builtin.include_role:
     name: labels
   vars:
     controller_labels: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'labels'
+  when: differential_item.name == 'labels'
 
-- name: Run differential teams
+- name: differential | Run differential teams
   ansible.builtin.include_role:
     name: teams
   vars:
     controller_teams: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'teams'
+  when: differential_item.name == 'teams'
 
-- name: Run differential notification_templates
+- name: differential | Run differential notification_templates
   ansible.builtin.include_role:
     name: notification_templates
   vars:
     controller_notifications: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'notification_templates'
+  when: differential_item.name == 'notification_templates'
 
-- name: Run differential job_templates
+- name: differential | Run differential job_templates
   ansible.builtin.include_role:
     name: job_templates
   vars:
     controller_templates: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'job_templates'
+  when: differential_item.name == 'job_templates'
 
-- name: Run differential workflow_job_templates
+- name: differential | Run differential workflow_job_templates
   ansible.builtin.include_role:
     name: workflow_job_templates
   vars:
     controller_workflows: "{{ set_absent_diff }}"
-  when:  differential_item.name == 'workflow_job_templates'
+  when: differential_item.name == 'workflow_job_templates'
 ...

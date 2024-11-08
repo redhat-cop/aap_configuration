@@ -1,9 +1,13 @@
 ---
-https_port_lookup: "{{ lookup('ansible.platform.gateway_api', 'http_ports', query_params={ 'is_api_port': true }, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false, expect_one=true) }}"
-gateway_services_lookup: "{{ lookup('ansible.platform.gateway_api', 'services', query_params={ 'name': 'gateway api' }, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false, expect_one=true) }}"
-service_node_name: "Node gateway - {{ aap_hostname | urlsplit('hostname') }}"
-gateway_service_node_lookup: "{{ lookup('ansible.platform.gateway_api', 'service_nodes', query_params={ 'name': service_node_name }, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false, expect_one=true) }}"
-gateway_routes_lookup: "{{ lookup('ansible.platform.gateway_api', 'routes', query_params={ 'name': 'hub container registry' }, host=aap_hostname, username=aap_username, password=aap_password, verify_ssl=false, expect_one=true) }}"
+https_port_lookup: "{{ lookup('ansible.platform.gateway_api', 'http_ports', query_params={ 'is_api_port': true }, host=aap_hostname, username=aap_username, password=aap_password,
+  verify_ssl=false, expect_one=true) }}"
+gateway_services_lookup: "{{ lookup('ansible.platform.gateway_api', 'services', query_params={ 'name': 'gateway api' }, host=aap_hostname, username=aap_username,
+  password=aap_password, verify_ssl=false, expect_one=true) }}"
+service_node_name: Node gateway - {{ aap_hostname | urlsplit('hostname') }}
+gateway_service_node_lookup: "{{ lookup('ansible.platform.gateway_api', 'service_nodes', query_params={ 'name': service_node_name }, host=aap_hostname, username=aap_username,
+  password=aap_password, verify_ssl=false, expect_one=true) }}"
+gateway_routes_lookup: "{{ lookup('ansible.platform.gateway_api', 'routes', query_params={ 'name': 'hub container registry' }, host=aap_hostname, username=aap_username,
+  password=aap_password, verify_ssl=false, expect_one=true) }}"
 
 http_ports:
   - name: "{{ https_port_lookup.name }}"
@@ -17,7 +21,7 @@ gateway_services:
   - name: gateway api
     http_port: port-443
     service_cluster: gateway
-    service_path: "/"
+    service_path: /
     service_port: "{{ gateway_services_lookup.service_port | int }}"
 
 gateway_service_nodes:

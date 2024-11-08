@@ -1,24 +1,23 @@
 ---
-
 # Create EDA Controller Rulebook Activation
 - name: Add EDA Controller rulebook activation
   ansible.eda.rulebook_activation:
-    name:                 "{{ __ra_item.name }}"
-    description:          "{{ __ra_item.description | default(omit) }}"
-    project:              "{{ __ra_item.project | default(omit) }}"
-    rulebook:             "{{ __ra_item.rulebook | default(omit) }}"
+    name: "{{ __ra_item.name }}"
+    description: "{{ __ra_item.description | default(omit) }}"
+    project: "{{ __ra_item.project | default(omit) }}"
+    rulebook: "{{ __ra_item.rulebook | default(omit) }}"
     decision_environment: "{{ __ra_item.decision_environment | default(omit) }}"
-    awx_token:            "{{ __ra_item.awx_token | default(omit) }}"
-    restart_policy:       "{{ __ra_item.restart_policy | default(omit) }}"
-    extra_vars:           "{{ __ra_item.extra_vars | default(omit) }}"
-    enabled:              "{{ __ra_item.enabled | default(omit) }}"
-    organization:    "{{ __ra_item.organization | default(omit) }}"
-    eda_credentials:      "{{ __ra_item.eda_credentials | default(omit) }}"
-    k8s_service_name:     "{{ __ra_item.k8s_service_name | default(omit) }}"
-    swap_single_source:   "{{ __ra_item.swap_single_source | default(omit) }}"
-    event_streams:        "{{ __ra_item.event_streams | default(omit) }}"
-    log_level:            "{{ __ra_item.log_level | default(omit) }}"
-    state:                "{{ __ra_item.state | default(eda_state | default('present')) }}"
+    awx_token: "{{ __ra_item.awx_token | default(omit) }}"
+    restart_policy: "{{ __ra_item.restart_policy | default(omit) }}"
+    extra_vars: "{{ __ra_item.extra_vars | default(omit) }}"
+    enabled: "{{ __ra_item.enabled | default(omit) }}"
+    organization: "{{ __ra_item.organization | default(omit) }}"
+    eda_credentials: "{{ __ra_item.eda_credentials | default(omit) }}"
+    k8s_service_name: "{{ __ra_item.k8s_service_name | default(omit) }}"
+    swap_single_source: "{{ __ra_item.swap_single_source | default(omit) }}"
+    event_streams: "{{ __ra_item.event_streams | default(omit) }}"
+    log_level: "{{ __ra_item.log_level | default(omit) }}"
+    state: "{{ __ra_item.state | default(eda_state | default('present')) }}"
     controller_host: "{{ aap_hostname | default(omit, true) }}"
     controller_username: "{{ aap_username | default(omit, true) }}"
     controller_password: "{{ aap_password | default(omit, true) }}"
@@ -26,7 +25,7 @@
     validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ eda_rulebook_activations }}"
   loop_control:
-    loop_var: "__ra_item"
+    loop_var: __ra_item
     label: "{{ __operation.verb }} the rulebook activation {{ __ra_item.name }} to EDA"
     pause: "{{ eda_configuration_rulebook_activations_async_delay }}"
   no_log: "{{ eda_configuration_rulebook_activations_secure_logging }}"
@@ -36,9 +35,9 @@
   changed_when: not __rulebook_activations_job_async.changed
   vars:
     __operation: "{{ operation_translate[__ra_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create rulebook_activation | Wait for finish the rulebook_activation creation"
+- name: Create rulebook_activation | Wait for finish the rulebook_activation creation
   ansible.builtin.async_status:
     jid: "{{ __rulebook_activations_job_async_result_item.ansible_job_id }}"
   register: __rulebook_activations_job_async_result
@@ -48,10 +47,11 @@
   loop: "{{ __rulebook_activations_job_async.results }}"
   loop_control:
     loop_var: __rulebook_activations_job_async_result_item
-    label: "{{ __operation.verb }} rulebook activation {{ __rulebook_activations_job_async_result_item.__ra_item.name }} | Wait for finish the rulebook activation {{ __operation.action }}"
+    label: "{{ __operation.verb }} rulebook activation {{ __rulebook_activations_job_async_result_item.__ra_item.name }} | Wait for finish the rulebook activation
+      {{ __operation.action }}"
   when: __rulebook_activations_job_async_result_item.ansible_job_id is defined
   no_log: "{{ eda_configuration_rulebook_activations_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__rulebook_activations_job_async_result.__ra_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

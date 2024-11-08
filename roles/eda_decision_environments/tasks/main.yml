@@ -1,15 +1,14 @@
 ---
-
 # Create EDA Controller Decision Environment
 - name: Add EDA Controller decision environment
   ansible.eda.decision_environment:
-    name:                "{{ __de_item.name }}"
-    new_name:            "{{ __de_item.new_name | default(omit) }}"
-    description:         "{{ __de_item.description | default(omit) }}"
-    image_url:           "{{ __de_item.image_url | default(omit) }}"
-    credential:          "{{ __de_item.credential | default(omit) }}"
-    organization_name:   "{{ __de_item.organization | default(omit) }}"
-    state:               "{{ __de_item.state | default(eda_state | default('present')) }}"
+    name: "{{ __de_item.name }}"
+    new_name: "{{ __de_item.new_name | default(omit) }}"
+    description: "{{ __de_item.description | default(omit) }}"
+    image_url: "{{ __de_item.image_url | default(omit) }}"
+    credential: "{{ __de_item.credential | default(omit) }}"
+    organization_name: "{{ __de_item.organization | default(omit) }}"
+    state: "{{ __de_item.state | default(eda_state | default('present')) }}"
     controller_host: "{{ aap_hostname | default(omit, true) }}"
     controller_username: "{{ aap_username | default(omit, true) }}"
     controller_password: "{{ aap_password | default(omit, true) }}"
@@ -17,7 +16,7 @@
     validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ eda_decision_environments }}"
   loop_control:
-    loop_var: "__de_item"
+    loop_var: __de_item
     label: "{{ __operation.verb }} the decisiion environment {{ __de_item.name }} to EDA"
     pause: "{{ eda_configuration_decision_environments_async_delay }}"
   no_log: "{{ eda_configuration_decision_environments_secure_logging }}"
@@ -27,9 +26,9 @@
   changed_when: not __decision_environments_job_async.changed
   vars:
     __operation: "{{ operation_translate[__de_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create decision_environment | Wait for finish the decision_environment creation"
+- name: Create decision_environment | Wait for finish the decision_environment creation
   ansible.builtin.async_status:
     jid: "{{ __decision_environments_job_async_result_item.ansible_job_id }}"
   register: __decision_environments_job_async_result
@@ -39,10 +38,11 @@
   loop: "{{ __decision_environments_job_async.results }}"
   loop_control:
     loop_var: __decision_environments_job_async_result_item
-    label: "{{ __operation.verb }} decisiion environment {{ __decision_environments_job_async_result_item.__de_item.name }} | Wait for finish the decisiion environment {{ __operation.action }}"
-  when:  __decision_environments_job_async_result_item.ansible_job_id is defined
+    label: "{{ __operation.verb }} decisiion environment {{ __decision_environments_job_async_result_item.__de_item.name }} | Wait for finish the decisiion environment
+      {{ __operation.action }}"
+  when: __decision_environments_job_async_result_item.ansible_job_id is defined
   no_log: "{{ eda_configuration_decision_environments_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__decision_environments_job_async_result_item.__de_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

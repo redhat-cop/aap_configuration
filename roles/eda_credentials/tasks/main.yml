@@ -1,15 +1,14 @@
 ---
-
 # Create EDA Controller Credential
 - name: Add EDA Controller credential
   ansible.eda.credential:
-    name:                 "{{ __credential_item.name }}"
-    new_name:             "{{ __credential_item.new_name | default(omit) }}"
-    description:          "{{ __credential_item.description | default(omit) }}"
-    organization_name:    "{{ __credential_item.organization | default(omit) }}"
+    name: "{{ __credential_item.name }}"
+    new_name: "{{ __credential_item.new_name | default(omit) }}"
+    description: "{{ __credential_item.description | default(omit) }}"
+    organization_name: "{{ __credential_item.organization | default(omit) }}"
     credential_type_name: "{{ __credential_item.credential_type | mandatory }}"
-    inputs:               "{{ __credential_item.inputs | default(omit) }}"
-    state:                "{{ __credential_item.state | default(eda_state | default('present')) }}"
+    inputs: "{{ __credential_item.inputs | default(omit) }}"
+    state: "{{ __credential_item.state | default(eda_state | default('present')) }}"
     controller_host: "{{ aap_hostname | default(omit, true) }}"
     controller_username: "{{ aap_username | default(omit, true) }}"
     controller_password: "{{ aap_password | default(omit, true) }}"
@@ -17,7 +16,7 @@
     validate_certs: "{{ aap_validate_certs | default(omit) }}"
   loop: "{{ eda_credentials }}"
   loop_control:
-    loop_var: "__credential_item"
+    loop_var: __credential_item
     label: "{{ __operation.verb }} the credential {{ __credential_item.name }} to EDA"
     pause: "{{ eda_configuration_credentials_async_delay }}"
   no_log: "{{ eda_configuration_credentials_secure_logging }}"
@@ -27,9 +26,9 @@
   changed_when: not __credentials_job_async.changed
   vars:
     __operation: "{{ operation_translate[__credentials_job_async.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create credential | Wait for finish the credential creation"
+- name: Create credential | Wait for finish the credential creation
   ansible.builtin.async_status:
     jid: "{{ __credentials_job_async_result_item.ansible_job_id }}"
   register: __credentials_job_async_result
@@ -44,5 +43,5 @@
   no_log: "{{ eda_configuration_credentials_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__credentials_job_async_result_item.__controller_user_accounts_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 ...

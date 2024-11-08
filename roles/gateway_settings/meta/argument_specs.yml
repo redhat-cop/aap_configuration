@@ -4,9 +4,7 @@ argument_specs:
     short_description: An Ansible Role to create settings on automation platform gateway.
     options:
       gateway_settings:
-        description: >-
-          Data structure describing your settings. Type is list if providing
-          name/value and type dict if providing settings.
+        description: Data structure describing your settings. Type is list if providing name/value and type dict if providing settings.
         required: true
         type: raw
       # Async variables
@@ -27,21 +25,16 @@ argument_specs:
         required: false
         description: This variable sets delay between retries across all roles as a default.
       aap_configuration_async_dir:
-        default: null
+        default:
         required: false
-        description: >
-          Sets the directory to write the results file for async tasks.
-          The default value is set to `null` which uses the Ansible Default of `~/.ansible_async`.
-
+        description: Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `~/.ansible_async`.
 
       # No_log variables
       gateway_services_secure_logging:
         default: "{{ aap_configuration_secure_logging | default(true) }}"
         required: false
         type: bool
-        description: >
-          Whether or not to include the sensitive tasks from this role in the log.
-          Set this value to `true` if you will be providing your sensitive values from elsewhere.
+        description: Whether or not to include the sensitive tasks from this role in the log. Set this value to `true` if you will be providing your sensitive values from elsewhere.
       aap_configuration_secure_logging:
         default: true
         required: false

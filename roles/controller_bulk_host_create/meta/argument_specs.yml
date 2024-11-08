@@ -10,7 +10,7 @@ argument_specs:
 
       # Async variables
       aap_configuration_async_dir:
-        default: null
+        default:
         required: false
         description: Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.
 

@@ -1,5 +1,5 @@
 ---
-ah_collection_remotes:
+hub_collection_remotes:
   - name: community-infra
     url: https://beta-galaxy.ansible.com/
     requirements:

@@ -1,6 +1,6 @@
 ---
-ah_configuration_repository_sync_async_delay: 5
-ah_configuration_repository_sync_async_retries: 150
+hub_configuration_repository_sync_async_delay: 5
+hub_configuration_repository_sync_async_retries: 150
 ah_repositories:
   - name: community
     url: https://beta-galaxy.ansible.com/
@@ -12,36 +12,36 @@ ah_repositories:
     timeout: 1000000
 
 # newer version
-ah_configuration_collection_repository_async_delay: 5
-ah_configuration_collection_repository_async_retries: 150
-ah_configuration_collection_repository_sync_async_delay: 5
-ah_configuration_collection_repository_sync_async_retries: 150
-ah_collection_remotes:
+hub_configuration_collection_repository_async_delay: 5
+hub_configuration_collection_repository_async_retries: 150
+hub_configuration_collection_repository_sync_async_delay: 5
+hub_configuration_collection_repository_sync_async_retries: 150
+hub_collection_remotes:
   - name: community-infra
     url: https://beta-galaxy.ansible.com/
     requirements:
       - name: infra.ee_utilities
       - name: infra.controller_configuration
 
-ah_collection_repositories:
+hub_collection_repositories:
   - name: community-infra-repo
-    description: "description of community-infra repository"
+    description: description of community-infra repository
     pulp_labels:
-      pipeline: "approved"
+      pipeline: approved
     distribution:
       state: present
     remote: community-infra
   - name: community-infra-repo-nodistro
-    description: "description of community-infra repository"
+    description: description of community-infra repository
     pulp_labels:
-      pipeline: "approved"
+      pipeline: approved
     remote: community-infra
   - name: community-infra-repo-noremote
-    description: "description of community-infra repository"
+    description: description of community-infra repository
     pulp_labels:
-      pipeline: "approved"
+      pipeline: approved
     distribution:
       state: present
   - name: community-infra-repo-nothing
-    description: "description of community-infra repository"
+    description: description of community-infra repository
 ...

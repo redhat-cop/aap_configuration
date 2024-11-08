@@ -12,7 +12,7 @@
     - name: Include vars from eda_configs directory
       ansible.builtin.include_vars:
         dir: ./vars
-        extensions: ["yml"]
+        extensions: [yml]
       tags:
         - always
   roles:

@@ -1,15 +1,15 @@
 ---
-- name: Combine id output with defaults temp
+- name: ad_hoc_cancel | Combine id output with defaults temp
   ansible.builtin.set_fact:
     tmp_ad_hoc: "{{ {'id': item.id} | combine(controller_ad_hoc_command_defaults) }}"
   with_items: "{{ controller_ad_hoc_commands_output.results }}"
   register: tmp_ad_hocs
 
-- name: Combine id output with defaults
+- name: ad_hoc_cancel | Combine id output with defaults
   ansible.builtin.set_fact:
     controller_ad_hoc_commands_cancel: "{{ tmp_ad_hocs.results | map(attribute='ansible_facts.tmp_ad_hoc') | list }}"
 
-- name: Cancel ad hoc commands
+- name: ad_hoc_cancel | Cancel ad hoc commands
   ansible.builtin.include_role:
     name: controller_ad_hoc_command_cancel
   when: controller_ad_hoc_commands is defined

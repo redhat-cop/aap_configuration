@@ -1,21 +1,21 @@
 ---
 job_templates:
   - name: No Survey Template no vars
-    description: ''
+    description: ""
     job_type: run
     playbook: helloworld.yml
-    scm_branch: ''
+    scm_branch: ""
     forks: 0
-    limit: ''
+    limit: ""
     verbosity: 0
     extra_vars: '{"empty_var": "nothing"}'
-    job_tags: ''
+    job_tags: ""
     force_handlers: false
-    skip_tags: ''
-    start_at_task: ''
+    skip_tags: ""
+    start_at_task: ""
     timeout: 0
     use_fact_cache: false
-    host_config_key: ''
+    host_config_key: ""
     ask_scm_branch_on_launch: false
     ask_diff_mode_on_launch: false
     ask_variables_on_launch: false
@@ -30,9 +30,9 @@ job_templates:
     become_enabled: false
     diff_mode: false
     allow_simultaneous: false
-    custom_virtualenv: null
+    custom_virtualenv:
     job_slice_count: 1
-    webhook_service: ''
+    webhook_service: ""
     inventory:
       organization:
         name: Satellite
@@ -48,7 +48,7 @@ job_templates:
     related:
       labels: []
       credentials:
-        - organization: null
+        - organization:
           name: Demo Credential
           credential_type:
             name: Machine
@@ -72,21 +72,21 @@ job_templates:
       name: No Survey Template no vars
       type: job_template
   - name: Survey Template with vars no org
-    description: ''
+    description: ""
     job_type: run
     playbook: helloworld.yml
-    scm_branch: ''
+    scm_branch: ""
     forks: 0
-    limit: ''
+    limit: ""
     verbosity: 0
     extra_vars: '{"example_a": "127.0.0.1", "example_b": "text"}'
-    job_tags: ''
+    job_tags: ""
     force_handlers: false
-    skip_tags: ''
-    start_at_task: ''
+    skip_tags: ""
+    start_at_task: ""
     timeout: 0
     use_fact_cache: false
-    host_config_key: ''
+    host_config_key: ""
     ask_scm_branch_on_launch: false
     ask_diff_mode_on_launch: false
     ask_variables_on_launch: false
@@ -101,9 +101,9 @@ job_templates:
     become_enabled: false
     diff_mode: false
     allow_simultaneous: false
-    custom_virtualenv: null
+    custom_virtualenv:
     job_slice_count: 1
-    webhook_service: ''
+    webhook_service: ""
     inventory:
       organization:
         name: Satellite
@@ -123,7 +123,7 @@ job_templates:
             name: Default
             type: organization
       credentials:
-        - organization: null
+        - organization:
           name: Demo Credential
           credential_type:
             name: Machine
@@ -145,10 +145,10 @@ job_templates:
         spec:
           - question_description: Name
             min: 0
-            default: ''
+            default: ""
             max: 128
             required: true
-            choices: ''
+            choices: ""
             new_question: true
             variable: basic_name
             question_name: Basic Name
@@ -165,9 +165,9 @@ job_templates:
             variable: option_true_false
             question_name: Choose yes or no?
             type: multiplechoice
-          - question_description: ''
+          - question_description: ""
             min: 0
-            default: ''
+            default: ""
             max: 0
             required: true
             choices: |-
@@ -176,7 +176,7 @@ job_templates:
               group3
             new_question: true
             variable: target_groups
-            question_name: 'Select Group:'
+            question_name: "Select Group:"
             type: multiselect
     natural_key:
       organization:
@@ -185,21 +185,21 @@ job_templates:
       name: Survey Template with vars no org
       type: job_template
   - name: workflow_test_template
-    description: ''
+    description: ""
     job_type: run
     playbook: helloworld.yml
-    scm_branch: ''
+    scm_branch: ""
     forks: 0
-    limit: ''
+    limit: ""
     verbosity: 0
     extra_vars: '{"empty_var": "nothing"}'
-    job_tags: ''
+    job_tags: ""
     force_handlers: false
-    skip_tags: ''
-    start_at_task: ''
+    skip_tags: ""
+    start_at_task: ""
     timeout: 0
     use_fact_cache: false
-    host_config_key: ''
+    host_config_key: ""
     ask_scm_branch_on_launch: false
     ask_diff_mode_on_launch: true
     ask_variables_on_launch: false
@@ -214,9 +214,9 @@ job_templates:
     become_enabled: false
     diff_mode: false
     allow_simultaneous: false
-    custom_virtualenv: null
+    custom_virtualenv:
     job_slice_count: 1
-    webhook_service: ''
+    webhook_service: ""
     inventory:
       organization:
         name: Satellite
@@ -232,7 +232,7 @@ job_templates:
     related:
       labels: []
       credentials:
-        - organization: null
+        - organization:
           name: Demo Credential
           credential_type:
             name: Machine

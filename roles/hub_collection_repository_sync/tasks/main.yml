@@ -2,45 +2,46 @@
 # Sync AH repository
 - name: Sync Automation Hub Collection Remote repository
   ansible.hub.collection_repository_sync:
-    name:                     "{{ __hub_collection_repository_sync_item.name }}"
-    wait:                     "{{ __hub_collection_repository_sync_item.wait | default(omit) }}"
-    interval:                 "{{ __hub_collection_repository_sync_item.interval | default(1) }}"
-    timeout:                  "{{ __hub_collection_repository_sync_item.timeout | default(omit) }}"
-    ah_host:                  "{{ aap_hostname | default(omit) }}"
-    ah_username:             "{{ aap_username | default(omit) }}"
-    ah_password:              "{{ aap_password | default(omit) }}"
-    ah_path_prefix:           "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:           "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:          "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_collection_repositories }}"
+    name: "{{ __hub_collection_repository_sync_item.name }}"
+    wait: "{{ __hub_collection_repository_sync_item.wait | default(omit) }}"
+    interval: "{{ __hub_collection_repository_sync_item.interval | default(1) }}"
+    timeout: "{{ __hub_collection_repository_sync_item.timeout | default(omit) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
+  loop: "{{ hub_collection_repositories }}"
   loop_control:
     loop_var: __hub_collection_repository_sync_item
     label: "{{ __operation.verb }} the sync {{ __hub_collection_repository_sync_item.name }} in Hub"
-    pause: "{{ ah_configuration_collection_repository_sync_loop_delay }}"
-  no_log: "{{ ah_configuration_collection_repository_sync_secure_logging }}"
-  async: "{{ ah_configuration_collection_repository_sync_async_timeout }}"
+    pause: "{{ hub_configuration_collection_repository_sync_loop_delay }}"
+  no_log: "{{ hub_configuration_collection_repository_sync_secure_logging }}"
+  async: "{{ hub_configuration_collection_repository_sync_async_timeout }}"
   poll: 0
   register: __collection_repository_sync_job_async
   changed_when: not __collection_repository_sync_job_async.changed
   vars:
     __operation: "{{ operation_translate[__hub_collection_repository_sync_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Sync Repository | Wait for finish the repository sync"
+- name: Sync Repository | Wait for finish the repository sync
   ansible.builtin.async_status:
     jid: "{{ __collection_repository_sync_job_async_result_item.ansible_job_id }}"
   register: __collection_repository_sync_job_async_result
   until: __collection_repository_sync_job_async_result.finished
-  retries: "{{ ah_configuration_collection_repository_sync_async_retries }}"
-  delay: "{{ ah_configuration_collection_repository_sync_async_delay }}"
+  retries: "{{ hub_configuration_collection_repository_sync_async_retries }}"
+  delay: "{{ hub_configuration_collection_repository_sync_async_delay }}"
   loop: "{{ __collection_repository_sync_job_async.results }}"
   loop_control:
     loop_var: __collection_repository_sync_job_async_result_item
-    label: "{{ __operation.verb }} Collection repository sync {{ __collection_repository_sync_job_async_result_item.__hub_collection_repository_sync_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Collection repository sync {{ __collection_repository_sync_job_async_result_item.__hub_collection_repository_sync_item.name }}
+      | Wait for finish the Label {{ __operation.action }}"
   when: __collection_repository_sync_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_collection_repository_sync_secure_logging }}"
+  no_log: "{{ hub_configuration_collection_repository_sync_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__collection_repository_sync_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
 ...

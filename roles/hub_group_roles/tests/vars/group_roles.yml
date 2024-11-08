@@ -1,5 +1,5 @@
 ---
-ah_group_roles:
+hub_group_roles:
   - state: present
     groups:
       - santa

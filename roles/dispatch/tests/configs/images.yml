@@ -1,5 +1,5 @@
 ---
-ah_ee_images:
+hub_ee_images:
   - name: ansible-automation-platform-22-early-access/ee-supported-rhel8:2.0.0-15
     state: present
     append: false

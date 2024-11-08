@@ -45,7 +45,8 @@
   loop: "{{ __gateway_authenticator_maps_job_async.results }}"
   loop_control:
     loop_var: __gateway_authenticator_maps_job_async_results_item
-    label: "{{ __operation.verb }} AAP Platform Authenticator Maps {{ __gateway_authenticator_maps_job_async_results_item.__gateway_authenticator_maps_item.name }} | Wait for finish the Authenticator Map {{ __operation.action }}"
+    label: "{{ __operation.verb }} AAP Platform Authenticator Maps {{ __gateway_authenticator_maps_job_async_results_item.__gateway_authenticator_maps_item.name }}
+      | Wait for finish the Authenticator Map {{ __operation.action }}"
   when: __gateway_authenticator_maps_job_async_results_item.ansible_job_id is defined
   no_log: "{{ gateway_authenticator_maps_secure_logging }}"
   vars:

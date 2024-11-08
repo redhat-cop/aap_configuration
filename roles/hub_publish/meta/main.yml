@@ -1,9 +1,9 @@
 ---
 galaxy_info:
-  role_name: "hub_publish"
-  author: "Sean Sullivan"
-  description: "An Ansible Role to publish collections to Automation Hub or Galaxies."
-  company: "Red Hat"
+  role_name: hub_publish
+  author: Sean Sullivan
+  description: An Ansible Role to publish collections to Automation Hub or Galaxies.
+  company: Red Hat
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -25,17 +25,17 @@ galaxy_info:
   # platforms is a list of platforms, and each platform has a name and a list of versions.
   #
   platforms:
-    - name: "EL"
+    - name: EL
       versions:
-        - "all"
+        - all
 
   galaxy_tags:
-    - "automationhub"
-    - "galaxy"
-    - "configuration"
-    - "collection"
-    - "collections"
-    - "publish"
+    - automationhub
+    - galaxy
+    - configuration
+    - collection
+    - collections
+    - publish
 
 dependencies:
   - role: global_vars

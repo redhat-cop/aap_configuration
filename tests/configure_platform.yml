@@ -18,7 +18,7 @@
       ansible.builtin.include_vars:
         dir: ./configs
         ignore_files: [controller_config.yml.template]
-        extensions: ["yml"]
+        extensions: [yml]
       tags:
         - always
 
@@ -58,9 +58,8 @@
     #   delegate_to: localhost
 
   roles:
-    - dispatch  # The dispatch role calls all of the other roles.
+    - dispatch # The dispatch role calls all of the other roles.
   tasks:
-
     - name: Validate error handling
       block:
         - name: Add Invalid Job Templates to Controller
@@ -74,8 +73,8 @@
             that:
               - job_templates_errors is defined
               - job_templates_errors | length > 0
-            fail_msg: "No errors found, validate test example"
-            success_msg: "Errors found, proceeding"
+            fail_msg: No errors found, validate test example
+            success_msg: Errors found, proceeding
           vars:
             job_templates_errors: __job_templates_errors_set_stats.ansible_stats.data.job_templates_errors
 
@@ -91,7 +90,7 @@
       when: controller_ad_hoc_commands is defined
 
     - name: Cancel Ad hoc commands
-      ansible.builtin.include_tasks: "./tasks/ad_hoc_cancel.yml"
+      ansible.builtin.include_tasks: ./tasks/ad_hoc_cancel.yml
       when: controller_ad_hoc_commands is defined
 
     - name: Launch Controller Bulk Hosts
@@ -157,9 +156,9 @@
         job_id: "{{ launched_controller_workflows.results[0].id }}"
         job_type: workflow_jobs
         timeout: 180
-        controller_username:     "{{ aap_username }}"
-        controller_password:     "{{ aap_password }}"
-        controller_host:         "{{ aap_hostname }}"
-        validate_certs:          "{{ aap_validate_certs }}"
-      ignore_errors: true  # noqa ignore-errors
+        controller_username: "{{ aap_username }}"
+        controller_password: "{{ aap_password }}"
+        controller_host: "{{ aap_hostname }}"
+        validate_certs: "{{ aap_validate_certs }}"
+      ignore_errors: true # noqa ignore-errors
 ...

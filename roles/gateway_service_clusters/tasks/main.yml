@@ -47,7 +47,8 @@
   loop: "{{ __gateway_service_clusters_job_async.results }}"
   loop_control:
     loop_var: __gateway_service_clusters_job_async_results_item
-    label: "{{ __operation.verb }} Label {{ __gateway_service_clusters_job_async_results_item.__gateway_service_clusters_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Label {{ __gateway_service_clusters_job_async_results_item.__gateway_service_clusters_item.name }} | Wait for finish the Label
+      {{ __operation.action }}"
   when: __gateway_service_clusters_job_async_results_item.ansible_job_id is defined
   no_log: "{{ gateway_service_clusters_secure_logging }}"
   vars:

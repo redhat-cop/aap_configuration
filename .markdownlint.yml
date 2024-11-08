@@ -4,7 +4,7 @@ default: true
 # MD003/heading-style/header-style - Heading style
 # This will ensure that the heading format is consistent across all markdown files
 MD003:
-  style: "atx"
+  style: atx
 
 # MD013/line-length - Line length
 # Setting to false to match the yamllint setting
@@ -17,5 +17,5 @@ MD0046:
 
 MD033:
   allowed_elements:
-    - "br"
+    - br
 ...

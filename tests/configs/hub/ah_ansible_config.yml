@@ -2,7 +2,7 @@
 automation_hub_list:
   - name: automation_hub
     url: "{{ aap_hostname }}"
-    auth_url: "{{ aap_hostname }}api/galaxy/"  # {{aap_hostname}}api/galaxy/ for AH {{aap_hostname}}api/automation-hub/ for Galaxy
+    auth_url: "{{ aap_hostname }}api/galaxy/" # {{aap_hostname}}api/galaxy/ for AH {{aap_hostname}}api/automation-hub/ for Galaxy
 
 ansible_config_list:
   - header: galaxy
@@ -10,7 +10,7 @@ ansible_config_list:
       - key: ignore_certs
         value: "{% if validate_certs %}false{% else %}true{% endif %}"
       - key: server_list
-        value: "automation_hub"
+        value: automation_hub
 
-aap_configuration_working_dir: "test"
+aap_configuration_working_dir: test
 ...

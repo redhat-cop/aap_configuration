@@ -28,22 +28,14 @@ argument_specs:
             description: If a user does not meet this rule should we revoke the permission
           map_type:
             type: str
-            description: |
-              What does the map work on, a team, a user flag or is this an allow rule
-              Defaults to "team" (by API)
+            description: What does the map work on, a team, a user flag or is this an allow rule. Defaults to "team" (by API)
             choices: [allow, is_superuser, team, organization, role]
           team:
             type: str
-            description: |
-              A team name this rule works on
-              required if map_type is a 'team'
-              required if role's content type is a 'team'
+            description: A team name this rule works on required if map_type is a 'team' required if role's content type is a 'team'
           organization:
             type: str
-            description: |
-              An organization name this rule works on
-              required if map_type is either 'organization' or 'team'
-              required if role's content type is either 'organization' or 'team'
+            description: An organization name this rule works on required if map_type is either 'organization' or 'team' required if role's content type is either 'organization' or 'team'
           role:
             type: str
             description: The name of the RBAC Role Definition to be used for this map
@@ -52,10 +44,7 @@ argument_specs:
             description: Trigger information for this rule
           order:
             type: int
-            description: |
-              The order in which this rule should be processed, smaller numbers are of higher precedence
-              Items with the same order will be executed in random order
-              Value must be greater or equal to 0
+            description: The order in which this rule should be processed, smaller numbers are of higher precedence Items with the same order will be executed in random order Value must be greater or equal to 0
           state:
             default: "{{ platform_state | default('present') }}"
             required: false
@@ -80,11 +69,9 @@ argument_specs:
         required: false
         description: This variable sets delay between retries across all roles as a default.
       aap_configuration_async_dir:
-        default: null
+        default:
         required: false
-        description: >
-          Sets the directory to write the results file for async tasks.
-          The default value is set to `null` which uses the Ansible Default of `~/.ansible_async`.
+        description: Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `~/.ansible_async`.
 
 
       # No_log variables
@@ -92,9 +79,7 @@ argument_specs:
         default: "{{ aap_configuration_secure_logging | default(false) }}"
         required: false
         type: bool
-        description: >
-          Whether or not to include the sensitive tasks from this role in the log.
-          Set this value to `true` if you will be providing your sensitive values from elsewhere.
+        description: Whether or not to include the sensitive tasks from this role in the log. Set this value to `true` if you will be providing your sensitive values from elsewhere.
       aap_configuration_secure_logging:
         default: true
         required: false

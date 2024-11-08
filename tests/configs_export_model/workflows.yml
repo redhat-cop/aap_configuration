@@ -218,8 +218,8 @@ workflow_job_templates:
       notification_templates_error: []
       notification_templates_approvals: []
       survey_spec:
-        name: ''
-        description: ''
+        name: ""
+        description: ""
         spec:
           - question_name: Basic Name
             question_description: Name
@@ -228,8 +228,8 @@ workflow_job_templates:
             variable: basic_name
             min: 0
             max: 1024
-            default: ''
-            choices: ''
+            default: ""
+            choices: ""
             new_question: true
           - question_name: Choose yes or no?
             question_description: Choosing yes or no.
@@ -243,14 +243,14 @@ workflow_job_templates:
               yes
               no
             new_question: true
-          - question_name: 'Select Group:'
-            question_description: ''
+          - question_name: "Select Group:"
+            question_description: ""
             required: true
             type: multiplechoice
             variable: target_groups
             min:
             max:
-            default: ''
+            default: ""
             choices: |-
               group1
               group2

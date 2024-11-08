@@ -1,12 +1,12 @@
 ---
 # Cannot add more than one, cannot add existing type.
 gateway_service_clusters:
-  - name: "gateway"
-    service_type: "gateway"
-  - name: "hub"
-    service_type: "hub"
-  - name: "controller"
-    service_type: "controller"
+  - name: gateway
+    service_type: gateway
+  - name: hub
+    service_type: hub
+  - name: controller
+    service_type: controller
 
 gateway_service_keys:
   - name: Test-Key 1

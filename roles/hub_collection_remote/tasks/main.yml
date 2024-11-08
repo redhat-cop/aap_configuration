@@ -2,66 +2,67 @@
 # Create AH repository
 - name: Add Automation Hub Collection Remote repository
   ansible.hub.collection_remote:
-    name:                     "{{ __hub_collection_remote_item.name }}"
-    url:                      "{{ __hub_collection_remote_item.url }}"
-    auth_url:                 "{{ __hub_collection_remote_item.auth_url | default(omit) }}"
-    token:                    "{{ __hub_collection_remote_item.token | default(omit) }}"
-    policy:                   "{{ __hub_collection_remote_item.policy | default(omit) }}"
-    requirements:             "{{ __hub_collection_remote_item.requirements | default(omit) }}"
-    requirements_file:        "{{ __hub_collection_remote_item.requirements_file | default(omit) }}"
-    username:                 "{{ __hub_collection_remote_item.username | default(omit) }}"
-    password:                 "{{ __hub_collection_remote_item.password | default(omit) }}"
-    tls_validation:           "{{ __hub_collection_remote_item.tls_validation | default(true) }}"
-    client_key:               "{{ __hub_collection_remote_item.client_key | default(omit) }}"
-    client_cert:              "{{ __hub_collection_remote_item.client_cert | default(omit) }}"
-    ca_cert:                  "{{ __hub_collection_remote_item.ca_cert | default(omit) }}"
-    client_key_path:          "{{ __hub_collection_remote_item.client_key_path | default(omit) }}"
-    client_cert_path:         "{{ __hub_collection_remote_item.client_cert_path | default(omit) }}"
-    ca_cert_path:             "{{ __hub_collection_remote_item.ca_cert_path | default(omit) }}"
-    download_concurrency:     "{{ __hub_collection_remote_item.download_concurrency | default(10) }}"
-    max_retries:               "{{ __hub_collection_remote_item.max_retries | default(0) }}"
-    rate_limit:               "{{ __hub_collection_remote_item.rate_limit | default(8) }}"
-    signed_only:              "{{ __hub_collection_remote_item.signed_only | default(omit) }}"
-    sync_dependencies:        "{{ __hub_collection_remote_item.sync_dependencies | default(omit) }}"
-    proxy_url:                "{{ __hub_collection_remote_item.proxy_url | default(proxy_url | default(omit)) }}"
-    proxy_username:           "{{ __hub_collection_remote_item.proxy_username | default(proxy_username | default(omit)) }}"
-    proxy_password:           "{{ __hub_collection_remote_item.proxy_password | default(proxy_password | default(omit)) }}"
-    state:                    "{{ __hub_collection_remote_item.state | default(ah_state | default('present')) }}"
-    ah_host:                  "{{ aap_hostname | default(omit) }}"
-    ah_username:             "{{ aap_username | default(omit) }}"
-    ah_password:              "{{ aap_password | default(omit) }}"
-    ah_path_prefix:           "{{ ah_path_prefix | default(omit) }}"
-    validate_certs:           "{{ aap_validate_certs | default(omit) }}"
-    request_timeout:          "{{ aap_request_timeout | default(omit) }}"
-  loop: "{{ ah_collection_remotes }}"
+    name: "{{ __hub_collection_remote_item.name }}"
+    url: "{{ __hub_collection_remote_item.url }}"
+    auth_url: "{{ __hub_collection_remote_item.auth_url | default(omit) }}"
+    token: "{{ __hub_collection_remote_item.token | default(omit) }}"
+    policy: "{{ __hub_collection_remote_item.policy | default(omit) }}"
+    requirements: "{{ __hub_collection_remote_item.requirements | default(omit) }}"
+    requirements_file: "{{ __hub_collection_remote_item.requirements_file | default(omit) }}"
+    username: "{{ __hub_collection_remote_item.username | default(omit) }}"
+    password: "{{ __hub_collection_remote_item.password | default(omit) }}"
+    tls_validation: "{{ __hub_collection_remote_item.tls_validation | default(true) }}"
+    client_key: "{{ __hub_collection_remote_item.client_key | default(omit) }}"
+    client_cert: "{{ __hub_collection_remote_item.client_cert | default(omit) }}"
+    ca_cert: "{{ __hub_collection_remote_item.ca_cert | default(omit) }}"
+    client_key_path: "{{ __hub_collection_remote_item.client_key_path | default(omit) }}"
+    client_cert_path: "{{ __hub_collection_remote_item.client_cert_path | default(omit) }}"
+    ca_cert_path: "{{ __hub_collection_remote_item.ca_cert_path | default(omit) }}"
+    download_concurrency: "{{ __hub_collection_remote_item.download_concurrency | default(10) }}"
+    max_retries: "{{ __hub_collection_remote_item.max_retries | default(0) }}"
+    rate_limit: "{{ __hub_collection_remote_item.rate_limit | default(8) }}"
+    signed_only: "{{ __hub_collection_remote_item.signed_only | default(omit) }}"
+    sync_dependencies: "{{ __hub_collection_remote_item.sync_dependencies | default(omit) }}"
+    proxy_url: "{{ __hub_collection_remote_item.proxy_url | default(proxy_url | default(omit)) }}"
+    proxy_username: "{{ __hub_collection_remote_item.proxy_username | default(proxy_username | default(omit)) }}"
+    proxy_password: "{{ __hub_collection_remote_item.proxy_password | default(proxy_password | default(omit)) }}"
+    state: "{{ __hub_collection_remote_item.state | default(ah_state | default('present')) }}"
+    ah_host: "{{ aap_hostname | default(omit) }}"
+    ah_username: "{{ aap_username | default(omit) }}"
+    ah_password: "{{ aap_password | default(omit) }}"
+    ah_path_prefix: "{{ ah_path_prefix | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(omit) }}"
+    request_timeout: "{{ aap_request_timeout | default(omit) }}"
+  loop: "{{ hub_collection_remotes }}"
   loop_control:
-    loop_var: "__hub_collection_remote_item"
+    loop_var: __hub_collection_remote_item
     label: "{{ __operation.verb }} the collection remote {{ __hub_collection_remote_item.name }} in Hub"
-    pause: "{{ ah_configuration_collection_remote_loop_delay }}"
-  no_log: "{{ ah_configuration_collection_remote_secure_logging }}"
-  async: "{{ ah_configuration_collection_remote_async_timeout }}"
+    pause: "{{ hub_configuration_collection_remote_loop_delay }}"
+  no_log: "{{ hub_configuration_collection_remote_secure_logging }}"
+  async: "{{ hub_configuration_collection_remote_async_timeout }}"
   poll: 0
   register: __collection_remote_job_async
   changed_when: not __collection_remote_job_async.changed
   vars:
     __operation: "{{ operation_translate[__hub_collection_remote_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
-- name: "Create Repository | Wait for finish the repository creation"
+- name: Create Repository | Wait for finish the repository creation
   ansible.builtin.async_status:
     jid: "{{ __collection_remote_job_async_result_item.ansible_job_id }}"
   register: __collection_remote_job_async_result
   until: __collection_remote_job_async_result.finished
-  retries: "{{ ah_configuration_collection_remote_async_retries }}"
-  delay: "{{ ah_configuration_collection_remote_async_delay }}"
+  retries: "{{ hub_configuration_collection_remote_async_retries }}"
+  delay: "{{ hub_configuration_collection_remote_async_delay }}"
   loop: "{{ __collection_remote_job_async.results }}"
   loop_control:
     loop_var: __collection_remote_job_async_result_item
-    label: "{{ __operation.verb }} Collection remote {{ __collection_remote_job_async_result_item.__hub_collection_remote_item.name }} | Wait for finish the Collection remote {{ __operation.action }}"
+    label: "{{ __operation.verb }} Collection remote {{ __collection_remote_job_async_result_item.__hub_collection_remote_item.name }} | Wait for finish the Collection
+      remote {{ __operation.action }}"
   when: __collection_remote_job_async_result_item.ansible_job_id is defined
-  no_log: "{{ ah_configuration_collection_remote_secure_logging }}"
+  no_log: "{{ hub_configuration_collection_remote_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__collection_remote_job_async_result_item.state | default(platform_state) | default('present')] }}"
-    ansible_async_dir: '{{ aap_configuration_async_dir }}'
+    ansible_async_dir: "{{ aap_configuration_async_dir }}"
 
 ...
