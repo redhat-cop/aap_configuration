@@ -27,7 +27,7 @@
     loop_var: __gateway_services_item
     label: "{{ __operation.verb }} the Gateway service {{ __gateway_services_item.name }}"
     pause: "{{ gateway_services_loop_delay }}"
-  no_log: "{{ services_secure_logging }}"
+  no_log: "{{ gateway_services_secure_logging }}"
   async: 1000
   poll: 0
   register: __gateway_services_job_async
@@ -41,14 +41,14 @@
     jid: "{{ __gateway_services_job_async_results_item.ansible_job_id }}"
   register: __gateway_services_job_async_result
   until: __gateway_services_job_async_result.finished
-  retries: "{{ services_async_retries }}"
-  delay: "{{ services_async_delay }}"
+  retries: "{{ gateway_services_async_retries }}"
+  delay: "{{ gateway_services_async_delay }}"
   loop: "{{ __gateway_services_job_async.results }}"
   loop_control:
     loop_var: __gateway_services_job_async_results_item
-    label: "{{ __operation.verb }} Label {{ __gateway_services_job_async_results_item.__gateway_services_item.name }} | Wait for finish the Label {{ __operation.action }}"
+    label: "{{ __operation.verb }} Gateway service {{ __gateway_services_job_async_results_item.__gateway_services_item.name }} | Wait for finish the Gateway service {{ __operation.action }}"
   when: __gateway_services_job_async_results_item.ansible_job_id is defined
-  no_log: "{{ services_secure_logging }}"
+  no_log: "{{ gateway_services_secure_logging }}"
   vars:
     __operation: "{{ operation_translate[__gateway_services_job_async_results_item.state | default(platform_state) | default('present')] }}"
     ansible_async_dir: "{{ aap_configuration_async_dir }}"
