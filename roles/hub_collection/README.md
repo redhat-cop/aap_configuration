@@ -1,4 +1,4 @@
-# infra.aap_configuration.collection
+# infra.aap_configuration.hub_collection
 
 ## Description
 

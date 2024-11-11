@@ -1,4 +1,4 @@
-# infra.aap_configuration.namespace
+# infra.aap_configuration.hub_namespace
 
 ## Description
 

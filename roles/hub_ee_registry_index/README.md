@@ -1,4 +1,4 @@
-# infra.aap_configuration.ee_registry_index
+# infra.aap_configuration.hub_ee_registry_index
 
 ## Description
 

@@ -1,4 +1,4 @@
-# infra.aap_configuration.publish
+# infra.aap_configuration.hub_publish
 
 ## Description
 

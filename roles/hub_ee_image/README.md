@@ -1,4 +1,4 @@
-# infra.aap_configuration.ee_image
+# infra.aap_configuration.hub_ee_image
 
 ## Description
 

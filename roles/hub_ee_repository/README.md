@@ -1,4 +1,4 @@
-# infra.aap_configuration.ee_repository
+# infra.aap_configuration.hub_ee_repository
 
 ## Description
 

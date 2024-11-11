@@ -1,4 +1,4 @@
-# infra.aap_configuration.collection_remote
+# infra.aap_configuration.hub_collection_remote
 
 ## Description
 

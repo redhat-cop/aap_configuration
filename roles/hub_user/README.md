@@ -1,4 +1,4 @@
-# infra.aap_configuration.user
+# infra.aap_configuration.hub_user
 
 ## Description
 

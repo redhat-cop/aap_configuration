@@ -1,4 +1,4 @@
-# infra.aap_configuration.group
+# infra.aap_configuration.hub_group
 
 ## Description
 

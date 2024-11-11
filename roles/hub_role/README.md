@@ -1,4 +1,4 @@
-# infra.aap_configuration.role
+# infra.aap_configuration.hub_role
 
 ## Description
 
