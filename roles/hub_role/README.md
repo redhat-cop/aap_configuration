@@ -115,7 +115,7 @@ hub_roles:
       tags:
         - always
   roles:
-    - ../../role
+    - infra.aap_configuration.hub_role
 ```
 
 ## License

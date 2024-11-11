@@ -105,7 +105,7 @@ aap_user_accounts:
       tags:
         - always
   roles:
-    - ../../user
+    - infra.aap_configuration.hub_user
 ```
 
 ## License

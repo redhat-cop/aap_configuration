@@ -104,7 +104,7 @@ eda_users:
       tags:
         - always
   roles:
-    - ../../eda_users
+    - infra.aap_configuration.eda_users
 ```
 
 ## License

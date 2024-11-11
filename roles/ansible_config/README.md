@@ -104,7 +104,7 @@ automation_hub_list:
       tags:
         - always
   roles:
-    - ../../ansible_config
+    - infra.aap_configuration.ansible_config
 ```
 
 ## License

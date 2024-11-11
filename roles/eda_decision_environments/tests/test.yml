@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../eda_decision_environments
+    - infra.aap_configuration.eda_decision_environments
 ...

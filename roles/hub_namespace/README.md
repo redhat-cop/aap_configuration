@@ -118,7 +118,7 @@ hub_namespaces:
       tags:
         - always
   roles:
-    - ../../namespace
+    - infra.aap_configuration.hub_namespace
 ```
 
 ## License

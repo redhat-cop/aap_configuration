@@ -119,7 +119,7 @@ hub_collection_remotes:
       tags:
         - always
   roles:
-    - ../../collection_remote
+    - infra.aap_configuration.hub_collection_remote
 ```
 
 ## License

@@ -95,7 +95,7 @@ hub_ee_repositories:
       tags:
         - always
   roles:
-    - ee_repository_sync
+    - infra.aap_configuration.hub_ee_repository_sync
 ```
 
 ## License

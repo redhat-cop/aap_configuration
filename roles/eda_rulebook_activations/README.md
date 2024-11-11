@@ -111,7 +111,7 @@ eda_rulebook_activations:
       tags:
         - always
   roles:
-    - ../../eda_rulebook_activations
+    - infra.aap_configuration.eda_rulebook_activations
 ```
 
 ## License

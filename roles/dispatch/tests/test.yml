@@ -20,5 +20,5 @@
       tags: always
 
   roles:
-    - ../../dispatch
+    - infra.aap_configuration.dispatch
 ...

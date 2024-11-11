@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../eda_event_streams
+    - infra.aap_configuration.eda_event_streams
 ...

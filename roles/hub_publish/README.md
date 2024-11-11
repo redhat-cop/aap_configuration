@@ -101,7 +101,7 @@ ah_auto_approve: true
       tags:
         - always
   roles:
-    - infra.aap_configuration.publish
+    - infra.aap_configuration.hub_publish
 ```
 
 ## License
