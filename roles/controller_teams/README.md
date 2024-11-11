@@ -1,4 +1,4 @@
-# controller_configuration.teams
+# infra.aap_configuration.teams
 
 ## Description
 

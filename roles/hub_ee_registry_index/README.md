@@ -1,4 +1,4 @@
-# galaxy.galaxy.ee_registry_index
+# infra.aap_configuration.hub_ee_registry_index
 
 ## Description
 
@@ -15,7 +15,7 @@ An Ansible Role to index EE Registries in Automation Hub.
 |`aap_request_timeout`|`10`|no|Specify the timeout Ansible should use in requests to the Galaxy or Automation Hub host.||
 |`ah_path_prefix`|""|no|API path used to access the api. Either galaxy, automation-hub, or custom||
 |`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.||
-|`hub_ee_registries`|`see below`|yes|Data structure describing your ee_registries, described below. (Note this is the same as for the `ee_registries` role and the variable can be combined). Note that this role will only do anything if the `index` suboption of this variable is set to true.||
+|`hub_ee_registries`|`see below`|yes|Data structure describing your ee_registries, described below. (Note this is the same as for the `ee_registries` role and the variable can be combined). Note that this role will only do anything if the `index` sub-option of this variable is set to true.||
 
 ### Secure Logging Variables
 
@@ -95,7 +95,7 @@ hub_ee_registries:
       tags:
         - always
   roles:
-    - ee_registry_index
+    - infra.aap_configuration.hub_ee_registry_index
 ```
 
 ## License

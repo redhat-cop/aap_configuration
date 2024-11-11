@@ -1,4 +1,4 @@
-# controller_configuration.workflow_launch
+# infra.aap_configuration.workflow_launch
 
 ## Description
 

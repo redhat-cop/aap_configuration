@@ -1,4 +1,4 @@
-# controller_configuration.inventory_sources
+# infra.aap_configuration.inventory_sources
 
 ## Description
 

@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../eda_credentials
+    - infra.aap_configuration.eda_credentials
 ...

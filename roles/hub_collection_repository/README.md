@@ -1,4 +1,4 @@
-# collection_repository
+# infra.aap_configuration.hub_collection_repository
 
 ## Description
 
@@ -127,7 +127,7 @@ hub_collection_repositories:
       tags:
         - always
   roles:
-    - ../../collection_repository
+    - infra.aap_configuration.hub_collection_repository
 ```
 
 ## License

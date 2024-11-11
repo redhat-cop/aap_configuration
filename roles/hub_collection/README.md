@@ -1,4 +1,4 @@
-# galaxy.galaxy.collection
+# infra.aap_configuration.hub_collection
 
 ## Description
 
@@ -108,7 +108,7 @@ hub_collections:
       tags:
         - always
   roles:
-    - ../../collection
+    - infra.aap_configuration.hub_collection
 ```
 
 ## License

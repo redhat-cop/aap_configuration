@@ -1,4 +1,4 @@
-# infra.eda_configuration.eda_event_streams
+# infra.aap_configuration.eda_event_streams
 
 ## Description
 
@@ -95,7 +95,7 @@ eda_event_streams:
       tags:
         - always
   roles:
-    - infra.eda_configuration.eda_event_streams
+    - infra.aap_configuration.eda_event_streams
 ```
 
 ## License

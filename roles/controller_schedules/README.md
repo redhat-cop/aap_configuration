@@ -1,4 +1,4 @@
-# controller_configuration.schedules
+# infra.aap_configuration.schedules
 
 ## Description
 

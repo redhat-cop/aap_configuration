@@ -1,4 +1,4 @@
-# galaxy.galaxy.ee_registry_sync
+# infra.aap_configuration.hub_ee_registry_sync
 
 ## Description
 
@@ -95,7 +95,7 @@ hub_ee_registries:
       tags:
         - always
   roles:
-    - ee_registry_sync
+    - infra.aap_configuration.hub_ee_registry_sync
 ```
 
 ## License

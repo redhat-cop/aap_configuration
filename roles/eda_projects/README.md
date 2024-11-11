@@ -1,4 +1,4 @@
-# infra.eda_configuration.eda_projects
+# infra.aap_configuration.eda_projects
 
 ## Description
 
@@ -97,7 +97,7 @@ eda_projects:
       tags:
         - always
   roles:
-    - infra.eda_configuration.projects
+    - infra.aap_configuration.eda_projects
 ```
 
 ## License

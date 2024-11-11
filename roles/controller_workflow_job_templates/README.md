@@ -1,4 +1,4 @@
-# controller_configuration.workflow_job_templates
+# infra.aap_configuration.workflow_job_templates
 
 ## Description
 

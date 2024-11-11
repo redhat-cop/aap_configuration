@@ -1,4 +1,4 @@
-# galaxy.galaxy.group
+# infra.aap_configuration.hub_group
 
 ## Description
 
@@ -103,7 +103,7 @@ ah_groups:
       tags:
         - always
   roles:
-    - ../../group
+    - infra.aap_configuration.hub_group
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# controller_configuration.roles
+# infra.aap_configuration.roles
 
 ## Description
 

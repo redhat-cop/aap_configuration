@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../hub_publish
+    - infra.aap_configuration.hub_publish
 ...

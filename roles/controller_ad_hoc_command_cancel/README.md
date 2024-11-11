@@ -1,4 +1,4 @@
-# controller_configuration.ad_hoc_command_cancel
+# infra.aap_configuration.ad_hoc_command_cancel
 
 ## Description
 

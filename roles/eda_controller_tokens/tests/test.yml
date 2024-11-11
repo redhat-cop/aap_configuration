@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../eda_controller_tokens
+    - infra.aap_configuration.eda_controller_tokens
 ...

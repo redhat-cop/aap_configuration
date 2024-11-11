@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../hub_role
+    - infra.aap_configuration.hub_role
 ...

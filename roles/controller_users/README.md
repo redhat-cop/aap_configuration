@@ -1,4 +1,4 @@
-# controller_configuration.users
+# infra.aap_configuration.users
 
 ## Description
 

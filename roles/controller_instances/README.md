@@ -1,4 +1,4 @@
-# controller_configuration.instances
+# infra.aap_configuration.instances
 
 ## Description
 

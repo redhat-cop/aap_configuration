@@ -1,4 +1,4 @@
-# group_roles
+# infra.aap_configuration.hub_group_roles
 
 ## Description
 
@@ -145,7 +145,7 @@ hub_group_roles:
       tags:
         - always
   roles:
-    - ../../hub_group_roles
+    - infra.aap_configuration.hub_group_roles
 ```
 
 ## License

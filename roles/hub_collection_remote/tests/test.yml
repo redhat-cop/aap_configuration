@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../hub_collection_remote
+    - infra.aap_configuration.hub_collection_remote
 ...

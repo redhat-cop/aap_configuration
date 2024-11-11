@@ -1,4 +1,4 @@
-# infra.eda_configuration.aap_user_accounts
+# infra.aap_configuration.aap_user_accounts
 
 ## Description
 
@@ -104,7 +104,7 @@ eda_users:
       tags:
         - always
   roles:
-    - ../../eda_users
+    - infra.aap_configuration.eda_users
 ```
 
 ## License

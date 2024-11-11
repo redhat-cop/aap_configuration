@@ -1,4 +1,4 @@
-# controller_configuration.credential_input_sources
+# infra.aap_configuration.credential_input_sources
 
 ## Description
 

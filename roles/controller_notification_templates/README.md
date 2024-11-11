@@ -1,4 +1,4 @@
-# controller_configuration.notification_templates
+# infra.aap_configuration.notification_templates
 
 ## Description
 

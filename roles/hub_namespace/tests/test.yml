@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../hub_namespace
+    - infra.aap_configuration.hub_namespace
 ...

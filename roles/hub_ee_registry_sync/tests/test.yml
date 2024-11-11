@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../hub_ee_registry_sync
+    - infra.aap_configuration.hub_ee_registry_sync
 ...

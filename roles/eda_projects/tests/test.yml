@@ -16,5 +16,5 @@
       tags:
         - always
   roles:
-    - ../../eda_projects
+    - infra.aap_configuration.eda_projects
 ...

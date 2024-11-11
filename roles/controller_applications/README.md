@@ -1,4 +1,4 @@
-# controller_configuration.applications
+# infra.aap_configuration.applications
 
 ## Description
 

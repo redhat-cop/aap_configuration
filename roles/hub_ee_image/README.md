@@ -1,4 +1,4 @@
-# galaxy.galaxy.ee_image
+# infra.aap_configuration.hub_ee_image
 
 ## Description
 
@@ -96,7 +96,7 @@ hub_ee_images:
       tags:
         - always
   roles:
-    - ../../ee_image
+    - infra.aap_configuration.hub_ee_image
 ```
 
 ## License

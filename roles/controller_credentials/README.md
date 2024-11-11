@@ -1,4 +1,4 @@
-# controller_configuration.credentials
+# infra.aap_configuration.credentials
 
 ## Description
 

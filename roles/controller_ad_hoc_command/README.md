@@ -1,4 +1,4 @@
-# controller_configuration.ad_hoc_command
+# infra.aap_configuration.ad_hoc_command
 
 ## Description
 
