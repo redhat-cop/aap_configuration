@@ -1,4 +1,4 @@
-# controller_configuration.execution_environments
+# infra.aap_configuration.execution_environments
 
 ## Description
 

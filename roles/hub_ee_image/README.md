@@ -1,4 +1,4 @@
-# galaxy.galaxy.ee_image
+# infra.aap_configuration.ee_image
 
 ## Description
 

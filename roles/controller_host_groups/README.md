@@ -1,4 +1,4 @@
-# controller_configuration.groups
+# infra.aap_configuration.groups
 
 ## Description
 

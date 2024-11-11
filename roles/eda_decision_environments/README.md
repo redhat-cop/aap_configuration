@@ -1,4 +1,4 @@
-# infra.eda_configuration.eda_decision_environments
+# infra.aap_configuration.eda_decision_environments
 
 ## Description
 
@@ -96,7 +96,7 @@ eda_decision_environments:
       tags:
         - always
   roles:
-    - infra.eda_configuration.decision_environments
+    - infra.aap_configuration.decision_environments
 ```
 
 ## License

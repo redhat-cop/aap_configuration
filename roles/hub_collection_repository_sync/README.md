@@ -1,4 +1,4 @@
-# collection_repository_sync
+# infra.aap_configuration.collection_repository_sync
 
 ## Description
 

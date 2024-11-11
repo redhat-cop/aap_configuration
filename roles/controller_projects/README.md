@@ -1,4 +1,4 @@
-# controller_configuration.projects
+# infra.aap_configuration.projects
 
 ## Description
 

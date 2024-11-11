@@ -1,4 +1,4 @@
-# infra.eda_configuration.eda_credential_types
+# infra.aap_configuration.eda_credential_types
 
 ## Description
 

@@ -1,4 +1,4 @@
-# controller_configuration.job_templates
+# infra.aap_configuration.job_templates
 
 ## Description
 

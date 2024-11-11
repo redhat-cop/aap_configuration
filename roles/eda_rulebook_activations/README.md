@@ -1,4 +1,4 @@
-# infra.eda_configuration.eda_rulebook_activations
+# infra.aap_configuration.eda_rulebook_activations
 
 ## Description
 

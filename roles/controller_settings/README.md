@@ -1,4 +1,4 @@
-# controller_configuration.settings
+# infra.aap_configuration.settings
 
 An Ansible role to alter Settings on Ansible Controller.
 

@@ -1,4 +1,4 @@
-# galaxy.galaxy.namespace
+# infra.aap_configuration.namespace
 
 ## Description
 

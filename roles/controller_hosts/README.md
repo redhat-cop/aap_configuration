@@ -1,4 +1,4 @@
-# controller_configuration.hosts
+# infra.aap_configuration.hosts
 
 ## Description
 

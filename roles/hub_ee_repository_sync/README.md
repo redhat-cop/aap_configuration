@@ -1,4 +1,4 @@
-# galaxy.galaxy.ee_repository_sync
+# infra.aap_configuration.ee_repository_sync
 
 ## Description
 

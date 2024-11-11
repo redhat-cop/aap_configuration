@@ -1,4 +1,4 @@
-# galaxy.galaxy.publish
+# infra.aap_configuration.publish
 
 ## Description
 
@@ -101,7 +101,7 @@ ah_auto_approve: true
       tags:
         - always
   roles:
-    - galaxy.galaxy.publish
+    - infra.aap_configuration.publish
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# controller_configuration.jobs_cancel
+# infra.aap_configuration.jobs_cancel
 
 ## Description
 

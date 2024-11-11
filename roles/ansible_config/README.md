@@ -1,4 +1,4 @@
-# galaxy.galaxy.ansible_config
+# infra.aap_configuration.ansible_config
 
 ## Description
 

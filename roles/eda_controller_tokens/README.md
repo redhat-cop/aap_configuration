@@ -1,4 +1,4 @@
-# infra.eda_configuration.eda_controller_tokens
+# infra.aap_configuration.eda_controller_tokens
 
 ## Description
 
@@ -92,7 +92,7 @@ eda_controller_tokens:
       tags:
         - always
   roles:
-    - infra.eda_configuration.controller_tokens
+    - infra.aap_configuration.controller_tokens
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# group_roles
+# infra.aap_configuration.group_roles
 
 ## Description
 

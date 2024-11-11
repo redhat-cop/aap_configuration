@@ -1,4 +1,4 @@
-# galaxy.galaxy.ee_registry_index
+# infra.aap_configuration.ee_registry_index
 
 ## Description
 

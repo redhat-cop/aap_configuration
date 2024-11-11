@@ -1,4 +1,4 @@
-# collection_repository
+# infra.aap_configuration.collection_repository
 
 ## Description
 

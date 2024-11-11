@@ -1,4 +1,4 @@
-# controller_configuration.global_vars
+# infra.aap_configuration.global_vars
 
 ## Description
 

@@ -1,4 +1,4 @@
-# controller_configuration.license
+# infra.aap_configuration.license
 
 ## Description
 

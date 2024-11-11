@@ -1,4 +1,4 @@
-# controller_configuration.organizations
+# infra.aap_configuration.organizations
 
 ## Description
 
