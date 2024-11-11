@@ -97,7 +97,7 @@ eda_projects:
       tags:
         - always
   roles:
-    - infra.aap_configuration.projects
+    - infra.aap_configuration.eda_projects
 ```
 
 ## License

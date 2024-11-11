@@ -97,7 +97,7 @@ eda_credentials:
       tags:
         - always
   roles:
-    - infra.aap_configuration.credentials
+    - infra.aap_configuration.eda_credentials
 ```
 
 ## License

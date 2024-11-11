@@ -92,7 +92,7 @@ eda_controller_tokens:
       tags:
         - always
   roles:
-    - infra.aap_configuration.controller_tokens
+    - infra.aap_configuration.eda_controller_tokens
 ```
 
 ## License
