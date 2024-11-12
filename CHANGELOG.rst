@@ -1,8 +1,21 @@
 ======================================
-infra.aap_configuration Release Notes
+infra.aap\_configuration Release Notes
 ======================================
 
 .. contents:: Topics
+
+v3.1.0
+======
+
+Major Changes
+-------------
+
+- renamed some more vars that got missed in the new naming convention.
+
+Bugfixes
+--------
+
+- updated gateway services async and no log vars to correct naming convention.
 
 v3.0.0
 ======

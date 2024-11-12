@@ -760,3 +760,12 @@ releases:
     - Rewrite.yml
     - ee_namespace_removed.yml
     release_date: '2024-11-08'
+  3.1.0:
+    changes:
+      bugfixes:
+      - updated gateway services async and no log vars to correct naming convention.
+      major_changes:
+      - renamed some more vars that got missed in the new naming convention.
+    fragments:
+    - hub_vars.yml
+    release_date: '2024-11-11'
