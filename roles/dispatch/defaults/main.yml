@@ -178,9 +178,7 @@ eda_configuration_dispatcher_roles:
     tags: credential_type
   - role: eda_credentials
     var: eda_credentials
-    tags:
-      - credential_type
-      - credential
+    tags: credential
   - role: eda_controller_tokens
     var: eda_controller_tokens
     tags: controller_token
