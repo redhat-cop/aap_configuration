@@ -1,0 +1,3 @@
+---
+bugfixes:
+  - added missing references to eda_credential_types and eda_event_streams in dispatcher defaults
