@@ -161,6 +161,9 @@ argument_specs:
           - role: eda_user
             var: eda_users
             tags: user
+          - role: eda_credential_types
+            var: eda_credential_types
+            tags: credential_type
           - role: eda_credential
             var: eda_credentials
             tags: credential
@@ -173,6 +176,9 @@ argument_specs:
           - role: eda_project_sync
             var: eda_projects
             tags: project_sync
+          - role: eda_event_streams
+            var: eda_event_streams
+            tags: event_stream
           - role: eda_decision_environment
             var: eda_decision_environments
             tags: decision_environment
