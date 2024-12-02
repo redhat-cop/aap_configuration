@@ -1,4 +1,4 @@
-# infra.aap_configuration.teams
+# infra.aap_configuration.controller_teams
 
 ## Description
 
@@ -100,7 +100,7 @@ This also speeds up the overall role.
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.teams, when: aap_teams is defined}
+    - {role: infra.aap_configuration.controller_teams, when: aap_teams is defined}
 ```
 
 ## License

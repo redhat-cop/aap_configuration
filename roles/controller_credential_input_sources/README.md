@@ -1,4 +1,4 @@
-# infra.aap_configuration.credential_input_sources
+# infra.aap_configuration.controller_credential_input_sources
 
 ## Description
 
@@ -163,7 +163,7 @@ controller_credential_input_sources:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.credential_input_sources, when: controller_credential_input_sources is defined}
+    - {role: infra.aap_configuration.controller_credential_input_sources, when: controller_credential_input_sources is defined}
 ```
 
 ## License

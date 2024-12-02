@@ -1,4 +1,4 @@
-# infra.aap_configuration.jobs_cancel
+# infra.aap_configuration.controller_jobs_cancel
 
 ## Description
 
@@ -77,7 +77,7 @@ controller_cancel_jobs:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.jobs_cancel, when: controller_cancel_jobs is defined}
+    - {role: infra.aap_configuration.controller_jobs_cancel, when: controller_cancel_jobs is defined}
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# infra.aap_configuration.job_launch
+# infra.aap_configuration.controller_job_launch
 
 ## Description
 
@@ -97,7 +97,7 @@ controller_launch_jobs:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.job_launch, when: controller_launch_jobs is defined}
+    - {role: infra.aap_configuration.controller_job_launch, when: controller_launch_jobs is defined}
 ```
 
 ## License

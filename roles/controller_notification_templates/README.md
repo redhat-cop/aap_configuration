@@ -1,4 +1,4 @@
-# infra.aap_configuration.notification_templates
+# infra.aap_configuration.controller_notification_templates
 
 ## Description
 
@@ -191,7 +191,7 @@ controller_notifications:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.notification_templates, when: controller_notifications is defined}
+    - {role: infra.aap_configuration.controller_notification_templates, when: controller_notifications is defined}
 ```
 
 ## License

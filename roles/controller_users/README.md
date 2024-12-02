@@ -1,4 +1,4 @@
-# infra.aap_configuration.users
+# infra.aap_configuration.controller_users
 
 ## Description
 
@@ -136,7 +136,7 @@ aap_user_accounts:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.users, when: aap_user_accounts is defined}
+    - {role: infra.aap_configuration.controller_users, when: aap_user_accounts is defined}
 ```
 
 ## License

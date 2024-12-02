@@ -1,4 +1,4 @@
-# infra.aap_configuration.organizations
+# infra.aap_configuration.controller_organizations
 
 ## Description
 
@@ -184,7 +184,7 @@ aap_organizations:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.organizations, when: aap_organizations is defined}
+    - {role: infra.aap_configuration.controller_organizations, when: aap_organizations is defined}
 ```
 
 ## License

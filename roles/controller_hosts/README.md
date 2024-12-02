@@ -1,4 +1,4 @@
-# infra.aap_configuration.hosts
+# infra.aap_configuration.controller_hosts
 
 ## Description
 
@@ -154,7 +154,7 @@ controller_hosts:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.hosts, when: controller_hosts is defined}
+    - {role: infra.aap_configuration.controller_hosts, when: controller_hosts is defined}
 ```
 
 ## License

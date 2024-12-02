@@ -1,4 +1,4 @@
-# infra.aap_configuration.ad_hoc_command
+# infra.aap_configuration.controller_ad_hoc_command
 
 ## Description
 
@@ -94,7 +94,7 @@ controller_ad_hoc_commands:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.ad_hoc_command, when: controller_ad_hoc_commands is defined}
+    - {role: infra.aap_configuration.controller_ad_hoc_command, when: controller_ad_hoc_commands is defined}
 
 ```
 

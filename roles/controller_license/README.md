@@ -1,4 +1,4 @@
-# infra.aap_configuration.license
+# infra.aap_configuration.controller_license
 
 ## Description
 
@@ -118,7 +118,7 @@ controller_license:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.license, when: controller_license is defined}
+    - {role: infra.aap_configuration.controller_license, when: controller_license is defined}
 ```
 
 ### Standard Subscription lookup Role Usage
@@ -141,7 +141,7 @@ controller_license:
         product_name: "Red Hat Ansible Automation Platform"
         support_level: "Self-Support"
   roles:
-    - {role: infra.aap_configuration.license}
+    - {role: infra.aap_configuration.controller_license}
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# infra.aap_configuration.roles
+# infra.aap_configuration.controller_roles
 
 ## Description
 
@@ -185,7 +185,7 @@ controller_roles:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.roles, when: controller_roles is defined}
+    - {role: infra.aap_configuration.controller_roles, when: controller_roles is defined}
 ```
 
 ## License

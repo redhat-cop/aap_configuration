@@ -1,4 +1,4 @@
-# infra.aap_configuration.bulk_host_create
+# infra.aap_configuration.controller_bulk_host_create
 
 ## Description
 
@@ -132,7 +132,7 @@ controller_bulk_hosts:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.bulk_host_create, when: controller_bulk_hosts is defined}
+    - {role: infra.aap_configuration.controller_bulk_host_create, when: controller_bulk_hosts is defined}
 ```
 
 ## License
