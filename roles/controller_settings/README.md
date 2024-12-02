@@ -1,4 +1,4 @@
-# infra.aap_configuration.settings
+# infra.aap_configuration.controller_settings
 
 An Ansible role to alter Settings on Ansible Controller.
 
@@ -142,7 +142,7 @@ controller_settings:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.settings, when: controller_settings is defined}
+    - {role: infra.aap_configuration.controller_settings, when: controller_settings is defined}
 ```
 
 ## License

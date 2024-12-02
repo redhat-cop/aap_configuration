@@ -1,4 +1,4 @@
-# infra.aap_configuration.schedules
+# infra.aap_configuration.controller_schedules
 
 ## Description
 
@@ -160,7 +160,7 @@ controller_schedules:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.schedules, when: controller_schedules is defined}
+    - {role: infra.aap_configuration.controller_schedules, when: controller_schedules is defined}
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# infra.aap_configuration.project_update
+# infra.aap_configuration.controller_project_update
 
 ## Description
 
@@ -117,7 +117,7 @@ controller_projects:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.project_update, when: controller_projects is defined}
+    - {role: infra.aap_configuration.controller_project_update, when: controller_projects is defined}
 
 ```
 

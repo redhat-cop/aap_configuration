@@ -1,4 +1,4 @@
-# infra.aap_configuration.labels
+# infra.aap_configuration.controller_labels
 
 An Ansible role to create/update/remove labels for templates on Ansible Controller.
 
@@ -115,7 +115,7 @@ controller_labels:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.labels, when: controller_labels is defined}
+    - {role: infra.aap_configuration.controller_labels, when: controller_labels is defined}
 ```
 
 ## License

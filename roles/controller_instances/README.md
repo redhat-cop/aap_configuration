@@ -1,4 +1,4 @@
-# infra.aap_configuration.instances
+# infra.aap_configuration.controller_instances
 
 ## Description
 
@@ -118,7 +118,7 @@ controller_instances:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.instances, when: controller_instances is defined}
+    - {role: infra.aap_configuration.controller_instances, when: controller_instances is defined}
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# infra.aap_configuration.inventory_source_update
+# infra.aap_configuration.controller_inventory_source_update
 
 ## Description
 
@@ -108,7 +108,7 @@ controller_inventory_sources:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.inventory_source_update, when: controller_inventory_sources is defined}
+    - {role: infra.aap_configuration.controller_inventory_source_update, when: controller_inventory_sources is defined}
 
 ```
 

@@ -1,4 +1,4 @@
-# infra.aap_configuration.job_templates
+# infra.aap_configuration.controller_job_templates
 
 ## Description
 
@@ -295,7 +295,7 @@ controller_templates:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.job_templates, when: controller_templates is defined}
+    - {role: infra.aap_configuration.controller_job_templates, when: controller_templates is defined}
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# infra.aap_configuration.workflow_job_templates
+# infra.aap_configuration.controller_workflow_job_templates
 
 ## Description
 
@@ -421,7 +421,7 @@ controller_workflows:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.workflow_job_templates, when: controller_workflows is defined}
+    - {role: infra.aap_configuration.controller_workflow_job_templates, when: controller_workflows is defined}
 
 ```
 

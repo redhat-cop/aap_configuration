@@ -1,4 +1,4 @@
-# infra.aap_configuration.bulk_job_launch
+# infra.aap_configuration.controller_bulk_job_launch
 
 ## Description
 
@@ -130,7 +130,7 @@ This also speeds up the overall role.
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.license, when: controller_license is defined}
+    - {role: infra.aap_configuration.controller_license, when: controller_license is defined}
 ```
 
 ## License

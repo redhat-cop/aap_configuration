@@ -1,4 +1,4 @@
-# infra.aap_configuration.inventories
+# infra.aap_configuration.controller_inventories
 
 ## Description
 
@@ -169,7 +169,7 @@ controller_inventories:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.inventories, when: controller_inventories is defined}
+    - {role: infra.aap_configuration.controller_inventories, when: controller_inventories is defined}
 ```
 
 ## License

@@ -1,4 +1,4 @@
-# infra.aap_configuration.execution_environments
+# infra.aap_configuration.controller_execution_environments
 
 ## Description
 
@@ -127,7 +127,7 @@ controller_execution_environments:
   tasks:
     - name: Add Execution Environments
       include_role:
-        name: infra.aap_configuration.execution_environments
+        name: infra.aap_configuration.controller_execution_environments
 ```
 
 ## License

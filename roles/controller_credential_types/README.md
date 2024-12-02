@@ -1,4 +1,4 @@
-# infra.aap_configuration.credential_types
+# infra.aap_configuration.controller_credential_types
 
 ## Description
 
@@ -238,7 +238,7 @@ controller_credential_types:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.credential_types, when: controller_credential_types is defined}
+    - {role: infra.aap_configuration.controller_credential_types, when: controller_credential_types is defined}
 ```
 
 ## License

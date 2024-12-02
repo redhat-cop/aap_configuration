@@ -1,4 +1,4 @@
-# infra.aap_configuration.applications
+# infra.aap_configuration.controller_applications
 
 ## Description
 
@@ -137,7 +137,7 @@ aap_applications:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.applications, when: aap_applications is defined}
+    - {role: infra.aap_configuration.controller_applications, when: aap_applications is defined}
 ```
 
 ## License
