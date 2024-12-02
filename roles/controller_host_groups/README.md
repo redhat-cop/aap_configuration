@@ -1,4 +1,4 @@
-# infra.aap_configuration.controller_groups
+# infra.aap_configuration.controller_host_groups
 
 ## Description
 
@@ -166,7 +166,7 @@ controller_groups:
         ignore_files: [controller_config.yml.template]
         extensions: ["yml"]
   roles:
-    - {role: infra.aap_configuration.controller_groups, when: controller_groups is defined}
+    - {role: infra.aap_configuration.controller_host_groups, when: controller_groups is defined}
 ```
 
 ## License
