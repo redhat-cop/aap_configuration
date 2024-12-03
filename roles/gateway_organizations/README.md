@@ -1,4 +1,4 @@
-# Ansible Role infra.aap_configuration.organizations
+# Ansible Role infra.aap_configuration.gateway_organizations
 
 ## Description
 

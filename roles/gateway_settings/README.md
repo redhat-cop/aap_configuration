@@ -1,4 +1,4 @@
-# Ansible Role infra.aap_configuration.settings
+# Ansible Role infra.aap_configuration.gateway_settings
 
 An Ansible role to alter Settings on Ansible Automation Gateway.
 
