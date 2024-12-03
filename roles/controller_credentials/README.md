@@ -38,7 +38,7 @@ Enabling this will enforce configurtion without specifying every option in the c
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`controller_configuration_credentials_enforce_defaults`|`false`|no|Whether or not to enforce default option values on only the applications role|
+|`controller_configuration_credentials_enforce_defaults`|`true`|no|Whether or not to enforce default option values on only the applications role|
 |`aap_configuration_enforce_defaults`|`false`|no|This variable enables enforced default values as well, but is shared across multiple roles, see above.|
 
 ### Secure Logging Variables
