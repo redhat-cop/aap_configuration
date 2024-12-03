@@ -1,4 +1,4 @@
-# Ansible Role infra.aap_configuration.applications
+# Ansible Role infra.aap_configuration.gateway_applications
 
 ## Description
 

@@ -1,4 +1,4 @@
-# Ansible Role infra.aap_configuration.service_nodes
+# Ansible Role infra.aap_configuration.gateway_service_nodes
 
 ## Description
 
