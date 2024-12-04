@@ -50,7 +50,7 @@ controller_configuration_credentials_secure_logging defaults to the value of aap
 
 |Variable Name|Default Value|Required|Description|
 |:---:|:---:|:---:|:---:|
-|`controller_configuration_credentials_secure_logging`|`false`|no|Whether or not to include the sensitive Credential role tasks in the log. Set this value to `true` if you will be providing your sensitive values from elsewhere.|
+|`controller_configuration_credentials_secure_logging`|`true`|no|Whether or not to include the sensitive Credential role tasks in the log. Set this value to `true` if you will be providing your sensitive values from elsewhere.|
 |`aap_configuration_secure_logging`|`false`|no|This variable enables secure logging as well, but is shared across multiple roles, see above.|
 
 ### Asynchronous Retry Variables
