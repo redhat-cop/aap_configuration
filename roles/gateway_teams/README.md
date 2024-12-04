@@ -1,4 +1,4 @@
-# Ansible Role infra.aap_configuration.teams
+# Ansible Role infra.aap_configuration.gateway_teams
 
 ## Description
 

@@ -1,4 +1,4 @@
-# Ansible Role infra.aap_configuration.users
+# Ansible Role infra.aap_configuration.gateway_users
 
 ## Description
 

@@ -1,4 +1,4 @@
-# infra.aap_configuration.aap_user_accounts
+# infra.aap_configuration.eda_users
 
 ## Description
 

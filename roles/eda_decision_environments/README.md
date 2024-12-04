@@ -96,7 +96,7 @@ eda_decision_environments:
       tags:
         - always
   roles:
-    - infra.aap_configuration.decision_environments
+    - infra.aap_configuration.eda_decision_environments
 ```
 
 ## License

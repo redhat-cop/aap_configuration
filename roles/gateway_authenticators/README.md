@@ -1,4 +1,4 @@
-# Ansible Role infra.aap_configuration.authenticators
+# Ansible Role infra.aap_configuration.gateway_authenticators
 
 ## Description
 
