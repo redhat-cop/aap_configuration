@@ -1,0 +1,3 @@
+---
+bugfixes:
+  - added missing references to controller_roles in dispatcher defaults

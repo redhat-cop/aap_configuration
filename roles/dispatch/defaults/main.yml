@@ -166,12 +166,16 @@ controller_configuration_dispatcher_roles:
   - role: controller_schedules
     var: controller_schedules
     tags: schedules
+  - role: controller_roles
+    var: controller_roles
+    tags: roles
   - role: controller_job_launch
     var: controller_launch_jobs
     tags: job_launch
   - role: controller_workflow_launch
     var: controller_workflow_launch_jobs
     tags: workflow_launch
+
 eda_configuration_dispatcher_roles:
   - role: eda_credential_types
     var: eda_credential_types
