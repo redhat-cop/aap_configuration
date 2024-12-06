@@ -55,6 +55,10 @@ jobs:
 
             - Matrix: [#aap_config_as_code:ansible.com](https://matrix.to/#/#aap_config_as_code:ansible.com) (recomended)
 
+            ## Past Recordings
+
+            Recordings of past meetings can be found in this [google drive folder(https://drive.google.com/drive/folders/199_VnU0T8fd2Q-KXu6QpUi7KtFfIUZqd?usp=drive_link).
+
             See you soon!
           labels: 'office_hours,help wanted,question'
 
