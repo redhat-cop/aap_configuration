@@ -197,19 +197,24 @@ controller_configuration_dispatcher_roles:
   - role: controller_schedules
     var: controller_schedules
     tags: schedules
+  - role: controller_roles
+    var: controller_roles
+    tags: roles
   - role: controller_job_launch
     var: controller_launch_jobs
     tags: job_launch
   - role: controller_workflow_launch
     var: controller_workflow_launch_jobs
     tags: workflow_launch
-
 ```
 
 #### Eda Roles
 
 ```yaml
 eda_configuration_dispatcher_roles:
+  - role: eda_credential_types
+    var: eda_credential_types
+    tags: credential_type
   - role: eda_credentials
     var: eda_credentials
     tags: credential
@@ -219,6 +224,9 @@ eda_configuration_dispatcher_roles:
   - role: eda_projects
     var: eda_projects
     tags: project
+  - role: eda_event_streams
+    var: eda_event_streams
+    tags: event_stream
   - role: eda_decision_environments
     var: eda_decision_environments
     tags: decision_environment
