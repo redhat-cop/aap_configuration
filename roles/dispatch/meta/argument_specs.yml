@@ -132,7 +132,7 @@ argument_specs:
           - role: hub_ee_repository
             var: hub_ee_repositories
             tags: repos
-          - role: phub_ee_repository_sync
+          - role: hub_ee_repository_sync
             var: hub_ee_repository_sync
             tags: reposync
           - role: hub_ee_image
