@@ -10,7 +10,7 @@
       delay: "{{ controller_configuration_job_templates_async_delay }}"
 
   rescue:
-    - name: async | Removing variables existance from result_file
+    - name: async | Removing variables existence from result_file
       ansible.builtin.replace:
         path: "{{ __job_templates_job_async_result.results_file }}"
         regexp: \{\{.*?\}\}
