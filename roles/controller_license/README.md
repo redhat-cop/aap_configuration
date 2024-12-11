@@ -68,7 +68,7 @@ The module and this role can use either a manifest file, or lookup the subscript
 |:---:|:---:|:---:|:---:|:---:|
 |`filters`|"default values"|no|str|dict of filters to use to narrow the subscription. See example below for how to use this.|
 |`support_level`|"Self-Support"|no|str|DEPRECATED - changed to `manifest_file` (still works as an alias)|
-|`list_num`|0|no|int|List index of the subscription to use, if you want to overide the default, it is recomended to use the filters to limit the pools found.|
+|`list_num`|0|no|int|List index of the subscription to use, if you want to overide the default, it is recommended to use the filters to limit the pools found.|
 |`pool_id`|""|no|str|Red Hat or Red Hat Satellite pool_id to attach to.|
 |`force`|`false`|no|bool|By default, the license will only be applied if controller is currently unlicensed or trial licensed. When force=true, the license is always applied.|
 |`use_lookup`|`false`|no|bool|Whether or not to lookup subscriptions.|
