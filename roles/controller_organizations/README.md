@@ -88,7 +88,7 @@ This role accepts two data models. A simple straightforward easy to maintain mod
 |`custom_virtualenv`|""|no|str|Local absolute file path containing a custom Python virtualenv to use.|
 |`max_hosts`|""|no|int|The max hosts allowed in this organization.|
 |`instance_groups`|""|no|list|list of Instance Groups for this Organization to run on.|
-|`galaxy_credentials`|""|no|list|The credentials to use with private automationhub.|
+|`galaxy_credentials`|""|no|list|The credentials to use with private automation hub.|
 |`default_environment`|""|no|str|Default Execution Environment to use for jobs owned by the Organization.|
 |`notification_templates_started`|""|no|list|The notifications on started to use for this organization in a list.|
 |`notification_templates_success`|""|no|list|The notifications on success to use for this organization in a list.|
