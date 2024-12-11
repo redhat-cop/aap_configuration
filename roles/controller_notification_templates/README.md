@@ -80,8 +80,8 @@ This also speeds up the overall role.
 |`new_name`|""|yes|str|Setting this option will change the existing name (looked up via the name field).|
 |`copy_from`|""|no|str|Name or id to copy the Notification template from. This will copy an existing notification and change any parameters supplied.|
 |`description`|""|no|str|The description of the notification.|
-|`organization`|""|no|str|The organization applicable to the notification.|
-|`notification_type`|""|no|str|The type of notification to be sent.|
+|`organization`|""|yes|str|The organization applicable to the notification.|
+|`notification_type`|""|yes|str|The type of notification to be sent.|
 |`notification_configuration`|""|no|str|The notification configuration file. Note providing this field would disable all depreciated notification-configuration-related fields.|
 |`messages`|""|no|list|Optional custom messages for notification template. Assumes any instance of two space __ are used for adding variables and removes them. Does not effect single space.|
 |`state`|`present`|no|str|Desired state of the resource.|
