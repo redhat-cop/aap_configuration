@@ -60,7 +60,7 @@ This also speeds up the overall role.
 #### role_list
 
 The `role_list` variable is a combination of roles and targets that are applied to the groups listed in `groups`.
-The structure look slike
+The structure looks like
 
 ```yaml
 - roles:
@@ -81,7 +81,7 @@ Targets consist of the following.
 |`collection_remotes`|List of collection remotes to apply the roles to.|
 |`collection_repositories`|List of collection repositories to apply the roles to.|
 |`execution_environments`|List of execution environments to apply the roles to.|
-|`container_registery_remotes`|List of container registry remotes to apply the roles to.|
+|`container_registry_remotes`|List of container registry remotes to apply the roles to.|
 
 #### Yaml Example
 
@@ -101,7 +101,7 @@ hub_group_roles:
       - roles:
           - galaxy.container_remote
         targets:
-          container_registery_remotes:
+          container_registry_remotes:
             - quay
       - roles:
           - galaxy.user_admin

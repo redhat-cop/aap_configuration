@@ -55,7 +55,7 @@ This also speeds up the overall role.
 |Variable Name|Default Value|Required|Type|Description|
 |:---:|:---:|:---:|:---:|:---:|
 |`name`|""|yes|str|Namespace name. Must be lower case containing only alphanumeric characters and underscores.|
-|`new_name`|""|yes|str|Setting this option will change the existing name (looked up via the name field.|
+|`new_name`|""|yes|str|Setting this option will change the existing name (looked up via the name field.)|
 |`description`|""|yes|str|Description to use for the Namespace.|
 |`company`|""|no|str|Namespace owner company name.|
 |`email`|"password"|yes|str|Namespace contact email.|

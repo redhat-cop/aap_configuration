@@ -21,7 +21,7 @@
   loop: "{{ execution_environments if execution_environments is defined else controller_execution_environments }}"
   loop_control:
     loop_var: __execution_environments_item
-    label: "{{ __operation.verb }} Controller Execution Environment {{ __execution_environments_item }}"
+    label: "{{ __operation.verb }} Controller Execution Environment {{ __execution_environments_item.name }}"
     pause: "{{ controller_configuration_execution_environments_loop_delay }}"
   no_log: "{{ controller_configuration_execution_environments_secure_logging }}"
   when: controller_execution_environments is defined

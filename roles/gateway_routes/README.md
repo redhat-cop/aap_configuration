@@ -67,7 +67,7 @@ Options for the `routes_list` variable:
 | `service_path`        |         N/A         |    no    | str  | URL path on the AAP Service cluster to route traffic to                             |
 | `service_port`        |         N/A         |    no    | int  | Port on the service cluster to route traffic to                                     |
 | `tags`                |         ""          |    no    | str  | Comma-separated string, selects which (tagged) nodes receive traffic from this route|
-| `state`               |      `present`      |    no    | str  | README.md#state-variable)                                              |
+| `state`               |      `present`      |    no    | str  | README.md#state-variable                                                            |
 
 **Unique value:**
 

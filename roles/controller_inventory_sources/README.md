@@ -30,9 +30,9 @@ Currently:
 The following Variables compliment each other.
 If Both variables are not set, enforcing default values is not done.
 Enabling these variables enforce default values on options that are optional in the controller API.
-This should be enabled to enforce configuration and prevent configuration drift. It is recomended to be enabled, however it is not enforced by default.
+This should be enabled to enforce configuration and prevent configuration drift. It is recommended to be enabled, however it is not enforced by default.
 
-Enabling this will enforce configurtion without specifying every option in the configuration files.
+Enabling this will enforce configuration without specifying every option in the configuration files.
 
 'controller_configuration_inventory_sources_enforce_defaults' defaults to the value of 'aap_configuration_enforce_defaults' if it is not explicitly called. This allows for enforced defaults to be toggled for the entire suite of controller configuration roles with a single variable, or for the user to selectively use it.
 
@@ -70,7 +70,7 @@ This also speeds up the overall role.
 |`controller_configuration_inventory_loop_delay`|`aap_configuration_loop_delay`|no|This sets the pause between each item in the loop for the role. To help when API is getting overloaded.|
 |`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.|
 
-### Formating Variables
+### Formatting Variables
 
 Variables can use a standard Jinja templating format to describe the resource.
 
