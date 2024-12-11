@@ -84,7 +84,7 @@ This also speeds up the overall role.
 |`kind`|"cloud"|no|The type of credential type being added. Note that only cloud and net can be used for creating credential types.|
 |`state`|`present`|no|Desired state of the resource.|
 
-### Formating Injectors
+### Formatting Injectors
 
 Injectors use a standard Jinja templating format to describe the resource.
 

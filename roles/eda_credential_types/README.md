@@ -59,7 +59,7 @@ This also speeds up the overall role.
 |`injectors`|""|no|dict|Enter injectors using either JSON or YAML syntax. Refer to the Ansible controller documentation for example syntax. See below on proper formatting.|
 |`state`|`present`|no|str|Desired state of the credential.|
 
-### Formating Injectors
+### Formatting Injectors
 
 Injectors use a standard Jinja templating format to describe the resource.
 

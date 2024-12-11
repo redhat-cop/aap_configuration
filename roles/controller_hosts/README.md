@@ -70,7 +70,7 @@ This also speeds up the overall role.
 |`controller_configuration_hosts_loop_delay`|`aap_configuration_loop_delay`|no|This sets the pause between each item in the loop for the role. To help when API is getting overloaded.|
 |`aap_configuration_async_dir`|`null`|no|Sets the directory to write the results file for async tasks. The default value is set to `null` which uses the Ansible Default of `/root/.ansible_async/`.|
 
-### Formating Variables
+### Formatting Variables
 
 Variables can use a standard Jinja templating format to describe the resource.
 
