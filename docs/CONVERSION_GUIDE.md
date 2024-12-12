@@ -1,4 +1,4 @@
-# Red Hat Communties of Practice Controller Configuration Collection Conversion Guide
+# Red Hat Communities of Practice Controller Configuration Collection Conversion Guide
 
 ## REQUIREMENTS
 

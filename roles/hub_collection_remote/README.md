@@ -62,7 +62,7 @@ This also speeds up the overall role.
 |`auth_url`|`https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token`|no|(`ah_repository_certified`)Remote URL for the repository authentication if separate.||
 |`token`|``|no|Token to authenticate to the remote repository.||
 |`policy`|`immediate`|no|The policy to use when downloading content. Can be one of `immediate`, `When syncing, download all metadata and content now.`.||
-|`requirements`|``|no|Requirements, a list of collections in [requirements file format](https://docs.ansible.com/ansible/latest/collections_guide/collections_installing.html#install-multiple-collections-with-a-requirements-file) to limit thedownload from remote. This will only download provided collections. This is only the list under collections. See examples for usage.||
+|`requirements`|``|no|Requirements, a list of collections in [requirements file format](https://docs.ansible.com/ansible/latest/collections_guide/collections_installing.html#install-multiple-collections-with-a-requirements-file) to limit the download from remote. This will only download provided collections. This is only the list under collections. See examples for usage.||
 |`requirements_file`|``|no|A yaml requirements file to download from remote. In requirements file format. Exclusive with `requirements` ||
 |`username`|``|no|Username to authenticate to the remote repository.||
 |`password`|``|no|Password to authenticate to the remote repository.||
