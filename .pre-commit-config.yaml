@@ -6,7 +6,7 @@ repos:
       - id: end-of-file-fixer
       - id: trailing-whitespace
   - repo: https://github.com/ansible-community/ansible-lint.git
-    rev: v24.10.0
+    rev: v24.12.1
     hooks:
       # see discussions here about what arguments are used, and behavior
       # https://github.com/ansible/ansible-lint/issues/649
@@ -22,7 +22,7 @@ repos:
           - ansible-core>=2.15
           - yamllint>=1.26,<2.0
   - repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.15.0
+    rev: v0.16.0
     hooks:
       - id: markdownlint-cli2
   - repo: https://github.com/ambv/black
