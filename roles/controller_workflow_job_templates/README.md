@@ -102,7 +102,7 @@ This also speeds up the overall role.
 |`scm_branch`|""|no|str|SCM branch applied as a prompt, assuming job template prompts for SCM branch|
 |`state`|`present`|no|str|Desired state of the resource.|
 |`workflow_nodes`|""|no|dict|A json list of nodes and their corresponding options. The sub-options are in the module doc.|
-|`destroy_current_nodes`|""|no|dict|Set in order to destroy current schema on the workflow, used in cases where drastic changes to schema are happening.|
+|`destroy_current_nodes`|""|no|bool|Set in order to destroy current schema on the workflow, used in cases where drastic changes to schema are happening.|
 |`survey_enabled`|""|no|bool|Enable a survey on the job template.|
 |`survey_spec`|""|no|dict|JSON/YAML dict formatted survey definition.|
 |`survey`|""|no|dict|JSON/YAML dict formatted survey definition. Alias of survey_spec|
@@ -198,6 +198,7 @@ controller_workflows:
     ask_inventory_on_launch: false
     ask_scm_branch_on_launch: false
     ask_limit_on_launch: false
+    destroy_current_nodes: false
     webhook_service: ''
     webhook_credential:
     organization: Default
