@@ -1,0 +1,3 @@
+---
+bugfixes:
+  - Correct README.md to indicate destroy_current_nodes is bool
