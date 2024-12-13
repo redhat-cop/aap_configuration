@@ -81,6 +81,7 @@
   loop: "{{ controller_workflows | default(workflow_job_templates) }}"
   loop_control:
     loop_var: __workflow_loop_item
+    label: "Workflow {{ __workflow_loop_item.name }}"
   when:
     - __workflow_loop_item.simplified_workflow_nodes is defined
     - (__workflow_loop_item.state | default('present')) ==  "present"

@@ -45,7 +45,7 @@
   loop: "{{ __credentialtypes_job_async.results }}"
   loop_control:
     loop_var: __credentialtypes_job_async_result_item
-    label: "{{ __operation.verb }} Controller Credential Type {{ __credentialtypes_job_async_result_item }} | Wait for finish the credential type {{ __operation.action }}"
+    label: "{{ __operation.verb }} Controller Credential Type {{ __credentialtypes_job_async_result_item.__controller_credential_type_item.name }} | Wait for finish the credential type {{ __operation.action }}"
   when: not ansible_check_mode and __credentialtypes_job_async_result_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_credential_types_secure_logging }}"
   vars:
