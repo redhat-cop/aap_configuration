@@ -132,7 +132,7 @@ controller_credential_input_sources:
       secret_path: vault/path/to/gitlab/secret
       auth_path: approle
       secret_key: GITLAB_PASSWORD_FROM_HASHI_VAULT
-      secret_version
+      secret_version: v2
     description: Fill the gitlab credential from HashiCorp Vault
   - source_credential: cyberark
     target_credential: gitlab
