@@ -112,12 +112,13 @@ controller_configuration vars:
 - controller_projects
 - controller_inventories
 - controller_inventory_sources
-- controller_inventory_sources
 - controller_hosts
+- controller_groups
 - controller_bulk_hosts
 - controller_templates
 - controller_workflows
 - controller_schedules
+- controller_roles
 - controller_launch_jobs
 - controller_workflow_launch_jobs
 - aap_user_accounts <- controller_user_accounts
