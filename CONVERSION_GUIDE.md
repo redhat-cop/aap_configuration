@@ -192,9 +192,9 @@ This is the format that is used for each using the appropriate prefix
 
 Prefixes
 
-- controller_configuration
-- ah_configuration
-- gateway
+- controller_configuration_
+- ah_configuration_
+- gateway_
 - eda_configuration_
 
 Format:
