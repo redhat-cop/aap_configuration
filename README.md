@@ -81,7 +81,7 @@ The awx.awx or ansible.controller collection must be invoked in the playbook in 
 The following command will invoke the collection playbook. This is considered a starting point for the collection.
 
 ```console
-ansible-playbook infra.aap_configuration.configure_controller.yml
+ansible-playbook infra.aap_configuration.configure_aap.yml
 ```
 
 Otherwise it will look for the modules only in your base installation. If there are errors complaining about "couldn't resolve module/action" this is the most likely cause.
