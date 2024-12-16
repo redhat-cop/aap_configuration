@@ -112,12 +112,13 @@ controller_configuration vars:
 - controller_projects
 - controller_inventories
 - controller_inventory_sources
-- controller_inventory_sources
 - controller_hosts
+- controller_groups
 - controller_bulk_hosts
 - controller_templates
 - controller_workflows
 - controller_schedules
+- controller_roles
 - controller_launch_jobs
 - controller_workflow_launch_jobs
 - aap_user_accounts <- controller_user_accounts
@@ -217,7 +218,7 @@ The dispatch role has changed to use the following order:
 - controller roles
 - eda roles
 
-These loop through all the applicable roles to create objects in the AAP. They will skip the role if the variable used in that role is not defined. you can tweak each services set of roles, or only run a single services roles by using the `aap_configuration_dispatcher_roles` variables. Refer to the [Dispatch role readme](roles/eda_controller_tokens/README.md) for more information.
+These loop through all the applicable roles to create objects in the AAP. They will skip the role if the variable used in that role is not defined. you can tweak each services set of roles, or only run a single services roles by using the `aap_configuration_dispatcher_roles` variables. Refer to the [Dispatch role readme](roles/dispatch/README.md) for more information.
 
 ## Roles moved
 

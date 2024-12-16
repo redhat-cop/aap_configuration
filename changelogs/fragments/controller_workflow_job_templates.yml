@@ -1,3 +1,4 @@
 ---
 bugfixes:
   - Correct README.md to indicate destroy_current_nodes is bool
+  - Update loop label to only show name of workflow job template instead of entire json object
