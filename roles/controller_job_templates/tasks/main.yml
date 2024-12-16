@@ -93,7 +93,7 @@
   loop: "{{ __job_templates_job_async.results }}"
   loop_control:
     loop_var: __job_templates_job_async_result_item
-    label: "{{ __operation.verb }} Job Template {{ __job_templates_job_async_result_item }} | Wait for finish the Job Template {{ __operation.action }}"
+    label: "{{ __operation.verb }} Job Template {{ __job_templates_job_async_result_item.__controller_template_item.name }} | Wait for finish the Job Template {{ __operation.action }}"
   when: not ansible_check_mode and __job_templates_job_async_result_item.ansible_job_id is defined
   no_log: "{{ controller_configuration_job_templates_secure_logging }}"
   vars:
