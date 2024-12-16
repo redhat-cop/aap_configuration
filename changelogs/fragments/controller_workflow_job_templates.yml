@@ -1,0 +1,3 @@
+---
+bugfixes:
+  - Update loop label to only show name of workflow job template instead of entire json object
