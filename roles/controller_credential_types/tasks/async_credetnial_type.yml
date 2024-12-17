@@ -1,7 +1,7 @@
 ---
 - name: async_credential_type | An async_credential_type block
   block:
-    - name: async_credential_type | Managing Controller credential_types | Wait for finish the credential_types management
+    - name: async_credential_type | Managing Controller Credential Types | Wait for finish the credential_types management
       ansible.builtin.async_status:
         jid: "{{ __credentialtypes_job_async_result_item.ansible_job_id }}"
       register: __credentialtypes_job_async_result

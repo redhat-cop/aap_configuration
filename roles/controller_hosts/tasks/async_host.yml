@@ -1,7 +1,7 @@
 ---
 - name: async_host | An async_host block
   block:
-    - name: async_host | Managing Controller hosts | Wait for finish the hosts management
+    - name: async_host | Managing Controller Hosts | Wait for finish the hosts management
       ansible.builtin.async_status:
         jid: "{{ __host_job_async_results_item.ansible_job_id }}"
       register: __host_job_async_result

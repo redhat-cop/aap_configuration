@@ -1,7 +1,7 @@
 ---
 - name: async_bulk_host | An async_bulk_host block
   block:
-    - name: async_bulk_host | Managing Controller bulk_hosts | Wait for finish the bulk_hosts management
+    - name: async_bulk_host | Configure bulk_hosts | Wait for finish the bulk_hosts management
       ansible.builtin.async_status:
         jid: "{{ __controller_bulk_hosts_job_async_results_item.ansible_job_id }}"
       register: __controller_bulk_hosts_job_async_result

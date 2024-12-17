@@ -1,7 +1,7 @@
 ---
 - name: async_host_group | An async_host_group block
   block:
-    - name: async_host_group | Managing Controller credential_types | Wait for finish the credential_types management
+    - name: async_host_group | Managing Controller Groups Wait for finish the credential_types management
       ansible.builtin.async_status:
         jid: "{{ __group_job_async_results_item.ansible_job_id }}"
       register: __group_job_async_result

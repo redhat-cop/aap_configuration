@@ -1,7 +1,7 @@
 ---
 - name: async_application | An async_application block
   block:
-    - name: async_application | Managing Controller applications | Wait for finish the applications management
+    - name: async_application | Managing Controller Applications | Wait for finish the applications management
       ansible.builtin.async_status:
         jid: "{{ __applications_job_async_result_item.ansible_job_id }}"
       register: __applications_job_async_result

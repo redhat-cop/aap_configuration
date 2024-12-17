@@ -1,7 +1,7 @@
 ---
 - name: async_execution_environment | An async_execution_environment block
   block:
-    - name: async_execution_environment | Managing Controller credential_types | Wait for finish the credential_types management
+    - name: async_execution_environment | Managing Controller Execution Environments | Wait for finish the credential_types management
       ansible.builtin.async_status:
         jid: "{{ __execution_environments_job_async_result_item.ansible_job_id }}"
       register: __execution_environments_job_async_result

@@ -1,7 +1,7 @@
 ---
 - name: async_project | An async_project block
   block:
-    - name: async_project | Managing Controller projects | Wait for finish the Projects management
+    - name: async_project | Managing Controller Projects | Wait for finish the Projects management
       ansible.builtin.async_status:
         jid: "{{ __projects_job_async_results_item.ansible_job_id }}"
       register: __projects_job_async_result
