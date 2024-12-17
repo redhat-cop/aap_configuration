@@ -6,4 +6,5 @@ controller_configuration_instance_groups_async_delay: "{{ aap_configuration_asyn
 controller_configuration_instance_groups_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
 aap_configuration_async_dir:
 controller_configuration_instance_groups_enforce_defaults: "{{ aap_configuration_enforce_defaults | default(false) }}"
+collect_logs: false
 ...
