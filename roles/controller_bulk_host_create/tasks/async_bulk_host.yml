@@ -17,7 +17,7 @@
     - name: async_bulk_host | Show error and stop execution
       when: not collect_logs
       ansible.builtin.fail:
-        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] }}"
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] | default ('N/A') }}"
 
     - name: async_bulk_host | Building list of not processed bulk_hosts
       ansible.builtin.set_fact:

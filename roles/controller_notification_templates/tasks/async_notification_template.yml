@@ -19,7 +19,7 @@
     - name: async_notification_template  | Show error and stop execution
       when: not collect_logs
       ansible.builtin.fail:
-        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] }}"
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] | default ('N/A') }}"
 
     - name: async_notification_template  | Building list of not processed templates
       ansible.builtin.set_fact:

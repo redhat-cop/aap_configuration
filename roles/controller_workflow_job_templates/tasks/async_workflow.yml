@@ -18,7 +18,7 @@
     - name: async_workflow | Show error and stop execution
       when: not collect_logs
       ansible.builtin.fail:
-        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] }}"
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] | default ('N/A') }}"
 
     - name: async_workflow | Building list of not processed workflows
       ansible.builtin.set_fact:
