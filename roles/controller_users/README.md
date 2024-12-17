@@ -25,6 +25,7 @@ Currently:
 |`aap_request_timeout`|`10`|no|Specify the timeout in seconds Ansible should use in requests to the Ansible Automation Platform host.||
 |`aap_user_accounts`|`see below`|yes|Data structure describing your user entries described below.  Alias: users ||
 |`controller_user_default_password`|""|no|Global variable to set the password for all users.||
+|`collect_logs`|`false`|no|Specify whether it collects logs for all failed tasks related to user creation, modification, or deletion, instead of failing on the first error.||
 
 ### Enforcing defaults
 
