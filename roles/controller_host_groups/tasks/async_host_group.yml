@@ -1,0 +1,31 @@
+---
+- name: async_host_group | An async_host_group block
+  block:
+    - name: async_host_group | Managing Controller credential_types | Wait for finish the credential_types management
+      ansible.builtin.async_status:
+        jid: "{{ __group_job_async_results_item.ansible_job_id }}"
+      register: __group_job_async_result
+      until: __group_job_async_result.finished
+      retries: "{{ controller_configuration_group_async_retries }}"
+      delay: "{{ controller_configuration_group_async_delay }}"
+  rescue:
+    - name: async_host_group | Load error details
+      ansible.builtin.include_vars:
+        file: "{{ __group_job_async_result.results_file }}"
+        name: __error_data
+
+    - name: async_host_group | Show error and stop execution
+      when: not collect_logs
+      ansible.builtin.fail:
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] }}"
+
+    - name: async_host_group | Building list of not processed credential_types
+      ansible.builtin.set_fact:
+        __host_group_error_list: "{{ __host_group_error_list | default([]) + [
+                                                                              {
+                                                                               'name': __error_data['invocation']['module_args']['name'] | default(''),
+                                                                               'error': __error_data['msg'] | default('')
+                                                                              }
+                                                                             ]
+                                 }}"
+...
