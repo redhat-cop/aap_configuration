@@ -10,4 +10,5 @@ assign_galaxy_credentials_to_org: true
 assign_default_ee_to_org: true
 assign_notification_templates_to_org: true
 assign_instance_groups_to_org: true
+collect_logs: false
 ...
