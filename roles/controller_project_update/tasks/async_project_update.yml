@@ -1,0 +1,31 @@
+---
+- name: async_project_update | An async_project_update block
+  block:
+    - name: async_project_update | Configure Controller Projects | Wait for finish the Projects management
+      ansible.builtin.async_status:
+        jid: "{{ __project_update_job_async_results_item.ansible_job_id }}"
+      register: __project_update_job_async_result
+      until: __project_update_job_async_result.finished
+      retries: "{{ controller_configuration_project_update_async_retries }}"
+      delay: "{{ controller_configuration_project_update_async_delay }}"
+  rescue:
+    - name: async_project_update | Load error details
+      ansible.builtin.include_vars:
+        file: "{{ __project_update_job_async_result.results_file }}"
+        name: __error_data
+
+    - name: async_project_update | Show error and stop execution
+      when: not collect_logs
+      ansible.builtin.fail:
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] }}"
+
+    - name: async_project_update | Building list of not processed projects
+      ansible.builtin.set_fact:
+        __project_updates_error_list: "{{ __project_updates_error_list | default([]) + [
+                                                                                        {
+                                                                                        'name': __error_data['invocation']['module_args']['name'] | default(''),
+                                                                                        'error': __error_data['msg'] | default('')
+                                                                                        }
+                                                                                       ]
+                                       }}"
+...
