@@ -28,5 +28,5 @@
                                                                              'error': __error_data['msg'] | default(__workflows_job_async_result['msg'])
                                                                             }
                                                                            ]
-                               }}"
+                                }}"
 ...

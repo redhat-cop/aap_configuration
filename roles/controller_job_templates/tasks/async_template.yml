@@ -8,7 +8,6 @@
       until: __job_templates_job_async_result.finished
       retries: "{{ controller_configuration_job_templates_async_template_retries }}"
       delay: "{{ controller_configuration_job_templates_async_template_delay }}"
-
   rescue:
     - name: async_template | Removing variables existance from result_file
       ansible.builtin.replace:
@@ -30,13 +29,13 @@
       ansible.builtin.set_fact:
         __templates_error_list: "{{ __templates_error_list | default([]) + [
                                                                             {
-                                                                              'name': __error_data['invocation']['module_args']['name'],
-                                                                              'project_name': __error_data['invocation']['module_args']['project'],
-                                                                              'playbook': __error_data['invocation']['module_args']['playbook'],
-                                                                              'inventory': __error_data['invocation']['module_args']['inventory'],
-                                                                              'credentials': __error_data['invocation']['module_args']['credentials'],
-                                                                              'error': __error_data['msg'],
-                                                                              'response': __error_data['response']
+                                                                             'name': __error_data['invocation']['module_args']['name'],
+                                                                             'project_name': __error_data['invocation']['module_args']['project'],
+                                                                             'playbook': __error_data['invocation']['module_args']['playbook'],
+                                                                             'inventory': __error_data['invocation']['module_args']['inventory'],
+                                                                             'credentials': __error_data['invocation']['module_args']['credentials'],
+                                                                             'error': __error_data['msg'],
+                                                                             'response': __error_data['response']
                                                                             }
                                                                           ]
                                 }}"
