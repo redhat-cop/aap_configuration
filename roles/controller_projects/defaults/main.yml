@@ -7,4 +7,5 @@ controller_configuration_projects_async_delay: "{{ aap_configuration_async_delay
 controller_configuration_projects_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
 aap_configuration_async_dir:
 controller_configuration_projects_enforce_defaults: "{{ aap_configuration_enforce_defaults | default(false) }}"
+collect_logs: false
 ...
