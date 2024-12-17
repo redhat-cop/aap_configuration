@@ -1,0 +1,33 @@
+---
+- name: async_workflow_node_link | An async_workflow_node_link block
+  block:
+    - name: async_workflow_node_link | Manage Workflows | Wait for finish the workflow creation
+      ansible.builtin.async_status:
+        jid: "{{ __workflows_link_async_results_item.ansible_job_id }}"
+      register: __workflows_link_async_result
+      until: __workflows_link_async_result.finished
+      retries: "{{ controller_configuration_workflow_async_retries }}"
+      delay: "{{ controller_configuration_workflow_async_delay }}"
+
+  rescue:
+    - name: async_workflow_node_link | Load error details
+      ansible.builtin.include_vars:
+        file: "{{ __workflows_link_async_result.results_file }}"
+        name: __error_data
+
+    - name: async_workflow_node_link | Show error and stop execution
+      when: not collect_logs
+      ansible.builtin.fail:
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] }}"
+
+    - name: async_workflow_node_link | Building list of not processed links
+      ansible.builtin.set_fact:
+        __workflow_nodes_error_list: "{{ workflow_nodes_error_list | default([]) + [
+                                                                                    {
+                                                                                     'name': __error_data['invocation']['module_args']['name'] | default ('N/A'),
+                                                                                     'type': 'link issue',
+                                                                                     'error': __error_data['msg'] | default(__workflows_link_async_result['msg'])
+                                                                                    }
+                                                                                   ]
+                                    }}"
+...
