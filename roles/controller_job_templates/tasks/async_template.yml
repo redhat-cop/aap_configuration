@@ -1,0 +1,43 @@
+---
+- name: async_template | An async_template block
+  block:
+    - name: async_template | Managing Controller Job Templates | Wait for finish the Job Templates management
+      ansible.builtin.async_template_status:
+        jid: "{{ __job_templates_job_async_result_item.ansible_job_id }}"
+      register: __job_templates_job_async_result
+      until: __job_templates_job_async_result.finished
+      retries: "{{ controller_configuration_job_templates_async_template_retries }}"
+      delay: "{{ controller_configuration_job_templates_async_template_delay }}"
+
+  rescue:
+    - name: async_template | Removing variables existance from result_file
+      ansible.builtin.replace:
+        path: "{{ __job_templates_job_async_result.results_file }}"
+        regexp: \{\{.*?\}\}
+        replace: ""
+
+    - name: async_template | Load error details
+      ansible.builtin.include_vars:
+        file: "{{ __job_templates_job_async_result.results_file }}"
+        name: __error_data
+
+    - name: async_template | Show error and stop execution
+      when: not collect_logs
+      ansible.builtin.fail:
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] }}"
+
+    - name: async_template | Building list of not processed templates
+      ansible.builtin.set_fact:
+        __templates_error_list: "{{ __templates_error_list | default([]) + [
+                                                                            {
+                                                                              'name': __error_data['invocation']['module_args']['name'],
+                                                                              'project_name': __error_data['invocation']['module_args']['project'],
+                                                                              'playbook': __error_data['invocation']['module_args']['playbook'],
+                                                                              'inventory': __error_data['invocation']['module_args']['inventory'],
+                                                                              'credentials': __error_data['invocation']['module_args']['credentials'],
+                                                                              'error': __error_data['msg'],
+                                                                              'response': __error_data['response']
+                                                                            }
+                                                                          ]
+                                }}"
+...
