@@ -2,12 +2,12 @@
 - name: async_template | An async_template block
   block:
     - name: async_template | Managing Controller Job Templates | Wait for finish the Job Templates management
-      ansible.builtin.async_template_status:
+      ansible.builtin.async_status:
         jid: "{{ __job_templates_job_async_result_item.ansible_job_id }}"
       register: __job_templates_job_async_result
       until: __job_templates_job_async_result.finished
-      retries: "{{ controller_configuration_job_templates_async_template_retries }}"
-      delay: "{{ controller_configuration_job_templates_async_template_delay }}"
+      retries: "{{ controller_configuration_job_templates_async_retries }}"
+      delay: "{{ controller_configuration_job_templates_async_delay }}"
   rescue:
     - name: async_template | Removing variables existance from result_file
       ansible.builtin.replace:
@@ -35,8 +35,8 @@
                                                                              'inventory': __error_data['invocation']['module_args']['inventory'],
                                                                              'credentials': __error_data['invocation']['module_args']['credentials'],
                                                                              'error': __error_data['msg'],
-                                                                             'response': __error_data['response']
+                                                                             'response': __error_data['response'] | default('N/A')
                                                                             }
-                                                                          ]
+                                                                           ]
                                 }}"
 ...

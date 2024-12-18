@@ -24,7 +24,8 @@
       ansible.builtin.set_fact:
         __workflow_nodes_error_list: "{{ workflow_nodes_error_list | default([]) + [
                                                                                     {
-                                                                                     'name': __error_data['invocation']['module_args']['name'] | default ('N/A'),
+                                                                                     'name': __error_data['invocation']['module_args']['identifier'] | default (''),
+                                                                                     'workflow': __error_data['invocation']['module_args']['workflow'] | default (''),
                                                                                      'type': 'link issue',
                                                                                      'error': __error_data['msg'] | default(__workflows_link_async_result['msg'])
                                                                                     }

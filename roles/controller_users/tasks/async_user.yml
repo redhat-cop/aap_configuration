@@ -23,7 +23,7 @@
       ansible.builtin.set_fact:
         __users_error_list: "{{ __users_error_list | default([]) + [
                                                                     {
-                                                                     'name': __error_data['invocation']['module_args']['name'] | default(''),
+                                                                     'name': __error_data['invocation']['module_args']['username'] | default(''),
                                                                      'error': __error_data['msg'] | default('')
                                                                     }
                                                                    ]

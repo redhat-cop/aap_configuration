@@ -11,7 +11,7 @@
   rescue:
     - name: async_instance_group | Load error details
       ansible.builtin.include_vars:
-        file: "{{ __host_job_async_result.results_file }}"
+        file: "{{ __instance_groups_job_async_result.results_file }}"
         name: __error_data
 
     - name: async_instance_group | Show error and stop execution
@@ -21,11 +21,11 @@
 
     - name: async_instance_group | Building list of not processed hosts
       ansible.builtin.set_fact:
-        __instance_group_error_list: "{{ __instance_group_error_list | default([]) + [
-                                                                                      {
-                                                                                      'name': __error_data['invocation']['module_args']['name'] | default(''),
-                                                                                      'error': __error_data['msg'] | default('')
-                                                                                      }
-                                                                                    ]
-                                     }}"
+        __instance_groups_error_list: "{{ __instance_group_error_list | default([]) + [
+                                                                                       {
+                                                                                       'name': __error_data['invocation']['module_args']['name'] | default(''),
+                                                                                       'error': __error_data['msg'] | default('')
+                                                                                       }
+                                                                                     ]
+                                      }}"
 ...

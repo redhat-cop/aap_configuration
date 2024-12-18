@@ -21,11 +21,12 @@
 
     - name: async_project_update | Building list of not processed projects
       ansible.builtin.set_fact:
-        __project_updates_error_list: "{{ __project_updates_error_list | default([]) + [
-                                                                                        {
-                                                                                        'name': __error_data['invocation']['module_args']['name'] | default(''),
-                                                                                        'error': __error_data['msg'] | default('')
-                                                                                        }
-                                                                                       ]
-                                       }}"
+        __projects_error_list: "{{ __projects_error_list | default([]) + [
+                                                                          {
+                                                                           'name': __error_data['invocation']['module_args']['name'] | default(''),
+                                                                           'type': 'update issue',
+                                                                           'error': __error_data['msg'] | default('')
+                                                                          }
+                                                                         ]
+                               }}"
 ...

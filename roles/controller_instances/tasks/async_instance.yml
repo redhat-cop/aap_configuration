@@ -21,11 +21,11 @@
 
     - name: async_instance | Building list of not processed hosts
       ansible.builtin.set_fact:
-        __instance_error_list: "{{ __instance_error_list | default([]) + [
-                                                                          {
-                                                                           'name': __error_data['invocation']['module_args']['name'] | default(''),
-                                                                           'error': __error_data['msg'] | default('')
-                                                                          }
-                                                                         ]
-                               }}"
+        __instances_error_list: "{{ __instances_error_list | default([]) + [
+                                                                            {
+                                                                             'hostname': __error_data['invocation']['module_args']['hostname'] | default(''),
+                                                                             'error': __error_data['msg'] | default('')
+                                                                            }
+                                                                           ]
+                                }}"
 ...

@@ -3,7 +3,7 @@
   block:
     - name: async_application | Managing Controller Applications | Wait for finish the applications management
       ansible.builtin.async_status:
-        jid: "{{ __applications_job_async_result_item.ansible_job_id }}"
+        jid: "{{ __applications_job_async_results_item.ansible_job_id }}"
       register: __applications_job_async_result
       until: __applications_job_async_result.finished
       retries: "{{ controller_configuration_applications_async_retries }}"

@@ -24,7 +24,7 @@
       ansible.builtin.set_fact:
         __workflows_error_list: "{{ __workflows_error_list | default([]) + [
                                                                             {
-                                                                             'name': __error_data['invocation']['module_args']['name'] | default ('N/A'),
+                                                                             'name': __error_data['invocation']['module_args']['name'] | default (''),
                                                                              'error': __error_data['msg'] | default(__workflows_job_async_result['msg'])
                                                                             }
                                                                            ]
