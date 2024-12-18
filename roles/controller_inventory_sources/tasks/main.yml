@@ -57,7 +57,7 @@
   when: ansible_check_mode and __inventory_source_job_async.failed is defined and __inventory_source_job_async.failed
 
 - name: Managing Inventory Sources | Wait for finish the Inventory Sources management
-  ansible.builtin.include_tasks: async_inventory_sources.yml
+  ansible.builtin.include_tasks: async_inventory_source.yml
   loop: "{{ __inventory_source_job_async.results }}"
   loop_control:
     loop_var: __inventory_source_job_async_results_item
