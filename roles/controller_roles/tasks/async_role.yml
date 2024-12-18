@@ -23,7 +23,27 @@
       ansible.builtin.set_fact:
         __roles_error_list: "{{ __roles_error_list | default([]) + [
                                                                     {
-                                                                     'name': __error_data['invocation']['module_args']['name'] | default(''),
+                                                                     'role': __error_data['invocation']['module_args']['role'] | default(''),
+                                                                     'user': __error_data['invocation']['module_args']['user'] | default(''),
+                                                                     'users': __error_data['invocation']['module_args']['users'] | default(''),
+                                                                     'team': __error_data['invocation']['module_args']['team'] | default(''),
+                                                                     'teams': __error_data['invocation']['module_args']['teams'] | default(''),
+                                                                     'target_team': __error_data['invocation']['module_args']['target_team'] | default(''),
+                                                                     'target_teams': __error_data['invocation']['module_args']['target_teams'] | default(''),
+                                                                     'inventory': __error_data['invocation']['module_args']['inventory'] | default(''),
+                                                                     'inventories': __error_data['invocation']['module_args']['inventories'] | default(''),
+                                                                     'job_template': __error_data['invocation']['module_args']['job_template'] | default(''),
+                                                                     'job_templates': __error_data['invocation']['module_args']['job_templates'] | default(''),
+                                                                     'workflow': __error_data['invocation']['module_args']['workflow'] | default(''),
+                                                                     'workflows': __error_data['invocation']['module_args']['workflows'] | default(''),
+                                                                     'credential': __error_data['invocation']['module_args']['credential'] | default(''),
+                                                                     'credentials': __error_data['invocation']['module_args']['credentials'] | default(''),
+                                                                     'organization': __error_data['invocation']['module_args']['organization'] | default(''),
+                                                                     'organizations': __error_data['invocation']['module_args']['organizations'] | default(''),
+                                                                     'lookup_organization': __error_data['invocation']['module_args']['lookup_organization'] | default(''),
+                                                                     'project': __error_data['invocation']['module_args']['project'] | default(''),
+                                                                     'projects': __error_data['invocation']['module_args']['projects'] | default(''),
+                                                                     'instance_groups': __error_data['invocation']['module_args']['instance_groups'] | default(''),
                                                                      'error': __error_data['msg'] | default('')
                                                                     }
                                                                    ]
