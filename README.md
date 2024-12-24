@@ -102,7 +102,7 @@ Define following vars here, or in `aap_configs/controller_auth.yml`
 You can also specify authentication by a combination of either:
 
 - `aap_hostname`, `aap_username`, `aap_password`
-- `aap_hostname`, `controller_oauthtoken`
+- `aap_hostname`, `aap_token`
 
 The OAuth2 token is the preferred method. You can obtain the token through the preferred `controller_token` module, or through the
 AWX CLI [login](https://docs.ansible.com/automation-controller/latest/html/controllerapi/authentication.html)
