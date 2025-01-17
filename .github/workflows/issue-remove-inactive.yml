@@ -4,16 +4,16 @@ name: Issue Remove Labels
 
 on:
   issues:
-    types: [edited, reopened, labeled]
+    types: [reopened]
   issue_comment:
-    types: [created, edited]
+    types: [created]
 
 jobs:
   remove-inactive:
     runs-on: ubuntu-latest
     steps:
       - name: remove inactive
-        if: github.event.issue.state == 'open' && github.event.issue.user != 'github-actions'
+        if: github.event.issue.state == 'open'
         uses: actions-cool/issues-helper@v3
         with:
           actions: 'remove-labels'
