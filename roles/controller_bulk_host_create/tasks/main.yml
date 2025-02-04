@@ -30,12 +30,7 @@
   when: ansible_check_mode and __controller_bulk_hosts_job_async.failed is defined and __controller_bulk_hosts_job_async.failed
 
 - name: Configure bulk_hosts | Wait for finish the bulk_hosts creation
-  ansible.builtin.async_status:
-    jid: "{{ __controller_bulk_hosts_job_async_results_item.ansible_job_id }}"
-  register: __controller_bulk_hosts_job_async_result
-  until: __controller_bulk_hosts_job_async_result.finished
-  retries: "{{ controller_configuration_bulk_hosts_async_retries }}"
-  delay: "{{ controller_configuration_bulk_hosts_async_delay }}"
+  ansible.builtin.include_tasks: async_bulk_host.yml
   loop: "{{ __controller_bulk_hosts_job_async.results }}"
   loop_control:
     loop_var: __controller_bulk_hosts_job_async_results_item

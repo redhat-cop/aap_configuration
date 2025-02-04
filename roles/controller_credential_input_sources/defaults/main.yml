@@ -7,4 +7,5 @@ controller_configuration_credential_input_sources_async_delay: "{{ aap_configura
 controller_configuration_credential_input_sources_loop_delay: "{{ aap_configuration_loop_delay | default(0) }}"
 aap_configuration_async_dir:
 controller_configuration_credential_input_sources_enforce_defaults: "{{ aap_configuration_enforce_defaults | default(false) }}"
+collect_logs: false
 ...

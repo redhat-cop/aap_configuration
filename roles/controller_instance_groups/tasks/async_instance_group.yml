@@ -1,0 +1,31 @@
+---
+- name: async_instance_group | An async_instance_group block
+  block:
+    - name: async_instance_group | Managing Controller Instance Groups | Wait for finish the hosts management
+      ansible.builtin.async_status:
+        jid: "{{ __instance_groups_job_async_results_item.ansible_job_id }}"
+      register: __instance_groups_job_async_result
+      until: __instance_groups_job_async_result.finished
+      retries: "{{ controller_configuration_instance_groups_async_retries }}"
+      delay: "{{ controller_configuration_instance_groups_async_delay }}"
+  rescue:
+    - name: async_instance_group | Load error details
+      ansible.builtin.include_vars:
+        file: "{{ __instance_groups_job_async_result.results_file }}"
+        name: __error_data
+
+    - name: async_instance_group | Show error and stop execution
+      when: not collect_logs
+      ansible.builtin.fail:
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] | default ('N/A') }}"
+
+    - name: async_instance_group | Building list of not processed hosts
+      ansible.builtin.set_fact:
+        __instance_groups_error_list: "{{ __instance_group_error_list | default([]) + [
+                                                                                       {
+                                                                                       'name': __error_data['invocation']['module_args']['name'] | default(''),
+                                                                                       'error': __error_data['msg'] | default('')
+                                                                                       }
+                                                                                     ]
+                                      }}"
+...

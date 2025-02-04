@@ -1,0 +1,33 @@
+---
+- name: async_workflow_node | An async_workflow_node block
+  block:
+    - name:  async_workflow_node | Manage Workflows nodes | Wait for finish the workflow node creation
+      ansible.builtin.async_status:
+        jid: "{{ __workflows_node_async_results_item.ansible_job_id }}"
+      register: __workflows_node_async_result
+      until: __workflows_node_async_result.finished
+      retries: 10
+
+  rescue:
+    - name: async_workflow_node | Load error details
+      ansible.builtin.include_vars:
+        file: "{{ __workflows_node_async_result.results_file }}"
+        name: __error_data
+
+    - name: async_workflow_node | Show error and stop execution
+      when: not collect_logs
+      ansible.builtin.fail:
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] | default ('N/A') }}"
+
+    - name: async_workflow_node | Building list of not processed nodes
+      ansible.builtin.set_fact:
+        __workflow_nodes_error_list: "{{ __workflow_nodes_error_list | default([]) + [
+                                                                                      {
+                                                                                       'name': __error_data['invocation']['module_args']['unified_job_template'] | default ('N/A'),
+                                                                                       'workflow': __error_data['invocation']['module_args']['workflow'] | default ('N/A'),
+                                                                                       'type': 'node creation issue',
+                                                                                       'error': __error_data['msg'] | default(__workflows_node_async_result['msg'])
+                                                                                      }
+                                                                                     ]
+                                     }}"
+...

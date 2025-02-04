@@ -1,0 +1,31 @@
+---
+- name: async_label | An async_label block
+  block:
+    - name: async_label | Managing labels | Wait for finish the labels management
+      ansible.builtin.async_status:
+        jid: "{{ __controller_label_job_async_results_item.ansible_job_id }}"
+      register: __controller_label_job_async_result
+      until: __controller_label_job_async_result.finished
+      retries: "{{ controller_configuration_labels_async_retries }}"
+      delay: "{{ controller_configuration_labels_async_delay }}"
+  rescue:
+    - name: async_label | Load error details
+      ansible.builtin.include_vars:
+        file: "{{ __controller_label_job_async_result.results_file }}"
+        name: __error_data
+
+    - name: async_label | Show error and stop execution
+      when: not collect_logs
+      ansible.builtin.fail:
+        msg: "error: {{ __error_data['msg'] }}, response: {{ __error_data['response'] | default ('N/A') }}"
+
+    - name: async_label | Building list of not processed labels
+      ansible.builtin.set_fact:
+        __labels_error_list: "{{ __labels_error_list | default([]) + [
+                                                                      {
+                                                                       'name': __error_data['invocation']['module_args']['name'] | default(''),
+                                                                       'error': __error_data['msg'] | default('')
+                                                                      }
+                                                                     ]
+                             }}"
+...
