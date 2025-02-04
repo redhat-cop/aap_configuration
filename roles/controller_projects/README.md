@@ -24,7 +24,7 @@ Currently:
 |`controller_oauthtoken`|""|no|str|Controller Admin User's token on the Ansible Controller Server. This should be stored in an Ansible Vault at or elsewhere and called from a parent playbook. Either username / password or oauthtoken need to be specified.||
 |`controller_request_timeout`|`10`|no|int|Specify the timeout in seconds Ansible should use in requests to the Ansible Automation Platform host.||
 |`controller_projects`|`see below`|yes|str|Data structure describing your project or projects Described below. Alias: projects ||
-|`collect_logs`|`false`|no|Specify whether it collects logs for all failed tasks related to project creation, modification, or deletion, instead of failing on the first error.||
+|`collect_logs`|`false`|no|bool|Specify whether it collects logs for all failed tasks related to project creation, modification, or deletion, instead of failing on the first error.||
 
 ### Enforcing defaults
 
