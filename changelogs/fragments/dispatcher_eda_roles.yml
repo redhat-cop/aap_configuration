@@ -1,3 +1,4 @@
 ---
 bugfixes:
   - added missing references to eda_credential_types and eda_event_streams in dispatcher defaults
+  - some module arguments or it's values weren't recognized

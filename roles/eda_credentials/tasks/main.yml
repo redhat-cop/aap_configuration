@@ -9,7 +9,7 @@
     credential_type_name: "{{ __credential_item.credential_type | mandatory }}"
     inputs: "{{ __credential_item.inputs | default(omit) }}"
     state: "{{ __credential_item.state | default(eda_state | default('present')) }}"
-    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_host: "https://{{ aap_hostname | default(omit, true) }}"
     controller_username: "{{ aap_username | default(omit, true) }}"
     controller_password: "{{ aap_password | default(omit, true) }}"
     request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
