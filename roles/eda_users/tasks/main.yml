@@ -12,7 +12,7 @@
     is_superuser: "{{ __user_item.is_superuser | default(omit) }}"
     roles: "{{ __user_item.roles | default(omit) }}"
     state: "{{ __user_item.state | default(eda_state | default('present')) }}"
-    controller_host: "{{ aap_hostname | default(omit, true) }}"
+    controller_host: "https://{{ aap_hostname | default(omit, true) }}"
     controller_username: "{{ aap_username | default(omit, true) }}"
     controller_password: "{{ aap_password | default(omit, true) }}"
     request_timeout: "{{ aap_request_timeout | default(omit, true) }}"
